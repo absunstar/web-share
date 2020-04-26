@@ -1,0 +1,26 @@
+[
+    {
+        "url": "https://social-browser.com/",
+        "title": "Social Browser المتصفح الاجتماعى",
+        "description": "تصفح الانترنت بدون أعلانات وبحسابات متعددة بنفس الوقت",
+        "image_url": "https://social-browser.com/images/logo.png"
+    },
+    {
+        "url": "https://pos.egytag.com/",
+        "title": "برنامج نقاط البيع",
+        "description": "أدارة المخازن والحسابات",
+        "image_url": "https://pos.egytag.com/images/logo.png"
+    },
+    {
+        "url": "https://restaurant.egytag.com/",
+        "title": "برنامج للمطاعم والكافيهات",
+        "description": "ادارة الطاولات والطلبات وخدمة الدليفرى",
+        "image_url": "https://restaurant.egytag.com/images/logo.png"
+    },
+    {
+        "url": "https://gym.egytag.com/",
+        "title": "برنامج للصالات الرياضية والمساج",
+        "description": "ادارة الجيم والمشتركين والجلسات الاشتراكات",
+        "image_url": "https://gym.egytag.com/images/logo.png"
+    }
+]

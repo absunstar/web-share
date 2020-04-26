@@ -1,0 +1,17 @@
+{
+  "name": "isite-template",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js --max-old-space-size=8192",
+    "init": "npm i"
+  },
+  "dependencies": {
+    "isite": "^1.13.27",
+    "n-readlines": "^1.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

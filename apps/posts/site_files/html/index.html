@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+
+<head x-import="head.html">
+    <link rel="stylesheet" href="/css/posts.css">
+</head>
+
+<body class="##session.lang##" ng-controller="posts">
+
+    <nav x-import="navbar/index.html" class="navbar" data-ng-controller="navbar">
+    </nav>
+
+    <script id="post-template" type="x-tmpl-mustache" x-import="posts/post-template.html">
+
+    </script>
+    <script id="video-template" type="x-tmpl-mustache" x-import="posts/video-template.html">
+
+    </script>
+    <div x-import="posts/new_post_modal.html"></div>
+    <div x-import="posts/new_url_modal.html"></div>
+    <div x-import="posts/new_author_modal.html"></div>
+    <div x-import="posts/new_post_category_modal.html"></div>
+
+    <div id="main-layout" class="container loaded">
+        <div x-import="posts/post_categories.html"></div>
+
+
+        <div class="row">
+            <div class="col2 ">
+                <div x-import="posts/post_types.html"></div>
+                <!-- desktop_right_ad -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
+                    data-ad-slot="4885184263" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="col7">
+                <div>
+                    <!-- desktop_top_ad -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
+                        data-ad-slot="8273571416" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    <div id="posts" class="posts">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col3 ">
+                <div x-import="posts/site_news.html"></div>
+                <!-- desktop_left_ad -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
+                    data-ad-slot="3212816421" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div x-import="scripts.html"></div>
+
+    <script x-import="posts/index.js"></script>
+    <script x-import="posts/posts.js"></script>
+</body>
+
+</html>

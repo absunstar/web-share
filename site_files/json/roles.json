@@ -1,0 +1,17 @@
+[
+    {
+        "name": "owner",
+        "ar": "مدير",
+        "en": "Owner",
+        "permissions": [
+            "owner",
+            "tickets",
+            "review",
+            "finance",
+            "menus",
+            "stores",
+            "print",
+            "customers"
+        ]
+    }
+]

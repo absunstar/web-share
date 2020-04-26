@@ -1,0 +1,14 @@
+<table class="table">
+    <tr>
+        <th>Post</th>
+        <th>Status</th>
+    </tr>
+    <tr ng-repeat="_post in newPosts">
+        <td>{{_post.text}}</td>
+        <td>
+            <p ng-show="_post.$status == 'Pending'"><img src="/images/loading.gif"></p>
+            <p class="red" ng-show="_post.$status == 'Error'">{{_post.$status}}</p>
+            <p class="bold green" ng-show="_post.$status == 'Published'">{{_post.$status}}</p>
+        </td>
+    </tr>
+</table>

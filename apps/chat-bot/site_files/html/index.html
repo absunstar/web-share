@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+
+<head x-import="head.html">
+    <link rel="stylesheet" href="/css/chat-bot.css">
+</head>
+
+<body class="##session.lang##">
+
+    <div id="main-layout" class="container loaded">
+       <div class="messages" ></div>
+       <div class="message">
+           <input class="input" onkeydown="sendMessage()"/>
+       </div>
+
+    </div>
+
+    <div x-import="scripts.html"></div>
+
+    <script x-import="chat-bot/index.js"></script>
+</body>
+
+</html>

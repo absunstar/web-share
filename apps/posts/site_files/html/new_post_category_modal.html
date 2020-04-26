@@ -1,0 +1,33 @@
+<div id="postCategoryModal" class="modal">
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>
+                    New Post Category  <i class="fa fa-plus"></i> 
+            </h2>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                    <form class="form">
+                        <div class="row">
+                            <i-control id2="post_category_ar" ng-model="post_category.ar" label="Arabic Name"></i-control>
+                            <i-control  ng-model="post_category.en" label="English Name"></i-control>
+                            <i-checkbox ng-model="post_category.is_show" label="can Show"></i-checkbox>
+                        </div>
+                    </form>               
+            </div>
+
+
+            <h2 class="error center red">{{error}}</h2>
+            <div class="modal-footer center">
+                <i-button ng-hide="post_category_busy" type="add" ng-click="addToPostCategories()" label="##word.add##"></i-button>
+                <i-button type="close" onclick="site.hideModal('#postCategoryModal')" label="##word.close##"></i-button>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

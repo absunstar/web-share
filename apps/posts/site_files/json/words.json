@@ -1,0 +1,16 @@
+[
+    {"name" : "posts_new" , "en" : "New Post" , "ar" : "مقال جديد"},
+    {"name" : "posts_new_author" , "en" : "New Author" , "ar" : "ناشر جديد"},
+    {"name" : "posts_author_name" , "en" : "Author Name" , "ar" : "أسم الناشر"},
+    {"name" : "posts_author_link" , "en" : "Author Link" , "ar" : "رابط الناشر"},
+    {"name" : "posts_author_image_url" , "en" : "Author Image URL" , "ar" : "رابط صورة الناشر"},
+    {"name" : "posts_author_generate" , "en" : "Generate Author Data" , "ar" : "تحميل بيانات الناشر"},
+    {"name" : "posts_new" , "en" : "New Post" , "ar" : "مقال جديد"},
+    {"name" : "posts_new_url" , "en" : "New URL" , "ar" : "رابط جديد"},
+    {"name" : "post_url" , "en" : "Post URL" , "ar" : "رابط البوست"},
+    {"name" : "posts_videos" , "en" : "Videos" , "ar" : "فيديوهات"},
+    {"name" : "posts_new_category" , "en" : "New Category" , "ar" : "أضافة تصنيف جديد"},
+    {"name" : "posts_load_more" , "en" : "Load More" , "ar" : "جارى تحميل المزيد"},
+    {"name" : "posts_read_more" , "en" : "Read More" , "ar" : "أقرأ المزيد"},
+    {"name" : "page_keywords" , "en" : "egytag , news , videos" , "ar" : "شبكة مصر , أخبار ,  فيديوهات"}
+]

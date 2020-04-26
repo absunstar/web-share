@@ -1,0 +1,55 @@
+<div id="newAuthorModal" class="modal small" fixed>
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>
+                ##word.posts_new_author## <i class="fa fa-plus"></i>
+                <p ng-show="busy"> <img src="/images/loading.gif"> ... </p>
+            </h2>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <form class="form">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col9">
+                                <i-control ng-model="author.link" label="##word.posts_author_link##"></i-control>
+                            </div>
+                            <div class="col3">
+                                <i-button ng-hide="author_busy" onclick="generateAuthorData()" label="##word.posts_author_generate##">
+                                </i-button>
+                            </div>
+                        </div>
+                        <i-control id="author_name" ng-model="author.name" label="##word.posts_author_name##">
+                        </i-control>
+                        <i-control ng-model="author.logo_url" label="##word.posts_author_image_url##"></i-control>
+                        <i-image ng-model="author.logo_url"></i-image>
+                        <div class="row">
+                            <i-checkbox ng-model="author.is_rss" label="is RSS"></i-checkbox>
+                            <i-checkbox ng-model="author.is_video" label="is Video"></i-checkbox>
+                            <i-checkbox ng-model="author.is_children" label="is Children"></i-checkbox>
+                            <i-checkbox ng-model="author.is_porn" label="is Porn"></i-checkbox>
+                            <i-checkbox ng-model="author.is_approved" label="is Approved"></i-checkbox>
+                            <i-checkbox ng-model="author.is_hidden" label="is Hidden"></i-checkbox>
+                            <i-checkbox ng-model="author.is_deleted" label="is Deleted"></i-checkbox>
+                        </div>
+                        <i-control ng-show="author.is_rss" ng-model="author.rss_link" label="##word.rss_link##"></i-control>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <h2 class="error center red">{{error}}</h2>
+            <div class="modal-footer center">
+                <i-button type="add" ng-click="addToAuthors()" label="##word.add##"></i-button>
+                <i-button type="close" onclick="site.hideModal('#newAuthorModal')" label="##word.close##"></i-button>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

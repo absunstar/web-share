@@ -1,0 +1,53 @@
+<script src="/x-js/jquery.js"></script>
+<script src="/js/mustache.js"></script>
+<script src="/x-js/angular.js"></script>
+<script src="/x-js/site.js"></script>
+
+<script>
+        var app = app || angular.module('myApp', []);
+    </script>
+
+<script src="/x-js/directive.js"></script>
+<script x-import="app.js"></script>
+<script x-import="navbar.js"></script>
+
+<script x-import="ui-print/index.js"></script>
+
+
+<div x-permission="!login" x-import="security/login_modal.html"></div>
+<div x-permission="!login" x-import="security/register_modal.html"></div>
+<div x-permission="login" x-import="security/logout_modal.html"></div>
+
+
+<script>
+        $(document).on('keydown', 'input,select', function (e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                e.preventDefault();
+                var $canfocus = $('input,select');
+                var index = $canfocus.index(document.activeElement) + 1;
+                if (index >= $canfocus.length) index = 0;
+                $canfocus.eq(index).focus();
+            }
+        });
+    </script>
+    <script>
+    function allow(){
+        if(typeof $$$ !== "undefined" && typeof $$$.browser !== "undefined" ){
+            return true;
+        }
+        return false;
+    }
+    site.features = '##req.features##';
+    </script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59220588-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-59220588-1');
+</script>
+<script data-ad-client="ca-pub-3372007384613151" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+

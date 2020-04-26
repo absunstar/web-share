@@ -1,0 +1,24 @@
+{
+    "text" : "",
+    "details" : {"url" : "" , "image_url" : "" , "title" : "" , "video_url" : ""},
+    "author" : {"id" : 1 , "name" : "System User" , "logo_url" : "/images/logo.png"},
+    "url_list" : [],
+    "image_list" : [],
+    "is_video" : false,
+    "is_children" : false,
+    "is_porn" : false,
+    "is_approved" : false,
+    "is_hidden" : false,
+    "is_deleted" : false,
+    "spider" : {"enabled" : false},
+    "category" : {"enabled" : false , "value" : "any"},
+    "password" : {"enabled" : false , "code" : ""},
+    "country" : {"enabled" : false , "value" : "any"},
+    "gnder" : {"enabled" : false , "value" : "male"},
+    "privacy" : {"enabled" : false , "value" : "public"},
+    "age" : {"enabled" : false , "min" : 0 , "mx" : 99},
+    "likes" : {"count" : 0 , "data" : []},
+    "comments" : {"count" : 0 , "data" : []},
+    "shares" : {"count" : 0 , "data" : []}
+
+}
