@@ -18,33 +18,84 @@ module.exports = function init(site) {
     path: __dirname + "/site_files"
   })
 
-  site.get("/", (req ,res)=>{
-    res.render("posts/index.html" , {}, {parser : 'html css js'})
+  site.get("/", (req, res) => {
+    res.render("posts/index.html", {}, {
+      parser: 'html css js'
+    })
+  })
+  site.get("/sitemap.xml", (req, res) => {
+    $posts_content.findAll({
+      sort: {
+        id: -1
+      },
+      limit: 10000
+    }, (err, docs) => {
+      if (!err && docs) {
+        let urls = ""
+        docs.forEach((doc , i)=>{
+          doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
+          urls += `
+          <url>
+              <loc>${doc.post_url}</loc>
+              <lastmod>${new Date(doc.date).toISOString()}</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>.8</priority>
+              <id2>${doc.id}</id2>
+              <num>${i}</num>
+          </url>
+          `
+        })
+        let xml = `<?xml version="1.0" encoding="UTF-8"?>
+                  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                  <url>
+                  <loc>https://egytag.com/</loc>
+                  <lastmod>${new Date().toISOString()}</lastmod>
+                  <changefreq>always</changefreq>
+                  <priority>1</priority>
+                  <id2>0</id2>
+                  <num>0</num>
+              </url>
+                     ${urls}
+                  </urlset> 
+                  `
+        res.set('Content-Type', 'application/xml')
+        res.end(xml)
+      } else {
+        res.end(404)
+      }
+    })
+  })
+  site.get("/videos", (req, res) => {
+    res.render("posts/videos.html", {
+      page_title2: 'فيديوهات'
+    }, {
+      parser: 'html css js'
+    })
   })
 
-  site.get("/videos", (req ,res)=>{
-    res.render("posts/videos.html" , {page_title2 : 'فيديوهات'}, {parser : 'html css js'} )
-  })
-
-  site.get("/post/:guid", (req ,res)=>{
-    $posts_content.find({guid : req.params.guid} , (err , doc)=>{
-      if(!err && doc){
-        doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0 , 70)
+  site.get("/post/:guid", (req, res) => {
+    $posts_content.find({
+      guid: req.params.guid
+    }, (err, doc) => {
+      if (!err && doc) {
+        doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
         doc.image_url = doc.details.image_url
         doc.page_description = doc.text.replace(/<[^>]+>/g, '')
         doc.post_url = req.headers.host + '/post/' + doc.guid
         doc.timeago = xtime(new Date().getTime() - new Date(doc.date).getTime());
         doc.page_keywords = doc.details.title.split(' ').join(',')
-        if(doc.is_video){
+        if (doc.is_video) {
           doc.post_type = 'full-video'
-        }else{
+        } else {
           doc.post_type = 'full-post'
         }
-        res.render("posts/post.html" , doc, {parser : 'html css js'})
-      }else{
+        res.render("posts/post.html", doc, {
+          parser: 'html css js'
+        })
+      } else {
         res.redirect('/')
       }
-     
+
     })
   })
 
@@ -52,7 +103,7 @@ module.exports = function init(site) {
   function xtime(_time) {
 
     if (typeof (_time) == 'undefined' || !_time) {
-        return " منذ قليل ";
+      return " منذ قليل ";
     }
 
     var _type = null;
@@ -65,49 +116,50 @@ module.exports = function init(site) {
 
     /*_time = (_time * 1000) - (2 * 60 * 60 * 1000 * 0);*/
     let offset = new Date().getTimezoneOffset();
-    if(false && offset < 0){
-        let diff = (Math.abs(offset) * 60 * 1000)
-        _time = _time + diff;
+    if (false && offset < 0) {
+      let diff = (Math.abs(offset) * 60 * 1000)
+      _time = _time + diff;
     }
     if (_time <= 10000) {
-        return " منذ قليل ";
+      return " منذ قليل ";
     }
     for (var i = 0; i < times.length; i++) {
-        if (_time < times[i]) {
+      if (_time < times[i]) {
 
-            break;
-        } else {
-            _type = times_type[i];
-            if (i > 0) {
-                _time_2 = _time % times[i];
-                _type_2 = times_type[i - 1];
-            }
-            _time = _time / times[i];
+        break;
+      } else {
+        _type = times_type[i];
+        if (i > 0) {
+          _time_2 = _time % times[i];
+          _type_2 = times_type[i - 1];
         }
+        _time = _time / times[i];
+      }
     }
 
     _time = Math.floor(_time);
     _time_2 = Math.floor(_time_2);
 
     if (_time_2 == 0 || _type_2 == null || _type_2 == 'x') {
-        return [" منذ ", _time, _type].join(' ');
+      return [" منذ ", _time, _type].join(' ');
     } else {
-        return [" منذ ", _time, _type, _time_2, _type_2].join(' ');
+      return [" منذ ", _time, _type, _time_2, _type_2].join(' ');
     }
 
 
-};
+  };
+
   function add_post_author(_post_author, callback) {
     callback = callback || function () {}
 
     _post_author.date = new Date()
     _post_author.time = _post_author.date.getTime()
-    if(_post_author.is_rss){
+    if (_post_author.is_rss) {
       _post_author.guid = site.md5(_post_author.rss_link)
-    }else{
+    } else {
       _post_author.guid = _post_author.guid || site.md5(_post_author.name)
     }
-    
+
     $posts_author.add(_post_author, (err, new_post_author) => {
       callback(err, new_post_author)
     })
@@ -204,11 +256,11 @@ module.exports = function init(site) {
               post[$(this)[0].name] = $(this).text()
             })
             post.pubDate = post.pubDate || post.pubdate || post['dc:date']
-            if(post.link){
+            if (post.link) {
               add_post_content({
-                guid : site.md5(post.link),
+                guid: site.md5(post.link),
                 author: doc,
-                text: post.title + ' <br> ' + post.description ,
+                text: post.title + ' <br> ' + post.description,
                 date: new Date(post.pubDate),
                 details: {
                   url: post.link,
@@ -217,10 +269,10 @@ module.exports = function init(site) {
                 is_approved: true,
                 is_rss: true
               }, (err, n) => {
-  
+
               })
             }
-          
+
           })
 
         }
@@ -387,7 +439,9 @@ module.exports = function init(site) {
   })
 
   site.post("/api/posts/categories/add", (req, res) => {
-    let response = {done : false}
+    let response = {
+      done: false
+    }
 
     if (!req.session.user) {
       response.error = 'you are not login'
@@ -411,7 +465,7 @@ module.exports = function init(site) {
     _post_category.guid = _post_category.guid || site.md5(_post_category.ar)
 
     $posts_categories.add(_post_category, (err, doc) => {
-      if(!err){
+      if (!err) {
         response.done = true
         response.doc = doc
       }
@@ -421,10 +475,14 @@ module.exports = function init(site) {
   })
   site.post("/api/posts/categories/all", (req, res) => {
 
-    let response = {done : false}
+    let response = {
+      done: false
+    }
 
-    $posts_categories.findMany({is_show : true}, (err, docs) => {
-      if(!err){
+    $posts_categories.findMany({
+      is_show: true
+    }, (err, docs) => {
+      if (!err) {
         response.done = true
         response.list = docs
       }
@@ -434,5 +492,44 @@ module.exports = function init(site) {
   })
 
 
+
+
+  function json_to_xml(o, tab) {
+    var toXml = function (v, name, ind) {
+        var xml = "";
+        if (v instanceof Array) {
+          for (var i = 0, n = v.length; i < n; i++)
+            xml += ind + toXml(v[i], name, ind + "\t") + "\n";
+        } else if (typeof (v) == "object") {
+          var hasChild = false;
+          xml += ind + "<" + name;
+          for (var m in v) {
+            if (m.charAt(0) == "@")
+              xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
+            else
+              hasChild = true;
+          }
+          xml += hasChild ? ">" : "/>";
+          if (hasChild) {
+            for (var m in v) {
+              if (m == "#text")
+                xml += v[m];
+              else if (m == "#cdata")
+                xml += "<![CDATA[" + v[m] + "]]>";
+              else if (m.charAt(0) != "@")
+                xml += toXml(v[m], m, ind + "\t");
+            }
+            xml += (xml.charAt(xml.length - 1) == "\n" ? ind : "") + "</" + name + ">";
+          }
+        } else {
+          xml += ind + "<" + name + ">" + v.toString() + "</" + name + ">";
+        }
+        return xml;
+      },
+      xml = "";
+    for (var m in o)
+      xml += toXml(o[m], m, "");
+    return tab ? xml.replace(/\t/g, tab) : xml.replace(/\t|\n/g, "");
+  };
 
 }
