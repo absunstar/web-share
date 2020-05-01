@@ -22,21 +22,25 @@
         <div class="row">
             <div class="col2 ">
                 <div x-import="posts/post_types.html"></div>
-                <!-- desktop_right_ad -->
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
-                    data-ad-slot="4885184263" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-            <div class="col7">
-                <div>
-                    <!-- desktop_top_ad -->
+                <div x-feature="os.desktop">
+                    <!-- desktop_right_ad -->
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
-                        data-ad-slot="8273571416" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        data-ad-slot="4885184263" data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
+                </div>
+            </div>
+            <div class="col7">
+                <div>
+                    <div x-feature="os.mobile">
+                        <!-- desktop_top_ad -->
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
+                            data-ad-slot="8273571416" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
                     <div id="posts" class="posts">
                         <div class="post ##data.post_type##" id="post_##data.id##">
                             <div class="header">
@@ -112,12 +116,14 @@
             </div>
             <div class="col3 ">
                 <div x-import="posts/site_news.html"></div>
-                <!-- desktop_left_ad -->
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
-                    data-ad-slot="3212816421" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                <div x-feature="os.desktop">
+                    <!-- desktop_left_ad -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
+                        data-ad-slot="3212816421" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
 
 
