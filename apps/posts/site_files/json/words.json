@@ -12,5 +12,27 @@
     {"name" : "posts_new_category" , "en" : "New Category" , "ar" : "أضافة تصنيف جديد"},
     {"name" : "posts_load_more" , "en" : "Load More" , "ar" : "جارى تحميل المزيد"},
     {"name" : "posts_read_more" , "en" : "Read More" , "ar" : "أقرأ المزيد"},
+     {
+        "name": "details.image_url",
+        "en": "/images/no.png",
+        "ar": "/images/no.png"
+    }, {
+        "name": "image_url",
+        "en": "/images/logo.png",
+        "ar": "/images/logo.png"
+    },{
+        "name": "page_title",
+        "en": "Egypt Network",
+        "ar": "شبكة مصر " 
+    },{
+        "name": "page_title2",
+        "en": "Posts - News - Videos",
+        "ar": " بوستات - أخبار - فيديوهات" 
+    },
+    {
+        "name": "page_description",
+        "en": "Posts & News & Videos",
+        "ar": "تقوم شبكة مصر بجمع البوستات من المواقع المشهورة واليوتيوب والفيسبوك وترتيبها بيما يتناسب معكم"
+    },
     {"name" : "page_keywords" , "en" : "egytag , news , videos" , "ar" : "شبكة مصر , أخبار ,  فيديوهات"}
 ]

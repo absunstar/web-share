@@ -5,7 +5,7 @@ function scope() {
     return angular.element(document.getElementById('main-layout')).scope();
 };
 
-const spider_server = 'http://127.0.0.1:60080'
+const spider_server = 'http://127.0.0.1:60080';
 
 const post_where = {
     is_video: document.location.href.like('*video*') ? true : null,
@@ -14,7 +14,8 @@ const post_where = {
     is_hidden: '##req.query.is_hidden##' == 'true' ? true : false,
     is_children: '##req.query.is_children##' == 'true' ? true : null,
     is_rss: '##req.query.is_rss##' == 'true' ? true : null,
-}
+};
+
 let posts_limit = 20;
 if (document.location.href.like('*video*')) {
     posts_limit = 40;
@@ -163,13 +164,13 @@ function urlify(text) {
     let data = {
         text: text,
         url_list: []
-    }
+    };
     let urlRegex = /(https?:\/\/[^\s]+)/g;
     text.replace(urlRegex, function (url) {
-        data.url_list.push(url)
+        data.url_list.push(url);
         return '<a href="' + url + '">' + url + '</a>';
     })
-    return data
+    return data;
 };
 
 function newPost() {
@@ -219,7 +220,9 @@ function generateAuthorData(link) {
         $scope.$apply();
     })
 };
-var one_post = one_post || false
+
+var one_post = one_post || false;
+
 if(!one_post){
     loadPosts();
 }
@@ -237,5 +240,6 @@ window.onscroll = function () {
         loadPosts(true);
     }
 };
+
 var rss = null;
 

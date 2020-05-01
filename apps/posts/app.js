@@ -18,21 +18,19 @@ module.exports = function init(site) {
     path: __dirname + "/site_files"
   })
 
-  site.get({
-    name: "/",
-    path: __dirname + "/site_files/html/index.html",
-    parser: "html",
-    compress: false
+  site.get("/", (req ,res)=>{
+    res.render("posts/index.html" , {}, {parser : 'html css js'})
   })
 
   site.get("/videos", (req ,res)=>{
-    res.render("posts/videos.html" , {page_title : 'شبكة مصر - فيديوهات'})
+    res.render("posts/videos.html" , {page_title2 : 'فيديوهات'}, {parser : 'html css js'} )
   })
 
   site.get("/post/:guid", (req ,res)=>{
     $posts_content.find({guid : req.params.guid} , (err , doc)=>{
       if(!err && doc){
-        doc.page_title = doc.details.title.replace(/<[^>]+>/g, '').substring(0 , 70)
+        doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0 , 70)
+        doc.image_url = doc.details.image_url
         doc.page_description = doc.text.replace(/<[^>]+>/g, '')
         doc.post_url = req.headers.host + '/post/' + doc.guid
         doc.timeago = xtime(new Date().getTime() - new Date(doc.date).getTime());
@@ -42,7 +40,7 @@ module.exports = function init(site) {
         }else{
           doc.post_type = 'full-post'
         }
-        res.render("posts/post.html" , doc)
+        res.render("posts/post.html" , doc, {parser : 'html css js'})
       }else{
         res.redirect('/')
       }

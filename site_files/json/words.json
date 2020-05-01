@@ -8,15 +8,6 @@
         "name": "brand_tag",
         "en": "Posts & News & Videos",
         "ar": "بوستات - أخبار - فيديوهات"
-    }, {
-        "name": "page_title",
-        "en": "Egypt Network",
-        "ar": "شبكة مصر"
-    },
-    {
-        "name": "page_description",
-        "en": "Posts & News & Videos",
-        "ar": "بوستات - أخبار - فيديوهات"
     },
     {
         "name": "name",
@@ -282,9 +273,5 @@
         "name": "select_all",
         "en": "Select All",
         "ar": "أختيار الكل"
-    }, {
-        "name": "details.image_url",
-        "en": "/images/logo.png",
-        "ar": "/images/logo.png"
     }
 ]
