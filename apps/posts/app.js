@@ -40,7 +40,6 @@ module.exports = function init(site) {
               <lastmod>${new Date(doc.date).toISOString()}</lastmod>
               <changefreq>monthly</changefreq>
               <priority>.8</priority>
-              <id2>${doc.id}</id2>
               <num>${i}</num>
           </url>
           `
@@ -52,7 +51,6 @@ module.exports = function init(site) {
                   <lastmod>${new Date().toISOString()}</lastmod>
                   <changefreq>always</changefreq>
                   <priority>1</priority>
-                  <id2>0</id2>
                   <num>0</num>
               </url>
                      ${urls}
