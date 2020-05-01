@@ -25,11 +25,11 @@ module.exports = function init(site) {
   })
   site.get(["/sitemap.xml"], (req, res) => {
     let where = {}
-    if(req.params.guid){
+    if (req.params.guid) {
       where['guid'] = req.params.guid
     }
     $posts_content.findAll({
-      where : where,
+      where: where,
       sort: {
         id: -1
       },
@@ -37,7 +37,7 @@ module.exports = function init(site) {
     }, (err, docs) => {
       if (!err && docs) {
         let urls = ""
-        docs.forEach((doc , i)=>{
+        docs.forEach((doc, i) => {
           doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
           urls += `
           <url>
@@ -67,13 +67,13 @@ module.exports = function init(site) {
     })
   })
 
-  site.get(["/rss" ,"/rss/posts" , "/rss/posts/:guid"], (req, res) => {
+  site.get(["/rss", "/rss/posts", "/rss/posts/:guid"], (req, res) => {
     let where = {}
-    if(req.params.guid){
+    if (req.params.guid) {
       where['guid'] = req.params.guid
     }
     $posts_content.findAll({
-      where : where,
+      where: where,
       sort: {
         id: -1
       },
@@ -81,9 +81,9 @@ module.exports = function init(site) {
     }, (err, docs) => {
       if (!err && docs) {
         let urls = ""
-        docs.forEach((doc , i)=>{
+        docs.forEach((doc, i) => {
           doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
-          doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;/g , '')
+          doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;/g, '')
           urls += `
           <item>
             <title>${doc.details.title}</title>
@@ -119,29 +119,48 @@ module.exports = function init(site) {
   })
 
   site.get("/post/:guid", (req, res) => {
-    $posts_content.find({
-      guid: req.params.guid
-    }, (err, doc) => {
-      if (!err && doc) {
-        doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
-        doc.image_url = doc.details.image_url
-        doc.page_description = doc.text.replace(/<[^>]+>/g, '')
-        doc.post_url = req.headers.host + '/post/' + doc.guid
-        doc.timeago = xtime(new Date().getTime() - new Date(doc.date).getTime());
-        doc.page_keywords = doc.details.title.split(' ').join(',')
-        if (doc.is_video) {
-          doc.post_type = 'full-video'
-        } else {
-          doc.post_type = 'full-post'
+    let where = {}
+    if (req.params.guid == 'random') {
+      $posts_content.findAll({
+        select: {
+          guid: 1
+        },
+        limit: 100,
+        sort: {
+          id: -1
         }
-        res.render("posts/post.html", doc, {
-          parser: 'html css js'
-        })
-      } else {
-        res.redirect('/')
-      }
+      }, (err, docs) => {
+        if (!err && docs) {
+          res.redirect('/post/' + docs[Math.floor(Math.random() * docs.length)].guid)
+        } else {
+          res.redirect('/')
+        }
 
-    })
+      })
+    } else {
+      where['guid'] = req.params.guid
+      $posts_content.find(where, (err, doc) => {
+        if (!err && doc) {
+          doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
+          doc.image_url = doc.details.image_url
+          doc.page_description = doc.text.replace(/<[^>]+>/g, '')
+          doc.post_url = req.headers.host + '/post/' + doc.guid
+          doc.timeago = xtime(new Date().getTime() - new Date(doc.date).getTime());
+          doc.page_keywords = doc.details.title.split(' ').join(',')
+          if (doc.is_video) {
+            doc.post_type = 'full-video'
+          } else {
+            doc.post_type = 'full-post'
+          }
+          res.render("posts/post.html", doc, {
+            parser: 'html css js'
+          })
+        } else {
+          res.redirect('/')
+        }
+
+      })
+    }
   })
 
 
