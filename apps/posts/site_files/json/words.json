@@ -7,7 +7,7 @@
     {"name" : "posts_author_generate" , "en" : "Generate Author Data" , "ar" : "تحميل بيانات الناشر"},
     {"name" : "posts_new" , "en" : "New Post" , "ar" : "مقال جديد"},
     {"name" : "posts_new_url" , "en" : "New URL" , "ar" : "رابط جديد"},
-    {"name" : "post_url" , "en" : "Post URL" , "ar" : "رابط البوست"},
+    {"name" : "posts_url" , "en" : "Post URL" , "ar" : "رابط البوست"},
     {"name" : "posts_videos" , "en" : "Videos" , "ar" : "فيديوهات"},
     {"name" : "posts_new_category" , "en" : "New Category" , "ar" : "أضافة تصنيف جديد"},
     {"name" : "posts_load_more" , "en" : "Load More" , "ar" : "جارى تحميل المزيد"},
@@ -20,6 +20,10 @@
         "name": "image_url",
         "en": "/images/logo.png",
         "ar": "/images/logo.png"
+    }, {
+        "name": "guid",
+        "en": "",
+        "ar": ""
     },{
         "name": "page_title",
         "en": "Egypt Network",
