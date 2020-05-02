@@ -62,6 +62,7 @@ function loadPosts(more) {
         var rendered = '';
         var post_template = $('#post-template').html();
         var video_template = $('#video-template').html();
+        var ad_template = $('#ad-template').html();
 
         Mustache.parse(post_template);
         last_posts = res.list;
@@ -81,17 +82,27 @@ function loadPosts(more) {
                 }else{
                     rendered += Mustache.render(post_template, post);
                 }
+               
             } catch (error) {
 
             }
         }
 
         $('#posts').append('<span class="line"></span><span class="line"></span><span class="line"></span>');
+        rendered += `
+                        <div>
+                        <!-- Post Ad-->
+                        <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                            data-ad-format="fluid" data-ad-client="ca-pub-3372007384613151"
+                            data-ad-slot="5838870332"></ins>
+                        </div>
+                    `
+        $('#posts').append('<span class="line"></span><span class="line"></span><span class="line"></span>');
         $('#posts').append(rendered);
 
         busy = false;
         $('.posts-loading').remove();
-
+        (adsbygoogle = window.adsbygoogle || []).push({});
     });
 
 
