@@ -71,7 +71,7 @@ function loadPosts(more) {
                 var post = last_posts[i];
                 
                 post.timeago = xtime(new Date().getTime() - new Date(post.date).getTime());
-                post.post_url = document.location.origin + '/post/' + post.guid;
+                post.post_url = document.location.origin + '/post/' + post.guid + '/'+ encodeURI(post.details.title);
                 post.text = post.is_rss ? post.text : xlinks(post.text);
                 if (post.is_rss) {
                     post.text = post.text + ` <a target="_blank" rel="nofollow" href="${post.details.url}"> ##word.posts_read_more## </a> `;
