@@ -123,15 +123,17 @@ module.exports = function init(site) {
     if (req.params.guid == 'random') {
       $posts_content.findAll({
         select: {
-          guid: 1
+          guid: 1,
+          details : 1
         },
         limit: 100,
         sort: {
-          id: -1
+          date: -1
         }
       }, (err, docs) => {
         if (!err && docs) {
-          res.redirect('/post/' + docs[Math.floor(Math.random() * docs.length)].guid)
+          let doc = docs[Math.floor(Math.random() * docs.length)]
+          res.redirect('/post/' + doc.guid+ '/'+ encodeURI(doc.details.title))
         } else {
           res.redirect('/')
         }
@@ -299,7 +301,7 @@ module.exports = function init(site) {
       site.request({
         url: doc.rss_link,
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36'
         }
       }, function (error, response, body) {
 
@@ -325,7 +327,7 @@ module.exports = function init(site) {
                 guid: site.md5(post.link),
                 author: doc,
                 text: post.title + ' <br> ' + post.description,
-                date: new Date(post.pubDate),
+                date: post.pubDate ? new Date(post.pubDate) : new Date(),
                 details: {
                   url: post.link,
                   title: post.title
