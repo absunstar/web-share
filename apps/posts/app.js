@@ -77,9 +77,10 @@ module.exports = function init(site) {
       sort: {
         id: -1
       },
-      limit: 100
+      limit: req.query.limit || 10
     }, (err, docs) => {
       if (!err && docs) {
+
         let urls = ""
         docs.forEach((doc, i) => {
           doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
@@ -105,7 +106,7 @@ module.exports = function init(site) {
         res.set('Content-Type', 'application/xml')
         res.end(xml)
       } else {
-        res.end(404)
+        res.end(402)
       }
     })
   })
