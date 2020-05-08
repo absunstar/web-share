@@ -84,7 +84,7 @@ module.exports = function init(site) {
         let urls = ""
         docs.forEach((doc, i) => {
           doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
-          doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;/g, '')
+          doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;&lrm;&rrm;/g, '')
           urls += `
           <item>
             <title>${doc.details.title}</title>
