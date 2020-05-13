@@ -16,7 +16,7 @@
 }
 
 .yts {
-    background: #272727;
+    background: #ffffff;
     float: right;
     margin: 5px;
     line-height: 1.3em;
@@ -29,12 +29,13 @@
     width: 230px;
     height: 450px;
     text-align: center;
-    box-shadow: 1px 1px 3px 0px #353535;
 }
 
 .yts .body .image {
     width: 220px;
     height: 320px;
+    border: 3px solid #000;
+    padding: 3px;
 }
 
 .yts .text {
@@ -44,12 +45,12 @@
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    color: #ffffff;
+    color: #000000;
     top: -100px;
 }
 
 .yts .text p {
-    color: #ffeb3b;
+    color: #ce3429;
 }
 
 .full-yts .body .image {
