@@ -4,5 +4,11 @@
         "url" : "/videos",
         "en": "Videos",
         "ar": "فيديوهات"
+    },
+    {
+        "id": 1,
+        "url" : "/?is_yts=true",
+        "en": "Torrent Movies",
+        "ar": "تحميل أفلام"
     }
 ]

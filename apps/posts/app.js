@@ -152,12 +152,21 @@ module.exports = function init(site) {
           doc.page_keywords = doc.details.title.split(' ').join(',')
           if (doc.is_video) {
             doc.post_type = 'full-video'
+            res.render("posts/post.html", doc, {
+              parser: 'html css js'
+            })
+          }else if (doc.is_yts) {
+            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
+            res.render("posts/yts.html", doc, {
+              parser: 'html css js'
+            })
           } else {
             doc.post_type = 'full-post'
+            res.render("posts/post.html", doc, {
+              parser: 'html css js'
+            })
           }
-          res.render("posts/post.html", doc, {
-            parser: 'html css js'
-          })
+         
         } else {
           res.redirect('/')
         }
@@ -353,14 +362,16 @@ module.exports = function init(site) {
 
   site.post("/api/posts/add", (req, res) => {
 
+    let response = {}
+    response.done = false
+    
     if (!req.session.user) {
       response.error = 'you are not login'
       res.json(response)
       return
     }
 
-    let response = {}
-    response.done = false
+  
 
     let _post = Object.assign(Object.assign({}, post_template), req.data)
 
@@ -442,6 +453,9 @@ module.exports = function init(site) {
     }
     if (user_where.is_rss != undefined) {
       where.is_rss = user_where.is_rss
+    }
+    if (user_where.is_yts != undefined) {
+      where.is_yts = user_where.is_yts
     }
 
     if (user_where.last_time != undefined) {

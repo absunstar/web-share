@@ -1,7 +1,7 @@
 {
     "text" : "",
     "details" : {"url" : "" , "image_url" : "" , "title" : "" , "video_url" : ""},
-    "author" : {"id" : 1 , "name" : "System User" , "logo_url" : "/images/logo.png"},
+    "author" : {"id" : 1000000000 , "name" : "System User" , "logo_url" : "/images/logo.png"},
     "url_list" : [],
     "image_list" : [],
     "is_video" : false,

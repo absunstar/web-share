@@ -3,6 +3,8 @@
 
 <head x-import="head.html">
     <link rel="stylesheet" href="/css/posts.css">
+    <link rel="stylesheet" href="/css/yts.css">
+
 </head>
 
 <body class="##session.lang##" ng-controller="posts">
@@ -16,7 +18,9 @@
     <script id="video-template" type="x-tmpl-mustache" x-import="posts/video-template.html">
 
     </script>
+    <script id="yts-template" type="x-tmpl-mustache" x-import="posts/yts-template.html">
 
+    </script>
     <div x-import="posts/new_post_modal.html"></div>
     <div x-import="posts/new_url_modal.html"></div>
     <div x-import="posts/new_author_modal.html"></div>
@@ -70,6 +74,7 @@
 
     <script x-import="posts/index.js"></script>
     <script x-import="posts/posts.js"></script>
+    <script x-permission="login" x-import="posts/yts.js"></script>
 </body>
 
 </html>

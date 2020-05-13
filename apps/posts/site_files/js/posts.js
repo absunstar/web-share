@@ -14,6 +14,7 @@ const post_where = {
     is_hidden: '##req.query.is_hidden##' == 'true' ? true : false,
     is_children: '##req.query.is_children##' == 'true' ? true : null,
     is_rss: '##req.query.is_rss##' == 'true' ? true : null,
+    is_yts: '##req.query.is_yts##' == 'true' ? true : null,
 };
 
 let posts_limit = 20;
@@ -62,6 +63,7 @@ function loadPosts(more) {
         var rendered = '';
         var post_template = $('#post-template').html();
         var video_template = $('#video-template').html();
+        var yts_template = $('#yts-template').html();
         var ad_template = $('#ad-template').html();
 
         Mustache.parse(post_template);
@@ -78,6 +80,9 @@ function loadPosts(more) {
                 }
                 if(post.is_video){
                     rendered += Mustache.render(video_template, post);
+
+                }else if(post.yts){
+                    rendered += Mustache.render(yts_template, post);
 
                 }else{
                     rendered += Mustache.render(post_template, post);
@@ -231,6 +236,8 @@ function generateAuthorData(link) {
         $scope.$apply();
     })
 };
+
+
 
 var one_post = one_post || false;
 
