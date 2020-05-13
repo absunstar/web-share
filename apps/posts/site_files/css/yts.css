@@ -1,18 +1,22 @@
-:root{
-    --font-family : 'Droid Arabic Kufi', serif
+:root {
+    --font-family: 'Droid Arabic Kufi', serif
 }
+
 .posts .yts {
     float: none;
-  }
+}
 
 .yts_list {
     margin: 5px;
     text-align: center;
 }
- .yts_list .posts-loading {
+
+.yts_list .posts-loading {
     float: right;
-  }
-  .yts {
+}
+
+.yts {
+    background: #272727;
     float: right;
     margin: 5px;
     line-height: 1.3em;
@@ -26,20 +30,26 @@
     height: 450px;
     text-align: center;
     box-shadow: 1px 1px 3px 0px #353535;
-  }
-  .yts .body .image {
+}
+
+.yts .body .image {
     width: 220px;
     height: 320px;
-  }
-  .yts .text {
+}
+
+.yts .text {
     position: relative;
     line-height: 1.8em;
     padding: 5px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    color: #000000;
+    color: #ffffff;
     top: -100px;
+}
+
+.yts .text p {
+    color: #ffeb3b;
 }
 
 .full-yts .body .image {
@@ -48,6 +58,7 @@
     max-width: 400px;
     max-height: 400px;
 }
+
 .full-yts .body .title {
     position: relative;
     line-height: 1.8em;
@@ -57,6 +68,7 @@
     color: #000000;
     font-weight: bold;
 }
+
 .full-yts .body .text {
     position: relative;
     line-height: 1.8em;
@@ -66,7 +78,8 @@
     color: #000000;
     font-weight: bold;
 }
-#info .btn{
+
+#info .btn {
     font-size: 18px;
     min-width: 400px;
     min-height: 50px;
@@ -74,22 +87,26 @@
     color: white;
     font-weight: bold;
 }
-#info .yts-info{
+
+#info .yts-info {
     text-align: left !important;
     font-size: 18px;
     color: black;
 }
-#info .yts-info span{
+
+#info .yts-info span {
     text-align: left !important;
     font-size: 16px;
     color: blue;
     font-weight: bold;
 }
-#info .rating{
+
+#info .rating {
     font-size: 26px !important;
     color: #795548 !important;
 }
-.yts-banner{
+
+.yts-banner {
     opacity: 1;
     position: relative;
     bottom: 290px;
