@@ -8,17 +8,17 @@ function scope() {
 const spider_server = 'http://127.0.0.1:60080';
 
 const post_where = {
-    is_video: document.location.href.like('*video*') ? true : null,
+    is_video: document.location.href.like('*videos*') ? true : null,
+    is_yts: document.location.href.like('*torrents*') ? true : null,
     is_approved: '##req.query.is_approved##' == 'false' ? false : true,
     is_porn: '##req.query.is_porn##' == 'true' ? true : false,
     is_hidden: '##req.query.is_hidden##' == 'true' ? true : false,
     is_children: '##req.query.is_children##' == 'true' ? true : null,
     is_rss: '##req.query.is_rss##' == 'true' ? true : null,
-    is_yts: '##req.query.is_yts##' == 'true' ? true : null,
 };
 
 let posts_limit = 20;
-if (document.location.href.like('*video*')) {
+if (document.location.href.like('*videos*')) {
     posts_limit = 40;
 }
 
@@ -75,6 +75,7 @@ function loadPosts(more) {
                 post.timeago = xtime(new Date().getTime() - new Date(post.date).getTime());
                 post.post_url = document.location.origin + '/post/' + post.guid + '/'+ encodeURI(post.details.title.split(' ').join('-'));
                 post.text = post.is_rss ? post.text : xlinks(post.text);
+                post.banner ='/images/banner720p.png'
                 if (post.is_rss) {
                     post.text = post.text + ` <a target="_blank" rel="nofollow" href="${post.details.url}"> ##word.posts_read_more## </a> `;
                 }
@@ -82,6 +83,11 @@ function loadPosts(more) {
                     rendered += Mustache.render(video_template, post);
 
                 }else if(post.yts){
+                   post.yts.torrents.forEach(torrent => {
+                       if(torrent.quality == '1080p'){
+                        post.banner ='/images/banner1080p.png'
+                       }
+                   });
                     rendered += Mustache.render(yts_template, post);
 
                 }else{

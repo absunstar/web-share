@@ -7,7 +7,7 @@
     },
     {
         "id": 1,
-        "url" : "/?is_yts=true",
+        "url" : "/torrents",
         "en": "Torrent Movies",
         "ar": "تحميل أفلام"
     }

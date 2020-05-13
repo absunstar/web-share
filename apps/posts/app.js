@@ -112,8 +112,15 @@ module.exports = function init(site) {
   })
 
   site.get("/videos", (req, res) => {
-    res.render("posts/videos.html", {
+    res.render("posts/index.html", {
       page_title2: 'فيديوهات'
+    }, {
+      parser: 'html css js'
+    })
+  })
+  site.get("/torrents", (req, res) => {
+    res.render("posts/index.html", {
+      page_title2: 'torrents movies - أفلام تورينت'
     }, {
       parser: 'html css js'
     })
