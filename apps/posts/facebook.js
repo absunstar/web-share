@@ -53,8 +53,8 @@ module.exports = function init(site) {
                     message: "الاكثر مشاهدة على #شبكة_مصر" + "\n\r" + doc.text,
                     link: "https://egytag.com/post/" + doc.guid
                 } , (data)=>{
+                    console.log(data)
                     if(data && data.error){
-                        console.log(data)
                         post_movie()
                     }else{
                         setTimeout(() => {
