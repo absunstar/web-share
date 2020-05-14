@@ -1,0 +1,27 @@
+:root{
+    --body-margin-top: 100px;
+    --navbar-background-color : #ffffff;
+
+    --scrollbar-background-color: #9E9E9E;
+    --scrollbar-color: #000000;
+    --scrollbar-box-shadow-color: #9E9E9E;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+.navbar {
+    height: 60px;
+    background-color: #2196F3;
+}
+
+.navbar .brand a {
+    background: var(--navbar-background-color);
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    text-shadow: none;
+}
+.navbar .brand a span {
+    color: #3F51B5;
+}

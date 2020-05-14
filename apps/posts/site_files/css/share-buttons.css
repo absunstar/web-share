@@ -1,0 +1,29 @@
+
+
+ul.share-buttons {
+    padding: 0;
+    margin: 0px;
+    margin-top: 30px;
+    list-style: none;
+    text-align: center;
+    max-height: 40px;
+  }
+  
+  ul.share-buttons li {
+    display: inline;
+    opacity: .5;
+  }
+  
+  ul.share-buttons li a {
+    text-decoration: none;
+    border: none !important;
+    margin: none !important;
+  }
+  
+  ul.share-buttons li a img {
+    height: 32px;
+  }
+  
+  ul.share-buttons li:hover {
+    opacity: 1;
+  }

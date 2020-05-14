@@ -1,0 +1,30 @@
+
+.post-type {
+    display: block;
+    margin: 5px;
+    padding: 15px;
+    font-size: 16px;
+    background: #ffffff;
+    border: 1px solid #bbb;
+    font-weight: bold;
+    color: #000000;
+    text-align: center !important;
+  }
+  
+  .post-type a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    transition: all .3s ease;
+  }
+  
+  .post-type:hover {
+    background: #ddd;
+  }
+  
+  .post-type:hover a {
+    padding-right: 25px;
+  }
+  
+  

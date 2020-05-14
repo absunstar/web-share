@@ -52,20 +52,19 @@
                                 <br>
                                 <div class="details">
                                     <div class="row">
-                                        <div class="col6 center">
+                                        
+                                        <div class="col7 center">
+                                           
                                             <h2 class="text"> ##data.details.description## </h2>
-
-                                            <div id="info" class="row center"></div>
                                         </div>
-                                        <div class="col1"></div>
                                         <div class="col5 center">
                                             <a rel="nofollow" href="##data.details.url##" target="_blank">
                                                 <img class="image " src="##data.details.image_url##"
                                                     alt="##data.details.title##"
                                                     onerror="this.onerror=null;this.parentNode.removeChild(this);">
                                             </a>
+                                            <div id="info" class="row center"></div>
                                         </div>
-
                                     </div>
 
                                 </div>
@@ -161,7 +160,13 @@
     <script x-import="posts/index.js"></script>
     <script x-import="posts/posts.js"></script>
     <script>
-        let post = JSON.parse(`##data.*##`)
+        let post = {
+            genres:JSON.parse(`##data.yts.genres##`),
+            language: `##data.yts.language##`,
+            rating: `##data.yts.rating##`,
+            imdb_code: `##data.yts.imdb_code##`,
+            torrents: JSON.parse(`##data.yts.torrents##`)
+        }
         let torrent_template = $('#torrent-template').html();
         let rendered = Mustache.render(torrent_template, post);
         $('#info').append(rendered);

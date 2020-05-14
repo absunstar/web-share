@@ -14,6 +14,20 @@ module.exports = function init(site) {
   const post_template = require('./site_files/json/post.json')
 
   site.get({
+    name: "/css/posts.css",
+    path: [
+      __dirname + "/site_files/css/custom.css",
+      __dirname + "/site_files/css/post.css",
+      __dirname + "/site_files/css/post-type.css",
+      __dirname + "/site_files/css/post-category.css",
+      __dirname + "/site_files/css/site-news.css",
+      __dirname + "/site_files/css/video.css",
+      __dirname + "/site_files/css/yts.css",
+      __dirname + "/site_files/css/share-buttons.css"
+    ]
+  })
+
+  site.get({
     name: "/",
     path: __dirname + "/site_files"
   })
@@ -132,7 +146,7 @@ module.exports = function init(site) {
       $posts_content.findAll({
         select: {
           guid: 1,
-          details : 1
+          details: 1
         },
         limit: 100,
         sort: {
@@ -141,7 +155,7 @@ module.exports = function init(site) {
       }, (err, docs) => {
         if (!err && docs) {
           let doc = docs[Math.floor(Math.random() * docs.length)]
-          res.redirect('/post/' + doc.guid+ '/'+ encodeURI(doc.details.title))
+          res.redirect('/post/' + doc.guid + '/' + encodeURI(doc.details.title))
         } else {
           res.redirect('/')
         }
@@ -162,7 +176,7 @@ module.exports = function init(site) {
             res.render("posts/post.html", doc, {
               parser: 'html css js'
             })
-          }else if (doc.is_yts) {
+          } else if (doc.is_yts) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
             res.render("posts/yts.html", doc, {
               parser: 'html css js'
@@ -173,7 +187,7 @@ module.exports = function init(site) {
               parser: 'html css js'
             })
           }
-         
+
         } else {
           res.redirect('/')
         }
@@ -371,14 +385,14 @@ module.exports = function init(site) {
 
     let response = {}
     response.done = false
-    
+
     if (!req.session.user) {
       response.error = 'you are not login'
       res.json(response)
       return
     }
 
-  
+
 
     let _post = Object.assign(Object.assign({}, post_template), req.data)
 

@@ -44,7 +44,9 @@ function get_all_yts_movies(op){
             });
             op.page+=1;
             setTimeout(() => {
-                get_all_yts_movies(op);
+                if(!op.stop){
+                    get_all_yts_movies(op);
+                }
             }, 5000);
         }
     });
