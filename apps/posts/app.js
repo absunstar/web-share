@@ -33,17 +33,18 @@ module.exports = function init(site) {
   var image_list = []
   site.get('/image/:guid', (req, res) => {
     if(image_list[req.params.guid]){
-      site.request({
-        url : image_list[req.params.guid],
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
-        },
-        encoding: null
-      }, (err, resp, buffer) => {
-        res.set("Content-Type", "image/png")
-        res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
-        res.end(buffer)
-      })
+      // site.request({
+      //   url : image_list[req.params.guid],
+      //   headers: {
+      //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
+      //   },
+      //   encoding: null
+      // }, (err, resp, buffer) => {
+      //   res.set("Content-Type", "image/png")
+      //   res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
+      //   res.end(buffer)
+      // })
+      res.redirect(image_list[req.params.guid])
       return
     }else{
       $posts_content.find({
@@ -57,17 +58,18 @@ module.exports = function init(site) {
         if (!err && doc) {
           let url = doc.details.image_url
           image_list[req.params.guid] = url
-          site.request({
-            url,
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
-            },
-            encoding: null
-          }, (err, resp, buffer) => {
-            res.set("Content-Type", "image/png")
-            res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
-            res.end(buffer)
-          })
+          // site.request({
+          //   url,
+          //   headers: {
+          //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
+          //   },
+          //   encoding: null
+          // }, (err, resp, buffer) => {
+          //   res.set("Content-Type", "image/png")
+          //   res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
+          //   res.end(buffer)
+          // })
+          res.redirect(image_list[req.params.guid])
         } else {
           res.end(402)
         }
