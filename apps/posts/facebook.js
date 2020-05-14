@@ -19,7 +19,6 @@ module.exports = function init(site) {
     }
 
     function post_to_facebook(data) {
-console.log(data)
         site.request.post({
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -56,7 +55,7 @@ console.log(data)
         })
     }
 
-     post_movie()
+     // post_movie()
 
     // get_long_access_token()
 

@@ -59,6 +59,8 @@ module.exports = function init(site) {
             encoding: null
           }, (err, resp, buffer) => {
             console.log(err)
+            console.log(resp)
+            res.set("Content-Type", "image/png")
             res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
             res.end(buffer)
           })
