@@ -31,10 +31,10 @@ module.exports = function init(site) {
         })
     }
 
-    let post_id = 5
+    let post_id = 5000
 
     function post_movie() {
-        console.log('try find movie')
+        console.log('try find movie ' + post_id)
         $posts_content.find({
             where: {
                 id: post_id,
@@ -43,7 +43,11 @@ module.exports = function init(site) {
         }, (err, doc) => {
             post_id++
             if (err || !doc) {
-                post_movie()
+                console.log(err)
+                setTimeout(() => {
+                    post_movie()
+                }, 500);
+                
             } else {
                 post_to_facebook({
                     message: "الاكثر مشاهدة على #شبكة_مصر" + "\n\r" + doc.text,
@@ -57,7 +61,19 @@ module.exports = function init(site) {
         })
     }
 
-      post_movie()
+    $posts_content.findAll({
+        where: {
+            is_yts: true
+        },
+        limit : 1,
+        select : {id : 1}
+    }, (err, docs) => {
+        if(!err && docs){
+            post_id = docs[0].id
+            post_movie()
+        }
+    })
+     
 
     // get_long_access_token()
 
