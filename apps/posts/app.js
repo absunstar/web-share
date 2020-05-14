@@ -35,6 +35,9 @@ module.exports = function init(site) {
     if(image_list[req.params.guid]){
       site.request({
         url : image_list[req.params.guid],
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
+        },
         encoding: null
       }, (err, resp, buffer) => {
         res.set("Content-Type", "image/png")
@@ -56,6 +59,9 @@ module.exports = function init(site) {
           image_list[req.params.guid] = url
           site.request({
             url,
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
+            },
             encoding: null
           }, (err, resp, buffer) => {
             res.set("Content-Type", "image/png")
