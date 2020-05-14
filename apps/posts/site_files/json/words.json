@@ -38,5 +38,7 @@
         "en": "Posts & News & Videos",
         "ar": "تقوم شبكة مصر بجمع البوستات من المواقع المشهورة واليوتيوب والفيسبوك وترتيبها بيما يتناسب معكم"
     },
-    {"name" : "page_keywords" , "en" : "egytag , news , videos" , "ar" : "شبكة مصر , أخبار ,  فيديوهات"}
+    {"name" : "page_keywords" , "en" : "egytag , news , videos" , "ar" : "شبكة مصر , أخبار ,  فيديوهات"},
+    {"name" : "no_data" , "en" : "No Data" , "ar" : "لايوجد نتائج للبحث"},
+    {"name" : "search_posts" , "en" : "Search in posts , movies , videos" , "ar" : "أبحث فى الموقع عن الاخبار والافلام والفيديوهات"}
 ]

@@ -125,6 +125,14 @@ module.exports = function init(site) {
     })
   })
 
+  site.get("/search", (req, res) => {
+    res.render("posts/index.html", {
+      page_title2: '  بحث  | ' + req.query.q
+    }, {
+      parser: 'html css js'
+    })
+  })
+
   site.get("/videos", (req, res) => {
     res.render("posts/index.html", {
       page_title2: 'فيديوهات'
@@ -453,8 +461,8 @@ module.exports = function init(site) {
 
     let user_where = req.data.where || {}
 
-    if (user_where['text']) {
-      where['text'] = new RegExp(where['text'], 'i')
+    if (user_where.q != undefined && user_where.q != "undefined") {
+      where['text'] = new RegExp(user_where['q'], 'i')
     }
 
     if (user_where.is_approved != undefined) {
@@ -478,6 +486,7 @@ module.exports = function init(site) {
     if (user_where.is_yts != undefined) {
       where.is_yts = user_where.is_yts
     }
+    
 
     if (user_where.last_time != undefined) {
       where.time = {

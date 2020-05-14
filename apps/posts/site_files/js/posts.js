@@ -15,6 +15,7 @@ const post_where = {
     is_hidden: '##req.query.is_hidden##' == 'true' ? true : false,
     is_children: '##req.query.is_children##' == 'true' ? true : null,
     is_rss: '##req.query.is_rss##' == 'true' ? true : null,
+    q: '##req.query.q##'
 };
 
 let posts_limit = 20;
@@ -52,7 +53,10 @@ function loadPosts(more) {
     }, function (res) {
 
         if (res.done && res.list.length == 0) {
+            $('#posts').append('<br><br> <p class="no-data">##word.no_data##</p> <br><br>');
+            $('.posts-loading').remove();
             busy = true;
+            return;
         } else {
             busy = false;
         }
@@ -99,7 +103,7 @@ function loadPosts(more) {
             }
         }
 
-        $('#posts').append('<span class="line"></span><span class="line"></span><span class="line"></span>');
+        $('#posts').append('<br><br><br>');
         rendered += `
                         <div>
                         <!-- Post Ad-->
@@ -108,7 +112,7 @@ function loadPosts(more) {
                             data-ad-slot="5838870332"></ins>
                         </div>
                     `
-        $('#posts').append('<span class="line"></span><span class="line"></span><span class="line"></span>');
+        $('#posts').append('<br><br><br>');
         $('#posts').append(rendered);
 
         busy = false;
