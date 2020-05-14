@@ -79,7 +79,7 @@ module.exports = function init(site) {
     }, (err, docs) => {
         if(!err && docs){
             post_id = docs[0].id + 15
-            post_movie()
+            // post_movie()
         }
     })
      

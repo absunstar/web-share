@@ -226,7 +226,7 @@ module.exports = function init(site) {
       $posts_content.find(where, (err, doc) => {
         if (!err && doc) {
           doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
-          doc.image_url = '/image/' + doc.guid
+          doc.image_url = doc.details.image_url
           doc.page_description = doc.text.replace(/<[^>]+>/g, '')
           doc.post_url = req.headers.host + '/post/' + doc.guid
           doc.timeago = xtime(new Date().getTime() - new Date(doc.date).getTime());
