@@ -18,7 +18,7 @@ module.exports = function init(site) {
         })
     }
 
-    function post_to_facebook(data) {
+    function post_to_facebook(data , callbaack) {
         console.log('posting to facebok')
         site.request.post({
             headers: {
@@ -27,7 +27,7 @@ module.exports = function init(site) {
             url: `https://graph.facebook.com/${facebook.page_id}/feed`,
             body: `message=${data.message}&link=${data.link}&access_token=${facebook.page_access_token}`
         }, function (error, response, body) {
-            console.log(error || body);
+            callbaack(error || body);
         })
     }
 
@@ -52,10 +52,18 @@ module.exports = function init(site) {
                 post_to_facebook({
                     message: "الاكثر مشاهدة على #شبكة_مصر" + "\n\r" + doc.text,
                     link: "https://egytag.com/post/" + doc.guid
+                } , (data)=>{
+                    if(data && data.error){
+                        console.log(data)
+                        post_movie()
+                    }else{
+                        setTimeout(() => {
+                            post_movie()
+                        }, 1000 * 60 * 5);
+                    }
+                    
                 })
-                setTimeout(() => {
-                    post_movie()
-                }, 1000 * 60 * 5);
+                
             }
 
         })
