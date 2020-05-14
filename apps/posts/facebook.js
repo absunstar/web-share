@@ -55,7 +55,7 @@ module.exports = function init(site) {
         })
     }
 
-     // post_movie()
+      post_movie()
 
     // get_long_access_token()
 

@@ -55,7 +55,7 @@ module.exports = function init(site) {
           details: 1
         }
       }, (err, doc) => {
-        if (!err && doc) {
+        if (!err && doc && doc.details && doc.details.image_url) {
           let url = doc.details.image_url
           image_list[req.params.guid] = url
           // site.request({
