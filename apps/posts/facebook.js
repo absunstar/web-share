@@ -50,7 +50,7 @@ module.exports = function init(site) {
                 
             } else {
                 post_to_facebook({
-                    message: "الاكثر مشاهدة على #شبكة_مصر" + "\n\r" + doc.text,
+                    message: "حمل الان مجانا وبجودة عالية #أفلام_تورينت" + "\n\r" + doc.text,
                     link: "https://egytag.com/post/" + doc.guid
                 } , (data)=>{
                     console.log(data)
@@ -77,7 +77,7 @@ module.exports = function init(site) {
         select : {id : 1}
     }, (err, docs) => {
         if(!err && docs){
-            post_id = docs[0].id + 5
+            post_id = docs[0].id + 10
             post_movie()
         }
     })
