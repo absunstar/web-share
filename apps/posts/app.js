@@ -1,5 +1,8 @@
 module.exports = function init(site) {
 
+
+  require(__dirname + '/facebook.js')(site)
+
   const $posts_content = site.$posts_content = site.connectCollection("posts_content")
   const $posts_author = site.$posts_author = site.connectCollection("posts_author")
   const $posts_categories = site.$posts_categories = site.connectCollection("posts_categories")
@@ -25,6 +28,45 @@ module.exports = function init(site) {
       __dirname + "/site_files/css/yts.css",
       __dirname + "/site_files/css/share-buttons.css"
     ]
+  })
+
+  var image_list = []
+  site.get('/image/:guid', (req, res) => {
+    if(image_list[req.params.guid]){
+      site.request({
+        url : image_list[req.params.guid],
+        encoding: null
+      }, (err, resp, buffer) => {
+        res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
+        res.end(buffer)
+      })
+      return
+    }else{
+      $posts_content.find({
+        where: {
+          guid: req.params.guid
+        },
+        select: {
+          details: 1
+        }
+      }, (err, doc) => {
+        if (!err && doc) {
+          let url = doc.details.image_url
+          image_list[req.params.guid] = url
+          site.request({
+            url,
+            encoding: null
+          }, (err, resp, buffer) => {
+            res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
+            res.end(buffer)
+          })
+        } else {
+          res.end(402)
+        }
+      })
+    }
+  
+
   })
 
   site.get({
@@ -174,7 +216,7 @@ module.exports = function init(site) {
       $posts_content.find(where, (err, doc) => {
         if (!err && doc) {
           doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
-          doc.image_url = doc.details.image_url
+          doc.image_url = '/image/' + doc.guid
           doc.page_description = doc.text.replace(/<[^>]+>/g, '')
           doc.post_url = req.headers.host + '/post/' + doc.guid
           doc.timeago = xtime(new Date().getTime() - new Date(doc.date).getTime());
@@ -203,6 +245,7 @@ module.exports = function init(site) {
       })
     }
   })
+
 
 
   function xtime(_time) {
@@ -486,7 +529,7 @@ module.exports = function init(site) {
     if (user_where.is_yts != undefined) {
       where.is_yts = user_where.is_yts
     }
-    
+
 
     if (user_where.last_time != undefined) {
       where.time = {
