@@ -1,6 +1,6 @@
         <div class="post" id="post_{{id}}">
             <div class="header">
-                <img src="{{author.logo_url}}" alt="{{author.name}}" onerror="this.onerror=null;this.parentNode.removeChild(this);">
+                <img src="{{author.logo_url}}" alt="{{author.name}}" onerror="this.onerror=null;this.src='/images/no.png'">
                 <h2>
                     <a>{{author.name}}</a>
                 </h2>
@@ -13,7 +13,7 @@
                 <h2 class="text"> {{{text}}} </h2>
                 <div class="details" >
                     <a rel="nofollow" href="{{details.url}}" target="_blank">
-                        <img class="image" src="/image/{{guid}}" alt="{{details.title}}" onerror="this.onerror=null;this.parentNode.removeChild(this);">
+                        <img class="image" src="/image/{{guid}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'">
                     </a>
                 </div>
               

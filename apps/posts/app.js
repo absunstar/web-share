@@ -37,6 +37,7 @@ module.exports = function init(site) {
         url : image_list[req.params.guid],
         encoding: null
       }, (err, resp, buffer) => {
+        res.set("Content-Type", "image/png")
         res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
         res.end(buffer)
       })
