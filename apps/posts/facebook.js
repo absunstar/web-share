@@ -9,15 +9,16 @@ module.exports = function init(site) {
         page_id: '1668811503334535',
         user_access_token: "EAAK2bTyVHUABAANv7EMFGspraZCKniXCypHanIsCNbZCNC08mBCCTxqvspmWfiKiA4CnBUTbZCQhbLgGp73ZA2PZAjE3IKiG8ZCAv0ydOUYgHbDJa6SOcHl7jfNW2XOVxvbERc1qZBSzZC4QgmpJHTGDg2HZAGmTJAhD0beZAZBgXWisOMCgiqwhvfPcqrzgqkCBLUZD",
         user_long_access_token: "EAAK2bTyVHUABAPaqivZAvlVRcm97P9vWnW7VLswuhNE6RtbsNZB5S8bPna48SY82wTNMBMQGr8bCkYzvDQrez0kRSFC3KZBS1fevtH3CIbHZAliwVH9FwL8QB0McZCf6w2xZBA8JJIZA3TgZBync46Qf9ZClF7ZAmMKG3byKC2CZBXZALgZDZD",
-        page_access_token: "EAAK2bTyVHUABALg0hcCQJyTzwF985PcHuLSXQbyODpqVC5RNZA68jQZBaFFrbvLoKTnZBK2BhRckytsOaX3BvSlhOZAD6b0NKyHaY8xBUVFkApCZA6KQkYzwt4idyZCHlhZBnwBackoZBVwQ4FpgCeE66TQ68ol9s0qKgtDwkMlobCENrZAPelhWW"
+        page_access_token: "EAAK2bTyVHUABAG52X0ErBH0lr613o7Qts9yQICZALRZAmBfZCXJZBd2PpVzAjQbtPZBKcfZCvdLSCaVjewIyMKPMuOPYmPTIZAn33z19bXzZAlijtNRjQfMidw6pHlHnbZBQUkyMJMJ2J6eyicOijjjQsT84wjT7Siyzkwa7uD2MtuILPCHnlmkvMTTRJy805vYAZD",
+        page_long_access_token: "EAAK2bTyVHUABAJBKfUmLsMzlHsD8z3IgIgoQM8Ni6yIwuOkAL5VdVRyMjVyVLxC3s7UZCbZCtTQXNJxVYZA2xqTBqnfUjIVrmgNcyKc2havGNvNgvkAsrBj7X6vU968z6bUrsiDffTsPZBoTePmOzq7mfzYA8GuLkYk5RPmVugZDZD"
     }
     
     function get_long_access_token() {
-        site.request.get(`https://graph.facebook.com/v7.0/oauth/access_token?grant_type=fb_exchange_token& client_id=${facebook.app_id}&client_secret=${facebook.secret_id}&fb_exchange_token=${facebook.user_access_token}&access_token=${facebook.user_access_token}`, function (error, response, body) {
+        site.request.get(`https://graph.facebook.com/v7.0/oauth/access_token?grant_type=fb_exchange_token& client_id=${facebook.app_id}&client_secret=${facebook.secret_id}&fb_exchange_token=${facebook.page_access_token}&access_token=${facebook.user_access_token}`, function (error, response, body) {
             console.log(body);
         })
     }
-
+    //get_long_access_token()
     function post_to_facebook(data , callbaack) {
         console.log('posting to facebok')
         site.request.post({
@@ -25,7 +26,7 @@ module.exports = function init(site) {
                 'content-type': 'application/x-www-form-urlencoded'
             },
             url: `https://graph.facebook.com/${facebook.page_id}/feed`,
-            body: `message=${data.message}&link=${data.link}&access_token=${facebook.page_access_token}`
+            body: `message=${data.message}&link=${data.link}&access_token=${facebook.page_long_access_token}`
         }, function (error, response, body) {
             callbaack(error || body);
         })
