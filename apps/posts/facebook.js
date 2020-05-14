@@ -26,7 +26,7 @@ module.exports = function init(site) {
             url: `https://graph.facebook.com/${facebook.page_id}/feed`,
             body: `message=${data.message}&link=${data.link}&access_token=${facebook.page_access_token}`
         }, function (error, response, body) {
-            console.log(body);
+            console.log(error || body);
         })
     }
 
