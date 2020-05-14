@@ -27,6 +27,12 @@
 .navbar .brand a span {
     color: #3F51B5;
 }
+.navbar ul.links li {
+    margin-top: 6px;
+    color: var(--navbar-color);
+    display: inline-block;
+}
+
 input.search{
     width: 100%;
     font-size: 16px;
