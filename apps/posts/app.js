@@ -58,6 +58,7 @@ module.exports = function init(site) {
             url,
             encoding: null
           }, (err, resp, buffer) => {
+            console.log(err)
             res.set("Cache-Control", "public, max-age=" + 60 * site.options.cache.images)
             res.end(buffer)
           })
