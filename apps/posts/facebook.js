@@ -19,6 +19,7 @@ module.exports = function init(site) {
     }
 
     function post_to_facebook(data) {
+        console.log('posting to facebok')
         site.request.post({
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -33,6 +34,7 @@ module.exports = function init(site) {
     let post_id = 5
 
     function post_movie() {
+        console.log('try find movie')
         $posts_content.find({
             where: {
                 id: post_id,
