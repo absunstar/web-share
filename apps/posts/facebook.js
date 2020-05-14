@@ -31,7 +31,7 @@ module.exports = function init(site) {
         })
     }
 
-    let post_id = 16347899
+    let post_id = 1
 
     function post_movie() {
         console.log('try find movie ' + post_id)
@@ -77,7 +77,7 @@ module.exports = function init(site) {
         select : {id : 1}
     }, (err, docs) => {
         if(!err && docs){
-            post_id = docs[0].id
+            post_id = docs[0].id + 5
             post_movie()
         }
     })
