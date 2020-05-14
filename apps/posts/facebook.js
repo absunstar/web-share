@@ -77,7 +77,7 @@ module.exports = function init(site) {
         select : {id : 1}
     }, (err, docs) => {
         if(!err && docs){
-            post_id = docs[0].id + 10
+            post_id = docs[0].id + 15
             post_movie()
         }
     })
