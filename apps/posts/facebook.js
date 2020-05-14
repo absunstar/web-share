@@ -25,7 +25,7 @@ module.exports = function init(site) {
                 'content-type': 'application/x-www-form-urlencoded'
             },
             url: `https://graph.facebook.com/${facebook.page_id}/feed`,
-            body: `message=${data.message}&link=${data.link}&access_token=${facebook.page_access_token}`
+            body: `message=${data.message}&link=${data.link}&access_token=${facebook.user_long_access_token}`
         }, function (error, response, body) {
             callbaack(error || body);
         })
