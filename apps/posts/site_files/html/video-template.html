@@ -3,7 +3,10 @@
             <div class="body">
                
                 <div class="details" >
-                    <a href="{{post_url}}" target="_blank">
+                    <a x-feature="browser.social" href="{{details.url}}" target="_blank">
+                        <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'">
+                    </a>
+                    <a x-feature="!browser.social"href="{{post_url}}" target="_blank">
                         <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'">
                     </a>
                 </div>
