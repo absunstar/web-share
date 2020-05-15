@@ -16,7 +16,6 @@ module.exports = function init(site) {
         page_long_access_token: "EAAK2bTyVHUABAJBKfUmLsMzlHsD8z3IgIgoQM8Ni6yIwuOkAL5VdVRyMjVyVLxC3s7UZCbZCtTQXNJxVYZA2xqTBqnfUjIVrmgNcyKc2havGNvNgvkAsrBj7X6vU968z6bUrsiDffTsPZBoTePmOzq7mfzYA8GuLkYk5RPmVugZDZD"
     }
     facebook.appsecret_proof = crypto.createHmac('sha256', facebook.secret_id).update(facebook.page_long_access_token).digest('hex');
-    console.log(facebook.appsecret_proof)
 
     facebook.get_user_long_access_token = function() {
         site.request.get(`https://graph.facebook.com/v7.0/oauth/access_token?grant_type=fb_exchange_token& client_id=${facebook.app_id}&client_secret=${facebook.secret_id}&fb_exchange_token=${facebook.user_access_token}&access_token=${facebook.user_access_token}`, function (error, response, body) {
