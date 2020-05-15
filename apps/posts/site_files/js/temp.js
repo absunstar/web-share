@@ -4,7 +4,7 @@ function test_rss() {
     }, (text) => {
         rss = JSON.parse(xml_to_json(get_xml_dom(text), ""));
         let link = rss.rss.channel.link;
-        get_page_info(link, () => {
+        spider.get_page_info(link, () => {
 
         })
         console.log('rss ready ...');

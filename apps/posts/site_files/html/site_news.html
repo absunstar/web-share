@@ -1,6 +1,6 @@
 <div class="center row" class="">
     <div class="site-news" ng-repeat="n in siteNews">
-        <a target="_blank" href="{{n.url}}">
+        <a target="_blank" href="{{n.url}}##new_tab##">
             <h3> {{n.title}} </h3>
             <img ng-src="{{n.image_url}}" alt="{{n.title}}" onerror="this.onerror=null;this.src='/images/no.png'">
             <p> {{n.description}} </p>

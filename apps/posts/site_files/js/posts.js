@@ -5,15 +5,14 @@ function scope() {
     return angular.element(document.getElementById('main-layout')).scope();
 };
 
-const spider_server = 'http://127.0.0.1:60080';
 
 const post_where = {
     is_video: document.location.href.like('*videos*') ? true : null,
+    is_children: document.location.href.like('*children-videos*') ? true : null,
     is_yts: document.location.href.like('*torrents*') ? true : null,
     is_approved: '##req.query.is_approved##' == 'false' ? false : true,
     is_porn: '##req.query.is_porn##' == 'true' ? true : false,
     is_hidden: '##req.query.is_hidden##' == 'true' ? true : false,
-    is_children: '##req.query.is_children##' == 'true' ? true : null,
     is_rss: '##req.query.is_rss##' == 'true' ? true : null,
     q: '##req.query.q##'
 };
@@ -207,35 +206,12 @@ function newAuthor() {
     scope().newAuthor();
 };
 
-function get_page_info(url, callback) {
-    site.postData({
-        url: spider_server + '/api/page-info-spider',
-        method: 'POST',
-        data: {
-            url: url
-        }
-    }, (res) => {
-
-        callback(res);
-    });
-};
-
-function get_page_urls(op, callback) {
-    site.postData({
-        url: spider_server + '/api/page-urls-spider',
-        method: 'POST',
-        data: op
-    }, (res) => {
-        callback(res);
-    });
-};
-
 function generateAuthorData(link) {
     let $scope = scope();
     link = link || $scope.author.link;
     $scope.author_busy = true;
     $scope.$apply();
-    get_page_info(link, (res) => {
+    spider.get_page_info(link, (res) => {
         $scope.author = Object.assign($scope.author, {
             link: res.url,
             logo_url: res.image_url,

@@ -130,7 +130,7 @@ app.controller("posts", function ($scope, $http, $sce) {
     post.url_list = post.url_list || urlify(post.text).url_list;
 
     if (post.url_list.length > 0) {
-      get_page_info(post.url_list[0], function (res) {
+      spider.get_page_info(post.url_list[0], function (res) {
         post.spider = {
           enabled: true
         };
@@ -168,7 +168,7 @@ app.controller("posts", function ($scope, $http, $sce) {
   $scope.addURL = function () {
     $scope.urls_busy = true;
     $scope.error = '';
-    get_page_urls({url : $scope.url.text , match : $scope.url.match}, (res) => {
+    spider.get_page_urls({url : $scope.url.text , match : $scope.url.match}, (res) => {
       $scope.urls_busy = false;
 
       res.list.forEach((url, i) => {

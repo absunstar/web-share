@@ -1,13 +1,19 @@
 [
     {
         "id": 1,
-        "url" : "/videos",
+        "url": "/children-videos",
+        "en": "Children Videos",
+        "ar": "فيديوهات للأطفال"
+    },
+    {
+        "id": 2,
+        "url": "/videos",
         "en": "Videos",
         "ar": "مشاهدة فيديوهات مباشرة"
     },
     {
-        "id": 1,
-        "url" : "/torrents",
+        "id": 3,
+        "url": "/torrents",
         "en": "Torrent Movies",
         "ar": "تحميل أفلام تورينت"
     }

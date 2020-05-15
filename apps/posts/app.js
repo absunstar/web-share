@@ -184,7 +184,13 @@ module.exports = function init(site) {
       parser: 'html css js'
     })
   })
-
+  site.get("/children-videos", (req, res) => {
+    res.render("posts/index.html", {
+      page_title2: 'فيديوهات للأطفال'
+    }, {
+      parser: 'html css js'
+    })
+  })
   site.get("/videos", (req, res) => {
     res.render("posts/index.html", {
       page_title2: 'فيديوهات'
