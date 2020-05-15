@@ -134,47 +134,94 @@ module.exports = function init(site) {
   })
 
   site.get(["/rss", "/rss/posts", "/rss/posts/:guid"], (req, res) => {
+    
     let where = {}
-    if (req.params.guid) {
-      where['guid'] = req.params.guid
+    if (req.query.is_rss == "true") {
+      where['is_rss'] = true
     }
-    $posts_content.findAll({
-      where: where,
-      sort: {
-        id: -1
-      },
-      limit: req.query.limit || 10
-    }, (err, docs) => {
-      if (!err && docs) {
+    if (req.query.is_video == "true") {
+      where['is_video'] = true
+    }
+    if (req.query.is_youtube == "true") {
+      where['is_youtube'] = true
+    }
+    if (req.query.is_children == "true") {
+      where['is_children'] = true
+    }
+    if (req.query.is_yts == "true") {
+      where['is_yts'] = true
+    }
+   
+    if (req.params.guid == 'random') {
+      $posts_content.findAll({
+        where : where,
+        select: {
+          guid: 1,
+          details: 1
+        },
+        limit: 100,
+        sort: {
+          date: -1
+        }
+      }, (err, docs) => {
+        if (!err && docs && docs.length > 0) {
+          let doc = docs[Math.floor(Math.random() * docs.length)]
+          res.redirect('/rss/posts/' + doc.guid)
+        } else {
+          res.redirect('/rss/posts/random?limit=1')
+        }
 
-        let urls = ""
-        docs.forEach((doc, i) => {
-          doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
-          doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '')
-          urls += `
-          <item>
-            <title>${doc.details.title}</title>
-            <link>${doc.post_url}</link>
-            <description>${doc.text}</description>
-            <date>${new Date(doc.date).toISOString()}</date>
-          </item>
-          `
-        })
-        let xml = `<?xml version="1.0" ?>
-                    <rss version="2.0">
-                      <channel>
-                            <title>Egytag Global RSS</title>
-                            <link>https://egytag.com</link>
-                            <description>All Posts Rss Feeds</description>
-                            ${urls}
-                        </channel>
-                     </rss>`
-        res.set('Content-Type', 'application/xml')
-        res.end(xml)
-      } else {
-        res.end(402)
+      })
+    }else{
+      
+      if (req.params.guid) {
+        where['guid'] = req.params.guid
       }
-    })
+      $posts_content.findAll({
+        where: where,
+        sort: {
+          id: -1
+        },
+        limit: req.query.limit || 10
+      }, (err, docs) => {
+        if (!err && docs) {
+  
+          let urls = ""
+          docs.forEach((doc, i) => {
+            doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
+            if(typeof doc.text != "string"){
+              doc.text = "No Title"
+            }
+            doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '')
+            urls += `
+            <item>
+              <title>${doc.details.title}</title>
+              <link>${doc.post_url}</link>
+              <description>${doc.text}</description>
+              <date>${new Date(doc.date).toISOString()}</date>
+            </item>
+            `
+          })
+          let xml = `<?xml version="1.0" ?>
+                      <rss version="2.0">
+                        <channel>
+                              <title>Egytag Global RSS</title>
+                              <link>https://egytag.com</link>
+                              <description>All Posts Rss Feeds</description>
+                              ${urls}
+                          </channel>
+                       </rss>`
+          res.set('Content-Type', 'application/xml')
+          res.end(xml)
+        } else {
+          res.end(402)
+        }
+      })
+    }
+    
+    
+
+
   })
 
   site.get("/search", (req, res) => {
