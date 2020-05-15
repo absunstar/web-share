@@ -32,9 +32,9 @@ module.exports = function init(site) {
 
   var image_list = []
   site.get('/image/:guid', (req, res) => {
-    if(image_list[req.params.guid]){
+    if (image_list[req.params.guid]) {
       site.request({
-        url : image_list[req.params.guid],
+        url: image_list[req.params.guid],
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
         },
@@ -46,7 +46,7 @@ module.exports = function init(site) {
       })
       //res.redirect(image_list[req.params.guid])
       return
-    }else{
+    } else {
       $posts_content.find({
         where: {
           guid: req.params.guid
@@ -75,7 +75,7 @@ module.exports = function init(site) {
         }
       })
     }
-  
+
 
   })
 
@@ -239,7 +239,10 @@ module.exports = function init(site) {
           doc.page_keywords = doc.details.title.split(' ').join(',')
           if (doc.is_video) {
             doc.post_type = 'full-video'
-            res.render("posts/post.html", doc, {
+            if (doc.details.url.like('https://www.youtube.com/watch*')) {
+              doc.details.url = 'https://www.youtube.com/embed/' + doc.details.url.split('=')[1].split('&')[0]
+            }
+            res.render("posts/video.html", doc, {
               parser: 'html css js'
             })
           } else if (doc.is_yts) {
