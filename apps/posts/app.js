@@ -294,7 +294,7 @@ module.exports = function init(site) {
             })
           } else if (doc.is_yts) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
-            if(req.hasFeature('browser.chrome') || req.hasFeature('browser.edge') || req.hasFeature('browser.social2')){
+            if(req.hasFeature('browser.social') || req.hasFeature('browser.chrome') || req.hasFeature('browser.edge') || req.hasFeature('browser.firefox')){
               /** do nothing */
             }else{
               doc.details.image_url = "/image/" + doc.guid
