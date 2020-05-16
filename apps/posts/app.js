@@ -295,7 +295,7 @@ module.exports = function init(site) {
           } else if (doc.is_yts) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
             if (req.hasFeature('browser.unknown')) {
-              doc.details.image_url = "/image/" + doc.guid
+              doc.details.image_url = "/images/torrent.png" //"/image/" + doc.guid
               doc.image_url = doc.details.image_url
             }
             res.render("posts/yts.html", doc, {
