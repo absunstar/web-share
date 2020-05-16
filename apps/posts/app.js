@@ -134,7 +134,7 @@ module.exports = function init(site) {
   })
 
   site.get(["/rss", "/rss/posts", "/rss/posts/:guid"], (req, res) => {
-    
+
     let where = {}
     if (req.query.is_rss == "true") {
       where['is_rss'] = true
@@ -151,10 +151,10 @@ module.exports = function init(site) {
     if (req.query.is_yts == "true") {
       where['is_yts'] = true
     }
-   
+
     if (req.params.guid == 'random') {
       $posts_content.findAll({
-        where : where,
+        where: where,
         select: {
           guid: 1,
           details: 1
@@ -172,8 +172,8 @@ module.exports = function init(site) {
         }
 
       })
-    }else{
-      
+    } else {
+
       if (req.params.guid) {
         where['guid'] = req.params.guid
       }
@@ -185,11 +185,11 @@ module.exports = function init(site) {
         limit: req.query.limit || 10
       }, (err, docs) => {
         if (!err && docs) {
-  
+
           let urls = ""
           docs.forEach((doc, i) => {
             doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
-            if(typeof doc.text != "string"){
+            if (typeof doc.text != "string") {
               doc.text = "No Title"
             }
             doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '')
@@ -218,8 +218,8 @@ module.exports = function init(site) {
         }
       })
     }
-    
-    
+
+
 
 
   })
@@ -294,9 +294,7 @@ module.exports = function init(site) {
             })
           } else if (doc.is_yts) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
-            if(req.hasFeature('browser.social') || req.hasFeature('browser.chrome') || req.hasFeature('browser.edge') || req.hasFeature('browser.firefox')){
-              /** do nothing */
-            }else{
+            if (req.hasFeature('browser.unknown')) {
               doc.details.image_url = "/image/" + doc.guid
               doc.image_url = doc.details.image_url
             }
