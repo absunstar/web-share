@@ -39,7 +39,7 @@
                         <div class="post full-yts" id="post_##data.id##">
                             <div class="header">
                                 <img src="##data.author.logo_url##" alt=""
-                                onerror="this.onerror=null;this.src='/images/no.png'">
+                                    onerror="this.onerror=null;this.src='/images/no.png'">
                                 <h2>
                                     <a>##data.author.name##</a>
                                 </h2>
@@ -52,13 +52,18 @@
                                 <br>
                                 <div class="details">
                                     <div class="row">
-                                        
+
                                         <div class="col7 center">
-                                           
+
                                             <h2 class="text"> ##data.details.description## </h2>
+                                            <a class="btn bg-red white font-22" rel="nofollow" target="_blank"
+                                                href="https://www.imdb.com/title/##data.yts.imdb_code####new_window##">
+                                                Trailer & Info
+                                            </a>
                                         </div>
                                         <div class="col5 center">
-                                            <a rel="nofollow" href="#" >
+                                            <a rel="nofollow" target="_blank"
+                                                href="https://www.imdb.com/title/##data.yts.imdb_code####new_window##">
                                                 <img class="image " src="##data.details.image_url##"
                                                     alt="##data.details.title##"
                                                     onerror="this.onerror=null;this.src='/images/no.png'">
@@ -163,7 +168,7 @@
     <script x-import="posts/posts.js"></script>
     <script>
         let post = {
-            genres:JSON.parse(`##data.yts.genres##`),
+            genres: JSON.parse(`##data.yts.genres##`),
             language: `##data.yts.language##`,
             rating: `##data.yts.rating##`,
             imdb_code: `##data.yts.imdb_code##`,
