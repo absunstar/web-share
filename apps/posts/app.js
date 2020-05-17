@@ -571,6 +571,7 @@ module.exports = function init(site) {
       is_porn: false,
       is_hidden: false
     }
+    let sort= {time: -1}
 
     let user_where = req.data.where || {}
 
@@ -597,6 +598,7 @@ module.exports = function init(site) {
       where.is_rss = user_where.is_rss
     }
     if (user_where.is_yts != undefined) {
+      sort= {'yts.year': -1}
       where.is_yts = user_where.is_yts
     }
 
@@ -611,9 +613,7 @@ module.exports = function init(site) {
       select: req.body.select || {},
       limit: req.body.limit || 20,
       where: where,
-      sort: {
-        time: -1
-      }
+      sort:sort
     }, (err, docs) => {
       if (!err) {
         response.done = true
