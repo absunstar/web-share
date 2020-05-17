@@ -42,7 +42,7 @@ function loadPosts(more) {
     if (more) {
         post_where.last_time = last_posts.length > 0 ? last_posts[last_posts.length - 1].time : null;
     }
-    page_number.page_number = page_number
+    post_where.page_number = page_number
     site.postData({
         url: '/api/posts/all',
         method: 'POST',

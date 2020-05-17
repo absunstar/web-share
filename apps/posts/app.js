@@ -608,6 +608,7 @@ module.exports = function init(site) {
       sort= {'yts.year': -1}
       where.is_yts = user_where.is_yts
       skip = (where.page_number || 0) * (req.body.limit || 20)
+      delete where.time
     }
 
     $posts_content.findMany({
