@@ -8,7 +8,7 @@
     {
         "url": "https://pos.egytag.com/",
         "title": "برنامج نقاط البيع",
-        "description": "أدارة المخازن والحسابات",
+        "description": "مخازن - حسابات - موظفين - مبيعات - مشتريات",
         "image_url": "https://pos.egytag.com/images/logo.png"
     },
     {
@@ -19,8 +19,14 @@
     },
     {
         "url": "https://gym.egytag.com/",
-        "title": "برنامج للصالات الرياضية والمساج",
-        "description": "ادارة الجيم والمشتركين والجلسات الاشتراكات",
+        "title": "برنامج للصالات الرياضية الجيم",
+        "description": "المشتركين - الحضور والانصراف - الجلسات - المساج",
         "image_url": "https://gym.egytag.com/images/logo.png"
+    },
+    {
+        "url": "https://lawyer.egytag.com/",
+        "title": "برنامج أدارة مكاتب المحامين",
+        "description": "الدعاوى - الجلسات - الموكلين - الاعمال الادارية",
+        "image_url": "https://lawyer.egytag.com/images/logo.png"
     }
 ]
