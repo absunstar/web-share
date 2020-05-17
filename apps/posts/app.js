@@ -572,11 +572,18 @@ module.exports = function init(site) {
       is_hidden: false
     }
     let sort= {time: -1}
+    let skip= 0
 
     let user_where = req.data.where || {}
 
     if (user_where.q != undefined && user_where.q != "undefined") {
       where['text'] = new RegExp(user_where['q'], 'i')
+    }
+
+    if (user_where.last_time != undefined) {
+      where.time = {
+        '$lt': user_where.last_time
+      }
     }
 
     if (user_where.is_approved != undefined) {
@@ -600,20 +607,15 @@ module.exports = function init(site) {
     if (user_where.is_yts != undefined) {
       sort= {'yts.year': -1}
       where.is_yts = user_where.is_yts
-    }
-
-
-    if (user_where.last_time != undefined) {
-      where.time = {
-        '$lt': user_where.last_time
-      }
+      skip = (where.page_number || 0) * (req.body.limit || 20)
     }
 
     $posts_content.findMany({
       select: req.body.select || {},
       limit: req.body.limit || 20,
       where: where,
-      sort:sort
+      sort:sort,
+      skip:skip
     }, (err, docs) => {
       if (!err) {
         response.done = true

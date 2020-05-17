@@ -22,7 +22,7 @@ if (document.location.href.like('*videos*')) {
     posts_limit = 40;
 }
 
-
+let page_number = 0;
 function loadPosts(more) {
 
     if (busy) {
@@ -42,6 +42,7 @@ function loadPosts(more) {
     if (more) {
         post_where.last_time = last_posts.length > 0 ? last_posts[last_posts.length - 1].time : null;
     }
+    page_number.page_number = page_number
     site.postData({
         url: '/api/posts/all',
         method: 'POST',
@@ -63,6 +64,7 @@ function loadPosts(more) {
 
         if (!res.done || res.list.length == 0) return;
 
+        page_number++;
         var rendered = '';
         var post_template = $('#post-template').html();
         var video_template = $('#video-template').html();
