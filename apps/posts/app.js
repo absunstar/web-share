@@ -607,13 +607,13 @@ module.exports = function init(site) {
     if (user_where.is_yts != undefined) {
       sort= {'yts.year': -1}
       where.is_yts = user_where.is_yts
-      skip = (where.page_number || 0) * (req.body.limit || 20)
+      skip = (req.data.page_number || 0) * (req.data.limit || 20)
       delete where.time
     }
 
     $posts_content.findMany({
       select: req.body.select || {},
-      limit: req.body.limit || 20,
+      limit: req.data.limit || 20,
       where: where,
       sort:sort,
       skip:skip
