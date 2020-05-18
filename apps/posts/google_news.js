@@ -91,7 +91,7 @@ module.exports = function init(site , post) {
 
         setTimeout(() => {
             google_news.auto_load()
-        }, 1000 * 60 * 15);
+        }, 1000 * 60 * 30);
     }
 
     google_news.auto_load()
