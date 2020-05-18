@@ -59,9 +59,9 @@ module.exports = function init(site , post) {
         })
     }
 
-    google_news.load = function (params) {
+    google_news.load = function (api , params) {
         console.log('Google New Auto Load')
-        site.request.get(`http://newsapi.org/v2/top-headlines?apiKey=${google_news.apiKey}&${params}`, function (error, response, body) {
+        site.request.get(`http://newsapi.org/v2/${api}?apiKey=${google_news.apiKey}&${params}`, function (error, response, body) {
             if (typeof body == "string") {
                 body = JSON.parse(body)
             }
@@ -78,8 +78,16 @@ module.exports = function init(site , post) {
 
     google_news.auto_load = function(){
 
-        google_news.load("language=ar")
-        google_news.load("country=eg")
+        google_news.load("top-headlines" , "language=ar")
+        google_news.load("top-headlines" , "country=eg&category=business")
+        google_news.load("top-headlines" , "country=eg&category=entertainment")
+        google_news.load("top-headlines" , "country=eg&category=general")
+        google_news.load("top-headlines" , "country=eg&category=health")
+        google_news.load("top-headlines" , "country=eg&category=science")
+        google_news.load("top-headlines" , "country=eg&category=sports")
+        google_news.load("top-headlines" , "country=eg&category=technology")
+
+        
 
         setTimeout(() => {
             google_news.auto_load()
