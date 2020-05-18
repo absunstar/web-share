@@ -1,0 +1,35 @@
+        <div class=" post google-news" id="post_{{id}}">
+            <div class="header">
+                <img src="{{author.logo_url}}" alt="{{author.name}}"
+                    onerror="this.onerror=null;this.src='/images/no.png'">
+                <h2>
+                    <a>{{author.name}}</a>
+                </h2>
+                <span date="{{date}}"> {{timeago}} </span>
+            </div>
+            <div class="body">
+               
+                <div class="row">
+                    <div class="col3">
+                        <div class="details">
+                            <a rel="nofollow" href="{{details.url}}##new_tab##" target="_blank">
+                                <img class="image" src="{{details.image_url}}" alt="{{details.title}}"
+                                onerror="this.onerror=null;this.src='/images/rss.png'">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col9">
+                        <h2 class="text"> {{{text}}} </h2>
+                        <p class="description"> {{{details.description}}} </p>
+                        <div class="left">
+                            <a class="btn bg-white black" target="_blank" href="{{post_url}}##new_tab##"> ##word.posts_url##</a>
+                            <a rel="nofollow" class="btn bg-white black" target="_blank" href="{{details.url}}##new_tab##"> ##word.posts_source##</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>

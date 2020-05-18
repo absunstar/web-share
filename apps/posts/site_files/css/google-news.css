@@ -1,0 +1,65 @@
+:root {
+    --font-family: 'Droid Arabic Kufi', serif
+}
+
+.google-news {
+    line-height: 1.3em;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    margin-top: 7px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    box-shadow: 1px 1px 3px 0px #353535;
+}
+
+.google-news .body .image {
+    width: 220px;
+    height: 220px;
+    border: 3px solid #f44336;
+    padding: 3px;
+}
+
+.google-news .text {
+    line-height: 1.8em;
+    padding: 5px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+}
+
+.google-news .description {
+    font-size: 16px;
+    color: #000;
+}
+
+.full-google-news .body .image {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.full-google-news .body .title {
+    position: relative;
+    line-height: 1.8em;
+    padding: 5px;
+    font-size: 24px;
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+}
+
+.full-google-news .body .text {
+    position: relative;
+    line-height: 1.8em;
+    padding: 5px;
+    font-size: 18px;
+    text-align: left;
+    color: #000000;
+    font-weight: bold;
+}

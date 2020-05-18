@@ -1,7 +1,7 @@
 {
     "text" : "",
     "details" : {"url" : "" , "image_url" : "" , "title" : "" , "video_url" : ""},
-    "author" : {"id" : 1000000000 , "name" : "System User" , "logo_url" : "/images/logo.png"},
+    "author" : {"name" : "System User" , "logo_url" : "/images/logo.png"},
     "url_list" : [],
     "image_list" : [],
     "is_video" : false,
@@ -14,6 +14,7 @@
     "category" : {"enabled" : false , "value" : "any"},
     "password" : {"enabled" : false , "code" : ""},
     "country" : {"enabled" : false , "value" : "any"},
+    "language" : {"enabled" : false , "value" : "any"},
     "gnder" : {"enabled" : false , "value" : "male"},
     "privacy" : {"enabled" : false , "value" : "public"},
     "age" : {"enabled" : false , "min" : 0 , "mx" : 99},

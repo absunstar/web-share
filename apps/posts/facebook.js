@@ -82,18 +82,18 @@ module.exports = function init(site) {
         })
     }
 
-    $posts_content.findAll({
-        where: {
-            is_yts: true
-        },
-        limit : 1,
-        select : {id : 1}
-    }, (err, docs) => {
-        if(!err && docs){
-            post_id = docs[0].id + 15
-            // facebook.post_movie()
-        }
-    })
+    // $posts_content.findAll({
+    //     where: {
+    //         is_yts: true
+    //     },
+    //     limit : 1,
+    //     select : {id : 1}
+    // }, (err, docs) => {
+    //     if(!err && docs && docs.length > 0){
+    //         post_id = docs[0].id + 15
+    //        facebook.post_movie()
+    //     }
+    // })
      
 
     // facebook.get_long_access_token()

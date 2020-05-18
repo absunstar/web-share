@@ -10,6 +10,7 @@ const post_where = {
     is_video: document.location.href.like('*videos*') ? true : null,
     is_children: document.location.href.like('*children-videos*') ? true : null,
     is_yts: document.location.href.like('*torrents*') ? true : null,
+    is_google_news: document.location.href.like('*top-news*') ? true : null,
     is_approved: '##req.query.is_approved##' == 'false' ? false : true,
     is_porn: '##req.query.is_porn##' == 'true' ? true : false,
     is_hidden: '##req.query.is_hidden##' == 'true' ? true : false,
@@ -71,7 +72,8 @@ function loadPosts(more) {
         var video_template = $('#video-template').html();
         var yts_template = $('#yts-template').html();
         var ad_template = $('#ad-template').html();
-
+        var google_news_template = $('#google-news-template').html();
+        
         Mustache.parse(post_template);
         last_posts = res.list;
         for (var i = 0; i < last_posts.length; i++) {
@@ -96,12 +98,14 @@ function loadPosts(more) {
                    });
                     rendered += Mustache.render(yts_template, post);
 
-                }else{
+                }else if(post.is_google_news){
+                     rendered += Mustache.render(google_news_template, post);
+                 }else{
                     rendered += Mustache.render(post_template, post);
                 }
-               
+                
             } catch (error) {
-
+                console.log(error)
             }
         }
 
