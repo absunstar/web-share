@@ -37,7 +37,8 @@
         }
         return false;
     }
-    site.features = '##req.features##';
+    site.features = JSON.parse(`##req.features##`);
+    site.session = JSON.parse(`##session.*##`);
     </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
