@@ -8,8 +8,7 @@
     "init": "npm i"
   },
   "dependencies": {
-    "isite": "^1.13.27",
-    "n-readlines": "^1.0.0"
+    "isite": "^1.13.27"
   },
   "keywords": [],
   "author": "",

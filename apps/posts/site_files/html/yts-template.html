@@ -1,15 +1,20 @@
         <div class="yts" id="post_{{id}}">
+            <a href="{{post_url}}" target="_blank">
+                <div class="body">
 
-            <div class="body">
-                <div class="details" >
-                    <a href="{{post_url}}" target="_blank">
-                        <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'">
-                    </a>
-                    <img class="yts-banner" src="{{banner}}" alt="" width="118" height="91" >
-                    <span class="rating"> {{yts.rating}} </span>
+                    <div class="details">
+
+                        <img class="image" src="{{details.image_url}}" alt="{{details.title}}"
+                            onerror="this.onerror=null;this.src='/images/no.png'">
+
+                        <img class="yts-banner" src="{{banner}}" alt="" width="118" height="91">
+                        <span class="rating"> {{yts.rating}} </span>
+                        <p class="type">{{#yts.genres}} {{.}} <br> {{/yts.genres}} </p>
+                    </div>
+
+                    <h2 class="text"> {{{details.title}}} <p class="center"> ( {{yts.year}} ) </p>
+                    </h2>
+
                 </div>
-
-                <h2 class="text"> {{{details.title}}} <p class="center"> ( {{yts.year}} ) </p> </h2>
-            </div>
-
+            </a>
         </div>
