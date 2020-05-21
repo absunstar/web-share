@@ -1,9 +1,33 @@
+<script>
+    window.search = function(filter){
+        window.location.href = `${filter}?q=` + document.querySelector('#q').value;
+    };
+</script>
 <div class="row">
     <div class="col4"></div>
     <div class="col4 center">
-        <form action="/search" method="get">
-        <input name="q" onkeydown="if(event.keyCode == 13)this.form.submit();" type="text" class="search" placeholder="##word.search_posts##">
+        <form class="form" action="/search" method="get">
+            <input id="q" name="q" onkeydown="if(event.keyCode == 13)this.form.submit();" type="text" class="search"
+                placeholder="##word.search_posts##">
+            <br>
+            <div class="row center">
+                <a onclick="window.search('/torrents')" class="btn"> Search in Movies</a>
+                <a onclick="window.search('/videos')" class="btn"> Search in Videos</a>
+                <a onclick="window.search('/top-news')" class="btn"> Search in News </a>
+                <a onclick="window.search('/')" class="btn"> Search in All </a>
+            </div>
+
+
         </form>
     </div>
     <div class="col4"></div>
+</div>
+<br>
+<br>
+<div x-feature="torrents" class="row">
+    <div class="row center">
+        <a href="/torrents?sort=rating" class="btn bg-blue"> Sort By Movie Rating</a>
+        <a href="/torrents?sort=time" class="btn bg-blue"> Sort By Uploaded Date</a>
+        <a href="/torrents?sort=year" class="btn bg-blue"> Sort By Production Year </a>
+    </div>
 </div>

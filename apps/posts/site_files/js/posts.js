@@ -15,7 +15,8 @@ const post_where = {
     is_porn: '##req.query.is_porn##' == 'true' ? true : false,
     is_hidden: '##req.query.is_hidden##' == 'true' ? true : false,
     is_rss: '##req.query.is_rss##' == 'true' ? true : null,
-    q: '##req.query.q##'
+    q: '##req.query.q##',
+    sort: '##req.query.sort##',
 };
 
 let posts_limit = 20;

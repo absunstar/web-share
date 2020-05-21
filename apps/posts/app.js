@@ -103,6 +103,7 @@ module.exports = function init(site) {
     })
   })
   site.get("/torrents", (req, res) => {
+    req.features.push('torrents')
     res.render("posts/index.html", {
       page_title2: 'torrents movies - أفلام تورينت'
     }, {
@@ -296,6 +297,15 @@ module.exports = function init(site) {
       where.is_yts = user_where.is_yts
       skip = (req.data.page_number || 0) * (req.data.limit || 20)
       delete where.time
+      if (user_where.sort != undefined) {
+        if (user_where.sort == "rating") {
+          sort= {'yts.rating': -1}
+        }else   if (user_where.sort == "year") {
+          sort= {'yts.year': -1}
+        }else   if (user_where.sort == "time") {
+          sort= {'time': -1}
+        }
+      }
     }
 
     post.$posts_content.findMany({
