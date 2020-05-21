@@ -196,7 +196,7 @@ app.controller("posts", function ($scope, $http, $sce) {
     $scope.error = '';
     $http({
       method: "POST",
-      url: "/api/posts/categories/all"
+      url: "/api/posts/categories/all?v=##site.options.version##"
     }).then(
       function (response) {
         if(response.data.done){
@@ -217,7 +217,7 @@ app.controller("posts", function ($scope, $http, $sce) {
     $scope.error = '';
     $http({
       method: "get",
-      url: "/json/post-types.json"
+      url: "/json/post-types.json?v=##site.options.version##"
     }).then(
       function (response) {
         $scope.PostTypes = response.data || [];
@@ -232,7 +232,7 @@ app.controller("posts", function ($scope, $http, $sce) {
     $scope.error = '';
     $http({
       method: "get",
-      url: "/json/site-news.json"
+      url: "/json/site-news.json?v=##site.options.version##"
     }).then(
       function (response) {
         $scope.siteNews = response.data || [];
