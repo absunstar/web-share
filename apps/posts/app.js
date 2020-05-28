@@ -4,7 +4,7 @@ module.exports = function init(site) {
   const post = require(__dirname + '/post.js')(site)
   require(__dirname + '/rss.js')(site, post)
   require(__dirname + '/facebook.js')(site, post)
-  // require(__dirname + '/google_news.js')(site , post)
+  require(__dirname + '/google_news.js')(site , post)
 
   site.get({
     name: "/css/posts.css",
@@ -256,7 +256,7 @@ module.exports = function init(site) {
     }
     let where = {}
     where['id'] = req.data.id
-    
+
     post.$posts_content.update(req.data, (err, doc) => {
       if (!err && doc) {
         response.done = true
