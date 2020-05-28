@@ -46,6 +46,11 @@
                             <div class="body">
                                 <h2 class="text"> ##data.text## </h2>
                                 <div class="details">
+                                    <div x-permission="admin" class="row">
+                                        <a class="btn remove" onclick="remove_post({id : '##data.id##'})">
+                                          remove
+                                        </a>
+                                      </div>
                                     <a rel="nofollow" href="##data.details.url##" target="_blank">
                                         <img class="image " src="##data.details.image_url##"
                                             alt="##data.details.title##"

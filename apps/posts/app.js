@@ -2,9 +2,9 @@ module.exports = function init(site) {
 
 
   const post = require(__dirname + '/post.js')(site)
-  require(__dirname + '/rss.js')(site , post)
-  require(__dirname + '/facebook.js')(site , post)
-  require(__dirname + '/google_news.js')(site , post)
+  require(__dirname + '/rss.js')(site, post)
+  require(__dirname + '/facebook.js')(site, post)
+  // require(__dirname + '/google_news.js')(site , post)
 
   site.get({
     name: "/css/posts.css",
@@ -17,6 +17,7 @@ module.exports = function init(site) {
       __dirname + "/site_files/css/video.css",
       __dirname + "/site_files/css/yts.css",
       __dirname + "/site_files/css/google-news.css",
+      __dirname + "/site_files/css/series.css",
       __dirname + "/site_files/css/share-buttons.css"
     ]
   })
@@ -80,7 +81,20 @@ module.exports = function init(site) {
       parser: 'html css js'
     })
   })
-
+  site.get("/show-video", (req, res) => {
+    res.render("posts/show-video.html", {
+      page_title2: 'مشاهدة فيديو'
+    }, {
+      parser: 'html css js'
+    })
+  })
+  site.get("/akwam", (req, res) => {
+    res.render("posts/akwam.html", {
+      page_title2: 'أكوام'
+    }, {
+      parser: 'html css js'
+    })
+  })
   site.get("/search", (req, res) => {
     res.render("posts/index.html", {
       page_title2: '  بحث  | ' + req.query.q
@@ -106,6 +120,14 @@ module.exports = function init(site) {
     req.features.push('torrents')
     res.render("posts/index.html", {
       page_title2: 'torrents movies - أفلام تورينت'
+    }, {
+      parser: 'html css js'
+    })
+  })
+  site.get("/series", (req, res) => {
+    req.features.push('series')
+    res.render("posts/index.html", {
+      page_title2: 'Series - مسلسلات'
     }, {
       parser: 'html css js'
     })
@@ -171,6 +193,13 @@ module.exports = function init(site) {
             res.render("posts/google_news.html", doc, {
               parser: 'html css js'
             })
+          } else if (doc.is_series) {
+            doc.page_title2 = ' مسلسل ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
+            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
+            doc.episode_count = doc.episode_list.length
+            res.render("posts/series.html", doc, {
+              parser: 'html css js'
+            })
           } else {
             doc.post_type = 'full-post'
             res.render("posts/post.html", doc, {
@@ -186,7 +215,59 @@ module.exports = function init(site) {
     }
   })
 
+  site.post("api/posts/get", (req, res) => {
+    let response = {
+      done: false
+    }
+    let where = {}
+    where['id'] = req.data.id
+    post.$posts_content.find(where, (err, doc) => {
+      if (!err && doc) {
+        response.done = true
+        response.doc = doc
+        res.json(response)
+      } else {
+        response.error = err
+        res.json(response);
+      }
+    })
 
+  })
+  site.post("api/posts/delete", (req, res) => {
+    let response = {
+      done: false
+    }
+    let where = {}
+    where['id'] = req.data.id
+    post.$posts_content.delete(where, (err, doc) => {
+      if (!err && doc) {
+        response.done = true
+        res.json(response)
+      } else {
+        response.error = err
+        res.json(response);
+      }
+    })
+
+  })
+  site.post("api/posts/update", (req, res) => {
+    let response = {
+      done: false
+    }
+    let where = {}
+    where['id'] = req.data.id
+    
+    post.$posts_content.update(req.data, (err, doc) => {
+      if (!err && doc) {
+        response.done = true
+        res.json(response)
+      } else {
+        response.error = err
+        res.json(response);
+      }
+    })
+
+  })
   site.post("/api/posts/add", (req, res) => {
 
     let response = {}
@@ -256,8 +337,10 @@ module.exports = function init(site) {
       is_porn: false,
       is_hidden: false
     }
-    let sort= {time: -1}
-    let skip= 0
+    let sort = {
+      time: -1
+    }
+    let skip = 0
 
     let user_where = req.data.where || {}
 
@@ -292,18 +375,29 @@ module.exports = function init(site) {
     if (user_where.is_google_news != undefined) {
       where.is_google_news = user_where.is_google_news
     }
+    if (user_where.is_series != undefined) {
+      where.is_series = user_where.is_series
+    }
     if (user_where.is_yts != undefined) {
-      sort= {'yts.year': -1}
+      sort = {
+        'yts.year': -1
+      }
       where.is_yts = user_where.is_yts
       skip = (req.data.page_number || 0) * (req.data.limit || 20)
       delete where.time
       if (user_where.sort != undefined) {
         if (user_where.sort == "rating") {
-          sort= {'yts.rating': -1}
-        }else   if (user_where.sort == "year") {
-          sort= {'yts.year': -1}
-        }else   if (user_where.sort == "time") {
-          sort= {'time': -1}
+          sort = {
+            'yts.rating': -1
+          }
+        } else if (user_where.sort == "year") {
+          sort = {
+            'yts.year': -1
+          }
+        } else if (user_where.sort == "time") {
+          sort = {
+            'time': -1
+          }
         }
       }
     }
@@ -312,8 +406,8 @@ module.exports = function init(site) {
       select: req.body.select || {},
       limit: req.data.limit || 20,
       where: where,
-      sort:sort,
-      skip:skip
+      sort: sort,
+      skip: skip
     }, (err, docs) => {
       if (!err) {
         response.done = true
@@ -417,6 +511,6 @@ module.exports = function init(site) {
 
   })
 
- 
+
 
 }

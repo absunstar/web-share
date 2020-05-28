@@ -10,6 +10,7 @@ const post_where = {
     is_video: document.location.href.like('*videos*') ? true : null,
     is_children: document.location.href.like('*children-videos*') ? true : null,
     is_yts: document.location.href.like('*torrents*') ? true : null,
+    is_series: document.location.href.like('*series*') ? true : null,
     is_google_news: document.location.href.like('*top-news*') ? true : null,
     is_approved: '##req.query.is_approved##' == 'false' ? false : true,
     is_porn: '##req.query.is_porn##' == 'true' ? true : false,
@@ -31,9 +32,6 @@ function loadPosts(more) {
         return;
     }
 
-    if (typeof (Mustache) == 'undefined') {
-        return;
-    }
 
     if (busy) return;
     busy = true;
@@ -69,13 +67,7 @@ function loadPosts(more) {
 
         page_number++;
         var rendered = '';
-        var post_template = $('#post-template').html();
-        var video_template = $('#video-template').html();
-        var yts_template = $('#yts-template').html();
-        var ad_template = $('#ad-template').html();
-        var google_news_template = $('#google-news-template').html();
-        
-        Mustache.parse(post_template);
+       
         last_posts = res.list;
         for (var i = 0; i < last_posts.length; i++) {
             try {
@@ -89,7 +81,7 @@ function loadPosts(more) {
                     post.text = post.text + ` <a target="_blank" rel="nofollow" href="${post.details.url}"> ##word.posts_read_more## </a> `;
                 }
                 if(post.is_video){
-                    rendered += Mustache.render(video_template, post);
+                    rendered += site.render('#video-template', post);
 
                 }else if(post.yts){
                    post.yts.torrents.forEach(torrent => {
@@ -97,16 +89,19 @@ function loadPosts(more) {
                         post.banner ='/images/banner1080p.png'
                        }
                    });
-                    rendered += Mustache.render(yts_template, post);
+                    rendered += site.render('#yts-template', post);
 
                 }else if(post.is_google_news){
-                     rendered += Mustache.render(google_news_template, post);
-                 }else{
-                    rendered += Mustache.render(post_template, post);
+                     rendered += site.render('#google-news-template', post);
+                 }else if(post.is_series){
+                     post.episode_count = post.episode_list.length;
+                    rendered += site.render('#series-template', post);
+                }else{
+                    rendered +=site.render('#google-news-template', post);
                 }
                 
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
 
@@ -231,7 +226,17 @@ function generateAuthorData(link) {
     })
 };
 
-
+function remove_post(_post , callback) {
+    site.postData({
+        method: "POST",
+        url: "/api/posts/delete",
+        data: _post
+    }, (res) => {
+        console.log(res)
+    }, (err) => {
+        console.log(err)
+    });
+};
 
 var one_post = one_post || false;
 

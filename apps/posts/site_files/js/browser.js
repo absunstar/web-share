@@ -27,3 +27,17 @@ spider.get_page_urls = function(op, callback) {
         callback(res);
     });
 };
+
+spider.get_page_content = function(op, callback) {
+    op.partition = $$$.browser.remote.getCurrentWindow().webContents.getWebPreferences().partition
+
+    site.postData({
+        url: spider.server + '/api/page-content-spider',
+        method: 'POST',
+        data: op
+    }, (res) => {
+        callback(res);
+    }, (err)=>{
+        callback(null , err);
+    });
+};

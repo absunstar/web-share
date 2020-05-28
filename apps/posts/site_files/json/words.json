@@ -13,6 +13,8 @@
     {"name" : "posts_load_more" , "en" : "Load More" , "ar" : "جارى تحميل المزيد"},
     {"name" : "posts_read_more" , "en" : "Read More" , "ar" : "أقرأ المزيد"},
     {"name" : "posts_source" , "en" : "Article Source" , "ar" : "مصدر الخبر"},
+    {"name" : "posts_show" , "en" : "Show" , "ar" : "مشاهدة"},
+    {"name" : "posts_download" , "en" : "Download" , "ar" : "تحميل"},
      {
         "name": "details.image_url",
         "en": "/images/no.png",
@@ -41,5 +43,7 @@
     },
     {"name" : "page_keywords" , "en" : "egytag , news , videos" , "ar" : "شبكة مصر , أخبار ,  فيديوهات"},
     {"name" : "no_data" , "en" : "No Data" , "ar" : "لايوجد نتائج للبحث"},
-    {"name" : "search_posts" , "en" : "Search in posts , movies , videos" , "ar" : "أبحث فى الموقع عن الاخبار والافلام والفيديوهات"}
+    {"name" : "posts_episode_count" , "en" : "Episode Count" , "ar" : "عدد الحلقات"},
+    {"name" : "posts_episode_show" , "en" : "Show or Download" , "ar" : "للمشاهدة والتحميل"},
+    {"name" : "search_posts" , "en" : "Search in posts , movies , videos" , "ar" : "بحث سريع"}
 ]

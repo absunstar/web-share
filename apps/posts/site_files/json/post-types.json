@@ -16,9 +16,14 @@
         "url": "/torrents",
         "en": "Torrent Movies",
         "ar": "تحميل أفلام تورينت"
+    }, {
+        "id": 4,
+        "url": "/series",
+        "en": "Series",
+        "ar": "مسلسلات"
     },
     {
-        "id": 3,
+        "id": 5,
         "url": "/top-news",
         "en": "News",
         "ar": "أهم الأخبار"
