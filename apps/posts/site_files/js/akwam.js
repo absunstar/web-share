@@ -315,7 +315,7 @@ akwam.re_upload = function (callback) {
             console.log(err);
             return;
         }
-        serie.id = id;
+        serie.id =parseInt(id);
         site.postData({
             method: "POST",
             url: "/api/posts/update",

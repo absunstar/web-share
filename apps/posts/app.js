@@ -250,19 +250,20 @@ module.exports = function init(site) {
     })
 
   })
-  site.post("api/posts/update", (req, res) => {
+  site.post("/api/posts/update", (req, res) => {
     let response = {
       done: false
     }
     let where = {}
     where['id'] = req.data.id
 
-    post.$posts_content.update(req.data, (err, doc) => {
-      if (!err && doc) {
+    post.$posts_content.update(req.data, (err, result) => {
+      if (!err) {
         response.done = true
+        response.result = result
         res.json(response)
       } else {
-        response.error = err
+        response.error = err.message
         res.json(response);
       }
     })
