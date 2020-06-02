@@ -82,22 +82,27 @@ akwam.get_serie_episode_watch_urls = function (episode, callback) {
             }
             data.tags.forEach(function (tag) {
                 if (tag.tagName == "A" && tag.href && tag._text && tag.href.like("*watch*")) {
-                    console.log(`watch link : ${episode.title} `);
+                    if (akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_watch_list.filter(u => u.url == tag.href).length > 0) {
+                        return;
+                    }
+                    console.log(`watch link : ${episode.title} , ${tag.href}`);
+                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_watch_list.push({
+                        url: tag.href
+                    });
                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting++;
                     spider.get_page_content({
                             url: tag.href,
                         },
                         function (data, err) {
                             if (err) {
-                                akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting--
+                                console.log(err);
+                                akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting--;
                                 return
                             }
                             data.tags.forEach(function (tag) {
                                 if (tag.class == "download-link") {
                                     console.log(`watch download-link : , ${episode.title} `);
-                                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_watch_list.push({
-                                        url: tag.href
-                                    });
+
                                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting++;
                                     spider.get_page_content({
                                             url: tag.href,
@@ -123,7 +128,18 @@ akwam.get_serie_episode_watch_urls = function (episode, callback) {
                                             akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting--;
                                         }
                                     );
+                                } else if (tag.tagName == "SOURCE") {
+                                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].watch_list.push({
+                                        type: tag.type,
+                                        size: tag.size,
+                                        href: tag.src,
+                                        guid: tag.src + tag.size,
+                                        title: " مسلسل " + akwam.series_list[episode.$serie_index].text + " - " + episode.title,
+                                        url: `/show-video?url=${tag.src}&title=${" مسلسل " + akwam.series_list[episode.$serie_index].text + " - " + episode.title}`
+                                    });
+
                                 }
+
                             });
                             akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting--;
                         }
@@ -148,13 +164,20 @@ akwam.get_serie_episode_download_urls = function (episode, callback) {
         },
         (data, err) => {
             if (err) {
+                console.log(err);
                 akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting--
                 callback(episode, err);
                 return
             }
             data.tags.forEach((tag) => {
-                if (tag.tagName == "A" && tag.href && tag._text && tag.href.like("*link*")) {
-                    console.log(`download link : ${episode.title} `);
+                if (tag.tagName == "A" && tag.href && tag._text && tag.class && tag.class.like("*link-download*")) {
+                    console.log(`download link : ${episode.title} , ${tag.href}`);
+                    if (akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_download_list.filter(u => u.url == tag.href).length > 0) {
+                        return;
+                    }
+                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_download_list.push({
+                        url: tag.href,
+                    });
                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting++;
                     spider.get_page_content({
                             url: tag.href,
@@ -165,11 +188,9 @@ akwam.get_serie_episode_download_urls = function (episode, callback) {
                                 return
                             }
                             data.tags.forEach((tag2) => {
-                                if (tag2.class == "download-link") {
+                                if (tag2.tagName == "A" && tag2.class && tag2.class == "download-link") {
                                     console.log(`download download-link : ${episode.title} `);
-                                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_download_list.push({
-                                        url: tag2.href,
-                                    });
+                                  
                                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting++;
                                     spider.get_page_content({
                                             url: tag2.href,
@@ -207,7 +228,30 @@ akwam.get_serie_episode_download_urls = function (episode, callback) {
                                             akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting--;
                                         }
                                     );
+                                } else if (tag2.tagName == "A" && tag2.class && tag2.class.like("link*")) {
+                                    let exists = false;
+                                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].download_list.forEach((s) => {
+                                        if (s.href == tag2.href) {
+                                            exists = true;
+                                        }
+                                    });
+                                    if (!exists) {
+                                        let t = {};
+                                        t.href = tag2.href;
+                                        t.size = "HD";
+                                        if (t.href.like("*480*")) {
+                                            t.size = "480";
+                                        } else if (t.href.like("*720*")) {
+                                            t.size = "720";
+                                        } else if (t.href.like("*1080*")) {
+                                            t.size = "1080";
+                                        } else if (t.href.like("*360*")) {
+                                            t.size = "360";
+                                        }
+                                        akwam.series_list[episode.$serie_index].episode_list[episode.$index].download_list.push(t);
+                                    }
                                 }
+
                             });
                             akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting--;
                         }
@@ -241,21 +285,21 @@ akwam.get_all_serie_data = function (serie, callback) {
             episode.$index = i;
             episode.$serie_index = serie_index;
             akwam.series_list[serie_index].waiting++;
-            akwam.get_serie_episode_watch_urls(akwam.series_list[episode.$serie_index].episode_list[episode.$index], (episode, err) => {
+            akwam.get_serie_episode_watch_urls(akwam.series_list[serie_index].episode_list[episode.$index], (episode, err) => {
                 akwam.series_list[serie_index].waiting--;
                 if (err) {
                     return
                 }
-                akwam.series_list[episode.$serie_index].episode_list[episode.$index].watch_list = site.getUniqueObjects(episode.watch_list, "guid");
+                akwam.series_list[serie_index].episode_list[episode.$index].watch_list = site.getUniqueObjects(episode.watch_list, "guid");
                 console.log(`watch list collected : ${episode.title} `);
             });
             akwam.series_list[serie_index].waiting++;
-            akwam.get_serie_episode_download_urls(akwam.series_list[episode.$serie_index].episode_list[episode.$index], (episode, err) => {
+            akwam.get_serie_episode_download_urls(akwam.series_list[serie_index].episode_list[episode.$index], (episode, err) => {
                 akwam.series_list[serie_index].waiting--;
                 if (err) {
                     return
                 }
-                akwam.series_list[episode.$serie_index].episode_list[episode.$index].download_list = site.getUniqueObjects(episode.download_list, "href");
+                akwam.series_list[serie_index].episode_list[episode.$index].download_list = site.getUniqueObjects(episode.download_list, "href");
                 console.log(`download_list collected: ${episode.title} `);
             });
         });
@@ -315,7 +359,7 @@ akwam.re_upload = function (callback) {
             console.log(err);
             return;
         }
-        serie.id =parseInt(id);
+        serie.id = parseInt(id);
         site.postData({
             method: "POST",
             url: "/api/posts/update",
