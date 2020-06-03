@@ -116,6 +116,13 @@ module.exports = function init(site) {
       parser: 'html css js'
     })
   })
+  site.get("/author/:guid/:title", (req, res) => {
+    res.render("posts/index.html", {
+      page_title2: decodeURIComponent(req.params.title)
+    }, {
+      parser: 'html css js'
+    })
+  })
   site.get("/torrents", (req, res) => {
     req.features.push('torrents')
     res.render("posts/index.html", {
@@ -167,7 +174,8 @@ module.exports = function init(site) {
           doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
           doc.image_url = doc.details.image_url
           doc.page_description = doc.text.replace(/<[^>]+>/g, '')
-          doc.post_url = req.headers.host + '/post/' + doc.guid
+          doc.post_url = req.headers.host + '/post/' + doc.guid+ '/'+ encodeURI(doc.details.title.split(' ').join('-'));
+          doc.author_url = '/author/' + doc.author.guid+ '/'+ encodeURI(doc.author.name.split(' ').join('-'));
           doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
           doc.page_keywords = doc.details.title.split(' ').join(',')
           doc.details.description = doc.details.description || ""
@@ -378,6 +386,9 @@ module.exports = function init(site) {
     }
     if (user_where.is_series != undefined) {
       where.is_series = user_where.is_series
+    }
+    if (user_where.author_guid != undefined) {
+      where['author.guid'] = user_where.author_guid
     }
     if (user_where.is_yts != undefined) {
       sort = {

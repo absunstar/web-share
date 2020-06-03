@@ -7,6 +7,7 @@ function scope() {
 
 
 const post_where = {
+    author_guid: document.location.href.like('*author*') ? '##req.params.guid##' : null,
     is_video: document.location.href.like('*videos*') ? true : null,
     is_children: document.location.href.like('*children-videos*') ? true : null,
     is_yts: document.location.href.like('*torrents*') ? true : null,
@@ -75,6 +76,7 @@ function loadPosts(more) {
                 
                 post.timeago = xtime(new Date().getTime() - new Date(post.date).getTime());
                 post.post_url = document.location.origin + '/post/' + post.guid + '/'+ encodeURI(post.details.title.split(' ').join('-'));
+                post.author_url = document.location.origin + '/author/' + post.author.guid + '/'+ encodeURI(post.author.name.split(' ').join('-'));
                 post.text = post.is_rss ? post.text : xlinks(post.text);
                 post.banner ='/images/banner720p.png'
                 if (post.is_rss) {
