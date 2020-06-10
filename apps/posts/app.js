@@ -103,6 +103,7 @@ module.exports = function init(site) {
     })
   })
   site.get("/children-videos", (req, res) => {
+    req.features.push('hide-menu')
     res.render("posts/index.html", {
       page_title2: 'فيديوهات للأطفال'
     }, {
@@ -110,6 +111,7 @@ module.exports = function init(site) {
     })
   })
   site.get("/videos", (req, res) => {
+    req.features.push('hide-menu')
     res.render("posts/index.html", {
       page_title2: 'فيديوهات'
     }, {
@@ -124,6 +126,7 @@ module.exports = function init(site) {
     })
   })
   site.get("/torrents", (req, res) => {
+    req.features.push('hide-menu')
     req.features.push('torrents')
     res.render("posts/index.html", {
       page_title2: 'torrents movies - أفلام تورينت'
@@ -132,6 +135,7 @@ module.exports = function init(site) {
     })
   })
   site.get("/series", (req, res) => {
+    req.features.push('hide-menu')
     req.features.push('series')
     res.render("posts/index.html", {
       page_title2: 'Series - مسلسلات'
