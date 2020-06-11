@@ -144,6 +144,7 @@ module.exports = function init(site) {
     })
   })
   site.get("/top-news", (req, res) => {
+    req.features.push('hide-menu')
     res.render("posts/index.html", {
       page_title2: 'Latest News - أهم الأخبار'
     }, {

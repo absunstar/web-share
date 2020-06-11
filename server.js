@@ -34,4 +34,4 @@ site.loadLocalApp('security')
 site.loadLocalApp('ui-print')
 
 // site.addFeature('register')
-site.run()
+site.run([80])
