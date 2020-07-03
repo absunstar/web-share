@@ -235,7 +235,13 @@ app.controller("posts", function ($scope, $http, $sce) {
       url: "/json/site-news.json?v=##site.options.version##"
     }).then(
       function (response) {
-        $scope.siteNews = response.data || [];
+        response.data = response.data || [];
+        if(document.location.href.like('*icc*')){
+          response.data.forEach(n=>{
+            n.url = n.url.replace('https://' , 'https://icc.').replace('http://' , 'http://icc.');
+          })
+        }
+        $scope.siteNews = response.data;
       },
       function (err) {
         $scope.error = err.message;

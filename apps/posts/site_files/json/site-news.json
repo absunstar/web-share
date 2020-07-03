@@ -34,5 +34,11 @@
         "title": "برنامج أدارة مكاتب المحامين",
         "description": "الدعاوى - الجلسات - الموكلين - الاعمال الادارية",
         "image_url": "https://lawyer.egytag.com/images/lawyer.png"
+    },
+    {
+        "url": "https://academy.egytag.com/",
+        "title": "برنامج الاكاديمية",
+        "description": "قاعات - طلاب - كورسات - مدربين ",
+        "image_url": "https://academy.egytag.com/images/hall.png"
     }
 ]
