@@ -238,7 +238,7 @@ app.controller("posts", function ($scope, $http, $sce) {
         response.data = response.data || [];
         if(document.location.href.like('*icc*')){
           response.data.forEach(n=>{
-            n.url = n.url.replace('https://' , 'https://icc.').replace('http://' , 'http://icc.');
+            n.url = n.url.replace('https://' , 'http://icc.').replace('http://' , 'http://icc.');
           })
         }
         $scope.siteNews = response.data;
