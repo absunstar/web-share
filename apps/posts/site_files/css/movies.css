@@ -1,0 +1,99 @@
+:root {
+  --font-family: "Droid Arabic Kufi", serif;
+}
+
+.movie {
+  line-height: 1.3em;
+  text-decoration: none;
+  display: block;
+  padding: 5px;
+  margin-top: 7px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  border: 3px solid #2196f3;
+}
+
+.movie .body .image {
+  width: 220px;
+  height: 220px;
+  border: 3px solid #bbbbbb;
+  padding: 3px;
+}
+
+.movie .text {
+  line-height: 1.8em;
+  padding: 5px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
+}
+
+.movie .description {
+  font-size: 16px;
+  color: #000;
+}
+
+.full-movie .body .image {
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.full-movie .body .title {
+  position: relative;
+  line-height: 1.8em;
+  padding: 5px;
+  font-size: 24px;
+  text-align: center;
+  color: #000000;
+  font-weight: bold;
+}
+
+.full-movie .body .text {
+  position: relative;
+  line-height: 1.8em;
+  padding: 5px;
+  font-size: 18px;
+  text-align: left;
+  color: #000000;
+  font-weight: bold;
+}
+
+#episode_list{
+  padding: 15px;
+}
+.episode {
+  padding: 5px !important;
+  margin: 5px !important;
+  margin-bottom: 15px !important;
+  border: 1px solid #2196f3;
+}
+
+.episode .title {
+  text-align: right !important;
+  font-weight: bold;
+  font-size: 22px !important;
+  color: #ce3429 !important;
+}
+.episode .image {
+  width: 250px;
+  height: 250px;
+}
+.episode .show-link {
+  background: #F44336 ;
+  color: white;
+  width: 250px !important;
+  font-size: 16px;
+}
+
+.episode .download-link {
+  background: green;
+  color: white;
+  width: 250px !important;
+  font-size: 16px;
+}

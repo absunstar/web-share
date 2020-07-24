@@ -29,7 +29,7 @@
         <div class="col7">
           <div>
             <div id="posts" class="posts">
-              <div class="post series" id="post_##data.id##">
+              <div class="post movie" id="post_##data.id##">
                 <div class="header">
                   <img src="##data.author.logo_url##" alt="" onerror="this.onerror=null;this.src='/images/no.png'" />
                   <h2>
@@ -49,16 +49,15 @@
                     <div class="col9">
                       <h2 class="text">##data.page_title2##</h2>
                       <p class="description">##data.details.description##</p>
-                      <p class="blue">
-                        ##word.posts_episode_count##
-                        <span class="bold"> ##data.episode_count## </span>
-                      </p>
                       <a x-permission="send-online" onclick="akwam.send_online()" class="btn"> Send To Server </a>
-                      <a x-permission="remove-series" onclick="akwam.remove()" class="btn remove"> Remove Series </a>
-                      <a x-permission="re-upload-series" onclick="akwam.re_upload_serie()" class="btn"> Re-Upload Series </a>
+                      <a x-permission="remove-series" onclick="akwam.remove()" class="btn remove"> Remove Movie </a>
+                      <a x-permission="re-upload-series" onclick="akwam.re_upload_movie()" class="btn"> Re-Upload Movie </a>
                     </div>
                   </div>
-                  <div id="episode_list"></div>
+                  <div class="row center">
+                    <a id="show_0" onclick="show_watch_list()" class="btn bg-red white"> ##word.posts_show## </a>
+                    <div id="show_list_0" class="center"></div>
+                  </div>
                 </div>
 
                 <div class="footer">
@@ -123,7 +122,6 @@
     <script>
       var one_post = true;
     </script>
-    <script id="episode-template" type="x-tmpl-mustache" x-import="posts/episode-template.html"></script>
     <script x-feature="browser.social" x-import="posts/browser.js"></script>
 
     <script x-import="posts/index.js"></script>
@@ -134,167 +132,20 @@
         id: "##data.id##",
         url: "##data.ref_url##",
         text: "##data.text##",
-        episode_list: JSON.parse(`##data.episode_list##`),
+        show_watch_list: JSON.parse(`##data.show_watch_list##`),
       };
-      for (let index = post.episode_list.length - 1; index > -1; index--) {
-        post.episode_list[index].id = index;
-        let rendered = site.render("#episode-template", post.episode_list[index]);
-        $("#episode_list").append(rendered);
-      }
-
-      function show_episode_watch_list(ep) {
-        $("#show_" + ep.index).hide("slow");
-        $("#show_list_" + ep.index).html("");
+     
+      function show_watch_list() {
+        $("#show_0" ).hide("slow");
+        $("#show_list_0").html("");
         setTimeout(() => {
-          post.episode_list[ep.index].show_watch_list.forEach((l , i) => {
+          post.show_watch_list.forEach((l , i) => {
             let out = site.html(`<a class="btn show-link" target="_blank" href="{{url}}##new_window##"> ##word.posts_show_server## ${i+1}  </a>`, l);
-            $("#show_list_" + ep.index).append(out);
+            $("#show_list_0").append(out);
           });
         }, 1000);
       }
 
-      function show_episode_download_list(ep) {
-        $("#download_" + ep.index).hide("slow");
-        $("#download_list_" + ep.index).html("");
-        setTimeout(() => {
-          post.episode_list[ep.index].download_list.forEach((l) => {
-            let out = site.html(`<a class="btn download-link" target="_blank" href="{{href}}##new_window##"> ##word.posts_download## ( {{size}} )  </a>`, l);
-            $("#download_list_" + ep.index).append(out);
-          });
-        }, 1000);
-      }
-
-      function show_episode(ep) {
-        $("#show_" + ep.index).hide();
-        $(".posts-loading").remove();
-        $("#watch_list_" + ep.index).append('<p class="posts-loading"> <img src="/images/loading.gif">  </p>');
-
-        ep.watch_list = [];
-        spider.get_page_content(
-          {
-            url: ep.url,
-          },
-          function (data) {
-            data.tags.forEach(function (tag) {
-              if (tag.tagName == "A" && tag.href && tag.value && tag.href.like("*watch*")) {
-                spider.get_page_content(
-                  {
-                    url: tag.href,
-                  },
-                  function (data) {
-                    data.tags.forEach(function (tag) {
-                      if (tag.className == "download-link") {
-                        spider.get_page_content(
-                          {
-                            url: tag.href,
-                          },
-                          function (data) {
-                            data.tags.forEach(function (tag) {
-                              if (tag.tagName == "SOURCE") {
-                                let exists = false;
-                                ep.watch_list.forEach((s) => {
-                                  if (s.src == tag.src) {
-                                    exists = true;
-                                  }
-                                });
-                                if (!exists) {
-                                  ep.watch_list.push({
-                                    type: tag.type,
-                                    size: tag.size,
-                                    href: tag.src,
-                                    guid: tag.src + tag.size,
-                                  });
-                                }
-                              }
-                            });
-                          }
-                        );
-                      }
-                    });
-                  }
-                );
-              }
-            });
-          }
-        );
-        setTimeout(() => {
-          site.getUniqueObjects(ep.watch_list, "guid").forEach((l) => {
-            l.title = " مسلسل " + post.text + " - " + post.episode_list[ep.index].title;
-            let out = site.html(`<a class="btn show-link" target="_blank" href="/show-video?url={{href}}&title={{title}}##new_window##"> ##word.posts_show## ( {{size}} )  </a>`, l);
-            $("#watch_list_" + ep.index).append(out);
-          });
-          $(".posts-loading").remove();
-        }, 1000 * 5);
-      }
-
-      function download_episode(ep) {
-        $("#download_" + ep.index).hide();
-        $(".posts-loading").remove();
-        $("#download_list_" + ep.index).append('<p class="posts-loading"> <img src="/images/loading.gif">  </p>');
-
-        ep.download_list = [];
-        spider.get_page_content(
-          {
-            url: ep.url,
-          },
-          (data) => {
-            data.tags.forEach((tag) => {
-              if (tag.tagName == "A" && tag.href && tag.value && tag.href.like("*link*")) {
-                spider.get_page_content(
-                  {
-                    url: tag.href,
-                  },
-                  (data) => {
-                    data.tags.forEach((tag2) => {
-                      if (tag2.className == "download-link") {
-                        spider.get_page_content(
-                          {
-                            url: tag2.href,
-                          },
-                          (data) => {
-                            data.tags.forEach((tag3) => {
-                              if (tag3.tagName == "A" && tag3.className.like("link*")) {
-                                let exists = false;
-                                ep.download_list.forEach((s) => {
-                                  if (s.href == tag3.href) {
-                                    exists = true;
-                                  }
-                                });
-                                if (!exists) {
-                                  let t = {};
-                                  t.href = tag3.href;
-                                  t.size = "HD";
-                                  if (t.href.like("*480*")) {
-                                    t.size = "480";
-                                  } else if (t.href.like("*720*")) {
-                                    t.size = "720";
-                                  } else if (t.href.like("*1080*")) {
-                                    t.size = "1080";
-                                  } else if (t.href.like("*360*")) {
-                                    t.size = "360";
-                                  }
-                                  ep.download_list.push(t);
-                                }
-                              }
-                            });
-                          }
-                        );
-                      }
-                    });
-                  }
-                );
-              }
-            });
-          }
-        );
-        setTimeout(() => {
-          site.getUniqueObjects(ep.download_list, "href").forEach((l) => {
-            let out = site.html(`<a class="btn download-link" target="_blank" href="{{href}}##new_window##"> ##word.posts_download## ( {{size}} )  </a>`, l);
-            $("#download_list_" + ep.index).append(out);
-          });
-          $(".posts-loading").remove();
-        }, 1000 * 5);
-      }
     </script>
   </body>
 </html>

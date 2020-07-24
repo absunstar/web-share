@@ -1,10 +1,11 @@
 const site = require('../isite')({
-  version : '1.0.3',
+  version : '1.0.4',
   port: 8080,
   apps_dir: process.cwd() + '/apps',
   name: "Web Share",
   lang: 'ar',
   theme: 'default_theme',
+  full : true,
   https : {
     enabled : false,
     port : 18080

@@ -18,6 +18,7 @@ module.exports = function init(site) {
       __dirname + "/site_files/css/yts.css",
       __dirname + "/site_files/css/google-news.css",
       __dirname + "/site_files/css/series.css",
+      __dirname + "/site_files/css/movies.css",
       __dirname + "/site_files/css/share-buttons.css"
     ]
   })
@@ -211,6 +212,12 @@ module.exports = function init(site) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
             doc.episode_count = doc.episode_list.length
             res.render("posts/series.html", doc, {
+              parser: 'html css js'
+            })
+          } else if (doc.is_movies) {
+            doc.page_title2 = ' فيلم ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
+            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
+            res.render("posts/movie.html", doc, {
               parser: 'html css js'
             })
           } else {

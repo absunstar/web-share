@@ -14,6 +14,7 @@
     {"name" : "posts_read_more" , "en" : "Read More" , "ar" : "أقرأ المزيد"},
     {"name" : "posts_source" , "en" : "Article Source" , "ar" : "مصدر الخبر"},
     {"name" : "posts_show" , "en" : "Show" , "ar" : "مشاهدة"},
+    {"name" : "posts_show_server" , "en" : "Show Server" , "ar" : "سيرفر المشاهدة"},
     {"name" : "posts_download" , "en" : "Download" , "ar" : "تحميل"},
      {
         "name": "details.image_url",
@@ -45,5 +46,6 @@
     {"name" : "no_data" , "en" : "No Data" , "ar" : "لايوجد نتائج للبحث"},
     {"name" : "posts_episode_count" , "en" : "Episode Count" , "ar" : "عدد الحلقات"},
     {"name" : "posts_episode_show" , "en" : "Show or Download" , "ar" : "للمشاهدة والتحميل"},
+    {"name" : "posts_movie_show" , "en" : "Show or Download" , "ar" : "للمشاهدة والتحميل"},
     {"name" : "search_posts" , "en" : "Search in posts , movies , videos" , "ar" : "بحث سريع"}
 ]

@@ -10,10 +10,8 @@ let download_url3 = "https://s208.akwam.download/download/1590194318/5ec71f0edfa
 let download_url3_selector = "document.querySelector('.btn-loader a')";
 
 var akwam = {
-    series_list: []
-};
-akwam.get_series = function (_option, callback) {
-
+    series_list: [],
+    movies_list : []
 };
 
 akwam.get_serie_info = function (serie, callback) {
@@ -70,6 +68,7 @@ akwam.get_serie_episode_watch_urls = function (episode, callback) {
     console.log(`get_serie_episode_watch_urls : ${episode.url}  , ${episode.title} `);
     akwam.series_list[episode.$serie_index].episode_list[episode.$index].watch_list = [];
     akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_watch_list = [];
+    akwam.series_list[episode.$serie_index].episode_list[episode.$index].show_watch_list = [];
     akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting = 1;
     spider.get_page_content({
             url: akwam.series_list[episode.$serie_index].episode_list[episode.$index].url,
@@ -89,6 +88,7 @@ akwam.get_serie_episode_watch_urls = function (episode, callback) {
                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].source_watch_list.push({
                         url: tag.href
                     });
+                   
                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting++;
                     spider.get_page_content({
                             url: tag.href,
@@ -101,8 +101,11 @@ akwam.get_serie_episode_watch_urls = function (episode, callback) {
                             }
                             data.tags.forEach(function (tag) {
                                 if (tag.class == "download-link") {
-                                    console.log(`watch download-link : , ${episode.title} `);
-
+                                    console.log(`show watch link : , ${episode.title} - ${tag.href} `);
+                                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].show_watch_list.push({
+                                        url: tag.href
+                                    });
+                                    return;
                                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].waiting++;
                                     spider.get_page_content({
                                             url: tag.href,
@@ -129,6 +132,11 @@ akwam.get_serie_episode_watch_urls = function (episode, callback) {
                                         }
                                     );
                                 } else if (tag.tagName == "SOURCE") {
+                                    console.log(`show watch link : , ${episode.title} - ${tag.href} `);
+                                    akwam.series_list[episode.$serie_index].episode_list[episode.$index].show_watch_list.push({
+                                        url: tag.href
+                                    });
+                                    return
                                     akwam.series_list[episode.$serie_index].episode_list[episode.$index].watch_list.push({
                                         type: tag.type,
                                         size: tag.size,
@@ -293,6 +301,7 @@ akwam.get_all_serie_data = function (serie, callback) {
                 akwam.series_list[serie_index].episode_list[episode.$index].watch_list = site.getUniqueObjects(episode.watch_list, "guid");
                 console.log(`watch list collected : ${episode.title} `);
             });
+            return;
             akwam.series_list[serie_index].waiting++;
             akwam.get_serie_episode_download_urls(akwam.series_list[serie_index].episode_list[episode.$index], (episode, err) => {
                 akwam.series_list[serie_index].waiting--;
@@ -338,7 +347,150 @@ akwam.callback = function (obj, callback) {
     }
 };
 
-akwam.upload = function (serie, callback) {
+akwam.get_movie_info = function (movie, callback) {
+
+    console.log('get_movie_info : ' + movie.url);
+
+    movie = {
+        author: {
+            "name": "movies TV",
+            "logo_url": "/images/movies.png"
+        },
+        ref_url: movie.url,
+        details: {},
+        is_approved: true,
+        is_akwam: true,
+        is_movies: true
+    }
+
+    spider.get_page_content({
+        url: movie.ref_url
+    }, (data, err) => {
+        if (err) {
+            console.log(err);
+            callback(null, err);
+            return
+        }
+        data.tags.forEach(tag => {
+            if (tag.tagName == "TITLE") {
+                movie.text = tag._text.replace('| اكوام', '').trim();
+                movie.details.url = movie.ref_url;
+                movie.details.title = movie.text;
+            } else if (tag.tagName == "META" && tag.name == "description") {
+                movie.details.description = tag.content;
+            } else if (tag.tagName == "IMG" && tag.class == "img-fluid" && tag.alt == movie.text) {
+                movie.details.image_url = tag.src;
+            }
+        });
+        callback(movie);
+    })
+};
+akwam.get_all_movie_data = function (movie, callback) {
+    akwam.get_movie_info(movie, (movie, err) => {
+        if (err) {
+            console.log(err);
+            callback(null, err)
+            return
+        }
+        let movie_index = 0;
+        if (typeof movie.$index == "undefined") {
+            akwam.movies_list.push(movie);
+            movie = akwam.movies_list[akwam.movies_list.length - 1];
+            movie_index = movie.$index = akwam.movies_list.length - 1;
+        }
+
+        akwam.movies_list[movie_index].waiting = 0;
+       
+            akwam.movies_list[movie_index].waiting++;
+            akwam.get_movie_watch_urls(akwam.movies_list[movie_index], (episode, err) => {
+                akwam.movies_list[movie_index].waiting--;
+                if (err) {
+                    return
+                }
+                akwam.movies_list[movie_index].show_watch_list = site.getUniqueObjects(episode.show_watch_list, "url");
+                console.log(`show watch list collected : ${movie.title} `);
+            });
+        
+
+        akwam.callback(akwam.movies_list[movie_index], callback);
+
+    });
+};
+akwam.get_movie_watch_urls = function (movie, callback) {
+   
+    akwam.movies_list[movie.$index].source_watch_list = [];
+    akwam.movies_list[movie.$index].show_watch_list = [];
+    akwam.movies_list[movie.$index].waiting = 1;
+    spider.get_page_content({
+            url: akwam.movies_list[movie.$index].ref_url,
+        },
+        function (data, err) {
+            if (err) {
+                akwam.movies_list[movie.$index].waiting--
+                callback(movie, err);
+                return
+            }
+            data.tags.forEach(function (tag) {
+                if (tag.tagName == "A" && tag.href && tag._text && tag.href.like("*watch*")) {
+                    if (akwam.movies_list[movie.$index].source_watch_list.filter(u => u.url == tag.href).length > 0) {
+                        return;
+                    }
+                    console.log(`watch link : ${movie.title} , ${tag.href}`);
+                    akwam.movies_list[movie.$index].source_watch_list.push({
+                        url: tag.href
+                    });
+                   
+                    akwam.movies_list[movie.$index].waiting++;
+                    spider.get_page_content({
+                            url: tag.href,
+                        },
+                        function (data, err) {
+                            if (err) {
+                                console.log(err);
+                                akwam.movies_list[movie.$index].waiting--;
+                                return
+                            }
+                            data.tags.forEach(function (tag) {
+                                if (tag.class == "download-link") {
+                                    console.log(`show watch link : , ${movie.title} - ${tag.href} `);
+                                    akwam.movies_list[movie.$index].show_watch_list.push({
+                                        url: tag.href
+                                    });
+                                } else if (tag.tagName == "SOURCE") {
+                                    console.log(`show watch link : , ${movie.title} - ${tag.href} `);
+                                    akwam.movies_list[movie.$index].show_watch_list.push({
+                                        url: tag.href
+                                    });
+
+                                }
+
+                            });
+                            akwam.movies_list[movie.$index].waiting--;
+                        }
+                    );
+                }
+            });
+            akwam.movies_list[movie.$index].waiting--;
+        }
+    );
+    akwam.callback(akwam.movies_list[movie.$index], callback);
+
+};
+akwam.upload_movie = function (movie, callback) {
+    akwam.get_all_movie_data(movie, (movie) => {
+        site.postData({
+            method: "POST",
+            url: "/api/posts/add",
+            data: akwam.movies_list[movie.$index]
+        }, (res) => {
+            console.log(res)
+        }, (err) => {
+            console.log(err)
+        });
+    });
+};
+
+akwam.upload_serie = function (serie, callback) {
     akwam.get_all_serie_data(serie, (serie) => {
         site.postData({
             method: "POST",
@@ -352,7 +504,7 @@ akwam.upload = function (serie, callback) {
     });
 };
 
-akwam.re_upload = function (callback) {
+akwam.re_upload_serie = function (callback) {
     let id = post.id;
     akwam.get_all_serie_data(post, (serie, err) => {
         if (err) {
@@ -372,7 +524,7 @@ akwam.re_upload = function (callback) {
     });
 };
 
-akwam.remove_series = function (callback) {
+akwam.remove = function (callback) {
     site.postData({
         method: "POST",
         url: "/api/posts/delete",

@@ -98,7 +98,9 @@ function loadPosts(more) {
                  }else if(post.is_series){
                      post.episode_count = post.episode_list.length;
                     rendered += site.render('#series-template', post);
-                }else{
+                }else if(post.is_movies){
+                   rendered += site.render('#movie-template', post);
+               }else{
                     rendered +=site.render('#google-news-template', post);
                 }
                 

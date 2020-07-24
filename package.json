@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js --max-old-space-size=8192",
+    "start": "node server.js",
     "init": "npm i"
   },
   "dependencies": {
