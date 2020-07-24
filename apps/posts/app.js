@@ -172,7 +172,7 @@ module.exports = function init(site) {
           res.redirect('/')
         }
 
-      })
+      } , true)
     } else {
       where['guid'] = req.params.guid
       post.$posts_content.find(where, (err, doc) => {
@@ -231,7 +231,7 @@ module.exports = function init(site) {
           res.redirect('/')
         }
 
-      })
+      } , true)
     }
   })
 
@@ -250,7 +250,7 @@ module.exports = function init(site) {
         response.error = err
         res.json(response);
       }
-    })
+    } , true)
 
   })
   site.post("api/posts/delete", (req, res) => {
@@ -440,7 +440,7 @@ module.exports = function init(site) {
         response.error = err.message
       }
       res.json(response)
-    })
+    } , true)
   })
 
   site.post("/api/posts/authors/add", (req, res) => {
@@ -531,7 +531,7 @@ module.exports = function init(site) {
         response.list = docs
       }
       res.json(response)
-    })
+    } , true)
 
   })
 
