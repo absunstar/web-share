@@ -21,9 +21,14 @@
         "url": "/series",
         "en": "Series",
         "ar": "مسلسلات"
+    }, {
+        "id": 5,
+        "url": "/movies",
+        "en": "Movies",
+        "ar": "أفلام"
     },
     {
-        "id": 5,
+        "id": 6,
         "url": "/top-news",
         "en": "News",
         "ar": "أهم الأخبار"

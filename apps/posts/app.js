@@ -144,6 +144,15 @@ module.exports = function init(site) {
       parser: 'html css js'
     })
   })
+  site.get("/movies", (req, res) => {
+    req.features.push('hide-menu')
+    req.features.push('movies')
+    res.render("posts/index.html", {
+      page_title2: 'Movies - أفلام'
+    }, {
+      parser: 'html css js'
+    })
+  })
   site.get("/top-news", (req, res) => {
     req.features.push('hide-menu')
     res.render("posts/index.html", {
@@ -398,6 +407,9 @@ module.exports = function init(site) {
     }
     if (user_where.is_series != undefined) {
       where.is_series = user_where.is_series
+    }
+    if (user_where.is_movies != undefined) {
+      where.is_movies = user_where.is_movies
     }
     if (user_where.author_guid != undefined) {
       where['author.guid'] = user_where.author_guid
