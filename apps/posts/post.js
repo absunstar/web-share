@@ -42,9 +42,9 @@ module.exports = function init(site) {
         }
         for (var i = 0; i < times.length; i++) {
             if (_time < times[i]) {
-
                 break;
             } else {
+                /*check this */
                 _type = times_type[i];
                 if (i > 0) {
                     _time_2 = _time % times[i];

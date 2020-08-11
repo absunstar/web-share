@@ -133,29 +133,29 @@ function loadPosts(more) {
 function xtime(_time) {
 
     if (typeof (_time) == 'undefined' || !_time) {
-        return " منذ قليل ";
+        return ' منذ قليل ';
     }
 
-    var _type = null;
+    let _type = null;
 
-    var _time_2 = null;
-    var _type_2 = null;
+    let _time_2 = null;
+    let _type_2 = null;
 
-    var times = [1, 1000, 60, 60, 24, 30, 12];
-    var times_type = ['x', 'ثانية', 'دقيقة', 'ساعة', 'يوم', 'شهر', 'سنة'];
+    let times = [1, 1000, 60, 60, 24, 30, 12];
+    let times_type = ['x', 'ثانية', 'دقيقة', 'ساعة', 'يوم', 'شهر', 'سنة'];
 
-    /*_time = (_time * 1000) - (2 * 60 * 60 * 1000 * 0);*/
     let offset = new Date().getTimezoneOffset();
     if(false && offset < 0){
         let diff = (Math.abs(offset) * 60 * 1000)
         _time = _time + diff;
     }
+    
     if (_time <= 10000) {
-        return " منذ قليل ";
+        return ' منذ قليل ';
     }
-    for (var i = 0; i < times.length; i++) {
-        if (_time < times[i]) {
 
+    for (let i = 0; i < times.length; i++) {
+        if (_time < times[i]) {
             break;
         } else {
             _type = times_type[i];
@@ -171,9 +171,9 @@ function xtime(_time) {
     _time_2 = Math.floor(_time_2);
 
     if (_time_2 == 0 || _type_2 == null || _type_2 == 'x') {
-        return [" منذ ", _time, _type].join(' ');
+        return [' منذ ', _time, _type].join(' ');
     } else {
-        return [" منذ ", _time, _type, _time_2, _type_2].join(' ');
+        return [' منذ ', _time, _type, _time_2, _type_2].join(' ');
     }
 
 

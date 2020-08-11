@@ -489,7 +489,25 @@ akwam.upload_movie = function (movie, callback) {
         });
     });
 };
-
+akwam.re_upload_movie = function (callback) {
+    let id = post.id;
+    akwam.get_all_movie_data(post, (movie, err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        movie.id = parseInt(id);
+        site.postData({
+            method: "POST",
+            url: "/api/posts/update",
+            data: akwam.movies_list[movie.$index]
+        }, (res) => {
+            console.log(res)
+        }, (err) => {
+            console.log(err)
+        });
+    });
+};
 akwam.upload_serie = function (serie, callback) {
     akwam.get_all_serie_data(serie, (serie) => {
         site.postData({
