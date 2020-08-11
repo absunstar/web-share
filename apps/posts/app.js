@@ -204,7 +204,6 @@ module.exports = function init(site) {
             })
           } else if (doc.is_yts) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
-            console.log(req.features)
             if (req.hasFeature('xbrowser.unknown')) {
               site.request.get({
                 url: doc.details.image_url,
