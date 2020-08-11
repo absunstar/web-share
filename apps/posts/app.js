@@ -4,7 +4,7 @@ module.exports = function init(site) {
   const post = require(__dirname + '/post.js')(site)
   require(__dirname + '/rss.js')(site, post)
   require(__dirname + '/facebook.js')(site, post)
-  require(__dirname + '/google_news.js')(site , post)
+  require(__dirname + '/google_news.js')(site, post)
 
   site.get({
     name: "/css/posts.css",
@@ -181,7 +181,7 @@ module.exports = function init(site) {
           res.redirect('/')
         }
 
-      } , true)
+      }, true)
     } else {
       where['guid'] = req.params.guid
       post.$posts_content.find(where, (err, doc) => {
@@ -189,8 +189,8 @@ module.exports = function init(site) {
           doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70)
           doc.image_url = doc.details.image_url
           doc.page_description = doc.text.replace(/<[^>]+>/g, '')
-          doc.post_url = req.headers.host + '/post/' + doc.guid+ '/'+ encodeURI(doc.details.title.split(' ').join('-'));
-          doc.author_url = '/author/' + doc.author.guid+ '/'+ encodeURI(doc.author.name.split(' ').join('-'));
+          doc.post_url = req.headers.host + '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
+          doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
           doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
           doc.page_keywords = doc.details.title.split(' ').join(',')
           doc.details.description = doc.details.description || ""
@@ -204,13 +204,36 @@ module.exports = function init(site) {
             })
           } else if (doc.is_yts) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
+            console.log(req.features)
             if (req.hasFeature('browser.unknown')) {
+              site.request.get({
+                url: doc.details.image_url,
+                headers: {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
+                },
+                encoding: null
+              }, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //doc.details.image_url = "/images/torrent.png" //"/image/" + doc.guid
+                  doc.details.image_url = "data:" + response.headers["content-type"] + ";base64," + Buffer.from(body).toString('base64');
+                  doc.image_url = doc.details.image_url
+                  res.render("posts/yts.html", doc, {
+                    parser: 'html css js'
+                  })
+                }
+              })
+            } else if (req.hasFeature('browser.unknown')) {
               doc.details.image_url = "/images/torrent.png" //"/image/" + doc.guid
               doc.image_url = doc.details.image_url
+              res.render("posts/yts.html", doc, {
+                parser: 'html css js'
+              })
+            } else {
+              res.render("posts/yts.html", doc, {
+                parser: 'html css js'
+              })
             }
-            res.render("posts/yts.html", doc, {
-              parser: 'html css js'
-            })
+
           } else if (doc.is_google_news) {
             doc.page_description = doc.details.description.replace(/<[^>]+>/g, '')
             res.render("posts/google_news.html", doc, {
@@ -240,7 +263,7 @@ module.exports = function init(site) {
           res.redirect('/')
         }
 
-      } , true)
+      }, true)
     }
   })
 
@@ -259,7 +282,7 @@ module.exports = function init(site) {
         response.error = err
         res.json(response);
       }
-    } , true)
+    }, true)
 
   })
   site.post("api/posts/delete", (req, res) => {
@@ -452,7 +475,7 @@ module.exports = function init(site) {
         response.error = err.message
       }
       res.json(response)
-    } , true)
+    }, true)
   })
 
   site.post("/api/posts/authors/add", (req, res) => {
@@ -543,7 +566,7 @@ module.exports = function init(site) {
         response.list = docs
       }
       res.json(response)
-    } , true)
+    }, true)
 
   })
 
