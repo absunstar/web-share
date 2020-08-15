@@ -140,7 +140,7 @@
         $("#show_list_0").html("");
         setTimeout(() => {
           post.show_watch_list.forEach((l , i) => {
-            let out = site.html(`<a class="btn show-link" target="_blank" href="{{url}}##new_window##"> ##word.posts_show_server## ${i+1}  </a>`, l);
+            let out = site.html(`<a class="btn show-link" target="_blank" href="{{url}}"> ##word.posts_show_server## ${i+1}  </a>`, l);
             $("#show_list_0").append(out);
           });
         }, 1000);

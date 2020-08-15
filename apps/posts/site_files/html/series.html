@@ -147,7 +147,7 @@
         $("#show_list_" + ep.index).html("");
         setTimeout(() => {
           post.episode_list[ep.index].show_watch_list.forEach((l , i) => {
-            let out = site.html(`<a class="btn show-link" target="_blank" href="{{url}}##new_window##"> ##word.posts_show_server## ${i+1}  </a>`, l);
+            let out = site.html(`<a class="btn show-link" target="_blank" href="{{url}}"> ##word.posts_show_server## ${i+1}  </a>`, l);
             $("#show_list_" + ep.index).append(out);
           });
         }, 1000);
@@ -158,7 +158,7 @@
         $("#download_list_" + ep.index).html("");
         setTimeout(() => {
           post.episode_list[ep.index].download_list.forEach((l) => {
-            let out = site.html(`<a class="btn download-link" target="_blank" href="{{href}}##new_window##"> ##word.posts_download## ( {{size}} )  </a>`, l);
+            let out = site.html(`<a class="btn download-link" target="_blank" href="{{href}}"> ##word.posts_download## ( {{size}} )  </a>`, l);
             $("#download_list_" + ep.index).append(out);
           });
         }, 1000);
@@ -220,7 +220,7 @@
         setTimeout(() => {
           site.getUniqueObjects(ep.watch_list, "guid").forEach((l) => {
             l.title = " مسلسل " + post.text + " - " + post.episode_list[ep.index].title;
-            let out = site.html(`<a class="btn show-link" target="_blank" href="/show-video?url={{href}}&title={{title}}##new_window##"> ##word.posts_show## ( {{size}} )  </a>`, l);
+            let out = site.html(`<a class="btn show-link" target="_blank" href="/show-video?url={{href}}&title={{title}}"> ##word.posts_show## ( {{size}} )  </a>`, l);
             $("#watch_list_" + ep.index).append(out);
           });
           $(".posts-loading").remove();
@@ -289,7 +289,7 @@
         );
         setTimeout(() => {
           site.getUniqueObjects(ep.download_list, "href").forEach((l) => {
-            let out = site.html(`<a class="btn download-link" target="_blank" href="{{href}}##new_window##"> ##word.posts_download## ( {{size}} )  </a>`, l);
+            let out = site.html(`<a class="btn download-link" target="_blank" href="{{href}}"> ##word.posts_download## ( {{size}} )  </a>`, l);
             $("#download_list_" + ep.index).append(out);
           });
           $(".posts-loading").remove();
