@@ -1,38 +1,46 @@
 const site = require('../isite')({
-  version : '1.0.5',
+  version: '1.0.5',
   port: 8080,
   apps_dir: process.cwd() + '/apps',
-  name: "Web Share",
+  name: 'Web Share',
   lang: 'ar',
   theme: 'default_theme',
-  full : true,
-  https : {
-    enabled : false,
-    port : 18080
+  full: true,
+  https: {
+    enabled: false,
+    port: 18080,
   },
-  cache:{
-    json : 0
+  cache: {
+    json: 0,
   },
-  mongodb:{
-    limit : 100,
-    db : 'web_share'
+  mongodb: {
+    limit: 100,
+    db: 'web_share',
   },
-  security :{
-    admin : {
-      email : 'amr',
-      password : '3273'
-    }
-  }
-})
+  security: {
+    admin: {
+      email: 'amr',
+      password: '3273',
+    },
+  },
+  require: {
+    features: [],
+    permissions: [],
+  },
+  default: {
+    features: [],
+    permissions: [],
+  },
+});
 
 site.get({
   name: '/',
-  path: site.dir
-})
+  path: site.dir,
+});
 
-site.loadLocalApp('client-side')
-site.loadLocalApp('security')
-site.loadLocalApp('ui-print')
+site.loadLocalApp('client-side');
+site.loadLocalApp('security');
+site.loadLocalApp('ui-print');
 
 // site.addFeature('register')
-site.run([80])
+site.run([80]);
