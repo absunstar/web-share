@@ -1,6 +1,6 @@
 <div class="center row" class="">
     <i-button x-permission="login" type="add" ng-click="newPostCategory()" label="##word.posts_new_category##"></i-button>
-    <div class="post-category" ng-repeat="cat in PostCategories">
+    <div class="post-category" ng-repeat="cat in PostCategories track by $index">
         <a href="{{cat.link}}"> {{cat['##session.lang##']}}</a>
     </div>
 </div>

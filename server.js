@@ -42,5 +42,14 @@ site.loadLocalApp('client-side');
 site.loadLocalApp('security');
 site.loadLocalApp('ui-print');
 
+setTimeout(() => {
+  site.get("*", (req, res) => {
+    res.render("posts/index.html", {}, {
+      parser: 'html css js'
+    })
+  })
+  
+}, 1000 * 3);
+
 // site.addFeature('register')
 site.run([80]);

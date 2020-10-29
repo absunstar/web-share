@@ -3,7 +3,7 @@
         <th>Post</th>
         <th>Status</th>
     </tr>
-    <tr ng-repeat="_post in newPosts">
+    <tr ng-repeat="_post in newPosts track by $index">
         <td>{{_post.text}}</td>
         <td>
             <p ng-show="_post.$status == 'Pending'"><img src="/images/loading.gif"></p>

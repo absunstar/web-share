@@ -1,5 +1,5 @@
 <div class="center row" class="">
-    <div class="post-type" ng-repeat="pt in PostTypes">
+    <div class="post-type" ng-repeat="pt in PostTypes track by $index">
         <a href="{{pt.url}}"> {{pt['##session.lang##']}}</a>
     </div>
 </div>
