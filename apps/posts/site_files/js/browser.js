@@ -8,7 +8,7 @@ spider.get_page_info = function(url, callback) {
         method: 'POST',
         data: {
             url: url,
-            partition : $$$.browser.remote.getCurrentWindow().webContents.getWebPreferences().partition
+            partition : SOCIALBROWSER.electron.remote.getCurrentWindow().webContents.getWebPreferences().partition
         }
     }, (res) => {
 
@@ -17,7 +17,7 @@ spider.get_page_info = function(url, callback) {
 };
 
 spider.get_page_urls = function(op, callback) {
-    op.partition = $$$.browser.remote.getCurrentWindow().webContents.getWebPreferences().partition
+    op.partition = SOCIALBROWSER.electron.remote.getCurrentWindow().webContents.getWebPreferences().partition
 
     site.postData({
         url: spider.server + '/api/page-urls-spider',
@@ -29,7 +29,7 @@ spider.get_page_urls = function(op, callback) {
 };
 
 spider.get_page_content = function(op, callback) {
-    op.partition = $$$.browser.remote.getCurrentWindow().webContents.getWebPreferences().partition
+    op.partition = SOCIALBROWSER.electron.remote.getCurrentWindow().webContents.getWebPreferences().partition
 
     site.postData({
         url: spider.server + '/api/page-content-spider',
