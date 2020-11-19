@@ -1,5 +1,5 @@
 const site = require('../isite')({
-  version: '1.0.6',
+  version: '1.0.7',
   port: 8080,
   apps_dir: process.cwd() + '/apps',
   name: 'Web Share',
@@ -50,6 +50,8 @@ setTimeout(() => {
   })
   
 }, 1000 * 3);
+
+
 
 // site.addFeature('register')
 site.run([80]);
