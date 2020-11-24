@@ -66,6 +66,10 @@ module.exports = function init(site, post) {
     if (req.query.is_yts == 'true') {
       where['is_yts'] = true;
     }
+    if (req.query.is_google_news == 'true') {
+      where['is_google_news'] = true;
+    }
+    
 
     if (req.params.guid == 'random') {
       post.$posts_content.findAll(
