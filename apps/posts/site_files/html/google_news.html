@@ -20,7 +20,7 @@
           <div x-import="posts/post_types.html"></div>
           <div x-feature="os.desktop">
             <!-- desktop_right_ad -->
-            <ins class="adsbygoogle" style="display: block;" data-ad-client="ca-pub-3372007384613151" data-ad-slot="4885184263" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-3372007384613151" data-ad-slot="4885184263" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>
               (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -48,14 +48,11 @@
                     </div>
                     <div class="col9">
                       <h2 class="text">##data.text##</h2>
-                      <p class="description">##data.text##
-                        <br>
-                        <a class="bold font-18" href="##data.details.url##" target="_blank"> ##word.posts_source## </a>
-                      </p>
+                      <p class="description">##data.text##</p>
+                      <br /><br />
+                      <a class="bold font-18 center" href="##data.details.url##" target="_blank"> ##word.posts_source## </a>
                       <div x-permission="admin" class="row">
-                        <a class="btn remove" onclick="remove_post({id : '##data.id##'})">
-                          remove
-                        </a>
+                        <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
                       </div>
                     </div>
                   </div>
@@ -64,34 +61,56 @@
                 <div class="footer">
                   <ul class="share-buttons">
                     <li>
-                      <a rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=##data.post_url##&t=" title="انشر الصفحة على الفيسبوك" target="_blank"><img alt="share" src="/images/social/Facebook.png" /></a>
+                      <a rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=##data.post_url##&t=" title="انشر الصفحة على الفيسبوك" target="_blank"
+                        ><img alt="share" src="/images/social/Facebook.png"
+                      /></a>
                     </li>
                     <li>
-                      <a rel="nofollow" href="https://twitter.com/intent/tweet?source=##data.post_url##&text=:%20##data.post_url##" target="_blank" title="انشر الصفحة على تويتر"><img alt="share" src="/images/social/Twitter.png" /></a>
+                      <a rel="nofollow" href="https://twitter.com/intent/tweet?source=##data.post_url##&text=:%20##data.post_url##" target="_blank" title="انشر الصفحة على تويتر"
+                        ><img alt="share" src="/images/social/Twitter.png"
+                      /></a>
                     </li>
                     <li>
                       <a rel="nofollow" href="https://plus.google.com/share?url=##data.post_url##" target="_blank" title="انشر الصفحة على جوجل"><img alt="share" src="/images/social/Google.png" /></a>
                     </li>
                     <li class="hidden">
-                      <a rel="nofollow" href="http://www.tumblr.com/share?v=3&u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على Tumblr"><img alt="share" src="/images/social/Tumblr.png" /></a>
+                      <a rel="nofollow" href="http://www.tumblr.com/share?v=3&u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على Tumblr"
+                        ><img alt="share" src="/images/social/Tumblr.png"
+                      /></a>
                     </li>
                     <li>
-                      <a rel="nofollow" href="http://pinterest.com/pin/create/button/?url=##data.post_url##&description=" target="_blank" title="انشر الصفحة على Pin it"><img alt="share" src="/images/social/Pinterest.png" /></a>
+                      <a rel="nofollow" href="http://pinterest.com/pin/create/button/?url=##data.post_url##&description=" target="_blank" title="انشر الصفحة على Pin it"
+                        ><img alt="share" src="/images/social/Pinterest.png"
+                      /></a>
                     </li>
                     <li class="hidden">
-                      <a rel="nofollow" href="https://getpocket.com/save?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Pocket"><img alt="share" src="/images/social/Pocket.png" /></a>
+                      <a rel="nofollow" href="https://getpocket.com/save?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Pocket"
+                        ><img alt="share" src="/images/social/Pocket.png"
+                      /></a>
                     </li>
                     <li>
-                      <a rel="nofollow" href="http://www.reddit.com/submit?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Reddit"><img alt="share" src="/images/social/Reddit.png" /></a>
+                      <a rel="nofollow" href="http://www.reddit.com/submit?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Reddit"
+                        ><img alt="share" src="/images/social/Reddit.png"
+                      /></a>
                     </li>
                     <li>
-                      <a rel="nofollow" href="http://www.linkedin.com/shareArticle?mini=true&url=##data.post_url##&title=&summary=&source=##data.post_url##" target="_blank" title="اشر الصفحة على LinkedIn"><img alt="share" src="/images/social/LinkedIn.png" /></a>
+                      <a
+                        rel="nofollow"
+                        href="http://www.linkedin.com/shareArticle?mini=true&url=##data.post_url##&title=&summary=&source=##data.post_url##"
+                        target="_blank"
+                        title="اشر الصفحة على LinkedIn"
+                        ><img alt="share" src="/images/social/LinkedIn.png"
+                      /></a>
                     </li>
                     <li class="hidden">
-                      <a rel="nofollow" href="http://wordpress.com/press-this.php?u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على WordPress"><img alt="share" src="/images/social/Wordpress.png" /></a>
+                      <a rel="nofollow" href="http://wordpress.com/press-this.php?u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على WordPress"
+                        ><img alt="share" src="/images/social/Wordpress.png"
+                      /></a>
                     </li>
                     <li class="hidden">
-                      <a rel="nofollow" href="https://pinboard.in/popup_login/?url=##data.post_url##&title=&description=" target="_blank" title="احفظ الصفحة على Pinboard"><img alt="share" src="/images/social/Pinboard.png" /></a>
+                      <a rel="nofollow" href="https://pinboard.in/popup_login/?url=##data.post_url##&title=&description=" target="_blank" title="احفظ الصفحة على Pinboard"
+                        ><img alt="share" src="/images/social/Pinboard.png"
+                      /></a>
                     </li>
                   </ul>
                 </div>
@@ -99,7 +118,14 @@
             </div>
             <div>
               <!-- Post Ad-->
-              <ins class="adsbygoogle" style="display: block; text-align: center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3372007384613151" data-ad-slot="5838870332"></ins>
+              <ins
+                class="adsbygoogle"
+                style="display: block; text-align: center"
+                data-ad-layout="in-article"
+                data-ad-format="fluid"
+                data-ad-client="ca-pub-3372007384613151"
+                data-ad-slot="5838870332"
+              ></ins>
               <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
               </script>
@@ -110,7 +136,7 @@
           <div x-import="posts/site_news.html"></div>
           <div x-feature="os.desktop">
             <!-- desktop_left_ad -->
-            <ins class="adsbygoogle" style="display: block;" data-ad-client="ca-pub-3372007384613151" data-ad-slot="3212816421" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-3372007384613151" data-ad-slot="3212816421" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>
               (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
