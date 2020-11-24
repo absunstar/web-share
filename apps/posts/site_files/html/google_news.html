@@ -50,7 +50,10 @@
                       <h2 class="text">##data.text##</h2>
                       <p class="description">##data.text##</p>
                       <br /><br />
-                      <a class="bold font-18 center" href="##data.details.url##" target="_blank"> ##word.posts_source## </a>
+                      <div class="center">
+                        <a class="bold font-18" href="##data.details.url##" target="_blank"> ##word.posts_source## </a>
+                      </div>
+                     
                       <div x-permission="admin" class="row">
                         <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
                       </div>
