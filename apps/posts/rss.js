@@ -118,6 +118,7 @@ module.exports = function init(site, post) {
                 <item>
                   <title>${doc.details.title}</title>
                   <link>${doc.post_url}</link>
+                  <image>${doc.details.image_url}</image>
                   <description>${doc.text}</description>
                   <date>${new Date(doc.date).toISOString()}</date>
                 </item>
