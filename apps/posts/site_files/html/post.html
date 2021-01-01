@@ -7,8 +7,7 @@
 
 <body class="##session.lang##" ng-controller="posts">
 
-    <nav x-import="navbar/index.html" class="navbar" data-ng-controller="navbar">
-    </nav>
+    <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
 
     <div x-import="posts/new_post_modal.html"></div>
     <div x-import="posts/new_url_modal.html"></div>
@@ -60,7 +59,10 @@
 
                                     </a>
                                 </div>
-
+                                <br /><br />
+                                <div class="center">
+                                  <a class="bold font-18" href="##data.details.url##" target="_blank"> ##word.posts_source## </a>
+                                </div>
                             </div>
 
                             <div class="footer">

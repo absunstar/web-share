@@ -1,15 +1,13 @@
 {
-  "name": "isite-template",
+  "name": "web-share",
   "version": "2.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "init": "npm i"
   },
-  "dependencies": {
-    "isite": "^1.13.27"
-  },
+  "dependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"

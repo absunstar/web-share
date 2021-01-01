@@ -8,8 +8,7 @@
 
 <body class="##session.lang##" ng-controller="posts">
 
-    <nav x-import="navbar/index.html" class="navbar" data-ng-controller="navbar">
-    </nav>
+    <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
 
     <script id="post-template" type="x-tmpl-mustache" x-import="posts/post-template.html">
 
@@ -35,8 +34,7 @@
     <div x-import="posts/new_post_category_modal.html"></div>
 
     <div id="main-layout" class="container loaded">
-        <div x-import="posts/post_categories.html"></div>
-        <div x-import="posts/post_search.html"></div>
+       
 
         <div class="row">
             <div  class="col2 ">
@@ -53,7 +51,9 @@
             </div>
             <div class="col7">
                 <div>
-
+                    <div x-import="posts/post_categories.html"></div>
+                    <div x-import="posts/post_search.html"></div>
+                    
                     <div id="posts" class="posts">
 
                     </div>

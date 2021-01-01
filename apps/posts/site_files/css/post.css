@@ -44,7 +44,7 @@
 }
 
 .post:hover {
-  background: #dddddd1f
+  box-shadow: 1px 1px 10px 0px #8BC34A;
 }
 
 .post .header {
@@ -159,14 +159,13 @@
 .post .footer {
   min-height: 50px;
   margin-top: 15px;
-  padding: 5px;
+  padding: 15px;
   text-align: center;
 }
 
 .post .footer a {
   text-decoration: none;
   padding: 7px 9px;
-  background: #fff;
   color: #000;
   border: 1px solid #ddddddc2;
   margin: 5px;

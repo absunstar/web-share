@@ -121,11 +121,10 @@ app.controller("posts", function ($scope, $http, $sce) {
     $scope.error = '';
 
     post = post || {
-      text: $('#new_post').html(),
-      is_approved: true,
-      details: {}
+      text: site.new_post_editor.getContents(),
+      is_approved: true
     };
-    post.details = post.details || {};
+   
 
     post.url_list = post.url_list || urlify(post.text).url_list;
 
@@ -134,6 +133,7 @@ app.controller("posts", function ($scope, $http, $sce) {
         post.spider = {
           enabled: true
         };
+        post.details = post.details || {};
         post.details.url = res.url;
         post.details.image_url = res.image_url;
         post.details.title = res.title;
@@ -153,7 +153,7 @@ app.controller("posts", function ($scope, $http, $sce) {
             };
           }
         } else {
-          if (post.text == post.details.url) {
+          if (post.details && post.text == post.details.url) {
             post.text = post.details.title || post.details.description;
           }
         }

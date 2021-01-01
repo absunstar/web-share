@@ -1,51 +1,71 @@
 <script src="/x-js/all.js?v=##site.options.version##"></script>
 
 <script>
-        var app = app || angular.module('myApp', []);
-    </script>
+  var app = app || angular.module('myApp', []);
+</script>
 
 <script src="/x-js/directive.min.js?v=##site.options.version##"></script>
 <script x-import="app.js"></script>
-<script x-import="navbar.js"></script>
+<script src="/js/sitebar.js?v=##site.options.version##"></script>
 
 <script x-import="ui-print/index.js"></script>
-
 
 <div x-permission="!login" x-import="security/login_modal.html"></div>
 <div x-permission="!login" x-import="security/register_modal.html"></div>
 <div x-permission="login" x-import="security/logout_modal.html"></div>
 
-
 <script>
-        $(document).on('keydown', 'input,select', function (e) {
-            if (e.which == 13 || e.keyCode == 13) {
-                e.preventDefault();
-                var $canfocus = $('input,select');
-                var index = $canfocus.index(document.activeElement) + 1;
-                if (index >= $canfocus.length) index = 0;
-                $canfocus.eq(index).focus();
-            }
-        });
-    </script>
-    <script>
-    function allow(){
-        if(typeof SOCIALBROWSER !== "undefined"){
-            return true;
-        }
-        return false;
+  $(document).on('keydown', 'input,select', function (e) {
+    if (e.which == 13 || e.keyCode == 13) {
+      e.preventDefault();
+      var $canfocus = $('input,select');
+      var index = $canfocus.index(document.activeElement) + 1;
+      if (index >= $canfocus.length) index = 0;
+      $canfocus.eq(index).focus();
     }
-    site.features = JSON.parse(`##req.features##`);
-    /*site.session = JSON.parse(`##session.*##`);*/
-    </script>
+  });
+</script>
+<script>
+  function allow() {
+    if (typeof SOCIALBROWSER !== 'undefined') {
+      return true;
+    }
+    return false;
+  }
+  site.features = JSON.parse(`##req.features##`);
+  /*site.session = JSON.parse(`##session.*##`);*/
+</script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59220588-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag('js', new Date());
 
   gtag('config', 'UA-59220588-1');
 </script>
 <script data-ad-client="ca-pub-3372007384613151" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
+<link x-permission="login" href="/css/editor.css" rel="stylesheet" />
+<script x-permission="login" src="/js/editor.js"></script>
+<script x-permission="login">
+  site.new_post_editor = WebShareEditor.create('new_post', {
+    toolbarItem: [
+      ['undo', 'redo'],
+      ['font', 'fontSize', 'formatBlock'],
+      ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+      ['removeFormat'],
+      ['fontColor', 'hiliteColor'],
+      ['outdent', 'indent'],
+      ['align', 'horizontalRule', 'list', 'table'],
+      ['link', 'image', 'video'],
+     // ['fullScreen', 'showBlocks', 'codeView'],
+     // ['preview', 'print'],
+     // ['save', 'template'],
+    ],
+    width: '100%',
+    minHeight: '300px',
+  });
+</script>

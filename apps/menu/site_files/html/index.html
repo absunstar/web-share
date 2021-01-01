@@ -1,0 +1,56 @@
+<style>
+  .tab-link img {
+    width: 32px;
+    height: 32px;
+    padding: 1px;
+    background: #fff;
+    border-radius: 5px;
+    margin: 0px;
+  }
+
+  .tab-link span {
+    padding-right: 50px;
+    padding-left: 50px;
+    vertical-align: super;
+  }
+</style>
+
+<div class="main-menu">
+  <div id="empty_tabs" class="tabs">
+    <div class="tabs-header">
+      <a class="tab-link" onclick="site.showTabs(event, '#main_tabs')">
+        <img src="/images/back.png" />
+        <span> ##word.main_menu##</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="main_tabs" class="tabs">
+    <div class="tabs-header">
+      <div class="row">
+
+        <a class="tab-link" onclick="newPost()">
+          <img src="/images/logo.png" />
+          <span> ##word.posts_new## </span>
+        </a>
+
+      
+       
+        <a class="tab-link" ng-click="newURL()">
+          <img src="/images/logo.png" />
+          <span> ##word.posts_new_url## </span>
+        </a>
+
+        <a class="tab-link" onclick="newAuthor()">
+          <img src="/images/logo.png" />
+          <span> ##word.posts_new_author## </span>
+        </a>
+        
+        <a class="tab-link" onclick="site.showTabs(event, '#main_tabs')">
+          <img src="/images/logo.png" />
+          <span> ##word.main##</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
