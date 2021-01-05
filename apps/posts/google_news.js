@@ -93,6 +93,6 @@ module.exports = function init(site, post) {
     }, 1000 * 60 * 60);
   };
 
- // google_news.auto_load();
+  google_news.auto_load();
   return google_news;
 };
