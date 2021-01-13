@@ -76,6 +76,8 @@ function loadPosts(more) {
                 var post = last_posts[i];
                 
                 post.timeago = xtime(new Date().getTime() - new Date(post.date).getTime());
+                
+                post.details.title = post.details.title || ''
                 post.post_url = document.location.origin + '/post/' + post.guid + '/'+ encodeURI(post.details.title.split(' ').join('-'));
                 post.author_url = document.location.origin + '/author/' + post.author.guid + '/'+ encodeURI(post.author.name.split(' ').join('-'));
                 post.text = post.is_rss ? post.text : xlinks(post.text);
