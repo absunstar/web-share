@@ -88,6 +88,17 @@ module.exports = function init(site) {
       },
     );
   });
+
+  site.get('/youtube-view', (req, res) => {
+    res.render(
+      'posts/youtube_view.html',
+      {},
+      {
+        parser: 'html css js',
+      },
+    );
+  });
+
   site.get('/show-video', (req, res) => {
     res.render(
       'posts/show-video.html',
