@@ -90,8 +90,21 @@ module.exports = function init(site) {
   });
 
   site.get('/youtube-view', (req, res) => {
+    req.queryRaw.videoid = req.queryRaw.videoid || '_Y8gawCe7mU'
     res.render(
       'posts/youtube_view.html',
+      {page_title : 'Show Youtube Video '  ,
+      page_title2 : req.queryRaw.videoid,
+      page_description : 'Dynamic Youtube Video Playing in egytag.com'
+    },
+      {
+        parser: 'html css js',
+      },
+    );
+  });
+  site.get('/page-view', (req, res) => {
+    res.render(
+      'posts/page_view.html',
       {},
       {
         parser: 'html css js',

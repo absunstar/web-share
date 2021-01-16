@@ -245,15 +245,15 @@ function remove_post(_post , callback) {
     });
 };
 
-var one_post = one_post || false;
+window.stop_loading_posts = window.stop_loading_posts || false;
 
-if(!one_post){
+if(!window.stop_loading_posts){
     loadPosts();
 }
 
 
 window.onscroll = function () {
-    if(one_post){
+    if(window.stop_loading_posts){
         return;
     }
 

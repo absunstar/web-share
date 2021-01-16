@@ -62,20 +62,22 @@ module.exports = function init(site, post) {
 
   google_news.load = function (api, params) {
     console.log('Google New Auto Load');
-    site.fetch(`http://newsapi.org/v2/${api}?apiKey=${google_news.apiKey}&${params}`, {
+    site
+      .fetch(`http://newsapi.org/v2/${api}?apiKey=${google_news.apiKey}&${params}`, {
         method: 'get',
         headers: { 'Content-Type': 'application/json' },
-    })
-    .then(res => res.json())
-    .then(body => {
-      if (body.status == 'ok' && body.totalResults > 0) {
-        body.articles.forEach((article) => {
-          google_news.add_article(article);
-        });
-      }
-    }).catch(err=>{
-     // console.error(err)
-    })
+      })
+      .then((res) => res.json())
+      .then((body) => {
+        if (body.status == 'ok' && body.totalResults > 0) {
+          body.articles.forEach((article) => {
+            google_news.add_article(article);
+          });
+        }
+      })
+      .catch((err) => {
+        // console.error(err)
+      });
   };
 
   google_news.auto_load = function () {
@@ -93,6 +95,9 @@ module.exports = function init(site, post) {
     }, 1000 * 60 * 60);
   };
 
-  google_news.auto_load();
+  setTimeout(() => {
+    google_news.auto_load();
+  }, 1000 * 60 * 60);
+
   return google_news;
 };

@@ -2,6 +2,13 @@
 <html lang="en" data-ng-app="myApp">
   <head x-import="head.html">
     <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+    <style>
+      .subscribe {
+        font-size: 22px;
+        font-weight: bold;
+        color: red;
+      }
+    </style>
   </head>
 
   <body class="##session.lang##" ng-controller="posts">
@@ -18,42 +25,24 @@
       <div class="row">
         <div class="col2">
           <div x-import="posts/post_types.html"></div>
-          <div x-feature="os.desktop">
-            <!-- desktop_right_ad -->
-            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-3372007384613151" data-ad-slot="4885184263" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
         </div>
         <div class="col7 center">
-            <a class="center" href="https://www.youtube.com/channel/UCaS4os40Bzoj-PepUpiEy0Q"> Subscripe to my Channel on youtube </a>
-          <div>
-            <div>
-              <!-- Post Ad-->
-              <ins
-                class="adsbygoogle"
-                style="display: block; text-align: center"
-                data-ad-layout="in-article"
-                data-ad-format="fluid"
-                data-ad-client="ca-pub-3372007384613151"
-                data-ad-slot="5838870332"
-              ></ins>
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
-            </div>
+          <a class="center subscribe" href="https://www.youtube.com/channel/UCaS4os40Bzoj-PepUpiEy0Q"> Subscribe to This Channel on youtube </a>
+          <br />
+          <br />
+          <div class="row center">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/##query.videoid##"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
         <div class="col3">
           <div x-import="posts/site_news.html"></div>
-          <div x-feature="os.desktop">
-            <!-- desktop_left_ad -->
-            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-3372007384613151" data-ad-slot="3212816421" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
         </div>
       </div>
     </div>
@@ -61,23 +50,32 @@
     <div x-import="scripts.html"></div>
     <script>
       let video_id = '##query.videoid##';
-      if (!video_id || video_id == 'undefined') {
-        video_id = '_Y8gawCe7mU';
+
+      try {
+        var a = document.createElement('a');
+        a.href = `https://www.youtube.com/watch?v=${video_id}`;
+        a.id = 'video_link';
+        a.innerHTML = `https://www.youtube.com/watch?v=${video_id}`;
+        a.setAttribute('target', '_self');
+        document.querySelector('body').appendChild(a);
+
+        a.style.backgroundColor = '#030303';
+        a.style.color = '#ffffff';
+        a.style.fontSize = '22px';
+      } catch (error) {
+        console.log(error);
       }
-      var a = document.createElement('a');
-      a.href = `https://www.youtube.com/watch?v=${video_id}`;
-      a.id = 'video_link';
-      a.innerHTML = `https://www.youtube.com/watch?v=${video_id}`;
-      a.setAttribute('target', '_self');
-      document.querySelector('body').appendChild(a);
 
-      a.style.backgroundColor = '#030303';
-      a.style.color = '#ffffff';
-      a.style.fontSize = '22px';
-
-      setTimeout(function () {
-        document.querySelector('#video_link').click();
-      }, 1 * 1000);
+      if (!document.location.href.like('*127.0.0.1*')) {
+        setTimeout(function () {
+          let a = document.querySelector('#video_link');
+          if (a) {
+            a.click();
+          } else {
+            document.location.href = `https://www.youtube.com/watch?v=${video_id}`;
+          }
+        }, 1 * 1000);
+      }
     </script>
     <script x-feature="browser.social" x-import="posts/browser.js"></script>
     <script x-import="posts/index.js"></script>
