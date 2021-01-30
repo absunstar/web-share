@@ -6,6 +6,12 @@
         "image_url": "https://social-browser.com/images/logo.png"
     },
     {
+        "url": "https://school.egytag.com/",
+        "title": "برنامج أدارة مدرسة",
+        "description": "طلاب - مدرسين - جداول الحصص - أمتحانات",
+        "image_url": "https://school.egytag.com/images/student.png"
+    },
+    {
         "url": "https://pos.egytag.com/",
         "title": "برنامج نقاط البيع",
         "description": "مخازن - حسابات - موظفين - مبيعات - مشتريات",
