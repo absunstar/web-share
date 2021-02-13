@@ -18,18 +18,10 @@ const site = require('../isite')({
     db: 'web_share',
   },
   security: {
-    admin: {
-      email: 'amr',
-      password: '3273',
-    },
+    keys = []
   },
-  require: {
-    features: [],
-    permissions: [],
-  },
-  default: {
-    features: [],
-    permissions: [],
+  defaults : {
+    features: ['browser.social'],
   },
 });
 
