@@ -18,7 +18,7 @@ const site = require('../isite')({
     db: 'web_share',
   },
   security: {
-    keys = []
+    keys : []
   },
   defaults : {
     features: ['browser.social'],
