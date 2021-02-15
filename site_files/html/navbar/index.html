@@ -3,7 +3,7 @@
         <span> ##word.brand_tag## </span>
     </a>
 </h2>
-<a x-features="browser.social" href="#" onclick="$('.links').toggle()" class="mobile-btn" > <i class="fa fa-bars"></i> </a>
+<a x-features="browser.social.app" href="#" onclick="$('.links').toggle()" class="mobile-btn" > <i class="fa fa-bars"></i> </a>
 <ul class="links">
     <a x-permissions="login" href="#" onclick="event.stopPropagation(); $('.sitebar .links').toggle(200)"> <i class="fa fa-bars"></i>
     </a>
@@ -18,7 +18,7 @@
     <li x-permission="post_manage">
         <a class="bg-blue white" ng-click="newURL()"> ##word.posts_new_url## </a>
     </li>
-    <li  x-features="browser.social" x-permission="!login">
+    <li  x-features="browser.social.app" x-permission="!login">
         <a class="bg-green white" ng-click="login()"> ##word.security_login## </a>
     </li>
     <li  x-features="register" x-permission="!login">
