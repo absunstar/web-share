@@ -1,13 +1,13 @@
 const site = require('../isite')({
-  version: '1.0.13',
+  version: '1.0.14',
   port: 8080,
   apps_dir: process.cwd() + '/apps',
   name: 'Web Share',
   lang: 'ar',
   theme: 'default_theme',
-  full: true,
+  _0x14xo: !0,
   https: {
-    enabled: false,
+    enabled: !1,
     port: 18080,
   },
   cache: {
@@ -42,8 +42,6 @@ setTimeout(() => {
   })
   
 }, 1000 * 3);
-
-
 
 // site.addFeature('register')
 site.run([80]);
