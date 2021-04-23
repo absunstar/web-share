@@ -4,7 +4,7 @@ module.exports = function init(site) {
   require(__dirname + '/facebook.js')(site, post);
   require(__dirname + '/google_news.js')(site, post);
 
-  site.get({
+  site.onGET({
     name: '/css/posts.css',
     path: [
       __dirname + '/site_files/css/custom.css',
@@ -22,7 +22,7 @@ module.exports = function init(site) {
   });
 
   post.image_list = [];
-  site.get('/image/:guid', (req, res) => {
+  site.onGET('/image/:guid', (req, res) => {
     if (post.image_list[req.params.guid]) {
       site
         .fetch(post.image_list[req.params.guid], {
@@ -74,12 +74,12 @@ module.exports = function init(site) {
     }
   });
 
-  site.get({
+  site.onGET({
     name: '/',
     path: __dirname + '/site_files',
   });
 
-  site.get('/', (req, res) => {
+  site.onGET('/', (req, res) => {
     res.render(
       'posts/index.html',
       {},
@@ -89,7 +89,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.get('/youtube-view', (req, res) => {
+  site.onGET('/youtube-view', (req, res) => {
     req.queryRaw.videoid = req.queryRaw.videoid || '_Y8gawCe7mU'
     res.render(
       'posts/youtube_view.html',
@@ -102,7 +102,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/page-view', (req, res) => {
+  site.onGET('/page-view', (req, res) => {
     res.render(
       'posts/page_view.html',
       {},
@@ -112,7 +112,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.get('/show-video', (req, res) => {
+  site.onGET('/show-video', (req, res) => {
     res.render(
       'posts/show-video.html',
       {
@@ -123,7 +123,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/akwam', (req, res) => {
+  site.onGET('/akwam', (req, res) => {
     res.render(
       'posts/akwam.html',
       {
@@ -134,7 +134,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/search', (req, res) => {
+  site.onGET('/search', (req, res) => {
     res.render(
       'posts/index.html',
       {
@@ -145,7 +145,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/children-videos', (req, res) => {
+  site.onGET('/children-videos', (req, res) => {
     req.features.push('hide-menu');
     res.render(
       'posts/index.html',
@@ -157,7 +157,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/videos', (req, res) => {
+  site.onGET('/videos', (req, res) => {
     req.features.push('hide-menu');
     res.render(
       'posts/index.html',
@@ -169,7 +169,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/author/:guid/:title', (req, res) => {
+  site.onGET('/author/:guid/:title', (req, res) => {
     res.render(
       'posts/index.html',
       {
@@ -180,7 +180,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/torrents', (req, res) => {
+  site.onGET('/torrents', (req, res) => {
     req.features.push('hide-menu');
     req.features.push('torrents');
     res.render(
@@ -193,7 +193,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/series', (req, res) => {
+  site.onGET('/series', (req, res) => {
     req.features.push('hide-menu');
     req.features.push('series');
     res.render(
@@ -206,7 +206,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/movies', (req, res) => {
+  site.onGET('/movies', (req, res) => {
     req.features.push('hide-menu');
     req.features.push('movies');
     res.render(
@@ -219,7 +219,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/top-news', (req, res) => {
+  site.onGET('/top-news', (req, res) => {
     req.features.push('hide-menu');
     res.render(
       'posts/index.html',
@@ -231,7 +231,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.get('/post/:guid', (req, res) => {
+  site.onGET('/post/:guid', (req, res) => {
     let where = {};
     if (req.params.guid == 'random') {
       post.$posts_content.findAll(
@@ -340,7 +340,7 @@ module.exports = function init(site) {
     }
   });
 
-  site.post('api/posts/get', (req, res) => {
+  site.onPOST('api/posts/get', (req, res) => {
     let response = {
       done: false,
     };
@@ -361,7 +361,7 @@ module.exports = function init(site) {
       true,
     );
   });
-  site.post('api/posts/delete', (req, res) => {
+  site.onPOST('api/posts/delete', (req, res) => {
     let response = {
       done: false,
     };
@@ -377,7 +377,7 @@ module.exports = function init(site) {
       }
     });
   });
-  site.post('/api/posts/update', (req, res) => {
+  site.onPOST('/api/posts/update', (req, res) => {
     let response = {
       done: false,
     };
@@ -395,7 +395,7 @@ module.exports = function init(site) {
       }
     });
   });
-  site.post('/api/posts/add', (req, res) => {
+  site.onPOST('/api/posts/add', (req, res) => {
     let response = {};
     response.done = false;
 
@@ -454,7 +454,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.post('/api/posts/all', (req, res) => {
+  site.onPOST('/api/posts/all', (req, res) => {
     let response = {};
     response.done = false;
 
@@ -555,7 +555,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.post('/api/posts/authors/add', (req, res) => {
+  site.onPOST('/api/posts/authors/add', (req, res) => {
     // if (!req.session.user) {
     //   response.error = 'you are not login'
     //   res.json(response)
@@ -588,7 +588,7 @@ module.exports = function init(site) {
     });
   });
 
-  site.post('/api/posts/categories/add', (req, res) => {
+  site.onPOST('/api/posts/categories/add', (req, res) => {
     let response = {
       done: false,
     };
@@ -623,7 +623,7 @@ module.exports = function init(site) {
     });
   });
 
-  site.post('/api/posts/categories/all', (req, res) => {
+  site.onPOST('/api/posts/categories/all', (req, res) => {
     let response = {
       done: false,
     };

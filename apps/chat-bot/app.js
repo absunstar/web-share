@@ -6,25 +6,25 @@ module.exports = function init(site) {
     word: 1
   })
 
-  site.get({
+  site.onGET({
     name: "/chat-bot",
     path: __dirname + "/site_files/html/index.html",
     parser : 'html cs js'
   })
 
-  site.get({
+  site.onGET({
     name: "/",
     path: __dirname + "/site_files"
   })
 
-  site.post('/api/message/send', (req, res) => {
+  site.onPOST('/api/message/send', (req, res) => {
     res.json({
       done: true,
       message: req.data.message
     })
   })
 
-  site.post('/api/chat-messages/all', (req, res) => {
+  site.onPOST('/api/chat-messages/all', (req, res) => {
     res.json({
       done: true,
       list: []

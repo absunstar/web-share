@@ -2,7 +2,7 @@ module.exports = function init(site, post) {
   let rss_busy = false;
   let rss_list = [];
 
-  site.get(['/sitemap.xml'], (req, res) => {
+  site.onGET(['/sitemap.xml'], (req, res) => {
     let where = {};
     if (req.params.guid) {
       where['guid'] = req.params.guid;
@@ -49,7 +49,7 @@ module.exports = function init(site, post) {
     );
   });
 
-  site.get(['/rss', '/rss/posts', '/rss/posts/:guid'], (req, res) => {
+  site.onGET(['/rss', '/rss/posts', '/rss/posts/:guid'], (req, res) => {
     let where = {};
     if (req.query.is_rss == 'true') {
       where['is_rss'] = true;

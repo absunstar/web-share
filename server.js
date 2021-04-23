@@ -1,5 +1,5 @@
 const site = require('../isite')({
-  version: '1.0.15',
+  version: '1.0.16',
   port: 8080,
   apps_dir: process.cwd() + '/apps',
   name: 'Web Share',
@@ -18,14 +18,14 @@ const site = require('../isite')({
     db: 'web_share',
   },
   security: {
-    keys: [],
-  },
+      keys: ['e698f2679be5ba5c9c0b0031cb5b057c' , '9705a3a85c1b21118532fefcee840f99'],
+    },
   defaults: {
     features: ['browser.social'],
   },
 });
 
-site.get({
+site.onGET({
   name: '/',
   path: site.dir,
 });
@@ -35,7 +35,7 @@ site.loadLocalApp('security');
 site.loadLocalApp('ui-print');
 
 setTimeout(() => {
-  site.get('*', (req, res) => {
+  site.onGET('*', (req, res) => {
     res.render(
       'posts/index.html',
       {},
@@ -46,5 +46,4 @@ setTimeout(() => {
   });
 }, 1000 * 3);
 
-// site.addFeature('register')
 site.run([80]);
