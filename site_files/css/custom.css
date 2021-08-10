@@ -1,7 +1,7 @@
 :root {
   --theme-color: #283e4a;
 
-  --font-family: 'Droid Arabic Kufi', monospace, sans-serif, Tahoma, serif;
+  --font-family: 'Droid', monospace, sans-serif, Tahoma, serif;
   --font-weight: normal;
   --font-size: 14px;
   --line-height: 1.4;
