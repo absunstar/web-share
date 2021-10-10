@@ -1,25 +1,25 @@
 <div id="newPostModal" class="modal small">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>
-        ##word.posts_new##
-        <p ng-show="busy"><img src="/images/loading.gif" /> ...</p>
-      </h2>
-    </div>
-    <div class="modal-body">
-      <div class="row">
-        <form class="form">
-          <div class="row">
-            <textarea id="new_post" rows="30"></textarea>
-          </div>
-        </form>
-      </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>
+                ##word.posts_new##
+                <p ng-show="busy"><img src="/images/loading.gif" /> ...</p>
+            </h2>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <form class="form">
+                    <div class="row">
+                        <textarea id="new_post" rows="30"></textarea>
+                    </div>
+                </form>
+            </div>
 
-      <h2 class="error center red">{{error}}</h2>
-      <div class="modal-footer center">
-        <i-button ng-hide="busy" type="add" ng-click="add()" label="##word.add##"></i-button>
-        <i-button type="close" onclick="site.hideModal('#newPostModal')" label="##word.close##"></i-button>
-      </div>
+            <h2 class="error center red">{{error}}</h2>
+            <div class="modal-footer center">
+                <i-button ng-hide="busy" type="add" ng-click="add()" label="##word.add##"></i-button>
+                <i-button type="close" onclick="site.hideModal('#newPostModal')" label="##word.close##"></i-button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

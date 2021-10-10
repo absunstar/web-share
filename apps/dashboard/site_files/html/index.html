@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en" data-ng-app="myApp" class="bg-white">
+  <head x-import="head.html">
+    <style>
+      :root {
+        --theme-color: #000000d4;
+      }
+      body {
+        margin-top: 70px;
+      }
+
+      nav.sitebar .brand a {
+        font-size: 16px !important;
+        font-weight: bold !important;
+        color: #fff;
+        box-shadow: none;
+        text-shadow: none;
+        border-radius: 0px;
+        border: 1px solid #414240;
+      }
+
+      nav.sitebar .brand a span {
+        color: yellow;
+        font-size: 12px !important;
+      }
+    </style>
+  </head>
+
+  <body class="##session.lang##">
+    <nav x-import="sitebar/index.html" class="sitebar" data-ng-controller="sitebar"></nav>
+
+    <div id="main-layout" class="container loaded" ng-controller="dashboard">
+      <div x-import="dashboard/content.html"></div>
+    </div>
+
+    <div x-import="scripts.html"></div>
+    <script x-import="dashboard/index.js"></script>
+  </body>
+</html>

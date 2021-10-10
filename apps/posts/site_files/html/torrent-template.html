@@ -1,11 +1,11 @@
-<br>
-<br>
-<p class="yts-info"> Movie Type :  {{#genres}} <span class="blue"> {{.}}  </span> {{/genres}}  </p>
-<p class="yts-info"> Language : <span class="blue"> {{language}} </span></p>
-<p class="yts-info"> Rating : <span class="rating"> {{rating}} </span></p>
+<br />
+<br />
+<p class="yts-info">Movie Type : {{#genres}} <span class="blue"> {{.}} </span> {{/genres}}</p>
+<p class="yts-info">Language : <span class="blue"> {{language}} </span></p>
+<p class="yts-info">Rating : <span class="rating"> {{rating}} </span></p>
 
-<br>
-<br>
+<br />
+<br />
 {{#torrents}}
- <a class="btn" target="_blank" href="{{url}}"> Download {{quality}} {{type}} ( {{size}} ) Torrent </a>
+<a class="btn" target="_blank" href="{{url}}"> Download {{quality}} {{type}} ( {{size}} ) Torrent </a>
 {{/torrents}}

@@ -6,6 +6,7 @@ module.exports = function init(site) {
 
   site.onGET({
     name: '/css/posts.css',
+    public : true,
     path: [
       __dirname + '/site_files/css/custom.css',
       __dirname + '/site_files/css/post.css',
@@ -77,9 +78,10 @@ module.exports = function init(site) {
   site.onGET({
     name: '/',
     path: __dirname + '/site_files',
+    public : true
   });
 
-  site.onGET('/', (req, res) => {
+  site.onGET({name : '/' , public : true }, (req, res) => {
     res.render(
       'posts/index.html',
       {},
@@ -89,7 +91,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.onGET('/youtube-view', (req, res) => {
+  site.onGET({name :'/youtube-view' , public : true}, (req, res) => {
     req.queryRaw.videoid = req.queryRaw.videoid || '_Y8gawCe7mU'
     res.render(
       'posts/youtube_view.html',
@@ -102,7 +104,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/page-view', (req, res) => {
+  site.onGET({name :'/page-view', public : true}, (req, res) => {
     res.render(
       'posts/page_view.html',
       {},
@@ -112,7 +114,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.onGET('/show-video', (req, res) => {
+  site.onGET({name :'/show-video', public : true}, (req, res) => {
     res.render(
       'posts/show-video.html',
       {
@@ -123,7 +125,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/akwam', (req, res) => {
+  site.onGET({name :'/akwam', public : true}, (req, res) => {
     res.render(
       'posts/akwam.html',
       {
@@ -134,7 +136,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/search', (req, res) => {
+  site.onGET({name :'/search', public : true}, (req, res) => {
     res.render(
       'posts/index.html',
       {
@@ -145,7 +147,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/children-videos', (req, res) => {
+  site.onGET({name :'/children-videos', public : true}, (req, res) => {
     req.features.push('hide-menu');
     res.render(
       'posts/index.html',
@@ -157,7 +159,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/videos', (req, res) => {
+  site.onGET({name :'/videos', public : true}, (req, res) => {
     req.features.push('hide-menu');
     res.render(
       'posts/index.html',
@@ -169,7 +171,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/author/:guid/:title', (req, res) => {
+  site.onGET({name :'/author/:guid/:title', public : true}, (req, res) => {
     res.render(
       'posts/index.html',
       {
@@ -180,7 +182,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/torrents', (req, res) => {
+  site.onGET({name :'/torrents', public : true}, (req, res) => {
     req.features.push('hide-menu');
     req.features.push('torrents');
     res.render(
@@ -193,7 +195,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/series', (req, res) => {
+  site.onGET({name :'/series', public : true}, (req, res) => {
     req.features.push('hide-menu');
     req.features.push('series');
     res.render(
@@ -206,7 +208,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/movies', (req, res) => {
+  site.onGET({name :'/movies', public : true}, (req, res) => {
     req.features.push('hide-menu');
     req.features.push('movies');
     res.render(
@@ -219,7 +221,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/top-news', (req, res) => {
+  site.onGET({name :'/top-news', public : true}, (req, res) => {
     req.features.push('hide-menu');
     res.render(
       'posts/index.html',
@@ -231,7 +233,7 @@ module.exports = function init(site) {
       },
     );
   });
-  site.onGET('/post/:guid', (req, res) => {
+  site.onGET({name :'/post/:guid', public : true}, (req, res) => {
     let where = {};
     if (req.params.guid == 'random') {
       post.$posts_content.findAll(
@@ -340,7 +342,7 @@ module.exports = function init(site) {
     }
   });
 
-  site.onPOST('api/posts/get', (req, res) => {
+  site.onPOST({name :'api/posts/get', public : true}, (req, res) => {
     let response = {
       done: false,
     };
@@ -361,7 +363,7 @@ module.exports = function init(site) {
       true,
     );
   });
-  site.onPOST('api/posts/delete', (req, res) => {
+  site.onPOST({name :'api/posts/delete', public : true}, (req, res) => {
     let response = {
       done: false,
     };
@@ -377,7 +379,7 @@ module.exports = function init(site) {
       }
     });
   });
-  site.onPOST('/api/posts/update', (req, res) => {
+  site.onPOST({name :'/api/posts/update', public : true}, (req, res) => {
     let response = {
       done: false,
     };
@@ -395,7 +397,7 @@ module.exports = function init(site) {
       }
     });
   });
-  site.onPOST('/api/posts/add', (req, res) => {
+  site.onPOST({name :'/api/posts/add', public : true}, (req, res) => {
     let response = {};
     response.done = false;
 
@@ -454,7 +456,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.onPOST('/api/posts/all', (req, res) => {
+  site.onPOST({name :'/api/posts/all', public : true}, (req, res) => {
     let response = {};
     response.done = false;
 
@@ -555,7 +557,7 @@ module.exports = function init(site) {
     );
   });
 
-  site.onPOST('/api/posts/authors/add', (req, res) => {
+  site.onPOST({name :'/api/posts/authors/add', public : true}, (req, res) => {
     // if (!req.session.user) {
     //   response.error = 'you are not login'
     //   res.json(response)
@@ -588,7 +590,7 @@ module.exports = function init(site) {
     });
   });
 
-  site.onPOST('/api/posts/categories/add', (req, res) => {
+  site.onPOST({name :'/api/posts/categories/add', public : true}, (req, res) => {
     let response = {
       done: false,
     };
@@ -623,7 +625,7 @@ module.exports = function init(site) {
     });
   });
 
-  site.onPOST('/api/posts/categories/all', (req, res) => {
+  site.onPOST({name :'/api/posts/categories/all', public : true}, (req, res) => {
     let response = {
       done: false,
     };

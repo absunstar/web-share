@@ -1,62 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="myApp">
-  <head x-import="head.html">
-    <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
-  </head>
+    <head x-import="head.html">
+        <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+    </head>
 
-  <body class="##session.lang##" ng-controller="posts">
-    <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
+    <body class="##session.lang##" ng-controller="posts">
+        <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
 
-    <div x-import="posts/new_post_modal.html"></div>
-    <div x-import="posts/new_url_modal.html"></div>
-    <div x-import="posts/new_author_modal.html"></div>
-    <div x-import="posts/new_post_category_modal.html"></div>
+        <div x-import="posts/new_post_modal.html"></div>
+        <div x-import="posts/new_url_modal.html"></div>
+        <div x-import="posts/new_author_modal.html"></div>
+        <div x-import="posts/new_post_category_modal.html"></div>
 
-    <div id="main-layout" class="container loaded">
-      <div x-import="posts/post_categories.html"></div>
+        <div id="main-layout" class="container loaded">
+            <div x-import="posts/post_categories.html"></div>
 
-      <div class="row">
-        <div class="col2">
-          <div x-import="posts/post_types.html"></div>
-
+            <div class="row">
+                <div class="col2">
+                    <div x-import="posts/post_types.html"></div>
+                </div>
+                <div class="col7 center">
+                    <a class="center" href="https://www.youtube.com/channel/UCaS4os40Bzoj-PepUpiEy0Q"> Subscripe to my Channel on youtube </a>
+                    <div></div>
+                </div>
+                <div class="col3">
+                    <div x-import="posts/site_news.html"></div>
+                </div>
+            </div>
         </div>
-        <div class="col7 center">
-          <a class="center" href="https://www.youtube.com/channel/UCaS4os40Bzoj-PepUpiEy0Q"> Subscripe to my Channel on youtube </a>
-          <div>
-          
-          </div>
-        </div>
-        <div class="col3">
-          <div x-import="posts/site_news.html"></div>
-  
-        </div>
-      </div>
-    </div>
 
-    <div x-import="scripts.html"></div>
-    <script>
-      window.stop_loading_posts = true;
-      let page_url = '##query.url##';
-      if (!page_url || page_url == 'undefined') {
-        page_url = 'https://social-browser.com';
-      }
-      var a = document.createElement('a');
-      a.href = `${page_url}`;
-      a.id = 'page_link';
-      a.innerHTML = `${page_url}`;
-      a.setAttribute('target', '_self');
-      document.querySelector('body').appendChild(a);
+        <div x-import="scripts.html"></div>
+        <script>
+            window.stop_loading_posts = true;
+            let page_url = '##query.url##';
+            if (!page_url || page_url == 'undefined') {
+                page_url = 'https://social-browser.com';
+            }
+            var a = document.createElement('a');
+            a.href = `${page_url}`;
+            a.id = 'page_link';
+            a.innerHTML = `${page_url}`;
+            a.setAttribute('target', '_self');
+            document.querySelector('body').appendChild(a);
 
-      a.style.backgroundColor = '#030303';
-      a.style.color = '#ffffff';
-      a.style.fontSize = '22px';
+            a.style.backgroundColor = '#030303';
+            a.style.color = '#ffffff';
+            a.style.fontSize = '22px';
 
-      setTimeout(function () {
-        document.querySelector('#page_link').click();
-      }, 1 * 1000);
-    </script>
-    <script x-feature="browser.social.app" x-import="posts/browser.js"></script>
-    <script x-import="posts/index.js"></script>
-    <script x-import="posts/posts.js"></script>
-  </body>
+            setTimeout(function () {
+                document.querySelector('#page_link').click();
+            }, 1 * 1000);
+        </script>
+        <script x-feature="browser.social" x-import="posts/browser.js"></script>
+        <script x-import="posts/index.js"></script>
+        <script x-import="posts/posts.js"></script>
+    </body>
 </html>

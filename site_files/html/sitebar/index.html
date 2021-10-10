@@ -1,29 +1,18 @@
-<h2 class="brand ">
+<h2 class="brand">
     <div class="row">
         <div class="col4 brand-title" help-id="brand_title">
-            <a x-permissions="login" class="site-setting" href="#" onclick="event.stopPropagation(); $('.sitebar .links').toggle(200)"> <i class="fa fa-bars"></i>
-            </a>
-            <a  href="/" >
-                ##word.brand_title## <span> ##word.brand_tag##</span>
-            </a>
-           
+            <a x-permissions="login" class="site-setting" href="#" onclick="event.stopPropagation(); $('.sitebar .links').toggle(200)"> <i class="fa fa-bars"></i> </a>
+            <a href="/"> ##word.brand_title## <span> ##word.brand_tag##</span> </a>
         </div>
-        <div class="col4 text-center desktop">
-            
-        </div>
-        <div class="col4 text-left ">
+        <div class="col4 text-center desktop"></div>
+        <div class="col4 text-left">
             <div class="info">
-               
-               
-                <a x-features="login" id="btn_logout" class="bg-red white" ng-click="logout()"> ##word.security_logout## <span class="white bold font-14"> ##user.name## </span> 
-                </a>
-                <a x-features="browser.social.app" id="btn_login" class="bg-green white" ng-click="login()"> ##word.security_login## </a>
+                <a x-features="login" id="btn_logout" class="bg-red white" ng-click="logout()"> ##word.security_logout## <span class="white bold font-14"> ##user.name## </span> </a>
+                <a x-features="browser.social" id="btn_login" class="bg-green white" ng-click="login()"> ##word.security_login## </a>
             </div>
         </div>
     </div>
-
 </h2>
-
 
 <div class="links">
     <div x-import="menu/index.html"></div>

@@ -1,38 +1,38 @@
 <h2 class="brand">
-  <a href="/">
-    ##word.brand_title##
-    <span> ##word.brand_tag## </span>
-  </a>
-</h2>
-<a x-features="browser.social.app" href="#" onclick="$('.links').toggle()" class="mobile-btn"> <i class="fa fa-bars"></i> </a>
-<ul class="links">
-  <a x-permissions="login" x-features="browser.social.app" href="#" onclick="event.stopPropagation(); $('.sitebar .links').toggle(200)"> <i class="fa fa-bars"></i> </a>
-
-  <li x-permission="author_manage">
-    <a class="bg-green white" onclick="newAuthor()"> ##word.posts_new_author## </a>
-  </li>
-  <li x-permission="post_manage">
-    <a class="bg-blue white" onclick="newPost()"> ##word.posts_new## </a>
-  </li>
-  <li x-permission="post_manage">
-    <a class="bg-blue white" ng-click="newURL()"> ##word.posts_new_url## </a>
-  </li>
-  <li x-features="browser.social.app" x-permission="!login">
-    <a class="bg-green white" ng-click="login()"> ##word.security_login## </a>
-  </li>
-  <li x-features="register" x-permission="!login">
-    <a ng-click="register()"> ##word.security_register## </a>
-  </li>
-  <li x-features="login">
-    <a class="bg-red white" ng-click="logout()">
-      ##word.security_logout##
-      <b class=""> ##user.name## </b>
+    <a href="/">
+        ##word.brand_title##
+        <span> ##word.brand_tag## </span>
     </a>
-  </li>
-  <li x-features="test" x-lang="ar">
-    <a class="bold" ng-click="changeLang('en')"> <i class="fa fa-globe"></i> ##word.en_lang## </a>
-  </li>
-  <li x-features="test" x-lang="en">
-    <a class="bold" ng-click="changeLang('ar')"> <i class="fa fa-globe"></i> ##word.ar_lang## </a>
-  </li>
+</h2>
+<a x-features="browser.social" href="#" onclick="$('.links').toggle()" class="mobile-btn"> <i class="fa fa-bars"></i> </a>
+<ul class="links">
+    <a x-permissions="login" x-features="browser.social" href="#" onclick="event.stopPropagation(); $('.sitebar .links').toggle(200)"> <i class="fa fa-bars"></i> </a>
+
+    <li x-permission="author_manage">
+        <a class="bg-green white" onclick="newAuthor()"> ##word.posts_new_author## </a>
+    </li>
+    <li x-permission="post_manage">
+        <a class="bg-blue white" onclick="newPost()"> ##word.posts_new## </a>
+    </li>
+    <li x-permission="post_manage">
+        <a class="bg-blue white" ng-click="newURL()"> ##word.posts_new_url## </a>
+    </li>
+    <li x-features="browser.social" x-permission="!login">
+        <a class="bg-green white" ng-click="login()"> ##word.security_login## </a>
+    </li>
+    <li x-features="register" x-permission="!login">
+        <a ng-click="register()"> ##word.security_register## </a>
+    </li>
+    <li x-features="login">
+        <a class="bg-red white" ng-click="logout()">
+            ##word.security_logout##
+            <b class=""> ##user.name## </b>
+        </a>
+    </li>
+    <li x-features="test" x-lang="ar">
+        <a class="bold" ng-click="changeLang('en')"> <i class="fa fa-globe"></i> ##word.en_lang## </a>
+    </li>
+    <li x-features="test" x-lang="en">
+        <a class="bold" ng-click="changeLang('ar')"> <i class="fa fa-globe"></i> ##word.ar_lang## </a>
+    </li>
 </ul>

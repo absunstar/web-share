@@ -231,6 +231,7 @@ nav.sitebar {
   box-shadow: 1px 1px 1px 1px #555;
   background: var(--theme-color);
   border-radius: 0px 0px 0px 0px;
+  padding: 3px;
 }
 
 nav h2.brand {

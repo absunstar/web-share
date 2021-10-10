@@ -18,8 +18,11 @@ const site = require('../isite')({
     db: 'web_share',
   },
   security: {
-      keys: ['e698f2679be5ba5c9c0b0031cb5b057c' , '9705a3a85c1b21118532fefcee840f99' , 'a2797cd0076d385e86663865dc4d855b'],
-    },
+    keys: ['e698f2679be5ba5c9c0b0031cb5b057c', '9705a3a85c1b21118532fefcee840f99', 'a2797cd0076d385e86663865dc4d855b'],
+  },
+  requires: {
+    permissions: ['login'],
+  },
   defaults: {
     features: ['browser.social'],
   },
@@ -28,6 +31,7 @@ const site = require('../isite')({
 site.onGET({
   name: '/',
   path: site.dir,
+  public : true
 });
 
 site.loadLocalApp('client-side');
@@ -41,6 +45,7 @@ setTimeout(() => {
       {},
       {
         parser: 'html css js',
+        public : true
       },
     );
   });

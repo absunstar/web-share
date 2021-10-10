@@ -1,14 +1,13 @@
 <script>
-    window.search = function(filter){
+    window.search = function (filter) {
         window.location.href = `${filter}?q=` + document.querySelector('#q').value;
     };
 </script>
 <div class="row">
     <div class="row center">
         <form class="form" action="" method="get">
-            <input id="q" name="q" onkeydown="if(event.keyCode == 13)this.form.submit();" type="text" class="search"
-                placeholder="##word.search_posts##">
-            <br>
+            <input id="q" name="q" onkeydown="if(event.keyCode == 13)this.form.submit();" type="text" class="search" placeholder="##word.search_posts##" />
+            <br />
             <div x-feature="test" class="row center">
                 <a onclick="window.search('/torrents')" class="btn"> Search in Movies</a>
                 <a onclick="window.search('/series')" class="btn"> Search in Series</a>
@@ -16,13 +15,11 @@
                 <a onclick="window.search('/top-news')" class="btn"> Search in News </a>
                 <a onclick="window.search('/')" class="btn"> Search in All </a>
             </div>
-
-
         </form>
     </div>
 </div>
-<br>
-<br>
+<br />
+<br />
 <div x-feature="torrents" class="row">
     <div class="row center">
         <a href="/torrents?sort=rating" class="btn bg-blue"> Sort By Movie Rating</a>

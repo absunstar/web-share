@@ -1,11 +1,11 @@
 {
-  "name": "web-share",
+  "name": "mysite",
   "version": "2.0.0",
-  "description": "",
+  "repository": "https://github.com/absunstar/mysite",
+  "description": "Advanced CMS [ Next Generation ] ",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "init": "npm i"
+    "start": "node server.js"
   },
   "dependencies": {},
   "keywords": [],

@@ -1,0 +1,22 @@
+<div class="form" id="dashboard">
+  <div class="tabs inline-block">
+    <div class="tabs-header">
+      <a class="tab-link" onclick="site.showTabContent(event, '#site_Settings')"> ##word.site_setting## </a>
+      <a class="tab-link" onclick="site.showTabContent(event, '#finger_program')"> ##word.finger_program## </a>
+      <a class="tab-link" onclick="site.showTabContent(event, '#printer_program')"> ##word.printer_program## </a>
+      <a class="tab-link" x-feature="school" onclick="site.showTabContent(event, '#exams_setting')"> ##word.exams_setting## </a>
+      <a class="tab-link" onclick="site.showTabContent(event, '#accounting_settings')"> ##word.accounting_settings## </a>
+      <a class="tab-link" onclick="site.showTabContent(event, '#inventory_settings')"> ##word.inventory_settings## </a>
+
+      <i-button ng-hide="busy" type="save" label="##word.save##" ng-click="save()"></i-button>
+    </div>
+    <div class="tabs-content">
+      <div id="site_Settings" class="tab-content">
+        <div class="row padding border">
+          <i-control class="col3" label="##word.site_title##" ng-model="dashboard.siteTitle"></i-control>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

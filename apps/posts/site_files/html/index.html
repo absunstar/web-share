@@ -1,90 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="myApp">
+    <head x-import="head.html">
+        <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+    </head>
 
-<head x-import="head.html">
-    <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##">
+    <body class="##session.lang##" ng-controller="posts">
+        <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
 
-</head>
+        <script id="post-template" type="x-tmpl-mustache" x-import="posts/post-template.html"></script>
+        <script id="google-news-template" type="x-tmpl-mustache" x-import="posts/google-news-template.html"></script>
+        <script id="series-template" type="x-tmpl-mustache" x-import="posts/series-template.html"></script>
+        <script id="movie-template" type="x-tmpl-mustache" x-import="posts/movie-template.html"></script>
+        <script id="video-template" type="x-tmpl-mustache" x-import="posts/video-template.html"></script>
+        <script id="yts-template" type="x-tmpl-mustache" x-import="posts/yts-template.html"></script>
+        <div x-import="posts/new_post_modal.html"></div>
+        <div x-import="posts/new_url_modal.html"></div>
+        <div x-import="posts/new_author_modal.html"></div>
+        <div x-import="posts/new_post_category_modal.html"></div>
 
-<body class="##session.lang##" ng-controller="posts">
-
-    <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
-
-    <script id="post-template" type="x-tmpl-mustache" x-import="posts/post-template.html">
-
-    </script>
-    <script id="google-news-template" type="x-tmpl-mustache" x-import="posts/google-news-template.html">
-
-    </script>
-    <script id="series-template" type="x-tmpl-mustache" x-import="posts/series-template.html">
-
-    </script>
-    <script id="movie-template" type="x-tmpl-mustache" x-import="posts/movie-template.html">
-
-    </script>
-    <script id="video-template" type="x-tmpl-mustache" x-import="posts/video-template.html">
-
-    </script>
-    <script id="yts-template" type="x-tmpl-mustache" x-import="posts/yts-template.html">
-
-    </script>
-    <div x-import="posts/new_post_modal.html"></div>
-    <div x-import="posts/new_url_modal.html"></div>
-    <div x-import="posts/new_author_modal.html"></div>
-    <div x-import="posts/new_post_category_modal.html"></div>
-
-    <div id="main-layout" class="container loaded">
-       
-
-        <div class="row">
-            <div  class="col2 ">
-                <div x-features="!hide-menu || os.desktop" x-import="posts/post_types.html"></div>
-                <div x-feature="os.desktop">
-                    <!-- desktop_right_ad -->
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
-                        data-ad-slot="4885184263" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-
-            </div>
-            <div class="col7">
-                <div>
-                    <div x-import="posts/post_categories.html"></div>
-                    <div x-import="posts/post_search.html"></div>
-                    
-                    <div id="posts" class="posts">
-
+        <div id="main-layout" class="container loaded">
+            <div class="row">
+                <div class="col2">
+                    <div x-features="!hide-menu || os.desktop" x-import="posts/post_types.html"></div>
+                    <div x-feature="os.desktop">
+                        <!-- desktop_right_ad -->
+                        <ins
+                            class="adsbygoogle"
+                            style="display: block"
+                            data-ad-client="ca-pub-3372007384613151"
+                            data-ad-slot="4885184263"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"
+                        ></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
+                </div>
+                <div class="col7">
+                    <div>
+                        <div x-import="posts/post_categories.html"></div>
+                        <div x-import="posts/post_search.html"></div>
 
+                        <div id="posts" class="posts"></div>
+                    </div>
+                </div>
+                <div class="col3">
+                    <div x-import="posts/site_news.html"></div>
+                    <div x-feature="os.desktop">
+                        <!-- desktop_left_ad -->
+                        <ins
+                            class="adsbygoogle"
+                            style="display: block"
+                            data-ad-client="ca-pub-3372007384613151"
+                            data-ad-slot="3212816421"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"
+                        ></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
                 </div>
             </div>
-            <div class="col3 ">
-                <div x-import="posts/site_news.html"></div>
-                <div x-feature="os.desktop">
-                    <!-- desktop_left_ad -->
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3372007384613151"
-                        data-ad-slot="3212816421" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-
-            </div>
-
-
         </div>
 
-    </div>
+        <div x-import="scripts.html"></div>
 
-    <div x-import="scripts.html"></div>
-
-    <script x-feature="browser.social.app" x-import="posts/browser.js"></script>
-    <script x-import="posts/index.js"></script>
-    <script x-import="posts/posts.js"></script>
-    <script x-permission="login" x-import="posts/yts.js"></script>
-    <script  x-import="posts/akwam.js"></script>
-</body>
-
+        <script x-feature="browser.social" x-import="posts/browser.js"></script>
+        <script x-import="posts/index.js"></script>
+        <script x-import="posts/posts.js"></script>
+        <script x-permission="login" x-import="posts/yts.js"></script>
+        <script x-import="posts/akwam.js"></script>
+    </body>
 </html>

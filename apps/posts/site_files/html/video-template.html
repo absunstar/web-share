@@ -1,17 +1,14 @@
-        <div class="video" id="post_{{id}}">
-
-            <div class="body">
-               
-                <div class="details" >
-                    <a x-feature="browser.social.app" onclick="event.preventDefault();window.open('{{details.url}}');return false;" href="{{post_url}}" target="_blank">
-                        <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'">
-                    </a>
-                    <a x-feature="!browser.social"href="{{post_url}}" target="_blank">
-                        <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'">
-                    </a>
-                </div>
-
-                <h2 class="text"> {{{text}}} </h2>
-            </div>
-
+<div class="video" id="post_{{id}}">
+    <div class="body">
+        <div class="details">
+            <a x-feature="browser.social" onclick="event.preventDefault();window.open('{{details.url}}');return false;" href="{{post_url}}" target="_blank">
+                <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
+            </a>
+            <a x-feature="!browser.social" href="{{post_url}}" target="_blank">
+                <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
+            </a>
         </div>
+
+        <h2 class="text">{{{text}}}</h2>
+    </div>
+</div>

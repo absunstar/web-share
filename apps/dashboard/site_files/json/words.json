@@ -1,0 +1,15 @@
+[
+  {
+    "name": "dashboard",
+    "en": "Admin Dashboard",
+    "ar": "لوحة التحكم"
+  },{
+    "name": "site_setting",
+    "en": "Site Setting",
+    "ar": "اعدادت الموقع"
+  },{
+    "name": "site_title",
+    "en": "Title",
+    "ar": "أسم الموقع"
+  }
+]
