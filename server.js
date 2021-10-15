@@ -1,5 +1,5 @@
 const site = require('../isite')({
-  version: '1.0.17',
+  version: '1.0.18',
   port: 8080,
   apps_dir: process.cwd() + '/apps',
   name: 'Web Share',
@@ -21,7 +21,7 @@ const site = require('../isite')({
     keys: ['e698f2679be5ba5c9c0b0031cb5b057c', '9705a3a85c1b21118532fefcee840f99', 'a2797cd0076d385e86663865dc4d855b'],
   },
   requires: {
-    permissions: ['login'],
+    permissions: [],
   },
   defaults: {
     features: ['browser.social'],
