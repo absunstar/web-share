@@ -2,6 +2,12 @@
 <html lang="en" data-ng-app="myApp">
     <head x-import="head.html">
         <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+        <style>
+            video {
+                width: 100%;
+                height: 400px;
+            }
+        </style>
     </head>
 
     <body class="##session.lang##" ng-controller="posts">
@@ -82,7 +88,6 @@
                                                 <br />
 
                                                 <div id="container-161451f73401de46f400035a512bfa21"></div>
-                                                
                                             </div>
                                             <div class="col5 center">
                                                 <a rel="nofollow" target="_blank" href="https://www.imdb.com/title/##data.yts.imdb_code##">
@@ -169,7 +174,64 @@
                             </script>
                         </div>
                     </div>
+
+                    <div x-features="host.torrents">
+                        <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+                        <video id="video-id"><source src="video.mp4" type="video/mp4" /></video>
+                        <script>
+                            var myFP = fluidPlayer('video-id', {
+                                layoutControls: {
+                                    controlBar: {
+                                        autoHideTimeout: 3,
+                                        animated: true,
+                                        autoHide: false,
+                                    },
+                                    htmlOnPauseBlock: {
+                                        html: null,
+                                        height: null,
+                                        width: null,
+                                    },
+                                    autoPlay: true,
+                                    mute: true,
+                                    allowTheatre: true,
+                                    playPauseAnimation: true,
+                                    playbackRateEnabled: true,
+                                    allowDownload: false,
+                                    playButtonShowing: true,
+                                    fillToContainer: true,
+                                    posterImage: '',
+                                },
+                                vastOptions: {
+                                    adList: [
+                                        {
+                                            roll: 'preRoll',
+                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
+                                            adText: '',
+                                        },
+                                        {
+                                            roll: 'midRoll',
+                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
+                                            adText: '',
+                                        },
+                                        {
+                                            roll: 'postRoll',
+                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
+                                            adText: '',
+                                        },
+                                        {
+                                            roll: 'onPauseRoll',
+                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
+                                            adText: '',
+                                        },
+                                    ],
+                                    adCTAText: false,
+                                    adCTATextPosition: '',
+                                },
+                            });
+                        </script>
+                    </div>
                 </div>
+
                 <div class="col3" x-features="!hide-left-menu">
                     <div x-import="posts/site_news.html"></div>
                     <div x-feature="os.desktop">
