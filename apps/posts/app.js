@@ -94,6 +94,7 @@ module.exports = function init(site) {
             site.callRoute('/videos', req, res);
         } else {
             if (req.hasFeature('host.torrents')) {
+                req.addFeature('torrents');
                 req.addFeature('hide-right-menu');
                 req.addFeature('hide-left-menu');
                 req.data.content_class = 'col12';
