@@ -26,6 +26,8 @@
             script.setAttribute('data-ad-client', info['data-ad-client']);
         }
         script.setAttribute('async', info['async']);
+        script.setAttribute('data-cfasync', info['data-cfasync']);
+
         document.querySelector('head').appendChild(script);
     }
 
@@ -55,9 +57,10 @@
 
 <script x-feature="host.torrents" class="adsterra-ads-manager">
     add_script({
-        src: '//pl16731925.trustedgatetocontent.com/3a/85/b4/3a85b41231d7fd8dd54abcf8c8aa8a94.js',
-        id: 'adsterra_Popunder_1',
+        src: '//pl16731936.trustedgatetocontent.com/161451f73401de46f400035a512bfa21/invoke.js',
+        id: 'adsterra_native_banner_1',
         async: true,
+        'data-cfasync': 'false',
     });
 </script>
 
