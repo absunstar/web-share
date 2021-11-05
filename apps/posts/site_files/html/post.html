@@ -16,7 +16,7 @@
             <div x-import="posts/post_categories.html"></div>
 
             <div class="row">
-                <div class="col2">
+                <div class="col2" x-features="!hide-right-menu">
                     <div x-import="posts/post_types.html"></div>
                     <div x-feature="os.desktop">
                         <!-- desktop_right_ad -->
@@ -33,7 +33,7 @@
                         </script>
                     </div>
                 </div>
-                <div class="col7">
+                <div class="col7 ##data.content_class##">
                     <div>
                         <div id="posts" class="posts">
                             <div class="post ##data.post_type##" id="post_##data.id##">
@@ -136,8 +136,18 @@
                             </script>
                         </div>
                     </div>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div class="center" id="qrcode"></div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
-                <div class="col3">
+                <div class="col3" x-features="!hide-left-menu">
                     <div x-import="posts/site_news.html"></div>
                     <div x-feature="os.desktop">
                         <!-- desktop_left_ad -->
@@ -164,5 +174,11 @@
         <script x-feature="browser.social" x-import="posts/browser.js"></script>
         <script x-import="posts/index.js"></script>
         <script x-import="posts/posts.js"></script>
+        <script>
+                 site.qrcode({
+                selector: '#qrcode',
+                text: document.location.href,
+            });
+        </script>
     </body>
 </html>

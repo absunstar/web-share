@@ -16,7 +16,7 @@
             <div x-import="posts/post_categories.html"></div>
 
             <div class="row">
-                <div class="col2">
+                <div class="col2" x-features="!hide-right-menu">
                     <div x-import="posts/post_types.html"></div>
                     <div x-feature="os.desktop">
                         <!-- desktop_right_ad -->
@@ -33,7 +33,7 @@
                         </script>
                     </div>
                 </div>
-                <div class="col7">
+                <div class="col7 ##data.content_class##">
                     <div>
                         <div id="posts" class="posts">
                             <div class="post full-yts" id="post_##data.id##">
@@ -66,9 +66,20 @@
                                                 <a class="btn bg-brown white font-22" rel="nofollow" target="_blank" href="https://subscene.com/subtitles/searchbytitle?query=##data.details.title##">
                                                     Subtitles
                                                 </a>
-                                            </div>
-                                            <div x-permission="admin" class="row">
-                                                <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
+
+                                                <div x-permission="admin" class="row">
+                                                    <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
+                                                </div>
+
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <div class="center" id="qrcode"></div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
                                             </div>
                                             <div class="col5 center">
                                                 <a rel="nofollow" target="_blank" href="https://www.imdb.com/title/##data.yts.imdb_code##">
@@ -156,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col3">
+                <div class="col3" x-features="!hide-left-menu">
                     <div x-import="posts/site_news.html"></div>
                     <div x-feature="os.desktop">
                         <!-- desktop_left_ad -->
@@ -196,6 +207,10 @@
             let torrent_template = $('#torrent-template').html();
             let rendered = Mustache.render(torrent_template, post);
             $('#info').append(rendered);
+            site.qrcode({
+                selector: '#qrcode',
+                text: document.location.href,
+            });
         </script>
     </body>
 </html>

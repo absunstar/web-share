@@ -1,9 +1,5 @@
 <script src="/x-js/all.js?v=##site.options.version##"></script>
 
-<script>
-  var app = app || angular.module('myApp', []);
-</script>
-
 <script x-import="app.js"></script>
 <script src="/js/sitebar.js?v=##site.options.version##"></script>
 
@@ -14,78 +10,66 @@
 <div x-permission="login" x-import="security/logout_modal.html"></div>
 
 <script>
-  $(document).on('keydown', 'input,select', function (e) {
-    if (e.which == 13 || e.keyCode == 13) {
-      e.preventDefault();
-      var $canfocus = $('input,select');
-      var index = $canfocus.index(document.activeElement) + 1;
-      if (index >= $canfocus.length) index = 0;
-      $canfocus.eq(index).focus();
+    function allow() {
+        if (typeof SOCIALBROWSER !== 'undefined') {
+            return true;
+        }
+        return false;
     }
-  });
-</script>
-<script>
-  function allow() {
-    if (typeof SOCIALBROWSER !== 'undefined') {
-      return true;
+
+    function add_script(info) {
+        console.log('Adding Script : ' + info.src);
+        var script = document.createElement('script');
+        script.id = info['id'];
+        script.src = info['src'];
+        script.setAttribute('data-ad-client', info['data-ad-client']);
+        script.setAttribute('async', info['async']);
+        document.querySelector('head').appendChild(script);
     }
-    return false;
-  }
-  site.features = JSON.parse(`##req.features##`);
-  /*site.session = JSON.parse(`##session.*##`);*/
-</script>
 
-<script>
-  function add_script(info) {
-    console.log('Adding Script : ' + info.src);
-    var script = document.createElement('script');
-    script.id = info['id'];
-    script.src = info['src'];
-    script.setAttribute('data-ad-client', info['data-ad-client']);
-    script.setAttribute('async', info['async']);
-    document.querySelector('head').appendChild(script);
-  }
-
-  if (typeof window.adsOff == 'undefined') {
     add_script({
-      src: 'https://www.googletagmanager.com/gtag/js?id=UA-59220588-1',
-      id: 'googletagmanager',
-      async: true,
-    });
-    add_script({
-      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-      id: 'googlesyndication',
-      'data-ad-client': 'ca-pub-3372007384613151',
-      async: true,
+        src: 'https://www.googletagmanager.com/gtag/js?id=UA-59220588-1',
+        id: 'googletagmanager',
+        async: true,
     });
 
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-      dataLayer.push(arguments);
+        dataLayer.push(arguments);
     }
     gtag('js', new Date());
     gtag('config', 'UA-59220588-1');
-  }
 </script>
 
-<link x-permission="login" href="/css/editor.css" rel="stylesheet" />
-<script x-permission="login" src="/js/editor.js"></script>
-<script x-permission="login">
-  site.new_post_editor = WebShareEditor.create('new_post', {
-    toolbarItem: [
-      ['undo', 'redo'],
-      ['font', 'fontSize', 'formatBlock'],
-      ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-      ['removeFormat'],
-      ['fontColor', 'hiliteColor'],
-      ['outdent', 'indent'],
-      ['align', 'horizontalRule', 'list', 'table'],
-      ['link', 'image', 'video'],
-      // ['fullScreen', 'showBlocks', 'codeView'],
-      // ['preview', 'print'],
-      // ['save', 'template'],
-    ],
-    width: '100%',
-    minHeight: '300px',
-  });
+<script x-feature="!host.torrents" class="google-ads-manager">
+    add_script({
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        id: 'googlesyndication',
+        'data-ad-client': 'ca-pub-3372007384613151',
+        async: true,
+    });
 </script>
+
+<div x-permission="login" class="editor-manager">
+    <link href="/css/editor.css" rel="stylesheet" />
+    <script src="/js/editor.js"></script>
+    <script>
+        site.new_post_editor = WebShareEditor.create('new_post', {
+            toolbarItem: [
+                ['undo', 'redo'],
+                ['font', 'fontSize', 'formatBlock'],
+                ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+                ['removeFormat'],
+                ['fontColor', 'hiliteColor'],
+                ['outdent', 'indent'],
+                ['align', 'horizontalRule', 'list', 'table'],
+                ['link', 'image', 'video'],
+                /* ['fullScreen', 'showBlocks', 'codeView'],
+                 ['preview', 'print'],
+                 ['save', 'template'], */
+            ],
+            width: '100%',
+            minHeight: '300px',
+        });
+    </script>
+</div>

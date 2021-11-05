@@ -143,6 +143,16 @@
                             </script>
                         </div>
                     </div>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div class="center" id="qrcode"></div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
                 <div class="col3">
                     <div x-import="posts/site_news.html"></div>
@@ -340,6 +350,12 @@
                     $('.posts-loading').remove();
                 }, 1000 * 5);
             }
+        
+            site.qrcode({
+                selector: '#qrcode',
+                text: document.location.href,
+            });
+
         </script>
     </body>
 </html>

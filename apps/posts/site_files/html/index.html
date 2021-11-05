@@ -20,8 +20,8 @@
 
         <div id="main-layout" class="container loaded">
             <div class="row">
-                <div class="col2">
-                    <div x-features="!hide-menu || os.desktop" x-import="posts/post_types.html"></div>
+                <div class="col2" x-features="!hide-right-menu">
+                    <div x-features="os.desktop" x-import="posts/post_types.html"></div>
                     <div x-feature="os.desktop">
                         <!-- desktop_right_ad -->
                         <ins
@@ -37,7 +37,7 @@
                         </script>
                     </div>
                 </div>
-                <div class="col7">
+                <div class="col7 ##data.content_class##">
                     <div>
                         <div x-import="posts/post_categories.html"></div>
                         <div x-import="posts/post_search.html"></div>
@@ -45,7 +45,7 @@
                         <div id="posts" class="posts"></div>
                     </div>
                 </div>
-                <div class="col3">
+                <div class="col3" x-features="!hide-left-menu">
                     <div x-import="posts/site_news.html"></div>
                     <div x-feature="os.desktop">
                         <!-- desktop_left_ad -->

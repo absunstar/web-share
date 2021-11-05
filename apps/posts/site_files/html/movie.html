@@ -52,6 +52,17 @@
                       <a x-permission="send-online" onclick="akwam.send_online()" class="btn"> Send To Server </a>
                       <a x-permission="remove-series" onclick="akwam.remove()" class="btn remove"> Remove Movie </a>
                       <a x-permission="re-upload-series" onclick="akwam.re_upload_movie()" class="btn"> Re-Upload Movie </a>
+
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <div class="center" id="qrcode"></div>
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+
                     </div>
                   </div>
                   <div class="row center">
@@ -104,6 +115,9 @@
               </script>
             </div>
           </div>
+
+         
+
         </div>
         <div class="col3">
           <div x-import="posts/site_news.html"></div>
@@ -145,6 +159,11 @@
           });
         }, 1000);
       }
+
+      site.qrcode({
+                selector: '#qrcode',
+                text: document.location.href,
+            });
 
     </script>
   </body>
