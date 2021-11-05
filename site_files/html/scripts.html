@@ -22,7 +22,9 @@
         var script = document.createElement('script');
         script.id = info['id'];
         script.src = info['src'];
-        script.setAttribute('data-ad-client', info['data-ad-client']);
+        if (info['data-ad-client']) {
+            script.setAttribute('data-ad-client', info['data-ad-client']);
+        }
         script.setAttribute('async', info['async']);
         document.querySelector('head').appendChild(script);
     }
@@ -49,6 +51,14 @@
         async: true,
     });
     window.allowGoogleAds = true;
+</script>
+
+<script x-feature="host.torrents" class="adsterra-ads-manager">
+    add_script({
+        src: '//pl16731925.trustedgatetocontent.com/3a/85/b4/3a85b41231d7fd8dd54abcf8c8aa8a94.js',
+        id: 'adsterra_Popunder_1',
+        async: true,
+    });
 </script>
 
 <div x-permission="login" class="editor-manager">
