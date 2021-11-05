@@ -95,7 +95,8 @@ module.exports = function init(site) {
         } else {
             if (req.hasFeature('host.torrents')) {
                 req.addFeature('hide-right-menu');
-                req.data.content_class = 'col9';
+                req.addFeature('hide-left-menu');
+                req.data.content_class = 'col12';
             }
             site.callRoute('/posts', req, res);
         }
