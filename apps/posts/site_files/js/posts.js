@@ -35,6 +35,7 @@ function loadPosts(more) {
   if (busy) return;
   busy = true;
   $('.posts-loading').remove();
+  $('.no-data').remove();
   $('#posts').append('<p class="posts-loading"> <img src="/images/loading.gif"> ##word.posts_load_more## </p>');
 
   busy = true;
@@ -54,7 +55,7 @@ function loadPosts(more) {
     },
     function (res) {
       if (res.done && res.list.length == 0) {
-        $('#posts').append('<br><br> <p class="no-data">##word.no_data##</p> <br><br>');
+        $('#posts').append('<p class="no-data"> <br><br>  ##word.no_data## <br><br> </p> ');
         $('.posts-loading').remove();
         busy = true;
         return;
