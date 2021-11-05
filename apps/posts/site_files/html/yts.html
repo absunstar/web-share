@@ -176,8 +176,8 @@
                     </div>
 
                     <div x-features="host.torrents">
-                        <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
                         <video id="video-id"><source src="https://cdn.fluidplayer.com/videos/valerian-480p.mkv" type="video/mp4" /></video>
+                        <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
                         <script>
                             var myFP = fluidPlayer('video-id', {
                                 layoutControls: {
@@ -213,6 +213,7 @@
                                             roll: 'midRoll',
                                             vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
                                             adText: '',
+                                            timer: 10
                                         },
                                         {
                                             roll: 'postRoll',
@@ -225,8 +226,17 @@
                                             adText: '',
                                         },
                                     ],
-                                    adCTAText: false,
-                                    adCTATextPosition: '',
+                                    adClickable: false,
+                                    showProgressbarMarkers: true,
+                                    skipButtonCaption: 'Skip ad in [seconds]',
+                                    skipButtonClickCaption: 'Skip ad <span class="skip_button_icon"></span>',
+                                    adText: 'Ads Support us ..',
+                                    adTextPosition: 'top left',
+                                    adCTAText: false ,
+                                    adCTATextPosition: 'bottom right',
+                                    vastTimeout: 5000,
+                                    showPlayButton: true,
+                                    maxAllowedVastTagRedirects: 5,
                                 },
                             });
                         </script>
