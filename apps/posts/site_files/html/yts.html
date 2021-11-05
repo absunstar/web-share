@@ -177,7 +177,7 @@
 
                     <div x-features="host.torrents">
                         <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-                        <video id="video-id"><source src="video.mp4" type="video/mp4" /></video>
+                        <video id="video-id"><source src="https://cdn.fluidplayer.com/videos/valerian-480p.mkv" type="video/mp4" /></video>
                         <script>
                             var myFP = fluidPlayer('video-id', {
                                 layoutControls: {
@@ -202,6 +202,7 @@
                                     posterImage: '',
                                 },
                                 vastOptions: {
+                                    allowVPAID: true,
                                     adList: [
                                         {
                                             roll: 'preRoll',
