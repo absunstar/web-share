@@ -108,19 +108,18 @@ function loadPosts(more) {
             }
 
             if (window.allowGoogleAds) {
-                $('#posts').append('<br><br><br>');
                 rendered += `
                           <div>
+                          <br><br><br>
                           <!-- Post Ad-->
                           <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
                               data-ad-format="fluid" data-ad-client="ca-pub-3372007384613151"
                               data-ad-slot="5838870332"></ins>
+                              <br><br><br>
                           </div>
                       `;
-                $('#posts').append('<br><br><br>');
-                $('#posts').append(rendered);
             }
-
+            $('#posts').append(rendered);
             busy = false;
             $('.posts-loading').remove();
             (adsbygoogle = window.adsbygoogle || []).push({});
