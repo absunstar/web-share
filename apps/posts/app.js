@@ -407,7 +407,7 @@ module.exports = function init(site) {
                     guid: 1,
                     details: 1,
                 },
-                limit: 1,
+                limit: 20,
                 sort: {
                     id: -1,
                 },
@@ -436,7 +436,7 @@ module.exports = function init(site) {
                     guid: 1,
                     details: 1,
                 },
-                limit: 1,
+                limit: 20,
                 sort: {
                     id: -1,
                 },
