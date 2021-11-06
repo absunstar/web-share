@@ -92,13 +92,18 @@ module.exports = function init(site) {
     site.onGET({ name: '/', public: true }, (req, res) => {
         if (req.hasFeature('host.videos')) {
             site.callRoute('/videos', req, res);
+        } else if (req.hasFeature('host.news')) {
+            req.addFeature('hide-right-menu');
+            req.data.content_class = 'col9';
+            site.callRoute('/posts', req, res);
+        } else if (req.hasFeature('host.torrents')) {
+            req.addFeature('torrents');
+            req.addFeature('hide-right-menu');
+            req.addFeature('hide-left-menu');
+            req.data.content_class = 'col12';
+            site.callRoute('/posts', req, res);
         } else {
-            if (req.hasFeature('host.torrents')) {
-                req.addFeature('torrents');
-                req.addFeature('hide-right-menu');
-                req.addFeature('hide-left-menu');
-                req.data.content_class = 'col12';
-            }
+            req.addFeature('host.google');
             site.callRoute('/posts', req, res);
         }
     });
@@ -375,7 +380,7 @@ module.exports = function init(site) {
                 },
                 where: {
                     is_yts: true,
-                    show_count :  { $exists: false }
+                    show_count: { $exists: false },
                 },
             },
             (err, docs) => {
