@@ -31,6 +31,17 @@
         document.querySelector('head').appendChild(script);
     }
 
+</script>
+
+<script x-feature="!host.torrents" class="google-ads-manager">
+    add_script({
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        id: 'googlesyndication',
+        'data-ad-client': 'ca-pub-3372007384613151',
+        async: true,
+    });
+    window.allowGoogleAds = true;
+
     add_script({
         src: 'https://www.googletagmanager.com/gtag/js?id=UA-59220588-1',
         id: 'googletagmanager',
@@ -43,16 +54,7 @@
     }
     gtag('js', new Date());
     gtag('config', 'UA-59220588-1');
-</script>
 
-<script x-feature="!host.torrents" class="google-ads-manager">
-    add_script({
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-        id: 'googlesyndication',
-        'data-ad-client': 'ca-pub-3372007384613151',
-        async: true,
-    });
-    window.allowGoogleAds = true;
 </script>
 
 <script x-feature="host.torrents" class="adsterra-ads-manager">
