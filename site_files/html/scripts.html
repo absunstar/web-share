@@ -15,11 +15,16 @@
         var script = document.createElement('script');
         script.id = info['id'];
         script.src = info['src'];
-        if (info['data-ad-client']) {
+
+        if (typeof info['data-ad-client'] != 'undefined') {
             script.setAttribute('data-ad-client', info['data-ad-client']);
         }
-        script.setAttribute('async', info['async']);
-        script.setAttribute('data-cfasync', info['data-cfasync']);
+        if (typeof info['async'] != 'undefined') {
+            script.setAttribute('async', info['async']);
+        }
+        if (typeof info['data-cfasync'] != 'undefined') {
+            script.setAttribute('data-cfasync', info['data-cfasync']);
+        }
 
         document.querySelector('head').appendChild(script);
     }
