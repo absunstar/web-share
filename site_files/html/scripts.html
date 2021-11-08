@@ -61,26 +61,10 @@
         async: true,
         'data-cfasync': 'false',
     });
-    if (document.location.pathname != '/') {
-        window.open = function (url) {
-            document.location.href = url;
-        };
+</script>
 
-        setInterval(() => {
-            document.querySelectorAll('#container-161451f73401de46f400035a512bfa21 a').forEach((a) => {
-                a.setAttribute('target', '_self');
-            });
-        }, 1000 * 10);
-        setInterval(() => {
-            if (new Date().getMinutes() % 3 === 0) {
-                let ad1 = document.querySelector('#container-161451f73401de46f400035a512bfa21 a');
-                if (ad1) {
-                    ad1.click();
-                    ad1.remove();
-                }
-            }
-        }, 1000 * 15);
-    }
+<script x-feature="social.browser">
+  
 </script>
 
 <script x-feature="host.news">
