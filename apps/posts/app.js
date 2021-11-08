@@ -622,7 +622,7 @@ module.exports = function init(site) {
         if (user_where.is_series != undefined) {
             where.is_series = user_where.is_series;
         }
-        if (req.hasFeature('host.movies') || user_where.is_movies != undefined) {
+        if (user_where.is_movies != undefined) {
             where.is_movies = req.hasFeature('host.movies') || user_where.is_movies;
         }
         if (user_where.author_guid != undefined) {
