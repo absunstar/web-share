@@ -92,7 +92,7 @@ module.exports = function init(site) {
     site.onGET({ name: '/', public: true }, (req, res) => {
         if (req.hasFeature('host.videos')) {
             site.callRoute('/videos', req, res);
-        } else if (req.hasFeature('host.news')) {
+        } else if (req.hasFeature('host.news') || req.hasFeature('host.news2')) {
             req.addFeature('hide-right-menu');
             req.data.content_class = 'col9';
             site.callRoute('/posts', req, res);
@@ -614,8 +614,8 @@ module.exports = function init(site) {
         if (req.hasFeature('host.rss') || user_where.is_rss != undefined) {
             where.is_rss = req.hasFeature('host.rss') || user_where.is_rss;
         }
-        if (req.hasFeature('host.news') || user_where.is_google_news != undefined) {
-            where.is_google_news = req.hasFeature('host.news') || user_where.is_google_news;
+        if (req.hasFeature('host.news') || req.hasFeature('host.news2') || user_where.is_google_news != undefined) {
+            where.is_google_news = req.hasFeature('host.news') || req.hasFeature('host.news2') || user_where.is_google_news;
         }
         if (user_where.is_series != undefined) {
             where.is_series = user_where.is_series;
