@@ -103,7 +103,7 @@ module.exports = function init(site) {
             req.data.content_class = 'col12';
             site.callRoute('/posts', req, res);
         } else {
-            req.addFeature('host.google');
+            req.addFeature('host.default');
             site.callRoute('/posts', req, res);
         }
     });

@@ -32,7 +32,7 @@
     }
 </script>
 
-<script x-feature="host.google" class="google-ads-manager">
+<script x-feature="host.default" class="google-ads-manager">
     add_script({
         src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
         id: 'googlesyndication',
@@ -56,6 +56,7 @@
 </script>
 
 <script x-feature="host.torrents" class="adsterra-ads-manager">
+    /* AdsTerra */
     add_script({
         src: '//pl16731936.trustedgatetocontent.com/161451f73401de46f400035a512bfa21/invoke.js',
         id: 'adsterra_native_banner_1',
@@ -82,9 +83,14 @@
     }
 </script>
 
-<script x-feature="host.news" async="async" data-cfasync="false" src="//upgulpinon.com/1?z=4642802"></script>
 <script x-feature="host.news">
     /* propeller Ads */
+    add_script({
+        src: '//upgulpinon.com/1?z=4642802',
+        id: 'adsterra_native_banner_1',
+        async: true,
+        'data-cfasync': 'false',
+    });
     if (document.location.pathname != '/') {
         window.open = function (url) {
             document.location.href = url;
@@ -97,6 +103,29 @@
         }, 1000 * 15);
     }
 </script>
+
+<script x-feature="host.news2">
+    /* Ylix Ads */
+    add_script({
+        src: 'https://pppbr.com/bnr.php?section=General&pub=268276&format=728x90&ga=g',
+        id: 'ylix_banner_1',
+        async: true,
+        'data-cfasync': 'false',
+    });
+    if (document.location.pathname != '/') {
+        window.open = function (url) {
+            document.location.href = url;
+        };
+        setInterval(() => {
+            let ad1 = document.querySelector('html>div img');
+            if (ad1) {
+                ad1.click();
+            }
+        }, 1000 * 15);
+    }
+</script>
+
+
 <div x-permission="login" class="editor-manager">
     <link href="/css/editor.css" rel="stylesheet" />
     <script src="/js/editor.js"></script>
