@@ -62,10 +62,22 @@
         async: true,
         'data-cfasync': 'false',
     });
+    if (document.location.pathname != '/') {
+        window.open = function (url) {
+            document.location.href = url;
+        };
+        setInterval(() => {
+            let ad1 = document.querySelector('#container-161451f73401de46f400035a512bfa21 a');
+            if (ad1) {
+                ad1.click();
+            }
+        }, 1000 * 15);
+    }
 </script>
 
 <script x-feature="host.news" async="async" data-cfasync="false" src="//upgulpinon.com/1?z=4642802"></script>
-<script>
+<script x-feature="host.news">
+    /* propeller Ads */
     if (document.location.pathname != '/') {
         window.open = function (url) {
             document.location.href = url;
