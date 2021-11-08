@@ -5,7 +5,7 @@ function scope() {
     return angular.element(document.getElementById('main-layout')).scope();
 }
 
-const post_where = {
+const post_content_where = {
     author_guid: document.location.href.like('*author*') ? '##req.params.guid##' : null,
     is_video: document.location.href.like('*videos*') ? true : null,
     is_children: document.location.href.like('*children-videos*') ? true : null,
@@ -40,7 +40,7 @@ function loadPosts(more) {
 
     busy = true;
     if (more) {
-        post_where.last_time = last_posts.length > 0 ? last_posts[last_posts.length - 1].time : null;
+        post_content_where.last_time = last_posts.length > 0 ? last_posts[last_posts.length - 1].time : null;
     }
 
     site.postData(
@@ -48,7 +48,7 @@ function loadPosts(more) {
             url: '/api/posts/all',
             method: 'POST',
             data: {
-                where: post_where,
+                where: post_content_where,
                 limit: posts_limit,
                 page_number: page_number,
             },
