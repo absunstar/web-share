@@ -281,7 +281,7 @@ module.exports = function init(site) {
             if (req.hasFeature('host.movies') || req.hasFeature('host.news') || req.hasFeature('host.news2')) {
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col9';
-            }else{
+            } else {
                 req.addFeature('host.default');
             }
             where['guid'] = req.params.guid;
@@ -622,13 +622,18 @@ module.exports = function init(site) {
         if (user_where.is_series != undefined) {
             where.is_series = user_where.is_series;
         }
-        if (user_where.is_movies != undefined) {
+        if (req.hasFeature('host.movies') || user_where.is_movies != undefined) {
             where.is_movies = req.hasFeature('host.movies') || user_where.is_movies;
         }
         if (user_where.author_guid != undefined) {
             where['author.guid'] = user_where.author_guid;
         }
         if (req.hasFeature('host.movies') || req.hasFeature('host.yts') || user_where.is_yts != undefined) {
+            delete where.is_movies;
+            delete where.is_series;
+            delete where.is_rss;
+            delete where.is_google_news;
+            delete where.is_video;
             sort = {
                 'yts.year': -1,
             };
