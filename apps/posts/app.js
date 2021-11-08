@@ -281,6 +281,8 @@ module.exports = function init(site) {
             if (req.hasFeature('host.torrents') || req.hasFeature('host.news') || req.hasFeature('host.news2')) {
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col9';
+            }else{
+                req.addFeature('host.default');
             }
             where['guid'] = req.params.guid;
             post.$posts_content.find(
