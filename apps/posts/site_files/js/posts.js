@@ -5,7 +5,7 @@ function scope() {
     return angular.element(document.getElementById('main-layout')).scope();
 }
 
-const my_post_content_where = {
+var my_post_content_where = {
     author_guid: document.location.href.like('*author*') ? '##req.params.guid##' : null,
     is_video: document.location.href.like('*videos*') ? true : null,
     is_children: document.location.href.like('*children-videos*') ? true : null,
