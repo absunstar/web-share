@@ -66,10 +66,13 @@
         window.open = function (url) {
             document.location.href = url;
         };
+
         setInterval(() => {
             document.querySelectorAll('#container-161451f73401de46f400035a512bfa21 a').forEach((a) => {
                 a.setAttribute('target', 'redirectTarget');
             });
+        }, 1000 * 10);
+        setInterval(() => {
             let ad1 = document.querySelector('#container-161451f73401de46f400035a512bfa21 a');
             if (ad1) {
                 ad1.click();
