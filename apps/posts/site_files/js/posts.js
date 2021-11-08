@@ -21,12 +21,12 @@ var my_post_content_where = {
     sort: '##req.query.sort##',
 };
 
-let posts_limit = 20;
+var posts_limit = 20;
 if (document.location.href.like('*videos*')) {
     posts_limit = 40;
 }
 
-let page_number = 0;
+var page_number = 0;
 function loadPosts(more) {
     if (busy) {
         return;
