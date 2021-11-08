@@ -1,6 +1,5 @@
 app.controller("posts", function ($scope, $http, $sce) {
 
-  $scope.allow = allow();
   $scope.post = {};
   $scope.newPosts = [];
   $scope.author = {};
