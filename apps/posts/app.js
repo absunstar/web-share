@@ -278,7 +278,7 @@ module.exports = function init(site) {
                 true,
             );
         } else {
-            if (req.hasFeature('host.torrents')) {
+            if (req.hasFeature('host.torrents') || req.hasFeature('host.news') || req.hasFeature('host.news2')) {
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col9';
             }
