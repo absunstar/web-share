@@ -4,6 +4,8 @@ module.exports = function init(site) {
     require(__dirname + '/facebook.js')(site, post);
     require(__dirname + '/google_news.js')(site, post);
 
+    site.postList = [];
+
     site.onGET({
         name: '/css/posts.css',
         public: true,
@@ -253,8 +255,85 @@ module.exports = function init(site) {
             },
         );
     });
+
+    function responsePost(doc, res, req, callback) {
+        if (doc.is_video) {
+            res.render('posts/video.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_yts) {
+            if (req.hasFeature('browser.unknown')) {
+                doc.details.image_url = '/images/torrent.png';
+                doc.image_url = doc.details.image_url;
+                res.render('posts/yts.html', doc, {
+                    parser: 'html css js',
+                });
+            } else {
+                res.render('posts/yts.html', doc, {
+                    parser: 'html css js',
+                });
+            }
+        } else if (doc.is_google_news) {
+            res.render('posts/google_news.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_series) {
+            res.render('posts/series.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_movies) {
+            res.render('posts/movie.html', doc, {
+                parser: 'html css js',
+            });
+        } else {
+            res.render('posts/post.html', doc, {
+                parser: 'html css js',
+            });
+        }
+    }
+
+    function handlePost(doc, res, req, callback) {
+        if (doc.$handled) {
+            callback(doc);
+            return;
+        }
+        doc.$handled = true;
+        doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
+        doc.image_url = doc.details.image_url;
+        doc.page_description = doc.text.replace(/<[^>]+>/g, '');
+        doc.post_url = req.headers.host + '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
+        doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
+        doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
+        doc.page_keywords = doc.details.title.split(' ').join(',');
+        doc.details.description = doc.details.description || '';
+        if (doc.is_video) {
+            doc.post_type = 'full-video';
+            if (doc.details.url.like('https://www.youtube.com/watch*')) {
+                doc.details.url = 'https://www.youtube.com/embed/' + doc.details.url.split('=')[1].split('&')[0];
+            }
+            callback(doc);
+        } else if (doc.is_yts) {
+            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+            doc.image_url = doc.details.image_url;
+            callback(doc);
+        } else if (doc.is_google_news) {
+            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+            callback(doc);
+        } else if (doc.is_series) {
+            doc.page_title2 = ' مسلسل ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
+            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+            doc.episode_count = doc.episode_list.length;
+            callback(doc);
+        } else if (doc.is_movies) {
+            doc.page_title2 = ' فيلم ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
+            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+            callback(doc);
+        } else {
+            doc.post_type = 'full-post';
+            callback(doc);
+        }
+    }
     site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
-        let where = {};
         if (req.params.guid == 'random') {
             post.$posts_content.findAll(
                 {
@@ -284,86 +363,29 @@ module.exports = function init(site) {
             } else {
                 req.addFeature('host.default');
             }
-            where['guid'] = req.params.guid;
-            post.$posts_content.find(
-                where,
-                (err, doc) => {
-                    if (!err && doc) {
-                        doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-                        doc.image_url = doc.details.image_url;
-                        doc.page_description = doc.text.replace(/<[^>]+>/g, '');
-                        doc.post_url = req.headers.host + '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
-                        doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
-                        doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
-                        doc.page_keywords = doc.details.title.split(' ').join(',');
-                        doc.details.description = doc.details.description || '';
-                        if (doc.is_video) {
-                            doc.post_type = 'full-video';
-                            if (doc.details.url.like('https://www.youtube.com/watch*')) {
-                                doc.details.url = 'https://www.youtube.com/embed/' + doc.details.url.split('=')[1].split('&')[0];
-                            }
-                            res.render('posts/video.html', doc, {
-                                parser: 'html css js',
-                            });
-                        } else if (doc.is_yts) {
-                            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
-                            if (req.hasFeature('xbrowser.unknown')) {
-                                site.fetch(doc.details.image_url, {
-                                    headers: {
-                                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363',
-                                    },
-                                    encoding: null,
-                                })
-                                    .then((res) => res.buffer())
-                                    .then((buffer) => {
-                                        //doc.details.image_url = "/images/torrent.png" //"/image/" + doc.guid
-                                        doc.details.image_url = 'data:' + response.headers['content-type'] + ';base64,' + Buffer.from(buffer).toString('base64');
-                                        doc.image_url = doc.details.image_url;
-                                        res.render('posts/yts.html', doc, {
-                                            parser: 'html css js',
-                                        });
-                                    });
-                            } else if (req.hasFeature('browser.unknown')) {
-                                doc.details.image_url = '/images/torrent.png'; //"/image/" + doc.guid
-                                doc.image_url = doc.details.image_url;
-                                res.render('posts/yts.html', doc, {
-                                    parser: 'html css js',
-                                });
-                            } else {
-                                res.render('posts/yts.html', doc, {
-                                    parser: 'html css js',
-                                });
-                            }
-                        } else if (doc.is_google_news) {
-                            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
-                            res.render('posts/google_news.html', doc, {
-                                parser: 'html css js',
-                            });
-                        } else if (doc.is_series) {
-                            doc.page_title2 = ' مسلسل ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-                            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
-                            doc.episode_count = doc.episode_list.length;
-                            res.render('posts/series.html', doc, {
-                                parser: 'html css js',
-                            });
-                        } else if (doc.is_movies) {
-                            doc.page_title2 = ' فيلم ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-                            doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
-                            res.render('posts/movie.html', doc, {
-                                parser: 'html css js',
+
+            let _post = site.postList.find((p) => p.guid == req.params.guid);
+            if (_post) {
+                _post.$memory = true
+                responsePost(_post, res, req);
+            } else {
+                let where = {};
+                where['guid'] = req.params.guid;
+                post.$posts_content.find(
+                    where,
+                    (err, doc) => {
+                        if (!err && doc) {
+                            handlePost(doc, res, req, (doc2) => {
+                                site.postList.push(doc2);
+                                responsePost(doc2, res, req);
                             });
                         } else {
-                            doc.post_type = 'full-post';
-                            res.render('posts/post.html', doc, {
-                                parser: 'html css js',
-                            });
+                            res.redirect('/');
                         }
-                    } else {
-                        res.redirect('/');
-                    }
-                },
-                true,
-            );
+                    },
+                    true,
+                );
+            }
         }
     });
 

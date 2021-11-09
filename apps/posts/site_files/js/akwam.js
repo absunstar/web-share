@@ -1,13 +1,13 @@
-let series_url = "https://akwam.net/series";
-let series_page = "https://akwam.net/series?page=2";
-let serie_url = "https://akwam.net/series/326/فلانتينو";
-let episode_url = "https://akwam.net/episode/6846"
-let watch_url = "http://pluslive.live/watch/16948" || "http://lefturl.com/watch/16949";
-let download_url = "http://pluslive.live/link/16948" || "http://lefturl.com/link/16949";
-let download_url2 = "https://akwam.net/download/17113/6770";
-let download_url2_selector = "document.querySelector('.download-link')";
-let download_url3 = "https://s208.akwam.download/download/1590194318/5ec71f0edfaec/Valantino.E27.720P.WEB-DL.akwam.net.mp4";
-let download_url3_selector = "document.querySelector('.btn-loader a')";
+var series_url = "https://akwam.net/series";
+var series_page = "https://akwam.net/series?page=2";
+var serie_url = "https://akwam.net/series/326/فلانتينو";
+var episode_url = "https://akwam.net/episode/6846"
+var watch_url = "http://pluslive.live/watch/16948" || "http://lefturl.com/watch/16949";
+var download_url = "http://pluslive.live/link/16948" || "http://lefturl.com/link/16949";
+var download_url2 = "https://akwam.net/download/17113/6770";
+var download_url2_selector = "document.querySelector('.download-link')";
+var download_url3 = "https://s208.akwam.download/download/1590194318/5ec71f0edfaec/Valantino.E27.720P.WEB-DL.akwam.net.mp4";
+var download_url3_selector = "document.querySelector('.btn-loader a')";
 
 var akwam = {
     series_list: [],
