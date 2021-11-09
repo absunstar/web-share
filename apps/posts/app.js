@@ -55,6 +55,7 @@ module.exports = function init(site) {
                     });
                 }
             },
+            true,
         );
     }
 
@@ -762,6 +763,7 @@ module.exports = function init(site) {
             type = 'is_rss';
         } else if (user_where.is_children) {
             type = 'is_children';
+            delete user_where.is_video;
         } else if (user_where.is_series) {
             type = 'is_series';
         }
