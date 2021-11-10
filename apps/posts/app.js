@@ -209,7 +209,7 @@ module.exports = function init(site) {
             req.addFeature('hide-right-menu');
             req.data.content_class = 'col9';
             site.callRoute('/posts', req, res);
-        } else if (req.hasFeature('host.movies')) {
+        } else if (req.hasFeature('host.torrents2')) {
             req.addFeature('torrents');
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
@@ -313,7 +313,7 @@ module.exports = function init(site) {
     });
     site.onGET({ name: '/torrents', public: true }, (req, res) => {
         req.addFeature('torrents');
-        if (req.hasFeature('host.movies')) {
+        if (req.hasFeature('host.torrents2')) {
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col12';
@@ -427,7 +427,7 @@ module.exports = function init(site) {
                 true,
             );
         } else {
-            if (req.hasFeature('host.movies') || req.hasFeature('host.news') || req.hasFeature('host.news2')) {
+            if (req.hasFeature('host.torrents2') || req.hasFeature('host.news') || req.hasFeature('host.news2')) {
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col9';
             } else {
@@ -714,13 +714,13 @@ module.exports = function init(site) {
         if (user_where.is_series != undefined) {
             where.is_series = user_where.is_series;
         }
-        if (req.hasFeature('host.movies') || user_where.is_movies != undefined) {
-            where.is_movies = req.hasFeature('host.movies') || user_where.is_movies;
+        if (req.hasFeature('host.torrents2') || user_where.is_movies != undefined) {
+            where.is_movies = req.hasFeature('host.torrents2') || user_where.is_movies;
         }
         if (user_where.author_guid != undefined) {
             where['author.guid'] = user_where.author_guid;
         }
-        if (req.hasFeature('host.movies') || req.hasFeature('host.yts') || user_where.is_yts != undefined) {
+        if (req.hasFeature('host.torrents2') || req.hasFeature('host.yts') || user_where.is_yts != undefined) {
             delete where.is_movies;
             delete where.is_series;
             delete where.is_rss;
@@ -729,7 +729,7 @@ module.exports = function init(site) {
             sort = {
                 'yts.year': -1,
             };
-            where.is_yts = req.hasFeature('host.movies') || req.hasFeature('host.yts') || user_where.is_yts;
+            where.is_yts = req.hasFeature('host.torrents2') || req.hasFeature('host.yts') || user_where.is_yts;
             skip = (req.data.page_number || 0) * (req.data.limit || 20);
             delete where.time;
             if (user_where.sort && user_where.sort != 'undefined') {
