@@ -350,12 +350,14 @@
                     $('.posts-loading').remove();
                 }, 1000 * 5);
             }
-        
+
+            let path = document.location.pathname.split('/');
+            path.pop();
+            path = path.join('/');
             site.qrcode({
                 selector: '#qrcode',
-                text: document.location.href,
+                text: document.location.origin + path,
             });
-
         </script>
     </body>
 </html>

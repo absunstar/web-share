@@ -86,8 +86,6 @@
                                                 <br />
                                                 <br />
                                                 <br />
-
-                                                
                                             </div>
                                             <div class="col5 center">
                                                 <a rel="nofollow" target="_blank" href="https://www.imdb.com/title/##data.yts.imdb_code##">
@@ -177,7 +175,6 @@
                         <div id="private-content">
                             <div id="container-8df5c187434e5226ff2893f994baeaa9"></div>
                         </div>
-                        
                     </div>
 
                     <div x-features="host.test">
@@ -288,9 +285,12 @@
             let torrent_template = $('#torrent-template').html();
             let rendered = Mustache.render(torrent_template, post);
             $('#info').append(rendered);
+            let path = document.location.pathname.split('/');
+            path.pop();
+            path = path.join('/');
             site.qrcode({
                 selector: '#qrcode',
-                text: document.location.href,
+                text: document.location.origin + path,
             });
         </script>
     </body>

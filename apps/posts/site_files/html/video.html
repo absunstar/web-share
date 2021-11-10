@@ -58,15 +58,15 @@
                                         <br />
                                         <iframe src="##data.details.url##" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
-                                    <br>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <div class="center" id="qrcode"></div>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="center" id="qrcode"></div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
                                 </div>
 
                                 <div class="footer">
@@ -144,9 +144,6 @@
                             </script>
                         </div>
                     </div>
-
-                 
-
                 </div>
                 <div class="col3">
                     <div x-import="posts/site_news.html"></div>
@@ -176,9 +173,12 @@
         <script x-import="posts/index.js"></script>
         <script x-import="posts/posts.js"></script>
         <script>
-                 site.qrcode({
+            let path = document.location.pathname.split('/');
+            path.pop();
+            path = path.join('/');
+            site.qrcode({
                 selector: '#qrcode',
-                text: document.location.href,
+                text: document.location.origin + path,
             });
         </script>
     </body>
