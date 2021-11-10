@@ -175,9 +175,9 @@
         <script x-import="posts/index.js"></script>
         <script x-import="posts/posts.js"></script>
         <script>
-          let _path = document.location.pathname.split('/');
+               let _path = document.location.pathname.split('/');
             _path.pop();
-            _path = path.join('/');
+            _path = _path.join('/');
             site.qrcode({
                 selector: '#qrcode',
                 text: document.location.origin + _path,
