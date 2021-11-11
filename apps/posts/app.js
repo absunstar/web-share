@@ -4,7 +4,7 @@ module.exports = function init(site) {
     require(__dirname + '/facebook.js')(site, post);
     require(__dirname + '/google_news.js')(site, post);
 
-    site.postList = [];
+    site.activePostList = [];
     site.defaultPostList = {
         is_movies: [],
         is_series: [],
@@ -405,27 +405,12 @@ module.exports = function init(site) {
 
     site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
         if (req.params.guid == 'random') {
-            post.$posts_content.findAll(
-                {
-                    select: {
-                        guid: 1,
-                        details: 1,
-                    },
-                    limit: 100,
-                    sort: {
-                        date: -1,
-                    },
-                },
-                (err, docs) => {
-                    if (!err && docs) {
-                        let doc = docs[Math.floor(Math.random() * docs.length)];
-                        res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
-                    } else {
-                        res.redirect('/');
-                    }
-                },
-                true,
-            );
+            if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
+                let doc = site.defaultPostList['all'][Math.floor(Math.random() * site.defaultPostList['all'].length)];
+                res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+            } else {
+                res.redirect('/');
+            }
         } else {
             if (req.hasFeature('host.torrents2') || req.hasFeature('host.news') || req.hasFeature('host.news2')) {
                 req.addFeature('hide-right-menu');
@@ -434,7 +419,7 @@ module.exports = function init(site) {
                 req.addFeature('host.default');
             }
 
-            let _post = site.postList.find((p) => p.guid == req.params.guid);
+            let _post = site.activePostList.find((p) => p.guid == req.params.guid);
             if (_post) {
                 _post.$memory = true;
                 responsePost(_post, res, req);
@@ -446,7 +431,7 @@ module.exports = function init(site) {
                     (err, doc) => {
                         if (!err && doc) {
                             handlePost(doc, (doc2) => {
-                                site.postList.push(doc2);
+                                site.activePostList.push(doc2);
                                 responsePost(doc2, res, req);
                             });
                         } else {
@@ -493,61 +478,21 @@ module.exports = function init(site) {
     });
 
     site.onGET({ name: ['/torrent/random'], public: true }, (req, res) => {
-        let where = {};
-
-        post.$posts_content.findAll(
-            {
-                select: {
-                    guid: 1,
-                    details: 1,
-                },
-                limit: 20,
-                sort: {
-                    id: -1,
-                },
-                where: {
-                    is_yts: true,
-                },
-            },
-            (err, docs) => {
-                if (!err && docs && docs.length > 0) {
-                    let doc = docs[Math.floor(Math.random() * docs.length)];
-                    res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
-                } else {
-                    res.redirect('/');
-                }
-            },
-            true,
-        );
+        if (site.defaultPostList['is_yts'] && site.defaultPostList['is_yts'].length > 0) {
+            let doc = site.defaultPostList['is_yts'][Math.floor(Math.random() * site.defaultPostList['is_yts'].length)];
+            res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+        } else {
+            res.redirect('/');
+        }
     });
 
     site.onGET({ name: ['/news/random'], public: true }, (req, res) => {
-        let where = {};
-
-        post.$posts_content.findAll(
-            {
-                select: {
-                    guid: 1,
-                    details: 1,
-                },
-                limit: 20,
-                sort: {
-                    id: -1,
-                },
-                where: {
-                    is_google_news: true,
-                },
-            },
-            (err, docs) => {
-                if (!err && docs && docs.length > 0) {
-                    let doc = docs[Math.floor(Math.random() * docs.length)];
-                    res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
-                } else {
-                    res.redirect('/');
-                }
-            },
-            true,
-        );
+        if (site.defaultPostList['is_google_news'] && site.defaultPostList['is_google_news'].length > 0) {
+            let doc = site.defaultPostList['is_google_news'][Math.floor(Math.random() * site.defaultPostList['is_google_news'].length)];
+            res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+        } else {
+            res.redirect('/');
+        }
     });
 
     site.onPOST({ name: 'api/posts/get', public: true }, (req, res) => {

@@ -189,7 +189,7 @@ app.controller("posts", function ($scope, $http, $sce) {
       });
     });
   };
-
+  $scope.PostCategories = [];
   $scope.loadPostCategories = function () {
     $scope.PostCategories = [];
     $scope.error = '';
@@ -247,9 +247,6 @@ app.controller("posts", function ($scope, $http, $sce) {
       }
     );
   };
-
-
-  $scope.loadPostCategories();
 
   $scope.loadPostTypes();
   $scope.loadSiteNews();
