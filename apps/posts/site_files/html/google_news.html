@@ -16,22 +16,8 @@
             <div x-import="posts/post_categories.html"></div>
 
             <div class="row">
-                <div class="col2" x-features="!hide-right-menu">
-                    <div x-import="posts/post_types.html"></div>
-                    <div x-feature="os.desktop">
-                        <!-- desktop_right_ad -->
-                        <ins
-                            class="adsbygoogle"
-                            style="display: block"
-                            data-ad-client="ca-pub-3372007384613151"
-                            data-ad-slot="4885184263"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"
-                        ></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
+                <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html">
+         
                 </div>
                 <div class="col7 ##data.content_class##">
                     <div>
@@ -154,22 +140,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col3" x-features="!hide-left-menu">
-                    <div x-import="posts/site_news.html"></div>
-                    <div x-feature="os.desktop">
-                        <!-- desktop_left_ad -->
-                        <ins
-                            class="adsbygoogle"
-                            style="display: block"
-                            data-ad-client="ca-pub-3372007384613151"
-                            data-ad-slot="3212816421"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"
-                        ></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
+                <div class="col3" x-features="!hide-left-menu" x-import="posts/left-menu.html">
+                   
                 </div>
             </div>
         </div>
