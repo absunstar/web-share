@@ -106,13 +106,20 @@ function loadPosts(more) {
                     console.error(error);
                 }
             }
-
+            let placeholder_number = 108;
+            if (page_number == 2) {
+                placeholder_number = 109;
+            } else if (page_number == 3) {
+                placeholder_number = 110;
+            } else if (page_number > 3) {
+                placeholder_number = 111;
+            }
             if (window.allowGoogleAds) {
                 rendered += `
                           <div>
                           <br><br><br>
                           <!-- Post Ad-->
-                          <div id="ezoic-pub-ad-placeholder-104">
+                          <div id="ezoic-pub-ad-placeholder-${placeholder_number}">
                             <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
                                 data-ad-format="fluid" data-ad-client="ca-pub-3372007384613151"
                                 data-ad-slot="5838870332">
