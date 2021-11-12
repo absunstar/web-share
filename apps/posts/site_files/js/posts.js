@@ -112,11 +112,15 @@ function loadPosts(more) {
                           <div>
                           <br><br><br>
                           <!-- Post Ad-->
-                          <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
-                              data-ad-format="fluid" data-ad-client="ca-pub-3372007384613151"
-                              data-ad-slot="5838870332"></ins>
-                              <br><br><br>
-                          </div>
+                          <div id="ezoic-pub-ad-placeholder-104">
+                            <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                                data-ad-format="fluid" data-ad-client="ca-pub-3372007384613151"
+                                data-ad-slot="5838870332">
+                            </ins>
+                          <br><br><br>
+                      </div>
+                        </div>
+                         
                       `;
             }
             $('#posts').append(rendered);
