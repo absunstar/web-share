@@ -193,6 +193,8 @@ module.exports = function init(site) {
     });
 
     site.onGET({ name: '/posts', public: true }, (req, res) => {
+        req.addFeature('host.default');
+
         res.render(
             'posts/index.html',
             {},
@@ -223,6 +225,8 @@ module.exports = function init(site) {
 
     site.onGET({ name: '/youtube-view', public: true }, (req, res) => {
         req.queryRaw.videoid = req.queryRaw.videoid || '_Y8gawCe7mU';
+        req.addFeature('host.default');
+
         res.render(
             'posts/youtube_view.html',
             { page_title: 'Show Youtube Video ', page_title2: req.queryRaw.videoid, page_description: 'Dynamic Youtube Video Playing in egytag.com' },
@@ -232,6 +236,8 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/page-view', public: true }, (req, res) => {
+        req.addFeature('host.default');
+
         res.render(
             'posts/page_view.html',
             {},
@@ -242,6 +248,8 @@ module.exports = function init(site) {
     });
 
     site.onGET({ name: '/show-video', public: true }, (req, res) => {
+        req.addFeature('host.default');
+
         res.render(
             'posts/show-video.html',
             {
@@ -253,6 +261,8 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/akwam', public: true }, (req, res) => {
+        req.addFeature('host.default');
+
         res.render(
             'posts/akwam.html',
             {
@@ -264,6 +274,8 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/search', public: true }, (req, res) => {
+        req.addFeature('host.default');
+
         res.render(
             'posts/index.html',
             {
@@ -275,7 +287,7 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/children-videos', public: true }, (req, res) => {
-        req.features.push('hide-menu');
+        req.addFeature('host.default');
         res.render(
             'posts/index.html',
             {
@@ -290,6 +302,8 @@ module.exports = function init(site) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
         req.data.content_class = 'col12';
+        req.addFeature('host.default');
+
         res.render(
             'posts/index.html',
             {
@@ -301,6 +315,8 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/author/:guid/:title', public: true }, (req, res) => {
+        req.addFeature('host.default');
+
         res.render(
             'posts/index.html',
             {
@@ -317,6 +333,8 @@ module.exports = function init(site) {
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col12';
+        }else{
+            req.addFeature('host.default');
         }
         res.render(
             'posts/index.html',
@@ -329,8 +347,9 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/series', public: true }, (req, res) => {
-        req.features.push('hide-menu');
-        req.features.push('series');
+        req.addFeature('host.default');
+        req.addFeature('series');
+
         res.render(
             'posts/index.html',
             {
@@ -342,8 +361,8 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/movies', public: true }, (req, res) => {
-        req.features.push('hide-menu');
-        req.features.push('movies');
+        req.addFeature('host.default');
+        req.addFeature('movies');
         res.render(
             'posts/index.html',
             {
@@ -355,7 +374,7 @@ module.exports = function init(site) {
         );
     });
     site.onGET({ name: '/top-news', public: true }, (req, res) => {
-        req.features.push('hide-menu');
+        req.addFeature('host.default');
         res.render(
             'posts/index.html',
             {
