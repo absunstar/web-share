@@ -6,63 +6,63 @@
     "image_url": "http://social-browser.com/images/logo.png"
   },
   {
-    "url": "https://school.egytag.com/",
+    "url": "http://school.egytag.com/",
     "title": "برنامج أدارة مدرسة",
     "description": "طلاب - مدرسين - جداول الحصص - أمتحانات",
-    "image_url": "https://school.egytag.com/images/student.png"
+    "image_url": "http://school.egytag.com/images/student.png"
   },
   {
-    "url": "https://medical.egytag.com/",
+    "url": "http://medical.egytag.com/",
     "title": "برنامج أدارة العيادات الطبية",
     "description": "اشعة وتحاليل - كشوفات - عيادات - اطباء",
-    "image_url": "https://medical.egytag.com/images/patients_tickets.png"
+    "image_url": "http://medical.egytag.com/images/patients_tickets.png"
   },
   {
-    "url": "https://erp.egytag.com/",
+    "url": "http://erp.egytag.com/",
     "title": "برنامج نقاط البيع",
     "description": "مخازن - حسابات - موظفين - مبيعات - مشتريات",
-    "image_url": "https://erp.egytag.com/images/report.png"
+    "image_url": "http://erp.egytag.com/images/report.png"
   },
   {
-    "url": "https://pos.egytag.com/",
+    "url": "http://pos.egytag.com/",
     "title": "برنامج نقاط البيع",
     "description": "مخازن - حسابات - موظفين - مبيعات - مشتريات",
-    "image_url": "https://pos.egytag.com/images/pos.png"
+    "image_url": "http://pos.egytag.com/images/pos.png"
   },
   {
-    "url": "https://employees.egytag.com/",
+    "url": "http://employees.egytag.com/",
     "title": "برنامج شئون الموظفين",
     "description": "المرتبات - الحضور والانصراف - السلف",
-    "image_url": "https://employees.egytag.com/images/fingerprint.png"
+    "image_url": "http://employees.egytag.com/images/fingerprint.png"
   },
   {
-    "url": "https://restaurant.egytag.com/",
+    "url": "http://restaurant.egytag.com/",
     "title": "برنامج للمطاعم والكافيهات",
     "description": "ادارة الطاولات والطلبات وخدمة الدليفرى",
-    "image_url": "https://restaurant.egytag.com/images/restaurant.png"
+    "image_url": "http://restaurant.egytag.com/images/restaurant.png"
   },
   {
-    "url": "https://club.egytag.com/",
+    "url": "http://club.egytag.com/",
     "title": "برنامج للصالات الرياضية الجيم",
     "description": "المشتركين - الحضور والانصراف - الجلسات - المساج",
-    "image_url": "https://club.egytag.com/images/gym_logo.png"
+    "image_url": "http://club.egytag.com/images/gym_logo.png"
   },
   {
-    "url": "https://lawyer.egytag.com/",
+    "url": "http://lawyer.egytag.com/",
     "title": "برنامج أدارة مكاتب المحامين",
     "description": "الدعاوى - الجلسات - الموكلين - الاعمال الادارية",
-    "image_url": "https://lawyer.egytag.com/images/lawyer.png"
+    "image_url": "http://lawyer.egytag.com/images/lawyer.png"
   },
   {
-    "url": "https://academy.egytag.com/",
+    "url": "http://academy.egytag.com/",
     "title": "برنامج الاكاديمية",
     "description": "قاعات - طلاب - كورسات - مدربين ",
-    "image_url": "https://academy.egytag.com/images/hall.png"
+    "image_url": "http://academy.egytag.com/images/hall.png"
   },
   {
-    "url": "https://crm.egytag.com/",
+    "url": "http://crm.egytag.com/",
     "title": "برنامج خدمة عملاء",
     "description": "بلاغات - مندوبين - خطوط سير - متابعة عملاء",
-    "image_url": "https://crm.egytag.com/images/logo.png"
+    "image_url": "http://crm.egytag.com/images/logo.png"
   }
 ]
