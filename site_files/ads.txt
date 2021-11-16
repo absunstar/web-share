@@ -1,10 +1,6 @@
 google.com, pub-3372007384613151, DIRECT, f08c47fec0942fa0
-
 nsightvideo.com,35,DIRECT,fd25240165056a01
-appnexus.com,1201403,RESELLER
-
-
-#dailymotion-v1.26-2021-10-29
+appnexus.com,1201403,RESELLER,f5ab79cb980f11d1
 freewheel.tv,899777,RESELLER
 freewheel.tv,901025,RESELLER
 freewheel.tv,1168417,RESELLER
@@ -235,4 +231,4 @@ engagebdr.com,10181,RESELLER
 Eskimi.com,eas-2020000005,RESELLER
 sharethrough.com,0177541a,RESELLER,d53b998a7bd4ecd2
 google.com,pub-2773354215874276,RESELLER,f08c47fec0942fa0
-
+google.com, pub-3372007384613151, DIRECT, f08c47fec0942fa0
