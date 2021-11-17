@@ -221,7 +221,6 @@ module.exports = function init(site) {
     });
 
     site.onGET({ name: '/posts', public: true }, (req, res) => {
-        req.addFeature('host.default');
 
         res.render(
             'posts/index.html',
@@ -239,7 +238,7 @@ module.exports = function init(site) {
             req.addFeature('hide-right-menu');
             req.data.content_class = 'col9';
             site.callRoute('/posts', req, res);
-        } else if (req.hasFeature('host.torrents2')) {
+        } else if (req.hasFeature('host.torrents')) {
             req.addFeature('torrents');
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
