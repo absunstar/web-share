@@ -120,18 +120,46 @@ module.exports = function init(site) {
     site.onGET({
         name: '/css/posts.css',
         public: true,
+        parser: null,
         path: [
-            __dirname + '/site_files/css/custom.css',
-            __dirname + '/site_files/css/post.css',
-            __dirname + '/site_files/css/post-type.css',
-            __dirname + '/site_files/css/post-category.css',
-            __dirname + '/site_files/css/site-news.css',
-            __dirname + '/site_files/css/video.css',
-            __dirname + '/site_files/css/yts.css',
-            __dirname + '/site_files/css/google-news.css',
-            __dirname + '/site_files/css/series.css',
-            __dirname + '/site_files/css/movies.css',
-            __dirname + '/site_files/css/share-buttons.css',
+            'client-side/theme.css',
+            'client-side/layout.css',
+            'client-side/scrollbar.css',
+            'client-side/progress.css',
+            'client-side/treeview.css',
+            'client-side/main-menu.css',
+            'client-side/images.css',
+            'client-side/navbar.css',
+            'client-side/form.css',
+            'client-side/selector.css',
+            'client-side/checkbox.css',
+            'client-side/radio.css',
+            'client-side/modal.css',
+            'client-side/fixed_menu.css',
+            'client-side/color.css',
+            'client-side/fonts.css',
+            'client-side/font-droid.css',
+            'client-side/effect.css',
+            'client-side/table.css',
+            'client-side/tabs.css',
+            'client-side/help.css',
+            'client-side/print.css',
+            'client-side/ui.css',
+            'client-side/tableExport.css',
+            'client-side/theme_paper.css',
+            'client-side/font-awesome.css',
+            site.dir + '/css/custom.css',
+            'posts/custom.css',
+            'posts/post.css',
+            'posts/post-type.css',
+            'posts/post-category.css',
+            'posts/site-news.css',
+            'posts/video.css',
+            'posts/yts.css',
+            'posts/google-news.css',
+            'posts/series.css',
+            'posts/movies.css',
+            'posts/share-buttons.css',
         ],
     });
 
@@ -333,7 +361,7 @@ module.exports = function init(site) {
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col12';
-        }else{
+        } else {
             req.addFeature('host.default');
         }
         res.render(

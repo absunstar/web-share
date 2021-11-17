@@ -2,6 +2,13 @@
 <html lang="en" data-ng-app="myApp">
     <head x-import="head.html">
         <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+        <style x-lang="ar">
+            :root {
+                --direction: rtl;
+                --text-align: right;
+                --float: right;
+            }
+        </style>
     </head>
 
     <body class="##session.lang##" ng-controller="posts">

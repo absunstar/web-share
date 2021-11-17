@@ -2,7 +2,13 @@
 <html lang="en" data-ng-app="myApp">
     <head x-import="head.html">
         <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
-        <meta x-features="host.news" name="propeller" content="b13ea4b174d7fbf71f5974e01b9055b1" />
+        <style x-lang="ar">
+            :root {
+                --direction: rtl;
+                --text-align: right;
+                --float: right;
+            }
+        </style>
     </head>
 
     <body class="##session.lang##" ng-controller="posts">

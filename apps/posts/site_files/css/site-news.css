@@ -7,34 +7,35 @@
     color: #000;
     text-align: center !important;
     border: 1px solid #ddd;
-  }
-  
-  .site-news:hover {
-    background: #dddddd1f
-  }
-  
-  .site-news a {
+}
+
+.site-news:hover {
+    background: #dddddd1f;
+}
+
+.site-news a {
     display: block;
     text-decoration: none;
     color: #fff;
     cursor: pointer;
-    transition: all .3s ease;
-  }
-  
-  .site-news img {
-    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.site-news img {
+    width: 200px;
+    height: 200px;
     max-width: 200px;
     display: block;
-  }
-  
-  .site-news h3 {
+}
+
+.site-news h3 {
     color: #3f51b5;
     text-align: center;
     font-weight: bold;
     margin: 15px;
-  }
-  
-  .site-news p {
+}
+
+.site-news p {
     color: #000;
     line-height: 1.8;
-  }
+}
