@@ -380,15 +380,8 @@ module.exports = function init(site) {
         } else {
             req.addFeature('host.default');
         }
-        res.render(
-            'posts/index.html',
-            {
-                page_title2: 'torrents movies - أفلام تورينت',
-            },
-            {
-                parser: 'html css js',
-            },
-        );
+        req.data.page_title2 = 'torrents movies - أفلام تورينت';
+        site.callRoute('/posts', req, res);
     });
     site.onGET({ name: '/series', public: true }, (req, res) => {
         req.addFeature('host.default');

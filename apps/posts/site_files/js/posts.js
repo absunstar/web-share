@@ -267,7 +267,7 @@ window.onscroll = function () {
     var y = document.documentElement.offsetHeight;
     var yy = window.pageYOffset + window.innerHeight;
 
-    if (y - 2000 <= yy) {
+    if (y - 6000 <= yy) {
         loadPosts(true);
     }
 };
