@@ -3,10 +3,10 @@
         <a href="{{pt.url}}"> {{pt['##session.lang##']}}</a>
     </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
+    <br />
 
     <div class="video float-none" id="video_{{v.id}}" ng-repeat="v in children_list track by $index">
         <div class="body">
@@ -31,6 +31,9 @@
 
                     <img class="yts-banner" ng-src="{{y.banner}}" alt="" width="118" height="91" />
                     <span class="rating"> {{y.yts.rating}} </span>
+                    <div class="type">
+                        <p ng-repeat="g in y.yts.genres">{{g}}</p>
+                    </div>
                 </div>
 
                 <h2 class="text">

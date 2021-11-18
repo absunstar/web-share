@@ -12,8 +12,9 @@
     border-radius: 8px;
     width: 100%;
     height: auto;
+    border: 3px solid #353535;
     text-align: center;
-    box-shadow: 1px 1px 3px 0px #353535;
+    box-shadow: 1px 1px 10px 0px #353535;
 }
 
 .google-news .body .image {
