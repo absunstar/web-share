@@ -2,4 +2,37 @@
     <div class="post-type" ng-repeat="pt in PostTypes track by $index">
         <a href="{{pt.url}}"> {{pt['##session.lang##']}}</a>
     </div>
+
+    <div class="video" id="video_{{v.id}}" ng-repeat="v in children_list track by $index">
+        <div class="body">
+            <div class="details">
+                <a x-feature="browser.social" onclick="event.preventDefault();window.open('{{v.details.url}}');return false;" href="{{v.post_url}}" target="_blank">
+                    <img class="image" ng-src="{{v.details.image_url}}" alt="{{v.details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
+                </a>
+                <a x-feature="!browser.social" href="{{v.post_url}}" target="_blank">
+                    <img class="image" ng-src="{{v.details.image_url}}" alt="{{v.details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
+                </a>
+            </div>
+
+            <h2 class="text">{{v.text}}</h2>
+        </div>
+    </div>
+
+    <div class="yts float-none" id="post_{{id}}" ng-repeat="y in yts_list track by $index">
+        <a href="{{y.post_url}}" target="_blank" class="post-url">
+            <div class="body">
+                <div class="details">
+                    <img class="image" ng-src="{{y.details.image_url}}" alt="{{y.details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
+
+                    <img class="yts-banner" ng-src="{{y.banner}}" alt="" width="118" height="91" />
+                    <span class="rating"> {{y.yts.rating}} </span>
+                </div>
+
+                <h2 class="text">
+                    {{y.details.title}}
+                    <p class="center">( {{y.yts.year}} )</p>
+                </h2>
+            </div>
+        </a>
+    </div>
 </div>

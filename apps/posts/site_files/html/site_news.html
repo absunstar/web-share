@@ -7,3 +7,16 @@
         </a>
     </div>
 </div>
+
+<div class="post google-news center" id="post_{{p.id}}" ng-repeat="p in news_list track by $index">
+    <div class="body">
+        <div class="row">
+            <div class="details">
+                <a rel="nofollow" href="{{p.details.url}}" target="_blank">
+                    <img class="image" src="{{p.details.image_url}}" alt="{{p.details.title}}" onerror="this.onerror=null;this.src='/images/rss.png'" />
+                    <p class="text">{{p.text}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

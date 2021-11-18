@@ -59,11 +59,11 @@ module.exports = function init(site) {
                     });
 
                     if (type == 'is_yts') {
-                        site.page_data.yts_list = site.defaultPostList[type].slice(0, 10);
+                        site.page_data.yts_list = site.defaultPostList[type].slice(-10);
                     } else if (type == 'is_google_news') {
-                        site.page_data.news_list = site.defaultPostList[type].slice(0, 10);
+                        site.page_data.news_list = site.defaultPostList[type].slice(-10);
                     } else if (type == 'is_children') {
-                        site.page_data.children_list = site.defaultPostList[type].slice(0, 10);
+                        site.page_data.children_list = site.defaultPostList[type].slice(-10);
                     }
                 }
             },

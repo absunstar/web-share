@@ -248,9 +248,21 @@ app.controller('posts', function ($scope, $http, $sce) {
         }).then(
             function (response) {
                 if (response.data.done) {
-                    $scope.siteNews = response.data.data.site_news;
-                    console.log($scope.siteNews);
-                    $scope.PostTypes = response.data.data.post_types;
+                    $scope.siteNews = response.data.data.site_news || [];
+                    $scope.PostTypes = response.data.data.post_types || [];
+
+                    $scope.children_list = response.data.data.children_list || [];
+                    $scope.news_list = response.data.data.news_list || [];
+                    $scope.yts_list = response.data.data.yts_list || [];
+                    
+                    $scope.yts_list.forEach((post) => {
+                        post.banner = '/images/banner720p.png';
+                        post.yts.torrents.forEach((torrent) => {
+                            if (torrent.quality == '1080p') {
+                                post.banner = '/images/banner1080p.png';
+                            }
+                        });
+                    });
                 }
             },
             function (err) {
