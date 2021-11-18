@@ -14,6 +14,10 @@ module.exports = function init(site) {
         is_children: [],
         all: [],
     };
+    site.page_data = {
+        site_news: require(__dirname + '/site_files/json/site-news.json'),
+        post_types: require(__dirname + '/site_files/json/post-types.json'),
+    };
 
     function preparePots(type) {
         let where = {
@@ -53,6 +57,14 @@ module.exports = function init(site) {
                             site.defaultPostList[type].push(doc2);
                         });
                     });
+
+                    if (type == 'is_yts') {
+                        site.page_data.yts_list = site.defaultPostList[type].slice(0, 10);
+                    } else if (type == 'is_google_news') {
+                        site.page_data.news_list = site.defaultPostList[type].slice(0, 10);
+                    } else if (type == 'is_children') {
+                        site.page_data.children_list = site.defaultPostList[type].slice(0, 10);
+                    }
                 }
             },
             true,
@@ -117,6 +129,12 @@ module.exports = function init(site) {
         }
     }
 
+    site.onGET('/api/page-data', (req, res) => {
+        res.json({
+            done: true,
+            data: site.page_data,
+        });
+    });
     site.onGET({
         name: '/css/posts.css',
         public: true,
@@ -221,7 +239,6 @@ module.exports = function init(site) {
     });
 
     site.onGET({ name: '/posts', public: true }, (req, res) => {
-
         res.render(
             'posts/index.html',
             {},
