@@ -54,7 +54,9 @@ input.search {
 .btn {
   min-width: 120px !important;
 }
-
+p{
+  word-break: break-all !important;
+}
 a {
   text-decoration: none;
 }
