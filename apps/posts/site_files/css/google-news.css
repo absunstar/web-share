@@ -18,8 +18,8 @@
 }
 
 .google-news .body .image {
-    width: 220px;
-    height: 220px;
+    width: 100%;
+    height: 100%;
     border: 3px solid #bbbbbb;
     padding: 3px;
 }
