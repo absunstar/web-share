@@ -638,6 +638,7 @@ module.exports = function init(site) {
                         if (!err) {
                             response.done = true;
                             response.doc = new_post;
+                            response.id = new_post.id
                         } else {
                             response.error = err.message;
                         }
@@ -651,6 +652,7 @@ module.exports = function init(site) {
                                 if (!err) {
                                     response.done = true;
                                     response.doc = new_post;
+                                    response.id = new_post.id
                                 } else {
                                     response.error = err.message;
                                 }
