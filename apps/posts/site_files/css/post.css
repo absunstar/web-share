@@ -28,6 +28,12 @@
     text-align: center;
 }
 
+.in-post {
+    opacity: 1;
+}
+.out-post {
+    opacity: .5;
+}
 .post {
     line-height: 1.3em;
     text-decoration: none;
@@ -39,13 +45,11 @@
     width: 100%;
     height: auto;
     text-align: center;
-    box-shadow: 1px 1px 3px 0px #353535;
     transition: all 0.2s ease;
 }
 
 .post:hover {
-    box-shadow: 1px 1px 20px 0px #353535;
-    transform: scale(1.1);
+    transform: scale(1.025);
 }
 
 .post .header {

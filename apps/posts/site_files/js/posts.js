@@ -259,6 +259,11 @@ if (!window.stop_loading_posts) {
     loadPosts();
 }
 
+function isViewable(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+}
+
 window.onscroll = function () {
     if (window.stop_loading_posts) {
         return;
@@ -270,6 +275,15 @@ window.onscroll = function () {
     if (y - 6000 <= yy) {
         loadPosts(true);
     }
+    /*document.querySelectorAll('#posts .post').forEach((p) => {
+        if (isViewable(p)) {
+            p.classList.add('in-post');
+            p.classList.remove('out-post');
+        } else {
+            p.classList.remove('in-post');
+            p.classList.add('out-post');
+        }
+    });*/
 };
 
 var rss = null;
