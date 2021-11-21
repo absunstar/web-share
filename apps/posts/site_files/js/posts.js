@@ -127,11 +127,12 @@ function loadPosts(more) {
                         </div>
                          
                       `;
+                      (adsbygoogle = window.adsbygoogle || []).push({});
             }
             $('#posts').append(rendered);
             busy = false;
             $('.posts-loading').remove();
-            (adsbygoogle = window.adsbygoogle || []).push({});
+           
         },
         (err) => {
             busy = false;
