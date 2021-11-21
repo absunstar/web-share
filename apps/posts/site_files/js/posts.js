@@ -126,10 +126,13 @@ function loadPosts(more) {
                         </div>
                          
                       `;
-                (adsbygoogle = window.adsbygoogle || []).push({});
             }
             $('#posts').append(rendered);
             $('.posts-loading').remove();
+
+            if (window.allowGoogleAds) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
             setTimeout(() => {
                 busy = false;
             }, 1000 * 5);
