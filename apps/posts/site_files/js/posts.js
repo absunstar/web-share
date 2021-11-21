@@ -38,7 +38,6 @@ function loadPosts(more) {
     $('.no-data').remove();
     $('#posts').append('<p class="posts-loading"> <img src="/images/loading.gif"> ##word.posts_load_more## </p>');
 
-    busy = true;
     if (more) {
         my_post_content_where.last_time = last_posts.length > 0 ? last_posts[last_posts.length - 1].time : null;
     }
@@ -127,16 +126,20 @@ function loadPosts(more) {
                         </div>
                          
                       `;
-                      (adsbygoogle = window.adsbygoogle || []).push({});
+                (adsbygoogle = window.adsbygoogle || []).push({});
             }
             $('#posts').append(rendered);
-            busy = false;
             $('.posts-loading').remove();
-           
+            setTimeout(() => {
+                busy = false;
+            }, 1000 * 5);
         },
         (err) => {
-            busy = false;
-            loadPosts(more);
+            console.log(err);
+            setTimeout(() => {
+                busy = false;
+                loadPosts(more);
+            }, 1000 * 5);
         },
     );
 }
