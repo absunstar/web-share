@@ -28,6 +28,7 @@ site.onGET({
     path: site.dir,
     public: true,
 });
+
 site.onGET({
     name: 'favicon.ico',
     path: site.dir + '/images/',
