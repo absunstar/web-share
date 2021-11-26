@@ -149,6 +149,7 @@ module.exports = function init(site) {
             'client-side/images.css',
             'client-side/navbar.css',
             'client-side/form.css',
+            'client-side/btn.css',
             'client-side/selector.css',
             'client-side/checkbox.css',
             'client-side/radio.css',
