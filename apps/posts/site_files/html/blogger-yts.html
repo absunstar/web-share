@@ -47,10 +47,7 @@
     }
 </style>
 <div class="xpost">
-    <h1 class="title">
-        ##data.details.title## <br />
-        <small class="center blue"> ( ##data.yts.year## ) </small>
-    </h1>
+    <h1 class="title">##data.details.title## ( ##data.yts.year## )<br /></h1>
     <div class="details">
         <p class="text">##data.details.description##</p>
         <br />
@@ -86,6 +83,5 @@
         post.torrents.forEach((tor) => {
             document.querySelector('#xpostId').innerHTML += `<a target="_blank" href="${tor.url}"> Download ${tor.quality} ${tor.type} ( ${tor.size} ) Torrent </a>`;
         });
-
     </script>
 </div>
