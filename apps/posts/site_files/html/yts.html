@@ -66,6 +66,8 @@
                                                     Subtitles
                                                 </a>
 
+                                                <a class="btn bg-black white font-22" onclick="htmlCode(this.event)"> HTML Code </a>
+
                                                 <div x-permission="admin" class="row">
                                                     <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
                                                 </div>
@@ -253,6 +255,19 @@
                 selector: '#qrcode',
                 text: document.location.origin + _path,
             });
+            function htmlCode() {
+                fetch('/api/html-post?guid=##data.guid##')
+                    .then(function (response) {
+                        return response.text();
+                    })
+                    .then(function (html) {
+                        navigator.clipboard.writeText(html);
+                        alert('Html Code [ Copy to Clipboard ] ... ');
+                    })
+                    .catch(function (err) {
+                        console.log('Failed to fetch page: ', err);
+                    });
+            }
         </script>
     </body>
 </html>

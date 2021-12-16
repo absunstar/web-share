@@ -425,7 +425,11 @@ module.exports = function init(site) {
     });
 
     function responsePost(doc, res, req, callback) {
-        if (doc.is_video) {
+        if (res.is_blogger) {
+            res.render('posts/blogger-yts.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_video) {
             res.render('posts/video.html', doc, {
                 parser: 'html css js',
             });
@@ -498,6 +502,32 @@ module.exports = function init(site) {
                     true,
                 );
             }
+        }
+    });
+
+    site.onGET({ name: ['/api/html-post'], public: true }, (req, res) => {
+        res.is_blogger = true;
+        let _post = site.activePostList.find((p) => p.guid == req.query.guid);
+        if (_post) {
+            _post.$memory = true;
+            responsePost(_post, res, req);
+        } else {
+            let where = {};
+            where['guid'] = req.query.guid;
+            post.$posts_content.find(
+                where,
+                (err, doc) => {
+                    if (!err && doc) {
+                        handlePost(doc, (doc2) => {
+                            site.activePostList.push(doc2);
+                            responsePost(doc2, res, req);
+                        });
+                    } else {
+                        res.redirect('/');
+                    }
+                },
+                true,
+            );
         }
     });
 
@@ -639,7 +669,7 @@ module.exports = function init(site) {
                         if (!err) {
                             response.done = true;
                             response.doc = new_post;
-                            response.id = new_post.id
+                            response.id = new_post.id;
                         } else {
                             response.error = err.message;
                         }
@@ -653,7 +683,7 @@ module.exports = function init(site) {
                                 if (!err) {
                                     response.done = true;
                                     response.doc = new_post;
-                                    response.id = new_post.id
+                                    response.id = new_post.id;
                                 } else {
                                     response.error = err.message;
                                 }
