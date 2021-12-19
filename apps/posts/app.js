@@ -434,17 +434,9 @@ module.exports = function init(site) {
                 parser: 'html css js',
             });
         } else if (doc.is_yts) {
-            if (req.hasFeature('browser.unknown')) {
-                doc.details.image_url = '/images/torrent.png';
-                doc.image_url = doc.details.image_url;
-                res.render('posts/yts.html', doc, {
-                    parser: 'html css js',
-                });
-            } else {
-                res.render('posts/yts.html', doc, {
-                    parser: 'html css js',
-                });
-            }
+            res.render('posts/yts.html', doc, {
+                parser: 'html css js',
+            });
         } else if (doc.is_google_news) {
             res.render('posts/google_news.html', doc, {
                 parser: 'html css js',

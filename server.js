@@ -1,5 +1,5 @@
 const site = require('../isite')({
-    version: '2021.12.19.3',
+    version: '2021.12.19.4',
     port: 8080,
     apps_dir: process.cwd() + '/apps',
     name: 'Web Share',
