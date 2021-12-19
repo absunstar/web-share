@@ -55,7 +55,7 @@ input.search {
   min-width: 120px !important;
 }
 p{
-  word-break: break-all !important;
+  word-break: break-word !important;
 }
 a {
   text-decoration: none;
