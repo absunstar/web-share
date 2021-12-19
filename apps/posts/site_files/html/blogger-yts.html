@@ -10,6 +10,7 @@
     }
     .xpost .title {
         text-align: center;
+        margin: 20px;
     }
     .xpost a {
         display: inline-block;
@@ -20,11 +21,13 @@
         margin: 10px;
         transition: all 0.2s ease;
         text-decoration: none;
+        min-width: 100px;
     }
     .xpost a:hover {
         transform: scale(1.1);
     }
-    .xpost .details {
+    .xpost .details,
+    .xpost .details .text {
         padding: 10px;
         margin: 10px;
     }
@@ -44,10 +47,9 @@
     }
 </style>
 <div class="xpost">
-    <h1 class="title">##data.details.title## ( ##data.yts.year## )<br /></h1>
+    <h1 class="title">##data.details.title## ( ##data.yts.year## )</h1>
     <div class="details">
         <p class="text">##data.details.description##</p>
-        <br />
         <a class="" rel="nofollow" target="_blank" href="https://www.imdb.com/title/##data.yts.imdb_code##"> IMDB </a>
         <a class="" rel="nofollow" target="_blank" href="https://www.youtube.com/results?search_query=##data.details.title##+##data.yts.year##+Trailer"> Trailer </a>
         <a class="" rel="nofollow" target="_blank" href="https://subscene.com/subtitles/searchbytitle?query=##data.details.title##"> Subtitles </a>
@@ -69,6 +71,7 @@
 
         <div id="xpostId"></div>
     </div>
+    <script src="//egytag.com/js/blogger.js"></script>
     <script>
         let post = {
             genres: JSON.parse(`##data.yts.genres##`),
