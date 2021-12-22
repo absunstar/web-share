@@ -103,7 +103,10 @@ module.exports = function init(site, post) {
             selector: '.entry-content',
         }, {
             url: '*24.ae*',
-            selector: '.articlecontentt',
+            selector: 'article',
+        },{
+            url: '*alkhaleej.ae*',
+            selector: '.content',
         },
         {
             url: '*aljazeerh-alarabiya.com*',
