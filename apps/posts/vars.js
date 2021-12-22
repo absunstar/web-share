@@ -107,6 +107,9 @@ module.exports = function init(site, post) {
         },{
             url: '*alkhaleej.ae*',
             selector: '.content',
+        },{
+            url: '*filgoal.com*',
+            selector: '.article',
         },
         {
             url: '*aljazeerh-alarabiya.com*',
