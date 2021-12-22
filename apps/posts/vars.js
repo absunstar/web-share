@@ -98,6 +98,9 @@ module.exports = function init(site, post) {
         }, {
             url: '*shorouknews.com*',
             selector: '.innerNews',
+        }, {
+            url: '*sawahpress.com*',
+            selector: '.entry-content',
         },
         {
             url: '*aljazeerh-alarabiya.com*',
