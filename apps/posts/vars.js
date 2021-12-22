@@ -88,26 +88,35 @@ module.exports = function init(site, post) {
         {
             url: '*ahdathnet.com*',
             selector: '#article',
-        }, {
+        },
+        {
             url: '*wam.ae*',
             selector: '.thePost',
         },
         {
             url: '*btolat.com*',
             selector: 'article.post',
-        }, {
+        },
+        {
             url: '*shorouknews.com*',
             selector: '.innerNews',
-        }, {
+        },
+        {
             url: '*sawahpress.com*',
             selector: '.entry-content',
-        }, {
+        },
+        {
             url: '*24.ae*',
             selector: 'article',
-        },{
+        },
+        {
             url: '*alkhaleej.ae*',
             selector: '.content',
-        },{
+        },  {
+            url: '*almountakhab.com*',
+            selector: '.article-body',
+        },
+        {
             url: '*filgoal.com*',
             selector: '.article',
         },
