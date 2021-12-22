@@ -96,9 +96,13 @@ module.exports = function init(site, post) {
         {
             url: '*btolat.com*',
             selector: 'article.post',
-        },    {
+        },
+        {
             url: '*slaati.com*',
             selector: '.show-main',
+        },  {
+            url: '*arabic.cnn.com*',
+            selector: 'article',
         },
         {
             url: '*shorouknews.com*',
