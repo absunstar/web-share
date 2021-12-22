@@ -321,6 +321,7 @@
             _path.pop();
             _path = _path.join('/');
             site.qrcode({
+                colorDark: '#2196f3',
                 selector: '#qrcode',
                 text: document.location.origin + _path,
             });

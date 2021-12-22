@@ -112,9 +112,13 @@ module.exports = function init(site, post) {
         {
             url: '*alkhaleej.ae*',
             selector: '.content',
-        },  {
+        },
+        {
             url: '*almountakhab.com*',
             selector: '.article-body',
+        }, {
+            url: '*yallakora.com*',
+            selector: 'article',
         },
         {
             url: '*filgoal.com*',
