@@ -101,6 +101,10 @@ module.exports = function init(site, post) {
             url: '*slaati.com*',
             selector: '.show-main',
         },   {
+            url: '*ienalwatan.com*',
+            selector: 'article',
+        },
+        {
             url: '*thaqfny.com*',
             selector: '.post-content',
         },
