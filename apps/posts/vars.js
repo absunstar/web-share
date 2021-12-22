@@ -101,6 +101,9 @@ module.exports = function init(site, post) {
         }, {
             url: '*sawahpress.com*',
             selector: '.entry-content',
+        }, {
+            url: '*24.ae*',
+            selector: '.articlecontentt',
         },
         {
             url: '*aljazeerh-alarabiya.com*',
