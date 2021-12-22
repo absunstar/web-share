@@ -1,8 +1,9 @@
 module.exports = function init(site) {
     const post = require(__dirname + '/post.js')(site);
+    require(__dirname + '/vars.js')(site , post);
     require(__dirname + '/rss.js')(site, post);
     require(__dirname + '/facebook.js')(site, post);
-    require(__dirname + '/google_news.js')(site, post);
+    let google_news = require(__dirname + '/google_news.js')(site, post);
 
     site.activePostList = [];
     site.defaultPostList = {
@@ -43,7 +44,16 @@ module.exports = function init(site) {
 
         post.$posts_content.findMany(
             {
-                select: {},
+                select: {
+                    id: 1,
+                    guid: 1,
+                    text: 1,
+                    author: 1,
+                    details: 1,
+                    date: 1,
+                    hasContent: 1,
+                    yts : 1
+                },
                 limit: 1000,
                 where: where,
                 sort: sort,

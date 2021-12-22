@@ -259,7 +259,33 @@ function remove_post(_post, callback) {
         },
     );
 }
-
+function handle_post(_post) {
+    $('#btn_handle').hide();
+    document.querySelector('#btn_handle_loading').style.display = 'block';
+    site.postData(
+        {
+            method: 'POST',
+            url: '/api/post/google-news/handle',
+            data: _post,
+        },
+        (res) => {
+            document.querySelector('#btn_handle_loading').style.display = 'none';
+            if (res.hasContent) {
+                document.location.reload();
+            } else if (res.needBrowser) {
+                window.open(res.url);
+            } else if (res.html) {
+                let iframe = document.createElement('iframe');
+                iframe.id = 'iframe_content';
+                document.querySelector('.full-google-news').appendChild(iframe);
+                document.querySelector('#iframe_content').src = 'data:text/html;charset=utf-8,' + escape(res.html);
+            }
+        },
+        (err) => {
+            console.log(err);
+        },
+    );
+}
 window.stop_loading_posts = window.stop_loading_posts || false;
 
 if (!window.stop_loading_posts) {

@@ -20,18 +20,15 @@
         <div x-import="posts/new_post_category_modal.html"></div>
 
         <div id="main-layout" class="container loaded">
+            <div class="row" x-import="posts/ad-top.html"></div>
             <div x-import="posts/post_categories.html"></div>
 
             <div class="row">
-                <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html">
-         
-                </div>
-                <div class="col1"></div>
-                <div class="col6 ##data.content_class##">
-                    <div class="row" x-import="posts/ad-top.html"></div>
+                <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
+                <div class="col8 ##data.content_class##">
                     <div>
                         <div id="posts" class="posts">
-                            <div class="post google-news" id="post_##data.id##">
+                            <div class="post google-news full-google-news" id="post_##data.id##">
                                 <div class="header">
                                     <img src="##data.author.logo_url##" alt="" onerror="this.onerror=null;this.src='/images/no.png'" />
                                     <h2>
@@ -41,36 +38,26 @@
                                 </div>
                                 <div class="body">
                                     <div class="row">
-                                        <div class="col3">
-                                            <div class="details">
-                                                <a rel="nofollow" href="##data.details.url##" target="_blank">
-                                                    <img class="image" src="##data.details.image_url##" alt="##data.details.title##" onerror="this.onerror=null;this.src='/images/no.png'" />
-                                                </a>
-                                            </div>
+                                        <h2 class="text">##data.text##</h2>
+                                        <div class="details">
+                                            <a rel="nofollow" href="##data.details.url##" target="_blank">
+                                                <img class="image" src="##data.image_url##" alt="##data.details.title##" onerror2="this.onerror=null;this.src='/images/no.png'" />
+                                            </a>
                                         </div>
-                                        <div class="col9">
-                                            <h2 class="text">##data.text##</h2>
-                                            <p class="description">##data.details.description##</p>
-                                            <br /><br />
-                                            <div class="center">
-                                                <a class="bold font-18" href="##data.details.url##" target="_blank"> ##word.posts_source## </a>
-                                            </div>
-
-                                            <br />
-                                            <br />
-                                            <br />
-                                            <br />
-                                            <div class="center" id="qrcode"></div>
-                                            <br />
-                                            <br />
-                                            <br />
-                                            <br />
-
-                                            <div x-permission="admin" class="row">
-                                                <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
-                                            </div>
+                                        <p class="post-description">##data.details.description##</p>
+                                        <div class="row center">
+                                            <a id="btn_handle" class="btn bg-green white" onclick="handle_post({guid : '##data.guid##'})"> ##word.posts_read_more## </a>
+                                            <img id="btn_handle_loading" src="/images/loading.gif" alt="" />
+                                        </div>
+                                        <div x-permission="admin" class="row">
+                                            <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
                                         </div>
                                     </div>
+                                    <div class="row center">
+                                        <p class="post-content">##data.content##</p>
+                                    </div>
+
+                                    <div class="center" id="qrcode"></div>
                                 </div>
 
                                 <div class="footer">
@@ -137,10 +124,7 @@
                         <div class="row" x-import="posts/ad-bottom.html"></div>
                     </div>
                 </div>
-                <div class="col1"></div>
-                <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html">
-                   
-                </div>
+                <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
             </div>
         </div>
 
@@ -152,10 +136,22 @@
         <script x-import="posts/index.js"></script>
         <script x-import="posts/posts.js"></script>
         <script>
-              let _path = document.location.pathname.split('/');
+            let postContent = document.querySelector('.post-content');
+            if (postContent.innerHTML == 'content') {
+                postContent.style.display = 'none';
+            } else {
+                $('#btn_handle').hide();
+            }
+            let postDescription = document.querySelector('.post-description');
+            if (postDescription.innerHTML == 'details.description') {
+                postDescription.style.display = 'none';
+            }
+            document.querySelector('#btn_handle_loading').style.display = 'none';
+            let _path = document.location.pathname.split('/');
             _path.pop();
             _path = _path.join('/');
             site.qrcode({
+                colorDark: '#2196f3',
                 selector: '#qrcode',
                 text: document.location.origin + _path,
             });

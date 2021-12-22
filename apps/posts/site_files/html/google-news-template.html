@@ -1,4 +1,4 @@
-        <div class=" post google-news center" id="post_{{id}}">
+        <div class=" post mini google-news center" id="post_{{id}}">
             <div class="header">
                 <img src="{{author.logo_url}}" alt="{{author.name}}"
                     onerror="this.onerror=null;this.src='/images/no.png'">
@@ -14,7 +14,7 @@
                         <div class="details">
                             <a rel="nofollow" href="{{details.url}}" target="_blank">
                                 <img class="image" src="{{details.image_url}}" alt="{{details.title}}"
-                                onerror="this.onerror=null;this.src='/images/rss.png'">
+                                onerror2="this.onerror=null;this.src='/images/rss.png'">
                             </a>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                         <p class="description"> {{{details.description}}} </p>
                         <div class="left">
                             <a class="btn bg-white black post-url" target="_blank" href="{{post_url}}"> ##word.posts_url##</a>
-                            <a rel="nofollow" class="btn bg-white black" target="_blank" href="{{details.url}}"> ##word.posts_source##</a>
+                            <a x-permission="admin" rel="nofollow" class="btn bg-white black" target="_blank" href="{{details.url}}"> ##word.posts_source##</a>
                             <div x-permission="admin" class="row">
                                 <a class="btn remove" onclick="remove_post({id : '{{id}}'})">
                                   remove
