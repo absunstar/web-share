@@ -143,6 +143,9 @@ module.exports = function init(site, post) {
         },  {
             url: '*france24.com*',
             selector: 'article',
+        }, {
+            url: '*zahratalkhaleej.ae*',
+            selector: '.article-content',
         },
         {
             url: '*filgoal.com*',
