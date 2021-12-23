@@ -128,6 +128,10 @@
     --main-menu-item-background-color: #283e4a;
     --main-menu-h2-color: #000;
     --main-menu-p-color: #000;
+
+    --scrollbar-background-color: #272727;
+    --scrollbar-color: #ffeb3b;
+    --scrollbar-box-shadow-color: #4caf50;
 }
 
 body {

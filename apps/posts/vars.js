@@ -100,7 +100,8 @@ module.exports = function init(site, post) {
         {
             url: '*slaati.com*',
             selector: '.show-main',
-        },   {
+        },
+        {
             url: '*ienalwatan.com*',
             selector: 'article',
         },
@@ -138,6 +139,9 @@ module.exports = function init(site, post) {
         },
         {
             url: '*yallakora.com*',
+            selector: 'article',
+        },  {
+            url: '*france24.com*',
             selector: 'article',
         },
         {
