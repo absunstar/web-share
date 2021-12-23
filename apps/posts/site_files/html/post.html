@@ -130,7 +130,6 @@
                 </div>
                 <div class="col1"></div>
                 <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
-
             </div>
         </div>
 
@@ -142,8 +141,10 @@
         <script x-import="posts/index.js"></script>
         <script x-import="posts/posts.js"></script>
         <script>
-               let _path = document.location.pathname.split('/');
-            _path.pop();
+            let _path = document.location.pathname.split('/');
+            if (_path.length > 3) {
+                _path.pop();
+            }
             _path = _path.join('/');
             site.qrcode({
                 colorDark: '#2196f3',
