@@ -150,6 +150,9 @@ module.exports = function init(site, post) {
         {
             url: '*filgoal.com*',
             selector: '.article',
+        },  {
+            url: '*sawtbeirut.com*',
+            selector: '.single-body',
         },
         {
             url: '*aljazeerh-alarabiya.com*',
