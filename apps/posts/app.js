@@ -262,9 +262,9 @@ module.exports = function init(site) {
     site.onGET({ name: '/', public: true }, (req, res) => {
         if (req.hasFeature('host.videos')) {
             site.callRoute('/videos', req, res);
-        } else if (req.hasFeature('host.news') || req.hasFeature('host.news2')) {
+        } else if (req.hasFeature('host.news')) {
             req.addFeature('hide-right-menu');
-            req.data.content_class = 'col9';
+            req.data.content_class = 'col10';
             site.callRoute('/posts', req, res);
         } else if (req.hasFeature('host.torrents')) {
             req.addFeature('torrents');
@@ -478,9 +478,9 @@ module.exports = function init(site) {
                 res.redirect('/');
             }
         } else {
-            if (req.hasFeature('host.torrents2') || req.hasFeature('host.news') || req.hasFeature('host.news2')) {
+            if (req.hasFeature('host.news')) {
                 req.addFeature('hide-right-menu');
-                req.data.content_class = 'col9';
+                req.data.content_class = 'col10';
             } else {
                 req.addFeature('host.default');
             }
