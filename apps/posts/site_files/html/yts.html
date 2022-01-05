@@ -29,9 +29,8 @@
             <div x-import="posts/post_categories.html"></div>
 
             <div class="row">
-                <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
-                <div class="col1"></div>
-                <div class="col6 ##data.content_class##">
+                <div class="col2"></div>
+                <div class="col8 ##data.content_class##">
                     <div class="row" x-import="posts/ad-top.html"></div>
                     <div>
                         <div id="posts" class="posts">
@@ -157,75 +156,9 @@
                         <div class="row" x-import="posts/ad-bottom.html"></div>
                     </div>
 
-                    <div x-features="host.test">
-                        <video id="video-id" src="https://cdn.fluidplayer.com/videos/valerian-480p.mkv"><source src="https://cdn.fluidplayer.com/videos/valerian-480p.mkv" type="video/mp4" /></video>
-                        <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-                        <script>
-                            var myFP = fluidPlayer('video-id', {
-                                layoutControls: {
-                                    controlBar: {
-                                        autoHideTimeout: 3,
-                                        animated: true,
-                                        autoHide: false,
-                                    },
-                                    htmlOnPauseBlock: {
-                                        html: null,
-                                        height: null,
-                                        width: null,
-                                    },
-                                    autoPlay: true,
-                                    mute: true,
-                                    allowTheatre: true,
-                                    playPauseAnimation: true,
-                                    playbackRateEnabled: true,
-                                    allowDownload: false,
-                                    playButtonShowing: true,
-                                    fillToContainer: true,
-                                    posterImage: '',
-                                },
-                                vastOptions: {
-                                    allowVPAID: true,
-                                    adList: [
-                                        {
-                                            roll: 'preRoll',
-                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
-                                            adText: '',
-                                        },
-                                        {
-                                            roll: 'midRoll',
-                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
-                                            adText: '',
-                                            timer: 10,
-                                        },
-                                        {
-                                            roll: 'postRoll',
-                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
-                                            adText: '',
-                                        },
-                                        {
-                                            roll: 'onPauseRoll',
-                                            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=c64a079757d12b81f15e09e955929756',
-                                            adText: '',
-                                        },
-                                    ],
-                                    adClickable: false,
-                                    showProgressbarMarkers: true,
-                                    skipButtonCaption: 'Skip ad in [seconds]',
-                                    skipButtonClickCaption: 'Skip ad <span class="skip_button_icon"></span>',
-                                    adText: 'Ads Support us ..',
-                                    adTextPosition: 'top left',
-                                    adCTAText: false,
-                                    adCTATextPosition: 'bottom right',
-                                    vastTimeout: 5000,
-                                    showPlayButton: true,
-                                    maxAllowedVastTagRedirects: 5,
-                                },
-                            });
-                        </script>
-                    </div>
+                  
                 </div>
-                <div class="col1"></div>
-                <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
+                <div class="col2"></div>
             </div>
         </div>
 
