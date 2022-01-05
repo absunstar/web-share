@@ -488,6 +488,7 @@ module.exports = function init(site) {
             } if (req.hasFeature('host.torrents')) {
                 req.addFeature('host.default');
                 req.addFeature('hide-right-menu');
+                req.addFeature('hide-left-menu');
                 req.data.content_class = 'col10';
             } else {
                 req.addFeature('host.default');
