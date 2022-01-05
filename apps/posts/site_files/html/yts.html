@@ -29,8 +29,10 @@
             <div x-import="posts/post_categories.html"></div>
 
             <div class="row">
-                <div class="col2"></div>
-                <div class="col8 ##data.content_class##">
+                <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
+                <div class="col2" x-features="hide-right-menu"></div>
+                <div class="col1"></div>
+                <div class="col6">
                     <div class="row" x-import="posts/ad-top.html"></div>
                     <br />
                     <br />
@@ -159,7 +161,9 @@
                         <div class="row" x-import="posts/ad-bottom.html"></div>
                     </div>
                 </div>
-                <div class="col2"></div>
+                <div class="col1"></div>
+                <div class="col2" x-features="hide-left-menu"></div>
+                <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
             </div>
         </div>
 
