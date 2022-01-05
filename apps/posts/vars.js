@@ -160,7 +160,7 @@ module.exports = function init(site, post) {
         },
         {
             url: '*gulf365.com*',
-            selector: '.content article',
+            selector: '#content article',
         },
         {
             url: '*almasryalyoum.com*',
