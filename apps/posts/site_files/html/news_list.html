@@ -1,0 +1,13 @@
+
+<div class="post google-news center" id="post_{{p.id}}" ng-repeat="p in news_list track by $index">
+    <div class="body">
+        <div class="row">
+            <div class="details">
+                <a rel="nofollow" href="/post/{{p.guid}}" target="_blank">
+                    <img class="image mini" src="{{p.image_url}}" alt="{{p.text}}" />
+                    <p class="text">{{p.text}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

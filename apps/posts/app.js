@@ -485,8 +485,13 @@ module.exports = function init(site) {
                 req.addFeature('host.default');
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col10';
+            } if (req.hasFeature('host.torrents')) {
+                req.addFeature('host.default');
+                req.addFeature('hide-right-menu');
+                req.data.content_class = 'col10';
             } else {
                 req.addFeature('host.default');
+                req.addFeature('host.all');
             }
 
             let _post = site.activePostList.find((p) => p.guid == req.params.guid);
