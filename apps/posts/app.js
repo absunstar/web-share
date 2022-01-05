@@ -869,6 +869,7 @@ module.exports = function init(site) {
         } else {
             if (req.hasFeature('host.news')) {
                 req.addFeature('google');
+                req.addFeature('news-post');
                 req.addFeature('hide-left-menu');
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col12';
