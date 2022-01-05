@@ -22,7 +22,9 @@
     border: 3px solid #bbbbbb;
     padding: 3px;
 }
-
+.google-news.mini {
+    max-width: 300px;
+}
 .google-news .body .image.mini {
     max-width: 200px;
 }
@@ -41,7 +43,7 @@
     color: #000;
 }
 
-.full-google-news{
+.full-google-news {
     width: 100% !important;
     border: none !important;
 }
