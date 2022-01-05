@@ -259,8 +259,6 @@ module.exports = function init(site) {
         );
     });
 
-
-
     site.onGET({ name: '/youtube-view', public: true }, (req, res) => {
         req.queryRaw.videoid = req.queryRaw.videoid || '_Y8gawCe7mU';
         req.addFeature('host.default');
@@ -365,18 +363,7 @@ module.exports = function init(site) {
             },
         );
     });
-    site.onGET({ name: '/torrents', public: true }, (req, res) => {
-        req.addFeature('torrents');
-        if (req.hasFeature('host.torrents2')) {
-            req.addFeature('hide-right-menu');
-            req.addFeature('hide-left-menu');
-            req.data.content_class = 'col12';
-        } else {
-            req.addFeature('host.default');
-        }
-        req.data.page_title2 = 'torrents movies - أفلام تورينت';
-        site.callRoute('/posts', req, res);
-    });
+
     site.onGET({ name: '/series', public: true }, (req, res) => {
         req.addFeature('host.default');
         req.addFeature('series');
@@ -416,8 +403,6 @@ module.exports = function init(site) {
             },
         );
     });
-
-
 
     site.onGET({ name: ['/api/html-post'], public: true }, (req, res) => {
         res.is_blogger = true;
@@ -837,6 +822,19 @@ module.exports = function init(site) {
             },
             true,
         );
+    });
+
+    site.onGET({ name: '/torrents', public: true }, (req, res) => {
+        req.addFeature('torrents');
+        if (req.hasFeature('host.torrents')) {
+            req.addFeature('hide-right-menu');
+            req.addFeature('hide-left-menu');
+            req.data.content_class = 'col12';
+        } else {
+        }
+        req.addFeature('google');
+        req.data.page_title2 = 'torrents movies - أفلام تورينت';
+        site.callRoute('/posts', req, res);
     });
 
     site.onGET({ name: '/', public: true }, (req, res) => {
