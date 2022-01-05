@@ -259,27 +259,7 @@ module.exports = function init(site) {
         );
     });
 
-    site.onGET({ name: '/', public: true }, (req, res) => {
-        if (req.hasFeature('host.videos')) {
-            site.callRoute('/videos', req, res);
-        } else if (req.hasFeature('host.news')) {
-            req.addFeature('host.default');
-            req.addFeature('hide-right-menu');
-            req.addFeature('hide-left-menu');
-            req.data.content_class = 'col10';
-            site.callRoute('/posts', req, res);
-        } else if (req.hasFeature('host.torrents')) {
-            req.addFeature('torrents');
-            req.addFeature('host.default');
-            req.addFeature('hide-right-menu');
-            req.addFeature('hide-left-menu');
-            req.data.content_class = 'col12';
-            site.callRoute('/posts', req, res);
-        } else {
-            req.addFeature('host.default');
-            site.callRoute('/posts', req, res);
-        }
-    });
+
 
     site.onGET({ name: '/youtube-view', public: true }, (req, res) => {
         req.queryRaw.videoid = req.queryRaw.videoid || '_Y8gawCe7mU';
@@ -859,6 +839,27 @@ module.exports = function init(site) {
         );
     });
 
+    site.onGET({ name: '/', public: true }, (req, res) => {
+        if (req.hasFeature('host.videos')) {
+            site.callRoute('/videos', req, res);
+        } else if (req.hasFeature('host.news')) {
+            req.addFeature('google');
+            req.addFeature('hide-right-menu');
+            req.addFeature('hide-left-menu');
+            req.data.content_class = 'col10';
+            site.callRoute('/posts', req, res);
+        } else if (req.hasFeature('host.torrents')) {
+            req.addFeature('torrents');
+            req.addFeature('google');
+            req.addFeature('hide-right-menu');
+            req.addFeature('hide-left-menu');
+            req.data.content_class = 'col12';
+            site.callRoute('/posts', req, res);
+        } else {
+            req.addFeature('host.default');
+            site.callRoute('/posts', req, res);
+        }
+    });
     site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
         if (req.params.guid == 'random') {
             if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
