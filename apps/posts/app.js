@@ -437,54 +437,7 @@ module.exports = function init(site) {
         );
     });
 
-    site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
-        if (req.params.guid == 'random') {
-            if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
-                let doc = site.defaultPostList['all'][Math.floor(Math.random() * site.defaultPostList['all'].length)];
-                res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
-            } else {
-                res.redirect('/');
-            }
-        } else {
-            if (req.hasFeature('host.news')) {
-                req.addFeature('google');
-                req.addFeature('hide-left-menu');
-                req.addFeature('hide-right-menu');
-                req.data.content_class = 'col10';
-            }
-            if (req.hasFeature('host.torrents')) {
-                req.addFeature('google');
-                req.addFeature('hide-left-menu');
-                req.addFeature('hide-right-menu');
-            } else {
-                req.addFeature('google');
-                req.addFeature('host.all');
-            }
 
-            let _post = site.activePostList.find((p) => p.guid == req.params.guid);
-            if (_post) {
-                _post.$memory = true;
-                responsePost(_post, res, req);
-            } else {
-                let where = {};
-                where['guid'] = req.params.guid;
-                post.$posts_content.find(
-                    where,
-                    (err, doc) => {
-                        if (!err && doc) {
-                            handlePost(doc, (doc2) => {
-                                site.activePostList.push(doc2);
-                                responsePost(doc2, res, req);
-                            });
-                        } else {
-                            res.redirect('/');
-                        }
-                    },
-                    true,
-                );
-            }
-        }
-    });
 
     site.onGET({ name: ['/api/html-post'], public: true }, (req, res) => {
         res.is_blogger = true;
@@ -906,6 +859,57 @@ module.exports = function init(site) {
         );
     });
 
+    site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
+        if (req.params.guid == 'random') {
+            if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
+                let doc = site.defaultPostList['all'][Math.floor(Math.random() * site.defaultPostList['all'].length)];
+                res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+            } else {
+                res.redirect('/');
+            }
+        } else {
+            if (req.hasFeature('host.news')) {
+                req.addFeature('google');
+                req.addFeature('hide-left-menu');
+                req.addFeature('hide-right-menu');
+                req.data.content_class = 'col10';
+            }
+            if (req.hasFeature('host.torrents')) {
+                req.addFeature('google');
+                req.addFeature('yts-post');
+                req.data.content_class = 'col8';
+                req.addFeature('hide-left-menu');
+                req.addFeature('hide-right-menu');
+            } else {
+                req.addFeature('google');
+                req.addFeature('host.all');
+            }
+
+            let _post = site.activePostList.find((p) => p.guid == req.params.guid);
+            if (_post) {
+                _post.$memory = true;
+                responsePost(_post, res, req);
+            } else {
+                let where = {};
+                where['guid'] = req.params.guid;
+                post.$posts_content.find(
+                    where,
+                    (err, doc) => {
+                        if (!err && doc) {
+                            handlePost(doc, (doc2) => {
+                                site.activePostList.push(doc2);
+                                responsePost(doc2, res, req);
+                            });
+                        } else {
+                            res.redirect('/');
+                        }
+                    },
+                    true,
+                );
+            }
+        }
+    });
+    
     function responsePost(doc, res, req, callback) {
         if (doc.post_url.startsWith('/post')) {
             doc.post_url = req.headers.host + doc.post_url;
@@ -919,8 +923,6 @@ module.exports = function init(site) {
                 parser: 'html css js',
             });
         } else if (doc.is_yts) {
-            req.addFeature('yts-post');
-            doc.content_class = 'col8';
             res.render('posts/yts.html', doc, {
                 parser: 'html css js',
             });
