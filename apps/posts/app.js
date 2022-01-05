@@ -437,41 +437,6 @@ module.exports = function init(site) {
         );
     });
 
-    function responsePost(doc, res, req, callback) {
-        if (doc.post_url.startsWith('/post')) {
-            doc.post_url = req.headers.host + doc.post_url;
-        }
-        if (res.is_blogger) {
-            res.render('posts/blogger-yts.html', doc, {
-                parser: 'html css js',
-            });
-        } else if (doc.is_video) {
-            res.render('posts/video.html', doc, {
-                parser: 'html css js',
-            });
-        } else if (doc.is_yts) {
-            res.render('posts/yts.html', doc, {
-                parser: 'html css js',
-            });
-        } else if (doc.is_google_news) {
-            res.render('posts/google_news.html', doc, {
-                parser: 'html css js',
-            });
-        } else if (doc.is_series) {
-            res.render('posts/series.html', doc, {
-                parser: 'html css js',
-            });
-        } else if (doc.is_movies) {
-            res.render('posts/movie.html', doc, {
-                parser: 'html css js',
-            });
-        } else {
-            res.render('posts/post.html', doc, {
-                parser: 'html css js',
-            });
-        }
-    }
-
     site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
         if (req.params.guid == 'random') {
             if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
@@ -940,4 +905,40 @@ module.exports = function init(site) {
             true,
         );
     });
+
+    function responsePost(doc, res, req, callback) {
+        if (doc.post_url.startsWith('/post')) {
+            doc.post_url = req.headers.host + doc.post_url;
+        }
+        if (res.is_blogger) {
+            res.render('posts/blogger-yts.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_video) {
+            res.render('posts/video.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_yts) {
+            req.addFeature('yts-post');
+            res.render('posts/yts.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_google_news) {
+            res.render('posts/google_news.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_series) {
+            res.render('posts/series.html', doc, {
+                parser: 'html css js',
+            });
+        } else if (doc.is_movies) {
+            res.render('posts/movie.html', doc, {
+                parser: 'html css js',
+            });
+        } else {
+            res.render('posts/post.html', doc, {
+                parser: 'html css js',
+            });
+        }
+    }
 };
