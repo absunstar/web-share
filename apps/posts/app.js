@@ -927,6 +927,7 @@ module.exports = function init(site) {
                 parser: 'html css js',
             });
         } else if (doc.is_google_news) {
+            req.addFeature('news-post');
             res.render('posts/google_news.html', doc, {
                 parser: 'html css js',
             });
