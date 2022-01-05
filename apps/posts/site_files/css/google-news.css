@@ -24,6 +24,8 @@
 }
 .google-news.mini {
     max-width: 300px;
+    max-height: 300px;
+    display: inline-block;
 }
 .google-news .body .image.mini {
     max-width: 200px;
