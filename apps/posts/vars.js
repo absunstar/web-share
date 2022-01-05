@@ -159,6 +159,10 @@ module.exports = function init(site, post) {
             selector: '.news_content',
         },
         {
+            url: '*gulf365.com*',
+            selector: '.content article',
+        },
+        {
             url: '*almasryalyoum.com*',
             selector: '#NewsStory',
             needBrowser: true,
