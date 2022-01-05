@@ -920,7 +920,7 @@ module.exports = function init(site) {
             });
         } else if (doc.is_yts) {
             req.addFeature('yts-post');
-            doc.data.content_class = 'col8';
+            doc.content_class = 'col8';
             res.render('posts/yts.html', doc, {
                 parser: 'html css js',
             });
