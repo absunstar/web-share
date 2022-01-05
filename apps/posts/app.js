@@ -263,12 +263,14 @@ module.exports = function init(site) {
         if (req.hasFeature('host.videos')) {
             site.callRoute('/videos', req, res);
         } else if (req.hasFeature('host.news')) {
+            req.addFeature('host.default');
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col10';
             site.callRoute('/posts', req, res);
         } else if (req.hasFeature('host.torrents')) {
             req.addFeature('torrents');
+            req.addFeature('host.default');
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col12';
