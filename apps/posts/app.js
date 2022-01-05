@@ -869,17 +869,15 @@ module.exports = function init(site) {
         } else {
             if (req.hasFeature('host.news')) {
                 req.addFeature('google');
-                req.addFeature('news-post');
                 req.addFeature('hide-left-menu');
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col12';
             }
             if (req.hasFeature('host.torrents')) {
                 req.addFeature('google');
-                req.addFeature('yts-post');
-                req.data.content_class = 'col12';
                 req.addFeature('hide-left-menu');
                 req.addFeature('hide-right-menu');
+                req.data.content_class = 'col12';
             } else {
                 req.addFeature('google');
                 req.addFeature('host.all');
@@ -923,6 +921,7 @@ module.exports = function init(site) {
                 parser: 'html css js',
             });
         } else if (doc.is_yts) {
+            req.addFeature('yts-post');
             res.render('posts/yts.html', doc, {
                 parser: 'html css js',
             });

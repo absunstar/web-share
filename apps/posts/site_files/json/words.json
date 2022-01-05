@@ -1,51 +1,57 @@
 [
-    {"name" : "posts_new" , "en" : "New Post" , "ar" : "مقال جديد"},
-    {"name" : "posts_new_author" , "en" : "New Author" , "ar" : "ناشر جديد"},
-    {"name" : "posts_author_name" , "en" : "Author Name" , "ar" : "أسم الناشر"},
-    {"name" : "posts_author_link" , "en" : "Author Link" , "ar" : "رابط الناشر"},
-    {"name" : "posts_author_image_url" , "en" : "Author Image URL" , "ar" : "رابط صورة الناشر"},
-    {"name" : "posts_author_generate" , "en" : "Generate Author Data" , "ar" : "تحميل بيانات الناشر"},
-    {"name" : "posts_new" , "en" : "New Post" , "ar" : "مقال جديد"},
-    {"name" : "posts_new_url" , "en" : "New URL" , "ar" : "رابط جديد"},
-    {"name" : "posts_url" , "en" : "Post URL" , "ar" : "رابط المقال"},
-    {"name" : "posts_videos" , "en" : "Videos" , "ar" : "فيديوهات"},
-    {"name" : "posts_new_category" , "en" : "New Category" , "ar" : "أضافة تصنيف جديد"},
-    {"name" : "posts_load_more" , "en" : "Load More" , "ar" : "جارى تحميل المزيد"},
-    {"name" : "posts_read_more" , "en" : "Read More" , "ar" : "أقرأ المزيد"},
-    {"name" : "posts_source" , "en" : "Article Source" , "ar" : "مشاهدة مصدر الخبر"},
-    {"name" : "posts_show" , "en" : "Show" , "ar" : "مشاهدة"},
-    {"name" : "posts_show_server" , "en" : "Show Server" , "ar" : "سيرفر المشاهدة"},
-    {"name" : "posts_download" , "en" : "Download" , "ar" : "تحميل"},
-     {
+    { "name": "posts_new", "en": "New Post", "ar": "مقال جديد" },
+    { "name": "posts_new_author", "en": "New Author", "ar": "ناشر جديد" },
+    { "name": "posts_author_name", "en": "Author Name", "ar": "أسم الناشر" },
+    { "name": "posts_author_link", "en": "Author Link", "ar": "رابط الناشر" },
+    { "name": "posts_author_image_url", "en": "Author Image URL", "ar": "رابط صورة الناشر" },
+    { "name": "posts_author_generate", "en": "Generate Author Data", "ar": "تحميل بيانات الناشر" },
+    { "name": "posts_new", "en": "New Post", "ar": "مقال جديد" },
+    { "name": "posts_new_url", "en": "New URL", "ar": "رابط جديد" },
+    { "name": "posts_url", "en": "Post URL", "ar": "رابط المقال" },
+    { "name": "posts_videos", "en": "Videos", "ar": "فيديوهات" },
+    { "name": "posts_new_category", "en": "New Category", "ar": "أضافة تصنيف جديد" },
+    { "name": "posts_load_more", "en": "Load More", "ar": "جارى تحميل المزيد" },
+    { "name": "posts_read_more", "en": "Read More", "ar": "أقرأ المزيد" },
+    { "name": "posts_source", "en": "Article Source", "ar": "مشاهدة مصدر الخبر" },
+    { "name": "posts_show", "en": "Show", "ar": "مشاهدة" },
+    { "name": "posts_show_server", "en": "Show Server", "ar": "سيرفر المشاهدة" },
+    { "name": "posts_download", "en": "Download", "ar": "تحميل" },
+    {
         "name": "details.image_url",
         "en": "/images/no.png",
         "ar": "/images/no.png"
-    }, {
+    },
+    {
         "name": "image_url",
         "en": "/images/logo.png",
         "ar": "/images/logo.png"
-    }, {
+    },
+    {
         "name": "guid",
         "en": "",
         "ar": ""
-    },{
+    },
+    {
         "name": "page_title",
         "en": "Egypt Network",
-        "ar": "شبكة مصر " 
-    },{
+        "ar": "شبكة مصر "
+    },
+    {
         "name": "page_title2",
         "en": "Posts - News - Videos",
-        "ar": " بوستات - أخبار - فيديوهات" 
+        "ar": " بوستات - أخبار - فيديوهات"
     },
     {
         "name": "page_description",
         "en": "Posts & News & Videos",
         "ar": "تقوم شبكة مصر بجمع البوستات من المواقع المشهورة واليوتيوب والفيسبوك وترتيبها بيما يتناسب معكم"
     },
-    {"name" : "page_keywords" , "en" : "egytag , news , videos" , "ar" : "شبكة مصر , أخبار ,  فيديوهات"},
-    {"name" : "no_data" , "en" : "No Data" , "ar" : "لايوجد نتائج للبحث"},
-    {"name" : "posts_episode_count" , "en" : "Episode Count" , "ar" : "عدد الحلقات"},
-    {"name" : "posts_episode_show" , "en" : "Show or Download" , "ar" : "للمشاهدة والتحميل"},
-    {"name" : "posts_movie_show" , "en" : "Show or Download" , "ar" : "للمشاهدة والتحميل"},
-    {"name" : "search_posts" , "en" : "Search in posts , movies , videos" , "ar" : "بحث سريع"}
+    { "name": "page_keywords", "en": "egytag , news , videos", "ar": "شبكة مصر , أخبار ,  فيديوهات" },
+    { "name": "no_data", "en": "No Data", "ar": "لايوجد نتائج للبحث" },
+    { "name": "more_news", "en": "See More News", "ar": "مشاهدة المزيد من الاخبار" },
+    { "name": "more_torrents", "en": "See More Totrrents", "ar": "مشاهدة المزيد من أفلام التورينت" },
+    { "name": "posts_episode_count", "en": "Episode Count", "ar": "عدد الحلقات" },
+    { "name": "posts_episode_show", "en": "Show or Download", "ar": "للمشاهدة والتحميل" },
+    { "name": "posts_movie_show", "en": "Show or Download", "ar": "للمشاهدة والتحميل" },
+    { "name": "search_posts", "en": "Search in posts , movies , videos", "ar": "بحث سريع" }
 ]
