@@ -844,7 +844,7 @@ module.exports = function init(site) {
             req.addFeature('google');
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
-            req.data.content_class = 'col10';
+            req.data.content_class = 'col12';
             site.callRoute('/posts', req, res);
         } else if (req.hasFeature('host.torrents')) {
             req.addFeature('torrents');
@@ -871,7 +871,7 @@ module.exports = function init(site) {
                 req.addFeature('google');
                 req.addFeature('hide-left-menu');
                 req.addFeature('hide-right-menu');
-                req.data.content_class = 'col10';
+                req.data.content_class = 'col12';
             }
             if (req.hasFeature('host.torrents')) {
                 req.addFeature('google');
