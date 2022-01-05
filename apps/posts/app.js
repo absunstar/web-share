@@ -877,7 +877,7 @@ module.exports = function init(site) {
             if (req.hasFeature('host.torrents')) {
                 req.addFeature('google');
                 req.addFeature('yts-post');
-                req.data.content_class = 'col8';
+                req.data.content_class = 'col12';
                 req.addFeature('hide-left-menu');
                 req.addFeature('hide-right-menu');
             } else {
@@ -909,7 +909,7 @@ module.exports = function init(site) {
             }
         }
     });
-    
+
     function responsePost(doc, res, req, callback) {
         if (doc.post_url.startsWith('/post')) {
             doc.post_url = req.headers.host + doc.post_url;
