@@ -264,6 +264,7 @@ module.exports = function init(site) {
             site.callRoute('/videos', req, res);
         } else if (req.hasFeature('host.news')) {
             req.addFeature('hide-right-menu');
+            req.addFeature('hide-left-menu');
             req.data.content_class = 'col10';
             site.callRoute('/posts', req, res);
         } else if (req.hasFeature('host.torrents')) {
