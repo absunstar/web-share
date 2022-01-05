@@ -482,6 +482,7 @@ module.exports = function init(site) {
             }
         } else {
             if (req.hasFeature('host.news')) {
+                req.addFeature('host.default');
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col10';
             } else {
