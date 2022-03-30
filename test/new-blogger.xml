@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateUrl='rockpool.xml' b:templateVersion='1.3.3' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+    <head>
+        <meta content='width=device-width, initial-scale=1' name='viewport' />
+        <title>
+            <data:view.title.escaped />
+        </title>
+        <b:include data='blog' name='all-head-content' />
+        <b:skin version='1.3.3'>
+            <![CDATA[]]>
+        </b:skin>
+        <link rel='stylesheet' href='https://egytag.com/x-css/all.css' />
+    </head>
+
+    <body class='container'>
+        <h1 class='center bold blue'>
+            <data:blog.pageTitle />
+        </h1>
+        <!-- Blog navbar-->
+        <b:section id='navbar' name='navbar'>
+            <data:blog.pageTitle />
+        </b:section>
+        <!-- End Blog navbar-->
+        <div class="row padding center">
+            <b:section id='mainPosts' name='mainPosts'></b:section>
+        </div>
+
+        <b:include name='posts' />
+        <b:includable id='posts' var='posts'>
+            <ul>
+                <b:loop values='data:posts' var='post'>
+                    <li>
+                        <a expr:href='data:post.url'>
+                            <data:post.title />
+                        </a>
+                    </li>
+                </b:loop>
+            </ul>
+        </b:includable>
+        <script src='https://egytag.com/x-js/all.js'></script>
+    </body>
+</html>
