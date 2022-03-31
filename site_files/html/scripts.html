@@ -23,7 +23,12 @@
         if (typeof info['data-cfasync'] != 'undefined') {
             script.setAttribute('data-cfasync', info['data-cfasync']);
         }
-
+        if (typeof info['data-adel'] != 'undefined') {
+            script.setAttribute('data-adel', info['data-adel']);
+        }
+        if (typeof info['czid'] != 'undefined') {
+            script.setAttribute('czid', info['czid']);
+        }
         document.querySelector('head').appendChild(script);
     }
 </script>
@@ -96,4 +101,16 @@
     </script>
 </div>
 
-<script data-cfasync="false" type="text/javascript" data-adel="atag" src="//achcdn.com/script/atg.js" czid="ibq6vec79g"></script>
+<script>
+    if (window.SOCIALBROWSER) {
+        add_script({
+            src: '//achcdn.com/script/atg.js',
+            id: 'googlesyndication',
+            'data-ad-client': 'ca-pub-3372007384613151',
+            'data-cfasync': 'false',
+            'data-adel': 'atag',
+            czid: 'ibq6vec79g',
+            async: true,
+        });
+    }
+</script>
