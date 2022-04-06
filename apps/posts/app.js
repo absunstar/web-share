@@ -868,13 +868,11 @@ module.exports = function init(site) {
             }
         } else {
             if (req.hasFeature('host.news')) {
-                req.addFeature('google');
                 req.addFeature('hide-left-menu');
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col12';
             }
             if (req.hasFeature('host.torrents')) {
-                req.addFeature('google');
                 req.addFeature('hide-left-menu');
                 req.addFeature('hide-right-menu');
                 req.data.content_class = 'col12';
