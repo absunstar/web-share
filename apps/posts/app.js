@@ -830,9 +830,11 @@ module.exports = function init(site) {
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col12';
+        } else if (req.hasFeature('host.news')) {
         } else {
+            req.addFeature('google');
         }
-        req.addFeature('google');
+
         req.data.page_title2 = 'torrents movies - أفلام تورينت';
         site.callRoute('/posts', req, res);
     });
@@ -841,14 +843,12 @@ module.exports = function init(site) {
         if (req.hasFeature('host.videos')) {
             site.callRoute('/videos', req, res);
         } else if (req.hasFeature('host.news')) {
-            req.addFeature('google');
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col12';
             site.callRoute('/posts', req, res);
         } else if (req.hasFeature('host.torrents')) {
             req.addFeature('torrents');
-            req.addFeature('google');
             req.addFeature('hide-right-menu');
             req.addFeature('hide-left-menu');
             req.data.content_class = 'col12';
