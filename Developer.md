@@ -3,3 +3,7 @@ api -> site-data
 
 All Data in One Request ^_^
 
+git config credential.helper store
+
+zapier.com
+google-news-api
