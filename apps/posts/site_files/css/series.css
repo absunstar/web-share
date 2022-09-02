@@ -1,5 +1,5 @@
 :root {
-  --font-family: "Droid", serif;
+  --font-family: 'Arabic', serif;
 }
 
 .series {
@@ -64,7 +64,7 @@
   font-weight: bold;
 }
 
-#episode_list{
+#episode_list {
   padding: 15px;
 }
 .episode {
@@ -85,7 +85,7 @@
   height: 250px;
 }
 .episode .show-link {
-  background: #F44336 ;
+  background: #f44336;
   color: white;
   width: 250px !important;
   font-size: 16px;

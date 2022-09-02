@@ -244,14 +244,9 @@ module.exports = function init(site, post) {
         google_news.load('top-headlines', 'country=eg&category=sports');
         google_news.load('top-headlines', 'country=eg&category=technology');
 
-        setTimeout(() => {
-            google_news.auto_load();
-        }, 1000 * 60 * 60);
     };
 
-    setTimeout(() => {
-        google_news.auto_load();
-    }, 1000 * 60 * 60);
+ 
 
     return google_news;
 };
