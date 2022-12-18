@@ -339,7 +339,7 @@ module.exports = function init(site) {
   site.onGET({ name: '/videos', public: true }, (req, res) => {
     req.addFeature('hide-left-menu');
     req.addFeature('hide-right-menu');
-    req.data.content_class = 'col12';
+    req.data.content_class = 'col10';
     req.addFeature('host.default');
 
     res.render(
@@ -831,12 +831,12 @@ module.exports = function init(site) {
     if (req.hasFeature('host.torrents')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col12';
+      req.data.content_class = 'col10';
     } else if (req.hasFeature('host.news')) {
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col4';
+      req.data.content_class = 'col10';
     } else {
       req.addFeature('google');
     }
@@ -851,18 +851,18 @@ module.exports = function init(site) {
     } else if (req.hasFeature('host.news')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col12';
+      req.data.content_class = 'col10';
       site.callRoute('/posts', req, res);
     } else if (req.hasFeature('host.torrents')) {
       req.addFeature('torrents');
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col12';
+      req.data.content_class = 'col10';
       site.callRoute('/posts', req, res);
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col4';
+      req.data.content_class = 'col10';
       site.callRoute('/posts', req, res);
     } else {
       req.addFeature('google');
@@ -881,15 +881,15 @@ module.exports = function init(site) {
       if (req.hasFeature('host.news')) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
-        req.data.content_class = 'col12';
+        req.data.content_class = 'col10';
       } else if (req.hasFeature('host.torrents')) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
-        req.data.content_class = 'col12';
+        req.data.content_class = 'col10';
       } else if (req.hasFeature('host.media')) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
-        req.data.content_class = 'col4';
+        req.data.content_class = 'col10';
       } else {
         req.addFeature('google');
         req.addFeature('host.all');
