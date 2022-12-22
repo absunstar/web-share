@@ -32,7 +32,6 @@ function loadPosts(more) {
     return;
   }
 
-  if (busy) return;
   busy = true;
   $('.posts-loading').remove();
   $('.no-data').remove();
@@ -56,10 +55,11 @@ function loadPosts(more) {
       if (res.done && res.list.length == 0) {
         $('#posts').append('<p class="no-data"> <br><br>  ##word.no_data## <br><br> </p> ');
         $('.posts-loading').remove();
-        busy = true;
+        setTimeout(() => {
+          busy = true;
+        }, 1000 * 3);
+
         return;
-      } else {
-        busy = false;
       }
 
       if (!res.done || res.list.length == 0) return;
@@ -306,7 +306,7 @@ window.onscroll = function () {
   var y = document.documentElement.offsetHeight;
   var yy = window.pageYOffset + window.innerHeight;
 
-  if (y - 6000 <= yy) {
+  if (y - 7000 <= yy) {
     loadPosts(true);
   }
 };
