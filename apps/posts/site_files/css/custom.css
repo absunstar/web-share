@@ -9,6 +9,17 @@
   --placeholder-color: #bbb;
 }
 
+@media (max-width: 768px
+
+  /*mobile*/) {
+  .modal.small .modal-content {
+    width: 90%;
+  }
+  .ad-center {
+    margin-right: 0;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -54,7 +65,7 @@ input.search {
 .btn {
   min-width: 120px !important;
 }
-p{
+p {
   word-break: break-word !important;
 }
 a {
@@ -71,8 +82,8 @@ a {
 ::placeholder {
   color: var(--placeholder-color);
 }
-.ad-center{
-  display: block !important;
-  width: 80vw !important;
-  margin-right: auto !important;
+.ad-center {
+  display: block;
+  width: 80vw;
+  margin-right: auto;
 }
