@@ -837,7 +837,7 @@ module.exports = function init(site) {
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col10';
+      req.data.content_class = 'col12';
     } else {
       req.addFeature('google');
     }
@@ -863,7 +863,7 @@ module.exports = function init(site) {
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col10';
+      req.data.content_class = 'col12';
       site.callRoute('/posts', req, res);
     } else {
       req.addFeature('google');
@@ -890,7 +890,7 @@ module.exports = function init(site) {
       } else if (req.hasFeature('host.media')) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
-        req.data.content_class = 'col10';
+        req.data.content_class = 'col12';
       } else {
         req.addFeature('google');
         req.addFeature('host.all');
