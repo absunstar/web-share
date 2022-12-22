@@ -6,6 +6,10 @@ module.exports = function init(site, post) {
     },
   };
 
+  site.onGET('/api/post/google-news/auto-load', () => {
+    google_news.auto_load();
+    res.json({ done: true });
+  });
   site.onPOST('/api/post/google-news/handle', (req, res) => {
     let guid = req.data.guid;
     let _post = site.activePostList.find((p) => p.guid == guid);
@@ -262,9 +266,9 @@ module.exports = function init(site, post) {
     google_news.load('top-headlines', 'country=eg&category=technology');
   };
 
-   setInterval(() => {
+  setInterval(() => {
     google_news.auto_load();
-   }, 1000 *60 *60);
+  }, 1000 * 60 * 60);
 
   return google_news;
 };
