@@ -22,7 +22,7 @@
   .row,
   fieldset,
   .container {
-    max-width: inherit;
+    max-width: inherit !important;
     margin: 0 !important;
   }
 }
