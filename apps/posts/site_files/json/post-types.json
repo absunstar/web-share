@@ -16,16 +16,6 @@
         "url": "/torrents?sort=time",
         "en": "Torrent Movies",
         "ar": "تحميل أفلام تورينت"
-    }, {
-        "id": 4,
-        "url": "/series",
-        "en": "Series",
-        "ar": "مسلسلات"
-    }, {
-        "id": 5,
-        "url": "/movies",
-        "en": "Movies",
-        "ar": "أفلام"
     },
     {
         "id": 6,

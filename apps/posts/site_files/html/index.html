@@ -27,14 +27,11 @@
 
         <div id="main-layout" class="container loaded">
             <div class="row">
-                <div class="col2"></div>
-                <div class="col8" x-import="posts/ad-top.html"></div>
-                <div class="col2"></div>
+                <div class="center" x-import="posts/ad-top.html"></div>
             </div>
             <div class="row">
                 <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
-                <div class="col1"></div>
-                <div class="col6 ##data.content_class##">
+                <div class="col8 ##data.content_class##">
                     <div>
                         <div x-import="posts/post_categories.html"></div>
                         <div x-import="posts/post_search.html"></div>
@@ -42,7 +39,6 @@
                         <div id="posts" class="posts"></div>
                     </div>
                 </div>
-                <div class="col1"></div>
                 <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
             </div>
         </div>

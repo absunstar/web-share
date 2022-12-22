@@ -1,40 +1,31 @@
-        <div class=" post mini google-news center" id="post_{{id}}">
-            <div class="header">
-                <img src="{{author.logo_url}}" alt="{{author.name}}"
-                    onerror="this.onerror=null;this.src='/images/no.png'">
-                <h2>
-                    <a href="{{author_url}}" target="_blank">{{author.name}}</a>
-                </h2>
-                <span date="{{date}}"> {{timeago}} </span>
-            </div>
-            <div class="body">
-               
-                <div class="row">
-                    <div class="col3">
-                        <div class="details">
-                            <a rel="nofollow" href="{{details.url}}" target="_blank">
-                                <img class="image" src="{{details.image_url}}" alt="{{details.title}}"
-                                onerror2="this.onerror=null;this.src='/images/rss.png'">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col9">
-                        <h2 class="text"> {{{text}}} </h2>
-                        <p class="description"> {{{details.description}}} </p>
-                        <div class="left">
-                            <a class="btn bg-white black post-url" target="_blank" href="{{post_url}}"> ##word.posts_url##</a>
-                            <a x-permission="admin" rel="nofollow" class="btn bg-white black" target="_blank" href="{{details.url}}"> ##word.posts_source##</a>
-                            <div x-permission="admin" class="row">
-                                <a class="btn remove" onclick="remove_post({id : '{{id}}'})">
-                                  remove
-                                </a>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-
+<div class="post mini google-news center" id="post_{{id}}">
+  <div class="header">
+    <img src="{{author.logo_url}}" alt="{{author.name}}" onerror="this.onerror=null;this.src='/images/no.png'" />
+    <h2>
+      <a href="{{author_url}}" target="_blank">{{author.name}}</a>
+    </h2>
+    <span date="{{date}}"> {{timeago}} </span>
+  </div>
+  <div class="body">
+    <div class="row">
+      <div class="col3">
+        <div class="details">
+          <a rel="nofollow" href="{{details.url}}" target="_blank">
+            <img class="image" src="{{details.image_url}}" alt="{{details.title}}" onerror2="this.onerror=null;this.src='/images/rss.png'" />
+          </a>
         </div>
+      </div>
+      <div class="col9">
+        <h2 class="text">{{{text}}}</h2>
+        <p class="description">{{{details.description}}}</p>
+        <div class="left">
+          <a class="btn bg-white black post-url" target="_blank" href="{{post_url}}"> ##word.posts_url##</a>
+          <a x-permission="admin" rel="nofollow" class="btn bg-white black" target="_blank" href="{{details.url}}"> ##word.posts_source##</a>
+          <div x-permission="admin" class="row">
+            <a class="btn remove" onclick="remove_post({id : '{{id}}'})"> remove </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

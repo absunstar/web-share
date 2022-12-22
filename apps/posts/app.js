@@ -3,7 +3,7 @@ module.exports = function init(site) {
   require(__dirname + '/vars.js')(site, post);
   require(__dirname + '/rss.js')(site, post);
   require(__dirname + '/facebook.js')(site, post);
-  let google_news = require(__dirname + '/google_news.js')(site, post);
+  require(__dirname + '/google_news.js')(site, post);
 
   site.activePostList = [];
   site.defaultPostList = {

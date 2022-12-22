@@ -188,3 +188,7 @@
 .full-post .play {
     display: none !important;
 }
+div.post-content{
+    line-height: 3;
+    font-size: 22px;
+}
