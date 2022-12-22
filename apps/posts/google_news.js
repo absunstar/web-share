@@ -244,7 +244,7 @@ module.exports = function init(site, post) {
       })
       .then((res) => res.json())
       .then((body) => {
-        if (body.status == 'ok' && body.totalResults > 0) {
+        if (body.status == 'ok' && body.articles) {
           body.articles.forEach((article) => {
             google_news.add_article(article);
           });
