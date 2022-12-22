@@ -339,7 +339,7 @@ module.exports = function init(site) {
   site.onGET({ name: '/videos', public: true }, (req, res) => {
     req.addFeature('hide-left-menu');
     req.addFeature('hide-right-menu');
-    req.data.content_class = 'col10';
+    req.data.content_class = 'col12';
     req.addFeature('host.default');
 
     res.render(
