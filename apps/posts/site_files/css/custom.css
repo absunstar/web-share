@@ -71,3 +71,9 @@ a {
 ::placeholder {
   color: var(--placeholder-color);
 }
+.ad-center{
+  height: 25px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+}
