@@ -72,7 +72,7 @@ a {
   color: var(--placeholder-color);
 }
 .ad-center{
-  height: 25px;
+  min-height: 250px;
   background: #fff;
   display: flex;
   justify-content: center;
