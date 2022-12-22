@@ -6,7 +6,7 @@ module.exports = function init(site, post) {
     },
   };
 
-  site.onGET('/api/post/google-news/auto-load', () => {
+  site.onGET('/api/post/google-news/auto-load', (req, res) => {
     google_news.auto_load();
     res.json({ done: true });
   });
@@ -248,6 +248,8 @@ module.exports = function init(site, post) {
           body.articles.forEach((article) => {
             google_news.add_article(article);
           });
+        } else {
+          console.log(body);
         }
       })
       .catch((err) => {
