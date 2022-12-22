@@ -72,7 +72,8 @@ a {
   color: var(--placeholder-color);
 }
 .ad-center{
-  min-height: 250px;
+  width: 100vw;
+  height: 250px;
   background: #fff;
   display: flex;
   justify-content: center;
