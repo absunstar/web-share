@@ -72,7 +72,7 @@ a {
   color: var(--placeholder-color);
 }
 .ad-center{
-  display: block;
-  width: 80vw;
-  margin-right: auto;
+  display: block !important;
+  width: 80vw !important;
+  margin-right: auto !important;
 }
