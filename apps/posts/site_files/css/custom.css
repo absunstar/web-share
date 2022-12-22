@@ -18,6 +18,13 @@
   .ad-center {
     margin-right: 0;
   }
+  div,
+  .row,
+  fieldset,
+  .container {
+    max-width: inherit;
+    margin: 0 !important;
+  }
 }
 
 ::-webkit-scrollbar {
