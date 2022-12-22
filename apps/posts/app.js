@@ -53,6 +53,7 @@ module.exports = function init(site) {
           date: 1,
           hasContent: 1,
           yts: 1,
+          article : 1
         },
         limit: 1000,
         where: where,
