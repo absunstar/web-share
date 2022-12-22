@@ -72,9 +72,7 @@ a {
   color: var(--placeholder-color);
 }
 .ad-center{
-  width: 100vw;
-  height: 250px;
-  background: #fff;
   display: block;
-  justify-content: center;
+  width: 80vw;
+  margin-right: auto;
 }
