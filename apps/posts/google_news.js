@@ -99,6 +99,13 @@ module.exports = function init(site, post) {
         return res.text();
       })
       .then((text) => {
+        let $ = site.$.load(text);
+        if (!_post.image_url) {
+          if ((img = $('meta[property="og:image"]'))) {
+            _post.image_url = img.getAttribute('content');
+          }
+        }
+
         if (_post.details.url.like('*youtube.com*')) {
           let videoID = _post.details.url.split('=').pop();
           _post.hasContent = true;
@@ -119,8 +126,10 @@ module.exports = function init(site, post) {
 
           return;
         }
+
         if ((page = post.siteList.find((s) => _post.details.url.like(s.url)))) {
           _post.$selector = page.selector;
+          _post.$selectImage = page.selectImage;
           _post.needBrowser = page.needBrowser;
           _post.$selectAll = page.selectAll;
           _post.$filter = page.filter;
@@ -136,7 +145,12 @@ module.exports = function init(site, post) {
             );
             return;
           }
-          let $ = site.$.load(text);
+
+          if (_post.$selectImage) {
+            if ((img = $(_post.$selectImage))) {
+              _post.image_url = img.getAttribute('src');
+            }
+          }
           if (_post.$filter) {
             _post.fullText = $.html(); // Buffer.from(text, 'utf-8').toString()
             _post.content = _post.fullText.split(_post.$filter.start)[1].split(_post.$filter.end)[0];
@@ -157,6 +171,7 @@ module.exports = function init(site, post) {
             });
           }
         }
+
         callback(null, {
           done: true,
           hasContent: _post.hasContent || false,
