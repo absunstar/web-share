@@ -43,18 +43,23 @@ module.exports = function init(site, post) {
 
   google_news.handlePostContent = function (_post, callback) {
     callback = callback || google_news.callback;
+    _post.tracking = '';
     if (_post.hasContent || _post.needBrowser) {
+      _post.tracking += ' -needbrowser ';
       callback(
         { message: '\nPost Content Exists or Need Browser\n' },
         {
           url: _post.details.url,
           guid: _post.guid,
           needBrowser: _post.needBrowser || false,
+          hasContent: _post.hasContent || false,
+          tracking: _post.tracking,
         }
       );
       return;
     }
     if ((page = post.siteList.find((s) => _post.details.url.like(s.url)))) {
+      _post.tracking += ' -page ';
       _post.$selector = page.selector;
       _post.needBrowser = page.needBrowser;
       _post.$selectAll = page.selectAll;
@@ -62,12 +67,15 @@ module.exports = function init(site, post) {
     }
 
     if (_post.needBrowser) {
+      _post.tracking += ' -needBrowser ';
       callback(
         { message: '\nPost Need Browser\n' },
         {
           url: _post.details.url,
           guid: _post.guid,
           needBrowser: _post.needBrowser || false,
+          hasContent: _post.hasContent || false,
+          tracking: _post.tracking,
         }
       );
       post.$posts_content.update(_post);
@@ -99,14 +107,17 @@ module.exports = function init(site, post) {
         return res.text();
       })
       .then((text) => {
+        _post.tracking += ' -fetch ';
         let $ = site.$.load(text);
         if (!_post.image_url) {
           if ((img = $('meta[property="og:image"]'))) {
             _post.image_url = img.attr('content');
+            _post.tracking += ' -og:image ';
           }
         }
 
         if (_post.details.url.like('*youtube.com*')) {
+          _post.tracking += ' -youtube ';
           let videoID = _post.details.url.split('=').pop();
           _post.hasContent = true;
           _post.content = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoID}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
@@ -122,12 +133,14 @@ module.exports = function init(site, post) {
             url: _post.details.url,
             selector: _post.$selector,
             guid: _post.guid,
+            tracking: _post.tracking,
           });
 
           return;
         }
 
         if ((page = post.siteList.find((s) => _post.details.url.like(s.url)))) {
+          _post.tracking += ' -page2 ';
           _post.$selector = page.selector;
           _post.$selectImage = page.selectImage;
           _post.needBrowser = page.needBrowser;
@@ -141,6 +154,7 @@ module.exports = function init(site, post) {
                 needBrowser: true,
                 url: _post.details.url,
                 guid: _post.guid,
+                tracking: _post.tracking,
               }
             );
             return;
@@ -149,6 +163,7 @@ module.exports = function init(site, post) {
           if (_post.$selectImage) {
             if ((img = $(_post.$selectImage))) {
               _post.image_url = img.attr('src');
+              _post.tracking += ' -selectImage ';
             }
           }
           if (_post.$filter) {
@@ -180,6 +195,7 @@ module.exports = function init(site, post) {
           url: _post.details.url,
           selector: _post.$selector,
           guid: _post.guid,
+          tracking: _post.tracking,
         });
       })
       .catch((err) => {
@@ -187,6 +203,7 @@ module.exports = function init(site, post) {
           url: _post.details.url,
           guid: _post.guid,
           needBrowser: true,
+          tracking: _post.tracking,
         });
       });
   };
