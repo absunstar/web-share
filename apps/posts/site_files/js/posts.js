@@ -65,7 +65,7 @@ function loadPosts(more) {
       if (!res.done || res.list.length == 0) return;
 
       page_number++;
-      var rendered = '';
+      var rendered = '<div class="posts">';
 
       last_posts = res.list;
       for (var i = 0; i < last_posts.length; i++) {
@@ -116,7 +116,7 @@ function loadPosts(more) {
       }
       if (window.allowGoogleAds) {
         rendered += `
-                          <div>
+                          <div class="post-google-ads">
                           <br><br><br>
                           <!-- Post Ad-->
                             <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
@@ -128,6 +128,7 @@ function loadPosts(more) {
                          
                       `;
       }
+      rendered+='</div>'
       $('#posts').append(rendered);
       $('.posts-loading').remove();
 

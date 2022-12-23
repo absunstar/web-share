@@ -396,6 +396,7 @@ module.exports = function init(site) {
   });
   site.onGET({ name: '/top-news', public: true }, (req, res) => {
     req.addFeature('host.default');
+    req.addFeature('google');
     res.render(
       'posts/index.html',
       {
