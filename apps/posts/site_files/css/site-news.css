@@ -26,6 +26,7 @@
     height: 100%;
     max-width: 200px;
     display: block;
+    margin: 0 auto;
 }
 
 .site-news h3 {

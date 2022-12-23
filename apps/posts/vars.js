@@ -1,8 +1,20 @@
 module.exports = function init(site, post) {
   post.siteList = [
     {
-      url: 'xxxxxxxxx',
+      url: '*xxxxxxxxx*',
       selector: 'xxxxxxxxx',
+    },
+    {
+      url: '*masralyoum.net*',
+      selector: '.entry-content',
+    },
+    {
+      url: '*aljadeed.tv*',
+      selector: '.newsDetailsBlock',
+    },
+    {
+      url: '*almowaten.net*',
+      selector: '.content:nth-child(1)',
     },
     {
       url: '*mowten.com*',
