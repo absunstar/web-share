@@ -396,7 +396,7 @@ module.exports = function init(site) {
   });
   site.onGET({ name: '/top-news', public: true }, (req, res) => {
     req.addFeature('host.default');
-    req.addFeature('google');
+    req.addFeature('google-ads');
     res.render(
       'posts/index.html',
       {
@@ -840,7 +840,7 @@ module.exports = function init(site) {
       req.addFeature('hide-left-menu');
       req.data.content_class = 'col12';
     } else {
-      req.addFeature('google');
+      req.addFeature('google-ads');
     }
 
     req.data.page_title2 = 'torrents movies - أفلام تورينت';
@@ -867,7 +867,7 @@ module.exports = function init(site) {
       req.data.content_class = 'col12';
       site.callRoute('/posts', req, res);
     } else {
-      req.addFeature('google');
+      req.addFeature('google-ads');
       site.callRoute('/posts', req, res);
     }
   });
@@ -893,7 +893,7 @@ module.exports = function init(site) {
         req.addFeature('hide-right-menu');
         req.data.content_class = 'col12';
       } else {
-        req.addFeature('google');
+        req.addFeature('google-ads');
         req.addFeature('host.all');
       }
 

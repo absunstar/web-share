@@ -140,7 +140,7 @@ body {
 }
 
 .brand-title {
-    margin-top: 10px;
+    margin-top: 5px !important;
 }
 .brand-title a {
     border-radius: 10px;

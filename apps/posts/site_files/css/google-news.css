@@ -2,6 +2,12 @@
   --font-family: 'Arabic', serif;
 }
 
+@media (max-width: 768px) {
+  .google-news {
+    width: 100% !important;
+  }
+}
+
 .google-news {
   line-height: 1.3em;
   text-decoration: none;
