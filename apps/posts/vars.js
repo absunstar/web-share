@@ -3,8 +3,9 @@ module.exports = function init(site, post) {
     {
       url: 'xxxxxxxxx',
       selector: 'xxxxxxxxx',
-    },{
-      url: 'koora.fal3arda.com',
+    },
+    {
+      url: '*koora.fal3arda.com*',
       selector: '.post-inner',
     },
     {
