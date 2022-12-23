@@ -102,7 +102,7 @@ module.exports = function init(site, post) {
         let $ = site.$.load(text);
         if (!_post.image_url) {
           if ((img = $('meta[property="og:image"]'))) {
-            _post.image_url = img.getAttribute('content');
+            _post.image_url = img.attr('content');
           }
         }
 
@@ -148,7 +148,7 @@ module.exports = function init(site, post) {
 
           if (_post.$selectImage) {
             if ((img = $(_post.$selectImage))) {
-              _post.image_url = img.getAttribute('src');
+              _post.image_url = img.attr('src');
             }
           }
           if (_post.$filter) {
