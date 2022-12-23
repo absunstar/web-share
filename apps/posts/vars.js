@@ -1,6 +1,13 @@
 module.exports = function init(site, post) {
   post.siteList = [
     {
+      url: 'xxxxxxxxx',
+      selector: 'xxxxxxxxx',
+    },{
+      url: 'koora.fal3arda.com',
+      selector: '.post-inner',
+    },
+    {
       url: '*muhtwaplus.com*',
       selector: '.content-inner',
     },

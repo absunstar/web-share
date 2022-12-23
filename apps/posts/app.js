@@ -53,7 +53,7 @@ module.exports = function init(site) {
           date: 1,
           hasContent: 1,
           yts: 1,
-          article : 1
+          article: 1,
         },
         limit: 1000,
         where: where,
@@ -97,6 +97,9 @@ module.exports = function init(site) {
   }
 
   prepareAllPosts();
+  function escapeHtml(unsafe) {
+    return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
 
   function handlePost(doc, callback) {
     if (doc.$handled) {
@@ -104,9 +107,10 @@ module.exports = function init(site) {
       return;
     }
     doc.$handled = true;
-    doc.page_title2 = doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
+    doc.details.title = escapeHtml(doc.details.title);
+    doc.page_title2 = doc.details.title.substring(0, 70);
     doc.image_url = doc.details.image_url;
-    doc.page_description = doc.text.replace(/<[^>]+>/g, '');
+    doc.page_description = escapeHtml(doc.text);
     doc.post_url = '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
     doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
     doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
@@ -119,20 +123,20 @@ module.exports = function init(site) {
       }
       callback(doc);
     } else if (doc.is_yts) {
-      doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+      doc.page_description = escapeHtml(doc.details.description);
       doc.image_url = doc.details.image_url;
       callback(doc);
     } else if (doc.is_google_news) {
-      doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+      doc.page_description = escapeHtml(doc.details.description);
       callback(doc);
     } else if (doc.is_series) {
       doc.page_title2 = ' مسلسل ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-      doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+      doc.page_description = escapeHtml(doc.details.description);
       doc.episode_count = doc.episode_list.length;
       callback(doc);
     } else if (doc.is_movies) {
       doc.page_title2 = ' فيلم ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-      doc.page_description = doc.details.description.replace(/<[^>]+>/g, '');
+      doc.page_description = escapeHtml(doc.details.description);
       callback(doc);
     } else {
       doc.post_type = 'full-post';

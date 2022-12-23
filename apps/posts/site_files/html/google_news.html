@@ -1,168 +1,166 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="myApp">
-    <head x-import="head.html">
-        <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
-        <style x-lang="ar">
-            :root {
-                --direction: rtl;
-                --text-align: right;
-                --float: right;
-            }
-        </style>
-    </head>
+  <head x-import="head.html">
+    <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+    <style x-lang="ar">
+      :root {
+        --direction: rtl;
+        --text-align: right;
+        --float: right;
+      }
+    </style>
+  </head>
 
-    <body class="##session.lang##" ng-controller="posts">
-        <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
+  <body class="##session.lang##" ng-controller="posts">
+    <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
 
-        <div x-import="posts/new_post_modal.html"></div>
-        <div x-import="posts/new_url_modal.html"></div>
-        <div x-import="posts/new_author_modal.html"></div>
-        <div x-import="posts/new_post_category_modal.html"></div>
+    <div x-import="posts/new_post_modal.html"></div>
+    <div x-import="posts/new_url_modal.html"></div>
+    <div x-import="posts/new_author_modal.html"></div>
+    <div x-import="posts/new_post_category_modal.html"></div>
 
-        <div id="main-layout" class="container loaded">
-            <div class="row">
-                <div class="col2"></div>
-                <div class="col8" x-import="posts/ad-top.html"></div>
-                <div class="col2"></div>
-            </div>
-            <div x-import="posts/post_categories.html"></div>
+    <div id="main-layout" class="container loaded">
+      <div class="row">
+        <div class="col2"></div>
+        <div class="col8" x-import="posts/ad-top.html"></div>
+        <div class="col2"></div>
+      </div>
+      <div x-import="posts/post_categories.html"></div>
 
-            <div class="row">
-                <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
-                <div class="col8 ##data.content_class##">
-                    <div>
-                        <div id="posts" class="posts">
-                            <div class="post google-news full-google-news" id="post_##data.id##">
-                                <div class="header">
-                                    <img src="##data.author.logo_url##" alt="" onerror="this.onerror=null;this.src='/images/no.png'" />
-                                    <h2>
-                                        <a>##data.author.name##</a>
-                                    </h2>
-                                    <span date="##data.date##"> ##data.timeago## </span>
-                                </div>
-                                <div class="body">
-                                    <div class="row">
-                                        <h2 class="text">##data.text##</h2>
-                                        <div class="details">
-                                            <a rel="nofollow" href="##data.details.url##" target="_blank">
-                                                <img class="image" src="##data.image_url##" alt="##data.details.title##" onerror2="this.onerror=null;this.src='/images/no.png'" />
-                                            </a>
-                                        </div>
-                                        <p class="post-description">##data.details.description##</p>
-                                        <div class="row center">
-                                            <a id="btn_handle" class="btn bg-green white" onclick="handle_post({guid : '##data.guid##'})"> ##word.posts_read_more## </a>
-                                            <img id="btn_handle_loading" src="/images/loading.gif" alt="" />
-                                        </div>
-                                        <div x-permission="admin" class="row">
-                                            <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
-                                        </div>
-                                    </div>
-                                    <div class="row padding">
-                                        <div class="post-content center">##data.content##</div>
-                                    </div>
-
-                                    <div class="center" id="qrcode"></div>
-                                </div>
-
-                                <div class="footer">
-                                    <ul class="share-buttons">
-                                        <li>
-                                            <a rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=##data.post_url##&t=" title="انشر الصفحة على الفيسبوك" target="_blank"
-                                                ><img alt="share" src="/images/social/Facebook.png"
-                                            /></a>
-                                        </li>
-                                        <li>
-                                            <a rel="nofollow" href="https://twitter.com/intent/tweet?source=##data.post_url##&text=:%20##data.post_url##" target="_blank" title="انشر الصفحة على تويتر"
-                                                ><img alt="share" src="/images/social/Twitter.png"
-                                            /></a>
-                                        </li>
-                                        <li>
-                                            <a rel="nofollow" href="https://plus.google.com/share?url=##data.post_url##" target="_blank" title="انشر الصفحة على جوجل"
-                                                ><img alt="share" src="/images/social/Google.png"
-                                            /></a>
-                                        </li>
-                                        <li class="hidden">
-                                            <a rel="nofollow" href="http://www.tumblr.com/share?v=3&u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على Tumblr"
-                                                ><img alt="share" src="/images/social/Tumblr.png"
-                                            /></a>
-                                        </li>
-                                        <li>
-                                            <a rel="nofollow" href="http://pinterest.com/pin/create/button/?url=##data.post_url##&description=" target="_blank" title="انشر الصفحة على Pin it"
-                                                ><img alt="share" src="/images/social/Pinterest.png"
-                                            /></a>
-                                        </li>
-                                        <li class="hidden">
-                                            <a rel="nofollow" href="https://getpocket.com/save?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Pocket"
-                                                ><img alt="share" src="/images/social/Pocket.png"
-                                            /></a>
-                                        </li>
-                                        <li>
-                                            <a rel="nofollow" href="http://www.reddit.com/submit?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Reddit"
-                                                ><img alt="share" src="/images/social/Reddit.png"
-                                            /></a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                rel="nofollow"
-                                                href="http://www.linkedin.com/shareArticle?mini=true&url=##data.post_url##&title=&summary=&source=##data.post_url##"
-                                                target="_blank"
-                                                title="اشر الصفحة على LinkedIn"
-                                                ><img alt="share" src="/images/social/LinkedIn.png"
-                                            /></a>
-                                        </li>
-                                        <li class="hidden">
-                                            <a rel="nofollow" href="http://wordpress.com/press-this.php?u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على WordPress"
-                                                ><img alt="share" src="/images/social/Wordpress.png"
-                                            /></a>
-                                        </li>
-                                        <li class="hidden">
-                                            <a rel="nofollow" href="https://pinboard.in/popup_login/?url=##data.post_url##&title=&description=" target="_blank" title="احفظ الصفحة على Pinboard"
-                                                ><img alt="share" src="/images/social/Pinboard.png"
-                                            /></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" x-import="posts/ad-post.html"></div>
-                        <div class="center" x-import="posts/news_list.html"></div>
-                        <div class="row" x-import="posts/ad-bottom.html"></div>
-                    </div>
+      <div class="row">
+        <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
+        <div class="col8 ##data.content_class##">
+          <div>
+            <div id="posts" class="posts">
+              <div class="post google-news full-google-news" id="post_##data.id##">
+                <div class="header">
+                  <img src="##data.author.logo_url##" alt=""  />
+                  <h2>
+                    <a>##data.author.name##</a>
+                  </h2>
+                  <span date="##data.date##"> ##data.timeago## </span>
                 </div>
-                <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
+                <div class="body">
+                  <div class="row">
+                    <h2 class="text">##data.text##</h2>
+                    <div class="details">
+                      <a rel="nofollow" href="##data.details.url##" target="_blank">
+                        <img class="image" src="##data.details.image_url##" alt="##data.details.title##" onerror="this.parentNode.remove(this)" />
+                      </a>
+                    </div>
+                    <p class="post-description">##data.details.description##</p>
+                    <div class="row center">
+                      <a id="btn_handle" class="btn bg-green white" onclick="handle_post({guid : '##data.guid##'})"> ##word.posts_read_more## </a>
+                      <img id="btn_handle_loading" src="/images/loading.gif" alt="" />
+                    </div>
+                    <div x-permission="admin" class="row">
+                      <a class="btn remove" onclick="remove_post({id : '##data.id##'})"> remove </a>
+                    </div>
+                  </div>
+                  <div class="row padding">
+                    <div class="post-content center">##data.content##</div>
+                  </div>
+
+                  <div class="flex-center" id="qrcode"></div>
+                </div>
+
+                <div class="footer">
+                  <ul class="share-buttons">
+                    <li>
+                      <a rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=##data.post_url##&t=" title="انشر الصفحة على الفيسبوك" target="_blank"
+                        ><img alt="share" src="/images/social/Facebook.png"
+                      /></a>
+                    </li>
+                    <li>
+                      <a rel="nofollow" href="https://twitter.com/intent/tweet?source=##data.post_url##&text=:%20##data.post_url##" target="_blank" title="انشر الصفحة على تويتر"
+                        ><img alt="share" src="/images/social/Twitter.png"
+                      /></a>
+                    </li>
+                    <li>
+                      <a rel="nofollow" href="https://plus.google.com/share?url=##data.post_url##" target="_blank" title="انشر الصفحة على جوجل"><img alt="share" src="/images/social/Google.png" /></a>
+                    </li>
+                    <li class="hidden">
+                      <a rel="nofollow" href="http://www.tumblr.com/share?v=3&u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على Tumblr"
+                        ><img alt="share" src="/images/social/Tumblr.png"
+                      /></a>
+                    </li>
+                    <li>
+                      <a rel="nofollow" href="http://pinterest.com/pin/create/button/?url=##data.post_url##&description=" target="_blank" title="انشر الصفحة على Pin it"
+                        ><img alt="share" src="/images/social/Pinterest.png"
+                      /></a>
+                    </li>
+                    <li class="hidden">
+                      <a rel="nofollow" href="https://getpocket.com/save?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Pocket"
+                        ><img alt="share" src="/images/social/Pocket.png"
+                      /></a>
+                    </li>
+                    <li>
+                      <a rel="nofollow" href="http://www.reddit.com/submit?url=##data.post_url##&title=" target="_blank" title="اضف الصفحة الى  Reddit"
+                        ><img alt="share" src="/images/social/Reddit.png"
+                      /></a>
+                    </li>
+                    <li>
+                      <a
+                        rel="nofollow"
+                        href="http://www.linkedin.com/shareArticle?mini=true&url=##data.post_url##&title=&summary=&source=##data.post_url##"
+                        target="_blank"
+                        title="اشر الصفحة على LinkedIn"
+                        ><img alt="share" src="/images/social/LinkedIn.png"
+                      /></a>
+                    </li>
+                    <li class="hidden">
+                      <a rel="nofollow" href="http://wordpress.com/press-this.php?u=##data.post_url##&t=&s=" target="_blank" title="انشر الصفحة على WordPress"
+                        ><img alt="share" src="/images/social/Wordpress.png"
+                      /></a>
+                    </li>
+                    <li class="hidden">
+                      <a rel="nofollow" href="https://pinboard.in/popup_login/?url=##data.post_url##&title=&description=" target="_blank" title="احفظ الصفحة على Pinboard"
+                        ><img alt="share" src="/images/social/Pinboard.png"
+                      /></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+            <div class="row" x-import="posts/ad-post.html"></div>
+            <div class="center" x-import="posts/news_list.html"></div>
+            <div class="row" x-import="posts/ad-bottom.html"></div>
+          </div>
         </div>
+        <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
+      </div>
+    </div>
 
-        <div x-import="scripts.html"></div>
-        <script>
-            window.stop_loading_posts = true;
-        </script>
-        <script x-feature="browser.social" x-import="posts/browser.js"></script>
-        <script x-import="posts/index.js"></script>
-        <script x-import="posts/posts.js"></script>
-        <script>
-            let postContent = document.querySelector('.post-content');
-            if (postContent.innerHTML == 'content') {
-                postContent.style.display = 'none';
-            } else {
-                $('#btn_handle').hide();
-            }
-            let postDescription = document.querySelector('.post-description');
-            if (postDescription.innerHTML == 'details.description') {
-                postDescription.style.display = 'none';
-            }
-            document.querySelector('#btn_handle_loading').style.display = 'none';
-            let _path = document.location.pathname.split('/');
-            if (_path.length > 3) {
-                _path.pop();
-            }
+    <div x-import="scripts.html"></div>
+    <script>
+      window.stop_loading_posts = true;
+    </script>
+    <script x-feature="browser.social" x-import="posts/browser.js"></script>
+    <script x-import="posts/index.js"></script>
+    <script x-import="posts/posts.js"></script>
+    <script>
+      let postContent = document.querySelector('.post-content');
+      if (postContent.innerHTML == 'content') {
+        postContent.style.display = 'none';
+      } else {
+        $('#btn_handle').hide();
+      }
+      let postDescription = document.querySelector('.post-description');
+      if (postDescription.innerHTML == 'details.description') {
+        postDescription.style.display = 'none';
+      }
+      document.querySelector('#btn_handle_loading').style.display = 'none';
+      let _path = document.location.pathname.split('/');
+      if (_path.length > 3) {
+        _path.pop();
+      }
 
-            _path = _path.join('/');
-            site.qrcode({
-                colorDark: '#2196f3',
-                selector: '#qrcode',
-                text: document.location.origin + _path,
-            });
-        </script>
-    </body>
+      _path = _path.join('/');
+      site.qrcode({
+        colorDark: '#2196f3',
+        selector: '#qrcode',
+        text: document.location.origin + _path,
+      });
+    </script>
+  </body>
 </html>

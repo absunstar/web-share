@@ -17,16 +17,6 @@
     { "name": "posts_show_server", "en": "Show Server", "ar": "سيرفر المشاهدة" },
     { "name": "posts_download", "en": "Download", "ar": "تحميل" },
     {
-        "name": "details.image_url",
-        "en": "/images/no.png",
-        "ar": "/images/no.png"
-    },
-    {
-        "name": "image_url",
-        "en": "/images/logo.png",
-        "ar": "/images/logo.png"
-    },
-    {
         "name": "guid",
         "en": "",
         "ar": ""
