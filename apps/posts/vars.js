@@ -3,6 +3,9 @@ module.exports = function init(site, post) {
     {
       url: 'xxxxxxxxx',
       selector: 'xxxxxxxxx',
+    },  {
+      url: '*new.masrmix.com*',
+      selector: '.section-post',
     },
     {
       url: '*koora.fal3arda.com*',
