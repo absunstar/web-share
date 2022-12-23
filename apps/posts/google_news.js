@@ -109,9 +109,9 @@ module.exports = function init(site, post) {
       .then((text) => {
         _post.tracking += ' -fetch ';
         let $ = site.$.load(text);
-        if (!_post.image_url) {
+        if (!_post.details.image_url) {
           if ((img = $('meta[property="og:image"]'))) {
-            _post.image_url = img.attr('content');
+            _post.details.image_url = img.attr('content');
             _post.tracking += ' -og:image ';
           }
         }
@@ -160,9 +160,9 @@ module.exports = function init(site, post) {
             return;
           }
 
-          if (_post.$selectImage) {
+          if (!!_post.details.image_url && _post.$selectImage) {
             if ((img = $(_post.$selectImage))) {
-              _post.image_url = img.attr('src');
+              _post.details.image_url = img.attr('src');
               _post.tracking += ' -selectImage ';
             }
           }
