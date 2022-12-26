@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+  <head x-import="head.html">
+    <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+    <style x-lang="ar">
+      :root {
+        --direction: rtl;
+        --text-align: right;
+        --float: right;
+      }
+    </style>
+  </head>
+
+  <body class="##session.lang##" ng-controller="scrapingList">
+    <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
+
+    <div id="main-layout" class="container loaded" x-permissions="login">
+      <div class="row">
+        <div class="row">
+          <div x-import="scrapingList/manager.html"></div>
+
+          <div class="row">
+            <h1 class="bold text-center">##word.scrapingList##</h1>
+          </div>
+
+          <div class="top-actions">
+            <i-button type="add" label="##word.new##" ng-click="showAdd()"></i-button>
+          </div>
+
+          <div class="row padding">
+            <i-control ng-model="$search"></i-control>
+          </div>
+          <table class="table hover bold">
+            <tr>
+              <th>##word.url##</th>
+              <th>##word.selector##</th>
+              <th>##word.needBrowser##</th>
+              <th>##word.active##</th>
+              <th class="not-print">##word.actions##</th>
+            </tr>
+            <tr ng-repeat="item in list | filter:$search">
+              <td class="center">{{item.url}}</td>
+              <td class="center">{{item.selector}}</td>
+              <td class="center">{{item.needBrowser}}</td>
+              <td class="center">{{item.active}}</td>
+
+              <td class="center not-print">
+                <i-button type="view" label="##word.details##" ng-click="showView(item)"></i-button>
+
+                <i-button type="edit" label="##word.edit##" ng-click="showUpdate(item)"></i-button>
+
+                <i-button type="delete" label="##word.delete##" ng-click="showDelete(item)"></i-button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div x-import="scripts.html"></div>
+    <script x-import="scrapingList/index.js"></script>
+  </body>
+</html>

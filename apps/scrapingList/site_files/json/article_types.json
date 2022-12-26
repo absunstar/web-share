@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "en": "Simble",
+    "ar": "بسيط"
+  },
+  {
+    "id": 2,
+    "en": "developed",
+    "ar": "متطور"
+  },
+  {
+    "id": 3,
+    "en": "multi-paragraph",
+    "ar": "متعدد الفقرات"
+  },
+  {
+    "id": 4,
+    "en": "multi-image",
+    "ar": "متعدد الصور"
+  }
+]

@@ -155,7 +155,7 @@ module.exports = function init(site) {
     public: true,
     parser: null,
     path: [
-      'client-side/theme.css',
+      'client-side/theme_paper.css',
       'client-side/layout.css',
       'client-side/scrollbar.css',
       'client-side/progress.css',
@@ -180,7 +180,6 @@ module.exports = function init(site) {
       'client-side/print.css',
       'client-side/ui.css',
       'client-side/tableExport.css',
-      'client-side/theme_paper.css',
       'client-side/font-awesome.css',
       site.dir + '/css/custom.css',
       'posts/custom.css',

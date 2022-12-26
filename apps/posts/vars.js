@@ -1,5 +1,5 @@
-module.exports = function init(site, post) {
-  post.siteList = [
+module.exports = function init(site) {
+  site.defaultScrapingList = [
     {
       url: '*xxxxxxxxx*',
       selector: 'xxxxxxxxx',

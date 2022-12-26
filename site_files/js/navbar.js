@@ -1,9 +1,3 @@
-var app = app || angular.module('myApp' , []);
-
-document.querySelectorAll('.loaded').forEach( el =>{
-    el.style.visibility = 'visible';
-});
-
 app.controller('navbar' , ($scope , $http)=>{
 
     $scope.register = function(){

@@ -2,7 +2,7 @@ module.exports = function init(site, post) {
   const google_news = {
     apiKey: '6aed1811909d48a0bb0924328fd41d8c',
     callback: function (err, data) {
-      console.log(err || data);
+      console.log(err || null);
     },
   };
 
@@ -58,7 +58,7 @@ module.exports = function init(site, post) {
       );
       return;
     }
-    if ((page = post.siteList.find((s) => _post.details.url.like(s.url)))) {
+    if ((page = site.get_scrapingList().find((s) => _post.details.url.like(s.url)))) {
       _post.tracking += ' -page ';
       _post.$selector = page.selector;
       _post.needBrowser = page.needBrowser;
@@ -122,7 +122,7 @@ module.exports = function init(site, post) {
           _post.hasContent = true;
           _post.content = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoID}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
           post.$posts_content.update(_post, (err, result) => {
-            console.log(err || 'Post Content Set');
+            console.log(err || 'Post Content Set as youtube');
           });
 
           callback(null, {
@@ -139,7 +139,7 @@ module.exports = function init(site, post) {
           return;
         }
 
-        if ((page = post.siteList.find((s) => _post.details.url.like(s.url)))) {
+        if ((page = site.get_scrapingList().find((s) => _post.details.url.like(s.url)))) {
           _post.tracking += ' -page2 ';
           _post.$selector = page.selector;
           _post.$selectImage = page.selectImage;
@@ -268,7 +268,6 @@ module.exports = function init(site, post) {
   };
 
   google_news.load = function (api, params) {
-    console.log('Google New Auto Load');
     site
       .fetch(`http://newsapi.org/v2/${api}?apiKey=${google_news.apiKey}&${params}`, {
         method: 'get',

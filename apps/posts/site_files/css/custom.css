@@ -7,6 +7,7 @@
   --scrollbar-box-shadow-color: #9e9e9e;
   --modal-header-background-color: #2196f3;
   --placeholder-color: #bbb;
+  --btn-color: #000;
 }
 
 @media (max-width: 768px
@@ -42,7 +43,8 @@ nav.sitebar .brand a {
   font-weight: bold;
   color: #000;
   text-shadow: none;
-  display: block;
+  vertical-align: top;
+  display: inline-block;
 }
 
 nav.sitebar .brand a span {
