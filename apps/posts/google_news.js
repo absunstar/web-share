@@ -51,43 +51,33 @@ module.exports = function init(site, post) {
         {
           url: _post.details.url,
           guid: _post.guid,
-          needBrowser: _post.needBrowser || false,
           hasContent: _post.hasContent || false,
           tracking: _post.tracking,
         }
       );
       return;
     }
-    if (_post.needBrowser) {
-      _post.tracking += ' -needbrowser ';
-      callback(
-        { message: '\nNeed Browser\n' },
-        {
-          url: _post.details.url,
-          guid: _post.guid,
-          needBrowser: _post.needBrowser || false,
-          hasContent: _post.hasContent || false,
-          tracking: _post.tracking,
-        }
-      );
-      return;
-    }
+
     if ((page = site.get_scrapingList().find((s) => _post.details.url.like(s.url)))) {
       _post.tracking += ' -page ';
       _post.$selector = page.selector;
-      _post.needBrowser = page.needBrowser;
+      _post.$needBrowser = page.needBrowser;
       _post.$selectAll = page.selectAll;
-      _post.$filter = page.filter;
+      _post.$allowRegx = page.allowRegx;
+      _post.$regx = page.regx;
+      _post.$allowFilter = page.allowFilter;
+      _post.$startFilter = page.startFilter;
+      _post.$endFilter = page.endFilter;
     }
 
-    if (_post.needBrowser) {
-      _post.tracking += ' -needBrowser2 ';
+    if (_post.$needBrowser) {
+      _post.tracking += ' -needBrowser ';
       callback(
         { message: '\nPost Need Browser\n' },
         {
           url: _post.details.url,
           guid: _post.guid,
-          needBrowser: _post.needBrowser || false,
+          needBrowser: _post.$needBrowser || false,
           hasContent: _post.hasContent || false,
           tracking: _post.tracking,
         }
@@ -143,7 +133,7 @@ module.exports = function init(site, post) {
             done: true,
             hasContent: _post.hasContent || false,
             content: _post.content,
-            needBrowser: _post.needBrowser || !_post.hasContent,
+            needBrowser: _post.$needBrowser || !_post.hasContent,
             url: _post.details.url,
             selector: _post.$selector,
             guid: _post.guid,
@@ -157,13 +147,17 @@ module.exports = function init(site, post) {
           _post.tracking += ' -page2 ';
           _post.$selector = page.selector;
           _post.$selectImage = page.selectImage;
-          _post.needBrowser = page.needBrowser;
+          _post.$needBrowser = page.needBrowser;
           _post.$selectAll = page.selectAll;
-          _post.$filter = page.filter;
+          _post.$allowRegx = page.allowRegx;
+          _post.$regx = page.regx;
+          _post.$allowFilter = page.allowFilter;
+          _post.$startFilter = page.startFilter;
+          _post.$endFilter = page.endFilter;
 
-          if (!_post.$selector) {
+          if (!_post.$allowRegx && !_post.$selector) {
             callback(
-              { message: '\nPost Selector Not Exists\n' },
+              { message: '\nPost Selector and allowRegx Not Sets\n' },
               {
                 needBrowser: true,
                 url: _post.details.url,
@@ -180,9 +174,17 @@ module.exports = function init(site, post) {
               _post.tracking += ' -selectImage ';
             }
           }
-          if (_post.$filter) {
-            _post.fullText = $.html(); // Buffer.from(text, 'utf-8').toString()
-            _post.content = _post.fullText.split(_post.$filter.start)[1].split(_post.$filter.end)[0];
+          if (_post.$allowRegx) {
+            _post.fullText = $.html();
+            var match = _post.fullText.match(_post.$regx);
+            if (match) {
+              match.forEach((m) => {
+                _post.content += m;
+              });
+            }
+          } else if (_post.$allowFilter) {
+            _post.fullText = $.html();
+            _post.content = _post.fullText.split(_post.$startFilter)[1].split(_post.$endFilter)[0];
           } else {
             if (_post.$selectAll) {
               $(_post.$selector).each((p) => {
@@ -304,18 +306,34 @@ module.exports = function init(site, post) {
 
   google_news.auto_load = function () {
     google_news.load('top-headlines', 'language=ar');
-    google_news.load('top-headlines', 'country=eg&category=business');
-    google_news.load('top-headlines', 'country=eg&category=entertainment');
-    google_news.load('top-headlines', 'country=eg&category=general');
-    google_news.load('top-headlines', 'country=eg&category=health');
-    google_news.load('top-headlines', 'country=eg&category=science');
-    google_news.load('top-headlines', 'country=eg&category=sports');
-    google_news.load('top-headlines', 'country=eg&category=technology');
+    setTimeout(() => {
+      google_news.load('top-headlines', 'country=eg&category=business');
+    }, 1000 * 60 * 10);
+    setTimeout(() => {
+      google_news.load('top-headlines', 'country=eg&category=entertainment');
+    }, 1000 * 60 * 20);
+    setTimeout(() => {
+      google_news.load('top-headlines', 'country=eg&category=general');
+    }, 1000 * 60 * 30);
+    setTimeout(() => {
+      google_news.load('top-headlines', 'country=eg&category=health');
+    }, 1000 * 60 * 40);
+    setTimeout(() => {
+      google_news.load('top-headlines', 'country=eg&category=science');
+    }, 1000 * 60 * 50);
+    setTimeout(() => {
+      google_news.load('top-headlines', 'country=eg&category=sports');
+    }, 1000 * 60 * 60);
+    setTimeout(() => {
+      google_news.load('top-headlines', 'country=eg&category=technology');
+    }, 1000 * 60 * 70);
+
+    setTimeout(() => {
+      google_news.auto_load();
+    }, 1000 * 60 * 80);
   };
 
-  setInterval(() => {
-    google_news.auto_load();
-  }, 1000 * 60 * 60);
+  google_news.auto_load();
 
   return google_news;
 };
