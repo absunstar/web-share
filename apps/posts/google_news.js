@@ -87,25 +87,7 @@ module.exports = function init(site, post) {
     }
 
     site
-      .fetch(_post.details.url, {
-        mode: 'cors',
-        method: 'get',
-        headers: {
-          'User-Agent': `Mozilla/5.0 (Windows NT 10.0; Win64; x64)  AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.${Date.now()} Safari/537.36`,
-        },
-        redirect: 'follow',
-        agent: function (_parsedURL) {
-          if (_parsedURL.protocol == 'http:') {
-            return new site.http.Agent({
-              keepAlive: true,
-            });
-          } else {
-            return new site.https.Agent({
-              keepAlive: true,
-            });
-          }
-        },
-      })
+      .fetchURLContent(_post.details.url)
       .then((res) => {
         _post.details.url = res.url;
         return res.text();
@@ -175,16 +157,14 @@ module.exports = function init(site, post) {
             }
           }
           if (_post.$allowRegx) {
-            _post.fullText = $.html();
-            var match = _post.fullText.match(_post.$regx);
+            var match = text.match(_post.$regx);
             if (match) {
               match.forEach((m) => {
                 _post.content += m;
               });
             }
           } else if (_post.$allowFilter) {
-            _post.fullText = $.html();
-            _post.content = _post.fullText.split(_post.$startFilter)[1].split(_post.$endFilter)[0];
+            _post.content = text.split(_post.$startFilter)[1].split(_post.$endFilter)[0];
           } else {
             if (_post.$selectAll) {
               $(_post.$selector).each((p) => {
@@ -305,7 +285,6 @@ module.exports = function init(site, post) {
   };
 
   google_news.auto_load = function () {
-    google_news.load('top-headlines', 'language=ar');
     setTimeout(() => {
       google_news.load('top-headlines', 'country=eg&category=business');
     }, 1000 * 60 * 10);
@@ -327,10 +306,12 @@ module.exports = function init(site, post) {
     setTimeout(() => {
       google_news.load('top-headlines', 'country=eg&category=technology');
     }, 1000 * 60 * 70);
-
+    setTimeout(() => {
+      google_news.load('top-headlines', 'language=ar');
+    }, 1000 * 60 * 80);
     setTimeout(() => {
       google_news.auto_load();
-    }, 1000 * 60 * 80);
+    }, 1000 * 60 * 90);
   };
 
   google_news.auto_load();
