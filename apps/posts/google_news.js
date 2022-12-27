@@ -44,10 +44,24 @@ module.exports = function init(site, post) {
   google_news.handlePostContent = function (_post, callback) {
     callback = callback || google_news.callback;
     _post.tracking = '';
-    if (_post.hasContent || _post.needBrowser) {
+    if (_post.hasContent) {
       _post.tracking += ' -needbrowser ';
       callback(
-        { message: '\nPost Content Exists or Need Browser\n' },
+        { message: '\nPost Content Exists\n' },
+        {
+          url: _post.details.url,
+          guid: _post.guid,
+          needBrowser: _post.needBrowser || false,
+          hasContent: _post.hasContent || false,
+          tracking: _post.tracking,
+        }
+      );
+      return;
+    }
+    if (_post.needBrowser) {
+      _post.tracking += ' -needbrowser ';
+      callback(
+        { message: '\nNeed Browser\n' },
         {
           url: _post.details.url,
           guid: _post.guid,
