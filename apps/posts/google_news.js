@@ -45,7 +45,7 @@ module.exports = function init(site, post) {
     callback = callback || google_news.callback;
     _post.tracking = '';
     if (_post.hasContent) {
-      _post.tracking += ' -needbrowser ';
+      _post.tracking += ' -hasContent ';
       callback(
         { message: '\nPost Content Exists\n' },
         {
@@ -81,7 +81,7 @@ module.exports = function init(site, post) {
     }
 
     if (_post.needBrowser) {
-      _post.tracking += ' -needBrowser ';
+      _post.tracking += ' -needBrowser2 ';
       callback(
         { message: '\nPost Need Browser\n' },
         {
