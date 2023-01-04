@@ -140,13 +140,13 @@
     <script x-import="posts/posts.js"></script>
     <script>
       let postContent = document.querySelector('.post-content');
-      if (postContent.innerHTML == 'content') {
+      if (!postContent.innerHTML) {
         postContent.style.display = 'none';
       } else {
         $('#btn_handle').hide();
       }
       let postDescription = document.querySelector('.post-description');
-      if (postDescription.innerHTML == 'details.description') {
+      if (!postDescription.innerHTML) {
         postDescription.style.display = 'none';
       }
       document.querySelector('#btn_handle_loading').style.display = 'none';
