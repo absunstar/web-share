@@ -13,7 +13,7 @@ module.exports = function init(site, post) {
         sort: {
           id: -1,
         },
-        limit: 10000,
+        limit: 1000,
       },
       (err, docs) => {
         if (!err && docs) {
