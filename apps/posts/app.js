@@ -90,7 +90,7 @@ module.exports = function init(site) {
       site.page_data.ytsList = site.defaultPostList['is_yts'] ? site.defaultPostList['is_yts'].slice(-10) : [];
       site.page_data.newsList = site.defaultPostList['is_google_news'] ? site.defaultPostList['is_google_news'].slice(-10) : [];
       site.page_data.childrenList = site.defaultPostList['is_children'] ? site.defaultPostList['is_children'].slice(-10) : [];
-    }, 1000 * 5);
+    }, 1000 * 15);
 
     setTimeout(() => {
       prepareAllPosts();
