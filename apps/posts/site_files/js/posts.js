@@ -35,7 +35,7 @@ function loadPosts(more) {
   busy = true;
   $('.posts-loading').remove();
   $('.no-data').remove();
-  $('#posts').append('<p class="posts-loading"> <img src="/images/loading.gif"> ##word.posts_load_more## </p>');
+  $('#posts').append('<p class="posts-loading"> <img src="/images/loading.gif" alt="loading"> ##word.posts_load_more## </p>');
 
   if (more) {
     my_post_content_where.last_time = last_posts.length > 0 ? last_posts[last_posts.length - 1].time : null;
@@ -128,7 +128,7 @@ function loadPosts(more) {
                          
                       `;
       }
-      rendered+='</div>'
+      rendered += '</div>';
       $('#posts').append(rendered);
       $('.posts-loading').remove();
 

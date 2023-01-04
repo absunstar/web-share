@@ -75,7 +75,9 @@
                       /></a>
                     </li>
                     <li>
-                      <a rel="nofollow" href="https://plus.google.com/share?url=##data.doc.post_url##" target="_blank" title="انشر الصفحة على جوجل"><img alt="share" src="/images/social/Google.png" /></a>
+                      <a rel="nofollow" href="https://plus.google.com/share?url=##data.doc.post_url##" target="_blank" title="انشر الصفحة على جوجل"
+                        ><img alt="share" src="/images/social/Google.png"
+                      /></a>
                     </li>
                     <li class="hidden">
                       <a rel="nofollow" href="http://www.tumblr.com/share?v=3&u=##data.doc.post_url##&t=&s=" target="_blank" title="انشر الصفحة على Tumblr"
@@ -186,7 +188,7 @@
       function show_episode(ep) {
         $('#show_' + ep.index).hide();
         $('.posts-loading').remove();
-        $('#watch_list_' + ep.index).append('<p class="posts-loading"> <img src="/images/loading.gif">  </p>');
+        $('#watch_list_' + ep.index).append('<p class="posts-loading"> <img src="/images/loading.gif" alt="loading">  </p>');
 
         ep.watch_list = [];
         spider.get_page_content(
@@ -249,7 +251,7 @@
       function download_episode(ep) {
         $('#download_' + ep.index).hide();
         $('.posts-loading').remove();
-        $('#download_list_' + ep.index).append('<p class="posts-loading"> <img src="/images/loading.gif">  </p>');
+        $('#download_list_' + ep.index).append('<p class="posts-loading"> <img src="/images/loading.gif" alt="loading">  </p>');
 
         ep.download_list = [];
         spider.get_page_content(
