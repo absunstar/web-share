@@ -1,9 +1,12 @@
+
 <div class="center row" class="">
-    <div class="site-news" ng-repeat="n in siteNews track by $index">
-        <a target="_blank" href="{{n.url}}">
-            <h3>{{n.title}}</h3>
-            <img ng-src="{{n.image_url}}" alt="{{n.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
-            <p>{{n.description}}</p>
+    <div class="site-news" x-list="siteNews">
+        <a target="_blank" href="##item.url##">
+            <h3>##item.title##</h3>
+            <img src="##item.image_url##" alt="##item.title##" onerror="this.onerror=null;this.src='/images/no.png'" />
+            <p>##item.description##</p>
         </a>
     </div>
 </div>
+
+<hr>

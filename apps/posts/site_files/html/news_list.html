@@ -1,11 +1,11 @@
 <div class="news-list">
-  <div class="post google-news mini center" id="post_{{p.id}}" ng-repeat="p in news_list track by $index">
+  <div class="post google-news mini center" id="post_##item.id##" x-list="newsList">
     <div class="body">
       <div class="row">
         <div class="details">
-          <a rel="nofollow" href="/post/{{p.guid}}" target="_blank">
-            <img class="image mini" ng-src="{{p.image_url || '/images/no.png'}}" alt="{{p.text}}" onerror="this.onerror=null;this.src='/images/no.png'" />
-            <p class="text">{{p.text}}</p>
+          <a rel="nofollow" href="/post/##item.guid##" target="_blank">
+            <img class="image mini" src="##item.image_url##" alt="##item.text##" onerror="this.onerror=null;this.src='/images/no.png'" />
+            <p class="text">##item.text##</p>
           </a>
         </div>
       </div>

@@ -1,14 +1,14 @@
-<div class="video float-none" id="video_{{v.id}}" ng-repeat="v in children_list track by $index">
-    <div class="body">
-        <div class="details">
-            <a x-feature="browser.social" onclick="event.preventDefault();window.open('{{v.details.url}}');return false;" href="{{v.post_url}}" target="_blank">
-                <img class="image" ng-src="{{v.details.image_url}}" alt="{{v.details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
-            </a>
-            <a x-feature="!browser.social" href="{{v.post_url}}" target="_blank">
-                <img class="image" ng-src="{{v.details.image_url}}" alt="{{v.details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
-            </a>
-        </div>
-
-        <h2 class="text">{{v.text}}</h2>
+<div class="video float-none" id="video_##item.id##" x-list="hildrenList">
+  <div class="body">
+    <div class="details">
+      <a x-feature="browser.social" onclick="event.preventDefault();window.open('##item.details.url##');return false;" href="##item.post_url##" target="_blank">
+        <img class="image" ng-src="##item.details.image_url##" alt="##item.details.title##" onerror="this.onerror=null;this.src='/images/no.png'" />
+      </a>
+      <a x-feature="!browser.social" href="##item.post_url##" target="_blank">
+        <img class="image" ng-src="##item.details.image_url##" alt="##item.details.title##" onerror="this.onerror=null;this.src='/images/no.png'" />
+      </a>
     </div>
+
+    <h2 class="text">##item.text##</h2>
+  </div>
 </div>

@@ -16,8 +16,8 @@ module.exports = function init(site) {
     all: [],
   };
   site.page_data = {
-    site_news: require(__dirname + '/site_files/json/site-news.json'),
-    post_types: require(__dirname + '/site_files/json/post-types.json'),
+    siteNews: require(__dirname + '/site_files/json/site-news.json'),
+    PostTypes: require(__dirname + '/site_files/json/post-types.json'),
   };
 
   function preparePots(type) {
@@ -54,6 +54,12 @@ module.exports = function init(site) {
           hasContent: 1,
           yts: 1,
           article: 1,
+          is_google_news : 1,
+          is_yts:1,
+          is_movies:1,
+          is_series:1,
+          is_rss:1,
+          is_children:1
         },
         limit: 1000,
         where: where,
@@ -63,19 +69,8 @@ module.exports = function init(site) {
         if (!err && docs) {
           site.defaultPostList[type] = [];
           docs.forEach((doc) => {
-            handlePost(doc, (doc2) => {
-              doc2.$memory = true;
-              site.defaultPostList[type].push(doc2);
-            });
+            site.defaultPostList[type].push(handlePost(doc));
           });
-
-          if (type == 'is_yts') {
-            site.page_data.yts_list = site.defaultPostList[type].slice(-10);
-          } else if (type == 'is_google_news') {
-            site.page_data.news_list = site.defaultPostList[type].slice(-10);
-          } else if (type == 'is_children') {
-            site.page_data.children_list = site.defaultPostList[type].slice(-10);
-          }
         }
       },
       true
@@ -92,6 +87,12 @@ module.exports = function init(site) {
     preparePots('is_children');
 
     setTimeout(() => {
+      site.page_data.ytsList = site.defaultPostList['is_yts'] ? site.defaultPostList['is_yts'].slice(-10) : [];
+      site.page_data.newsList = site.defaultPostList['is_google_news'] ? site.defaultPostList['is_google_news'].slice(-10) : [];
+      site.page_data.childrenList = site.defaultPostList['is_children'] ? site.defaultPostList['is_children'].slice(-10) : [];
+    }, 1000 * 5);
+
+    setTimeout(() => {
       prepareAllPosts();
     }, 1000 * 60 * 15);
   }
@@ -101,47 +102,46 @@ module.exports = function init(site) {
     return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
   }
 
-  function handlePost(doc, callback) {
+  function handlePost(doc) {
     if (doc.$handled) {
-      callback(doc);
-      return;
+      return doc;
     }
     doc.$handled = true;
     doc.details.title = escapeHtml(doc.details.title);
     doc.page_title2 = doc.details.title.substring(0, 70);
-    doc.image_url = doc.details.image_url;
+    doc.image_url = doc.image_url || doc.details.image_url || '/images/no.png';
     doc.page_description = escapeHtml(doc.text);
     doc.post_url = '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
     doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
     doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
     doc.page_keywords = doc.details.title.split(' ').join(',');
-    doc.details.description = doc.details.description || '';
+    doc.details.description = doc.details.description || ' ................... ';
     if (doc.is_video) {
       doc.post_type = 'full-video';
       if (doc.details.url.like('https://www.youtube.com/watch*')) {
         doc.details.url = 'https://www.youtube.com/embed/' + doc.details.url.split('=')[1].split('&')[0];
       }
-      callback(doc);
     } else if (doc.is_yts) {
       doc.page_description = escapeHtml(doc.details.description);
-      doc.image_url = doc.details.image_url;
-      callback(doc);
+      doc.banner = '/images/banner720p.png';
+      doc.yts.torrents.forEach((torrent) => {
+        if (torrent.quality == '1080p') {
+          doc.banner = '/images/banner1080p.png';
+        }
+      });
     } else if (doc.is_google_news) {
       doc.page_description = escapeHtml(doc.details.description);
-      callback(doc);
     } else if (doc.is_series) {
       doc.page_title2 = ' مسلسل ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
       doc.page_description = escapeHtml(doc.details.description);
       doc.episode_count = doc.episode_list.length;
-      callback(doc);
     } else if (doc.is_movies) {
       doc.page_title2 = ' فيلم ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
       doc.page_description = escapeHtml(doc.details.description);
-      callback(doc);
     } else {
       doc.post_type = 'full-post';
-      callback(doc);
     }
+    return doc;
   }
 
   site.onGET('/api/page-data', (req, res) => {
@@ -258,7 +258,13 @@ module.exports = function init(site) {
   site.onGET({ name: '/posts', public: true }, (req, res) => {
     res.render(
       'posts/index.html',
-      {},
+      {
+        siteNews: site.page_data.siteNews,
+        PostTypes: site.page_data.PostTypes,
+        ytsList: site.page_data.ytsList,
+        newsList: site.page_data.newsList,
+        childrenList: site.page_data.childrenList,
+      },
       {
         parser: 'html css js',
       }
@@ -424,10 +430,9 @@ module.exports = function init(site) {
         where,
         (err, doc) => {
           if (!err && doc) {
-            handlePost(doc, (doc2) => {
-              site.activePostList.push(doc2);
-              responsePost(doc2, res, req);
-            });
+            doc = handlePost(doc);
+            site.activePostList.push(doc);
+            responsePost(doc, res, req);
           } else {
             res.redirect('/');
           }
@@ -911,10 +916,9 @@ module.exports = function init(site) {
           where,
           (err, doc) => {
             if (!err && doc) {
-              handlePost(doc, (doc2) => {
-                site.activePostList.push(doc2);
-                responsePost(doc2, res, req);
-              });
+              doc = handlePost(doc);
+              site.activePostList.push(doc);
+              responsePost(doc, res, req);
             } else {
               res.redirect('/');
             }
@@ -930,35 +934,119 @@ module.exports = function init(site) {
       doc.post_url = req.headers.host + doc.post_url;
     }
     if (res.is_blogger) {
-      res.render('posts/blogger-yts.html', doc, {
-        parser: 'html css js',
-      });
+      res.render(
+        'posts/blogger-yts.html',
+        {
+          ...req.data,
+          doc: doc,
+          siteNews: site.page_data.siteNews,
+          PostTypes: site.page_data.PostTypes,
+          ytsList: site.page_data.ytsList,
+          newsList: site.page_data.newsList,
+          childrenList: site.page_data.childrenList,
+        },
+        {
+          parser: 'html css js',
+        }
+      );
     } else if (doc.is_video) {
-      res.render('posts/video.html', doc, {
-        parser: 'html css js',
-      });
+      res.render(
+        'posts/video.html',
+        {
+          ...req.data,
+          doc: doc,
+          siteNews: site.page_data.siteNews,
+          PostTypes: site.page_data.PostTypes,
+          ytsList: site.page_data.ytsList,
+          newsList: site.page_data.newsList,
+          childrenList: site.page_data.childrenList,
+        },
+        {
+          parser: 'html css js',
+        }
+      );
     } else if (doc.is_yts) {
       req.addFeature('yts-post');
-      res.render('posts/yts.html', doc, {
-        parser: 'html css js',
-      });
+      res.render(
+        'posts/yts.html',
+        {
+          ...req.data,
+          doc: doc,
+          siteNews: site.page_data.siteNews,
+          PostTypes: site.page_data.PostTypes,
+          ytsList: site.page_data.ytsList,
+          newsList: site.page_data.newsList,
+          childrenList: site.page_data.childrenList,
+        },
+        {
+          parser: 'html css js',
+        }
+      );
     } else if (doc.is_google_news) {
       req.addFeature('news-post');
-      res.render('posts/google_news.html', doc, {
-        parser: 'html css js',
-      });
+      res.render(
+        'posts/google_news.html',
+        {
+          ...req.data,
+          doc: doc,
+          siteNews: site.page_data.siteNews,
+          PostTypes: site.page_data.PostTypes,
+          ytsList: site.page_data.ytsList,
+          newsList: site.page_data.newsList,
+          childrenList: site.page_data.childrenList,
+        },
+        {
+          parser: 'html css js',
+        }
+      );
     } else if (doc.is_series) {
-      res.render('posts/series.html', doc, {
-        parser: 'html css js',
-      });
+      res.render(
+        'posts/series.html',
+        {
+          ...req.data,
+          doc: doc,
+          siteNews: site.page_data.siteNews,
+          PostTypes: site.page_data.PostTypes,
+          ytsList: site.page_data.ytsList,
+          newsList: site.page_data.newsList,
+          childrenList: site.page_data.childrenList,
+        },
+        {
+          parser: 'html css js',
+        }
+      );
     } else if (doc.is_movies) {
-      res.render('posts/movie.html', doc, {
-        parser: 'html css js',
-      });
+      res.render(
+        'posts/movie.html',
+        {
+          ...req.data,
+          doc: doc,
+          siteNews: site.page_data.siteNews,
+          PostTypes: site.page_data.PostTypes,
+          ytsList: site.page_data.ytsList,
+          newsList: site.page_data.newsList,
+          childrenList: site.page_data.childrenList,
+        },
+        {
+          parser: 'html css js',
+        }
+      );
     } else {
-      res.render('posts/post.html', doc, {
-        parser: 'html css js',
-      });
+      res.render(
+        'posts/post.html',
+        {
+          ...req.data,
+          doc: doc,
+          siteNews: site.page_data.siteNews,
+          PostTypes: site.page_data.PostTypes,
+          ytsList: site.page_data.ytsList,
+          newsList: site.page_data.newsList,
+          childrenList: site.page_data.childrenList,
+        },
+        {
+          parser: 'html css js',
+        }
+      );
     }
   }
 };

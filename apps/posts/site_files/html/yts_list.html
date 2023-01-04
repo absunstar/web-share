@@ -1,20 +1,20 @@
 <div class="center">
-  <div class="yts float-none" id="post_{{id}}" ng-repeat="y in yts_list track by $index">
-    <a href="{{y.post_url}}" target="_blank" class="post-url">
+  <div class="yts float-none" id="post_##item.id##" x-list="ytsList">
+    <a href="##item.post_url##" target="_blank" class="post-url">
       <div class="body">
         <div class="details">
-          <img class="image" ng-src="{{y.details.image_url}}" alt="{{y.details.title}}" onerror="this.onerror=null;this.src='/images/no.png'" />
+          <img class="image" src="##item.details.image_url##" alt="##item.details.title##" onerror="this.onerror=null;this.src='/images/no.png'" />
 
-          <img class="yts-banner" ng-src="{{y.banner}}" alt="" width="118" height="91" />
-          <span class="rating"> {{y.yts.rating}} </span>
+          <img class="yts-banner" src="##item.banner##" alt="" width="118" height="91" />
+          <span class="rating"> ##item.yts.rating## </span>
           <div class="type">
-            <p ng-repeat="g in y.yts.genres">{{g}}</p>
+            <p x-list2="genres">##item2.##</p>
           </div>
         </div>
 
         <h2 class="text">
-          {{y.details.title}}
-          <p class="center">( {{y.yts.year}} )</p>
+          ##item.details.title##
+          <p class="center">( ##item.yts.year## )</p>
         </h2>
       </div>
     </a>

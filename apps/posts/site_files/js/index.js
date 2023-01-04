@@ -271,5 +271,4 @@ app.controller('posts', function ($scope, $http, $sce) {
         );
     };
 
-    $scope.loadPageData();
 });

@@ -51,7 +51,14 @@ setTimeout(() => {
   site.onGET('*', (req, res) => {
     res.render(
       'posts/index.html',
-      {},
+      {
+        ...req.data,
+        siteNews: site.page_data.siteNews,
+        PostTypes: site.page_data.PostTypes,
+        ytsList: site.page_data.ytsList,
+        newsList: site.page_data.newsList,
+        childrenList: site.page_data.childrenList,
+      },
       {
         parser: 'html css js',
         public: true,
