@@ -18,10 +18,10 @@
 <div class="main-menu">
   <div id="empty_tabs" class="tabs">
     <div class="tabs-header">
-      <a class="tab-link" onclick="site.showTabs(event, '#main_tabs')">
+      <button class="tab-link" onclick="site.showTabs(event, '#main_tabs')">
         <img src="/images/logo.png" alt="##word.main_menu##"/>
         <span> ##word.main_menu##</span>
-      </a>
+      </button>
     </div>
   </div>
 
@@ -29,27 +29,27 @@
     <div class="tabs-header">
       <div class="row">
 
-        <a class="tab-link" onclick="newPost()">
+        <button class="tab-link" onclick="newPost()">
           <img src="/images/logo.png" alt="##word.main_menu##"/>
           <span> ##word.posts_new## </span>
-        </a>
+        </button>
 
       
        
-        <a class="tab-link" ng-click="newURL()">
+        <button class="tab-link" ng-click="newURL()">
           <img src="/images/logo.png" alt="##word.main_menu##"/>
           <span> ##word.posts_new_url## </span>
-        </a>
+        </button>
 
-        <a class="tab-link" onclick="newAuthor()">
+        <button class="tab-link" onclick="newAuthor()">
           <img src="/images/logo.png" alt="##word.main_menu##"/>
           <span> ##word.posts_new_author## </span>
-        </a>
+        </button>
         
-        <a class="tab-link" onclick="site.showTabs(event, '#main_tabs')">
+        <button class="tab-link" onclick="site.showTabs(event, '#main_tabs')">
           <img src="/images/logo.png" alt="##word.main_menu##"/>
           <span> ##word.main##</span>
-        </a>
+        </button>
       </div>
     </div>
   </div>
