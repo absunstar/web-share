@@ -2,22 +2,22 @@
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
-      <h2 ng-show="mode == 'add' ">
+      <p ng-show="mode == 'add' ">
         ##word.add##
         <i class="fa fa-plus"></i>
-      </h2>
-      <h2 ng-show="mode == 'edit' ">
+      </p>
+      <p ng-show="mode == 'edit' ">
         ##word.edit##
         <i class="fa fa-pencil"></i>
-      </h2>
-      <h2 ng-show="mode == 'delete' ">
+      </p>
+      <p ng-show="mode == 'delete' ">
         ##word.delete##
         <i class="fa fa-trash"></i>
-      </h2>
-      <h2 ng-show="mode == 'view' ">
+      </p>
+      <p ng-show="mode == 'view' ">
         ##word.details##
         <i class="fa fa-file"></i>
-      </h2>
+      </p>
     </div>
 
     <div class="modal-body">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="modal-footer center">
-      <h2 class="error">{{error}}</h2>
+      <p class="error">{{error}}</p>
       <i-button ng-show="mode == 'add' " type="add" label="##word.add##" ng-click="add(data)"></i-button>
       <i-button ng-show="mode == 'edit' " type="edit" label="##word.edit##" ng-click="update(data)"></i-button>
       <i-button ng-show="mode == 'delete' " type="delete" label="##word.delete##" ng-click="delete(data)"> </i-button>

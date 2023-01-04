@@ -15,7 +15,7 @@ module.exports = function init(site) {
     is_children: [],
     all: [],
   };
-  site.page_data = {
+  site.pageData = {
     siteNews: require(__dirname + '/site_files/json/site-news.json'),
     PostTypes: require(__dirname + '/site_files/json/post-types.json'),
   };
@@ -54,12 +54,12 @@ module.exports = function init(site) {
           hasContent: 1,
           yts: 1,
           article: 1,
-          is_google_news : 1,
-          is_yts:1,
-          is_movies:1,
-          is_series:1,
-          is_rss:1,
-          is_children:1
+          is_google_news: 1,
+          is_yts: 1,
+          is_movies: 1,
+          is_series: 1,
+          is_rss: 1,
+          is_children: 1,
         },
         limit: 1000,
         where: where,
@@ -71,6 +71,14 @@ module.exports = function init(site) {
           docs.forEach((doc) => {
             site.defaultPostList[type].push(handlePost(doc));
           });
+
+          if (type === 'is_yts') {
+            site.pageData.ytsList = site.defaultPostList['is_yts'].slice(-10);
+          } else if (type === 'is_google_news') {
+            site.pageData.newsList = site.defaultPostList['is_google_news'].slice(-10);
+          } else if (type === 'is_children') {
+            site.pageData.childrenList = site.defaultPostList['is_children'].slice(-10);
+          }
         }
       },
       true
@@ -85,12 +93,6 @@ module.exports = function init(site) {
     preparePots('is_series');
     preparePots('is_rss');
     preparePots('is_children');
-
-    setTimeout(() => {
-      site.page_data.ytsList = site.defaultPostList['is_yts'] ? site.defaultPostList['is_yts'].slice(-10) : [];
-      site.page_data.newsList = site.defaultPostList['is_google_news'] ? site.defaultPostList['is_google_news'].slice(-10) : [];
-      site.page_data.childrenList = site.defaultPostList['is_children'] ? site.defaultPostList['is_children'].slice(-10) : [];
-    }, 1000 * 15);
 
     setTimeout(() => {
       prepareAllPosts();
@@ -115,7 +117,7 @@ module.exports = function init(site) {
     doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
     doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
     doc.page_keywords = doc.details.title.split(' ').join(',');
-    doc.details.description = doc.details.description || ' ................... ';
+    doc.details.description = doc.details.description || '';
     if (doc.is_video) {
       doc.post_type = 'full-video';
       if (doc.details.url.like('https://www.youtube.com/watch*')) {
@@ -147,7 +149,7 @@ module.exports = function init(site) {
   site.onGET('/api/page-data', (req, res) => {
     res.json({
       done: true,
-      data: site.page_data,
+      data: site.pageData,
     });
   });
   site.onGET({
@@ -255,15 +257,96 @@ module.exports = function init(site) {
     public: true,
   });
 
+  site.onGET({ name: '/', public: true }, (req, res) => {
+    if (req.hasFeature('host.videos')) {
+      site.callRoute('/videos', req, res);
+    } else if (req.hasFeature('host.news')) {
+      req.addFeature('hide-right-menu');
+      req.addFeature('hide-left-menu');
+      req.data.content_class = 'col10';
+      site.callRoute('/posts', req, res);
+    } else if (req.hasFeature('host.torrents')) {
+      req.addFeature('torrents');
+      req.addFeature('hide-right-menu');
+      req.addFeature('hide-left-menu');
+      req.data.content_class = 'col10';
+      site.callRoute('/posts', req, res);
+    } else if (req.hasFeature('host.media')) {
+      req.addFeature('hide-right-menu');
+      req.addFeature('hide-left-menu');
+      req.data.content_class = 'col12';
+      site.callRoute('/posts', req, res);
+    } else {
+      req.addFeature('google-ads');
+      site.callRoute('/posts', req, res);
+    }
+  });
+  site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
+    if (req.params.guid == 'random') {
+      if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
+        let doc = site.defaultPostList['all'][Math.floor(Math.random() * site.defaultPostList['all'].length)];
+        res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+      } else {
+        res.redirect('/');
+      }
+    } else {
+      if (req.hasFeature('host.news')) {
+        req.addFeature('hide-left-menu');
+        req.addFeature('hide-right-menu');
+        req.data.content_class = 'col10';
+      } else if (req.hasFeature('host.torrents')) {
+        req.addFeature('hide-left-menu');
+        req.addFeature('hide-right-menu');
+        req.data.content_class = 'col10';
+      } else if (req.hasFeature('host.media')) {
+        req.addFeature('hide-left-menu');
+        req.addFeature('hide-right-menu');
+        req.data.content_class = 'col12';
+      } else {
+        req.addFeature('google-ads');
+        req.addFeature('host.all');
+      }
+
+      let _post = site.activePostList.find((p) => p.guid == req.params.guid);
+      if (_post) {
+        _post.$memory = true;
+        responsePost(_post, res, req);
+      } else {
+        let where = {};
+        where['guid'] = req.params.guid;
+        post.$posts_content.find(
+          where,
+          (err, doc) => {
+            if (!err && doc) {
+              doc = handlePost(doc);
+              site.activePostList.push(doc);
+              responsePost(doc, res, req);
+            } else {
+              res.redirect('/');
+            }
+          },
+          true
+        );
+      }
+    }
+  });
+
   site.onGET({ name: '/posts', public: true }, (req, res) => {
+    req.data.page_title = site.word('page_title').ar;
+    req.data.page_title2 = site.word('page_title2').ar;
+    req.data.page_description = site.word('page_description').ar;
+    req.data.page_keywords = site.word('page_keywords').ar;
+    req.data.image_url = '/images/logo.png';
+    req.data.h1 = req.data.page_description;
     res.render(
       'posts/index.html',
       {
-        siteNews: site.page_data.siteNews,
-        PostTypes: site.page_data.PostTypes,
-        ytsList: site.page_data.ytsList,
-        newsList: site.page_data.newsList,
-        childrenList: site.page_data.childrenList,
+        ...req.data,
+        siteNews: site.pageData.siteNews,
+        PostTypes: site.pageData.PostTypes,
+        ytsList: site.pageData.ytsList,
+        newsList: site.pageData.newsList,
+        childrenList: site.pageData.childrenList,
       },
       {
         parser: 'html css js',
@@ -855,81 +938,15 @@ module.exports = function init(site) {
     site.callRoute('/posts', req, res);
   });
 
-  site.onGET({ name: '/', public: true }, (req, res) => {
-    if (req.hasFeature('host.videos')) {
-      site.callRoute('/videos', req, res);
-    } else if (req.hasFeature('host.news')) {
-      req.addFeature('hide-right-menu');
-      req.addFeature('hide-left-menu');
-      req.data.content_class = 'col10';
-      site.callRoute('/posts', req, res);
-    } else if (req.hasFeature('host.torrents')) {
-      req.addFeature('torrents');
-      req.addFeature('hide-right-menu');
-      req.addFeature('hide-left-menu');
-      req.data.content_class = 'col10';
-      site.callRoute('/posts', req, res);
-    } else if (req.hasFeature('host.media')) {
-      req.addFeature('hide-right-menu');
-      req.addFeature('hide-left-menu');
-      req.data.content_class = 'col12';
-      site.callRoute('/posts', req, res);
-    } else {
-      req.addFeature('google-ads');
-      site.callRoute('/posts', req, res);
-    }
-  });
-  site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
-    if (req.params.guid == 'random') {
-      if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
-        let doc = site.defaultPostList['all'][Math.floor(Math.random() * site.defaultPostList['all'].length)];
-        res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
-      } else {
-        res.redirect('/');
-      }
-    } else {
-      if (req.hasFeature('host.news')) {
-        req.addFeature('hide-left-menu');
-        req.addFeature('hide-right-menu');
-        req.data.content_class = 'col10';
-      } else if (req.hasFeature('host.torrents')) {
-        req.addFeature('hide-left-menu');
-        req.addFeature('hide-right-menu');
-        req.data.content_class = 'col10';
-      } else if (req.hasFeature('host.media')) {
-        req.addFeature('hide-left-menu');
-        req.addFeature('hide-right-menu');
-        req.data.content_class = 'col12';
-      } else {
-        req.addFeature('google-ads');
-        req.addFeature('host.all');
-      }
-
-      let _post = site.activePostList.find((p) => p.guid == req.params.guid);
-      if (_post) {
-        _post.$memory = true;
-        responsePost(_post, res, req);
-      } else {
-        let where = {};
-        where['guid'] = req.params.guid;
-        post.$posts_content.find(
-          where,
-          (err, doc) => {
-            if (!err && doc) {
-              doc = handlePost(doc);
-              site.activePostList.push(doc);
-              responsePost(doc, res, req);
-            } else {
-              res.redirect('/');
-            }
-          },
-          true
-        );
-      }
-    }
-  });
-
   function responsePost(doc, res, req, callback) {
+    req.data.page_title = doc.page_title || site.word('page_title').ar;
+    req.data.page_title2 = doc.page_title2 || site.word('page_title2').ar;
+    req.data.page_description = doc.page_description || site.word('page_description').ar;
+    req.data.page_keywords = doc.page_keywords || site.word('page_keywords').ar;
+    req.data.image_url = doc.image_url || '/images/logo.png';
+
+    req.data.h1 = req.data.page_title;
+
     if (doc.post_url.startsWith('/post')) {
       doc.post_url = req.headers.host + doc.post_url;
     }
@@ -939,11 +956,11 @@ module.exports = function init(site) {
         {
           ...req.data,
           doc: doc,
-          siteNews: site.page_data.siteNews,
-          PostTypes: site.page_data.PostTypes,
-          ytsList: site.page_data.ytsList,
-          newsList: site.page_data.newsList,
-          childrenList: site.page_data.childrenList,
+          siteNews: site.pageData.siteNews,
+          PostTypes: site.pageData.PostTypes,
+          ytsList: site.pageData.ytsList,
+          newsList: site.pageData.newsList,
+          childrenList: site.pageData.childrenList,
         },
         {
           parser: 'html css js',
@@ -955,11 +972,11 @@ module.exports = function init(site) {
         {
           ...req.data,
           doc: doc,
-          siteNews: site.page_data.siteNews,
-          PostTypes: site.page_data.PostTypes,
-          ytsList: site.page_data.ytsList,
-          newsList: site.page_data.newsList,
-          childrenList: site.page_data.childrenList,
+          siteNews: site.pageData.siteNews,
+          PostTypes: site.pageData.PostTypes,
+          ytsList: site.pageData.ytsList,
+          newsList: site.pageData.newsList,
+          childrenList: site.pageData.childrenList,
         },
         {
           parser: 'html css js',
@@ -972,11 +989,11 @@ module.exports = function init(site) {
         {
           ...req.data,
           doc: doc,
-          siteNews: site.page_data.siteNews,
-          PostTypes: site.page_data.PostTypes,
-          ytsList: site.page_data.ytsList,
-          newsList: site.page_data.newsList,
-          childrenList: site.page_data.childrenList,
+          siteNews: site.pageData.siteNews,
+          PostTypes: site.pageData.PostTypes,
+          ytsList: site.pageData.ytsList,
+          newsList: site.pageData.newsList,
+          childrenList: site.pageData.childrenList,
         },
         {
           parser: 'html css js',
@@ -984,16 +1001,17 @@ module.exports = function init(site) {
       );
     } else if (doc.is_google_news) {
       req.addFeature('news-post');
+
       res.render(
         'posts/google_news.html',
         {
           ...req.data,
           doc: doc,
-          siteNews: site.page_data.siteNews,
-          PostTypes: site.page_data.PostTypes,
-          ytsList: site.page_data.ytsList,
-          newsList: site.page_data.newsList,
-          childrenList: site.page_data.childrenList,
+          siteNews: site.pageData.siteNews,
+          PostTypes: site.pageData.PostTypes,
+          ytsList: site.pageData.ytsList,
+          newsList: site.pageData.newsList,
+          childrenList: site.pageData.childrenList,
         },
         {
           parser: 'html css js',
@@ -1005,11 +1023,11 @@ module.exports = function init(site) {
         {
           ...req.data,
           doc: doc,
-          siteNews: site.page_data.siteNews,
-          PostTypes: site.page_data.PostTypes,
-          ytsList: site.page_data.ytsList,
-          newsList: site.page_data.newsList,
-          childrenList: site.page_data.childrenList,
+          siteNews: site.pageData.siteNews,
+          PostTypes: site.pageData.PostTypes,
+          ytsList: site.pageData.ytsList,
+          newsList: site.pageData.newsList,
+          childrenList: site.pageData.childrenList,
         },
         {
           parser: 'html css js',
@@ -1021,11 +1039,11 @@ module.exports = function init(site) {
         {
           ...req.data,
           doc: doc,
-          siteNews: site.page_data.siteNews,
-          PostTypes: site.page_data.PostTypes,
-          ytsList: site.page_data.ytsList,
-          newsList: site.page_data.newsList,
-          childrenList: site.page_data.childrenList,
+          siteNews: site.pageData.siteNews,
+          PostTypes: site.pageData.PostTypes,
+          ytsList: site.pageData.ytsList,
+          newsList: site.pageData.newsList,
+          childrenList: site.pageData.childrenList,
         },
         {
           parser: 'html css js',
@@ -1037,11 +1055,11 @@ module.exports = function init(site) {
         {
           ...req.data,
           doc: doc,
-          siteNews: site.page_data.siteNews,
-          PostTypes: site.page_data.PostTypes,
-          ytsList: site.page_data.ytsList,
-          newsList: site.page_data.newsList,
-          childrenList: site.page_data.childrenList,
+          siteNews: site.pageData.siteNews,
+          PostTypes: site.pageData.PostTypes,
+          ytsList: site.pageData.ytsList,
+          newsList: site.pageData.newsList,
+          childrenList: site.pageData.childrenList,
         },
         {
           parser: 'html css js',

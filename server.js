@@ -1,7 +1,7 @@
 const site = require('../isite')({
   version: 'version_' + new Date().getTime().toString() + '___',
   port: 8080,
-  savingTime : .5,
+  savingTime: 0.5,
   apps_dir: process.cwd() + '/apps',
   name: 'Web Share',
   lang: 'ar',
@@ -49,19 +49,26 @@ site.onGET('glx_ecfdd4d6a3041a9e7eeea5a9947936bd.txt', (req, res) => {
 
 setTimeout(() => {
   site.onGET('*', (req, res) => {
+    req.data.page_title = site.word('page_title').ar;
+    req.data.page_title2 = site.word('page_title2').ar;
+    req.data.page_description = site.word('page_description').ar;
+    req.data.page_keywords = site.word('page_keywords').ar;
+    req.data.image_url = '/images/logo.png';
+    req.data.h1 = req.data.page_description;
     res.render(
       'posts/index.html',
       {
         ...req.data,
-        siteNews: site.page_data.siteNews,
-        PostTypes: site.page_data.PostTypes,
-        ytsList: site.page_data.ytsList,
-        newsList: site.page_data.newsList,
-        childrenList: site.page_data.childrenList,
+        siteNews: site.pageData.siteNews,
+        PostTypes: site.pageData.PostTypes,
+        ytsList: site.pageData.ytsList,
+        newsList: site.pageData.newsList,
+        childrenList: site.pageData.childrenList,
       },
       {
         parser: 'html css js',
         public: true,
+        code: 404,
       }
     );
   });

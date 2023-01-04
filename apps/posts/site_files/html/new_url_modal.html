@@ -1,34 +1,34 @@
 <div id="newURLModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>##word.posts_new_url## <i class="fa fa-plus"></i></h2>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <form class="form">
-                    <div class="row">
-                        <i-control id2="url_text" ng-model="url.text" label="Parent URL"></i-control>
-                        <i-control id2="url_match" ng-model="url.match" label="Match URLS"></i-control>
-                        <i-checkbox ng-model="url.is_video" label="is Video"></i-checkbox>
-                        <i-checkbox ng-model="url.is_children" label="is Children"></i-checkbox>
-                        <i-checkbox ng-model="url.is_porn" label="is Porn"></i-checkbox>
-                        <i-checkbox ng-model="url.is_approved" label="is Approved"></i-checkbox>
-                        <i-checkbox ng-model="url.is_hidden" label="is Hidden"></i-checkbox>
-                        <i-checkbox ng-model="url.is_deleted" label="is Deleted"></i-checkbox>
-                    </div>
-                </form>
-            </div>
-
-            <div class="row">
-                <div x-import="posts/new_posts.html"></div>
-            </div>
-
-            <h2 class="error center red">{{error}}</h2>
-            <div class="modal-footer center">
-                <i-button ng-hide="urls_busy" type="add" ng-click="addURL()" label="##word.add##"></i-button>
-                <i-button type="close" onclick="site.hideModal('#newURLModal')" label="##word.close##"></i-button>
-            </div>
-        </div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p>##word.posts_new_url## <i class="fa fa-plus"></i></p>
     </div>
+    <div class="modal-body">
+      <div class="row">
+        <form class="form">
+          <div class="row">
+            <i-control id2="url_text" ng-model="url.text" label="Parent URL"></i-control>
+            <i-control id2="url_match" ng-model="url.match" label="Match URLS"></i-control>
+            <i-checkbox ng-model="url.is_video" label="is Video"></i-checkbox>
+            <i-checkbox ng-model="url.is_children" label="is Children"></i-checkbox>
+            <i-checkbox ng-model="url.is_porn" label="is Porn"></i-checkbox>
+            <i-checkbox ng-model="url.is_approved" label="is Approved"></i-checkbox>
+            <i-checkbox ng-model="url.is_hidden" label="is Hidden"></i-checkbox>
+            <i-checkbox ng-model="url.is_deleted" label="is Deleted"></i-checkbox>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div x-import="posts/new_posts.html"></div>
+      </div>
+
+      <p class="error center red">{{error}}</p>
+      <div class="modal-footer center">
+        <i-button ng-hide="urls_busy" type="add" ng-click="addURL()" label="##word.add##"></i-button>
+        <i-button type="close" onclick="site.hideModal('#newURLModal')" label="##word.close##"></i-button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="myApp">
-    <head x-import="head.html">
-        <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
-        <style x-lang="ar">
-            :root {
-                --direction: rtl;
-                --text-align: right;
-                --float: right;
-            }
-        </style>
-    </head>
+  <head x-import="head.html">
+    <link rel="stylesheet" href="/css/posts.css?v=##site.options.version##" />
+    <style x-lang="ar">
+      :root {
+        --direction: rtl;
+        --text-align: right;
+        --float: right;
+      }
+    </style>
+  </head>
 
-    <body class="##session.lang##" ng-controller="posts">
-        <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
+  <body class="##session.lang##" ng-controller="posts">
+    <nav class="sitebar" x-import="sitebar/index.html" ng-controller="sitebar"></nav>
 
-        <script id="post-template" type="x-tmpl-mustache" x-import="posts/post-template.html"></script>
-        <script id="google-news-template" type="x-tmpl-mustache" x-import="posts/google-news-template.html"></script>
-        <script id="series-template" type="x-tmpl-mustache" x-import="posts/series-template.html"></script>
-        <script id="movie-template" type="x-tmpl-mustache" x-import="posts/movie-template.html"></script>
-        <script id="video-template" type="x-tmpl-mustache" x-import="posts/video-template.html"></script>
-        <script id="yts-template" type="x-tmpl-mustache" x-import="posts/yts-template.html"></script>
-        <div x-import="posts/new_post_modal.html"></div>
-        <div x-import="posts/new_url_modal.html"></div>
-        <div x-import="posts/new_author_modal.html"></div>
-        <div x-import="posts/new_post_category_modal.html"></div>
+    <script id="post-template" type="x-tmpl-mustache" x-import="posts/post-template.html"></script>
+    <script id="google-news-template" type="x-tmpl-mustache" x-import="posts/google-news-template.html"></script>
+    <script id="series-template" type="x-tmpl-mustache" x-import="posts/series-template.html"></script>
+    <script id="movie-template" type="x-tmpl-mustache" x-import="posts/movie-template.html"></script>
+    <script id="video-template" type="x-tmpl-mustache" x-import="posts/video-template.html"></script>
+    <script id="yts-template" type="x-tmpl-mustache" x-import="posts/yts-template.html"></script>
+    <div x-import="posts/new_post_modal.html"></div>
+    <div x-import="posts/new_url_modal.html"></div>
+    <div x-import="posts/new_author_modal.html"></div>
+    <div x-import="posts/new_post_category_modal.html"></div>
 
-        <div id="main-layout" class="container ">
-            <div class="row">
-                <div  x-import="posts/ad-top.html"></div>
-            </div>
-            <div class="row">
-                <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
-                <div class="col8 ##data.content_class##">
-                    <div>
-                        <div x-import="posts/post_categories.html"></div>
-                        <div x-import="posts/post_search.html"></div>
+    <div id="main-layout" class="container">
+      <div class="row">
+        <div x-import="posts/ad-top.html"></div>
+      </div>
+      <h1 class="bold center blue">##data.h1##</h1>
+      <div class="row">
+        <div class="col2" x-features="!hide-right-menu" x-import="posts/right-menu.html"></div>
+        <div class="col8 ##data.content_class##">
+          <div>
+            <div x-import="posts/post_categories.html"></div>
+            <div x-import="posts/post_search.html"></div>
 
-                        <div id="posts" class="post-list loaded"></div>
-
-                    </div>
-                </div>
-                <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
-            </div>
+            <div id="posts" class="post-list loaded"></div>
+          </div>
         </div>
+        <div class="col2" x-features="!hide-left-menu" x-import="posts/left-menu.html"></div>
+      </div>
+    </div>
 
-        <div x-import="scripts.html"></div>
+    <div x-import="scripts.html"></div>
 
-        <script x-feature="browser.social" x-import="posts/browser.js"></script>
-        <script x-import="posts/index.js"></script>
-        <script x-import="posts/posts.js"></script>
-        <script x-permission="login" x-import="posts/yts.js"></script>
-        <script x-import="posts/akwam.js"></script>
-    </body>
+    <script x-feature="browser.social" x-import="posts/browser.js"></script>
+    <script x-import="posts/index.js"></script>
+    <script x-import="posts/posts.js"></script>
+    <script x-permission="login" x-import="posts/yts.js"></script>
+    <script x-import="posts/akwam.js"></script>
+  </body>
 </html>

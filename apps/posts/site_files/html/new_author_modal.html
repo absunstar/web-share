@@ -2,10 +2,10 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h2>
+            <p>
                 ##word.posts_new_author## <i class="fa fa-plus"></i>
                 <p ng-show="busy"><img src="/images/loading.gif" /> ...</p>
-            </h2>
+            </p>
         </div>
         <div class="modal-body">
             <div class="row">
@@ -36,7 +36,7 @@
                 </form>
             </div>
 
-            <h2 class="error center red">{{error}}</h2>
+            <p class="error center red">{{error}}</p>
             <div class="modal-footer center">
                 <i-button type="add" ng-click="addToAuthors()" label="##word.add##"></i-button>
                 <i-button type="close" onclick="site.hideModal('#newAuthorModal')" label="##word.close##"></i-button>
