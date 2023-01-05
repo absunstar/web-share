@@ -1,4 +1,5 @@
 const site = require('../isite')({
+  www : false,
   version: 'version_' + new Date().getTime().toString() + '___',
   port: 8080,
   savingTime: 0.5,

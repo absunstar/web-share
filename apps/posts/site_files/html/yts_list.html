@@ -1,5 +1,5 @@
 <div class="center">
-  <div class="yts float-none" id="post_##item.id##" x-list="ytsList">
+  <div itemscope itemtype="https://schema.org/Movie" class="yts float-none" id="post_##item.id##" x-list="ytsList">
     <a href="##item.post_url##" target="_blank" class="post-url">
       <div class="body">
         <div class="details">
@@ -8,11 +8,11 @@
           <img class="yts-banner" src="##item.banner##" alt="##item.details.title##" width="118" height="91" />
           <span class="rating"> ##item.yts.rating## </span>
           <div class="type">
-            <p x-list2="genres">##item2.##</p>
+            <p x-list2="genres" itemprop="genre">##item2.##</p>
           </div>
         </div>
 
-        <h2 class="text">
+        <h2 class="text" itemprop="name">
           ##item.details.title##
           <p class="center">( ##item.yts.year## )</p>
         </h2>

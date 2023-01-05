@@ -1,4 +1,4 @@
-<div class="yts" id="post_{{id}}">
+<div itemscope itemtype="https://schema.org/Movie" class="yts" id="post_{{id}}">
     <a href="{{post_url}}" target="_blank" class="post-url">
         <div class="body">
             <div class="details">
@@ -6,13 +6,13 @@
 
                 <img class="yts-banner" src="{{banner}}" alt="" width="118" height="91" />
                 <span class="rating"> {{yts.rating}} </span>
-                <p class="type">
+                <p class="type" itemprop="genre">
                     {{#yts.genres}} {{.}} <br />
                     {{/yts.genres}}
                 </p>
             </div>
 
-            <h2 class="text">
+            <h2 class="text" itemprop="name">
                 {{{details.title}}}
                 <p class="center">( {{yts.year}} )</p>
             </h2>

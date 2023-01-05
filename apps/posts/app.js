@@ -73,11 +73,11 @@ module.exports = function init(site) {
           });
 
           if (type === 'is_yts') {
-            site.pageData.ytsList = site.defaultPostList['is_yts'].slice(-10);
+            site.pageData.ytsList = site.defaultPostList['is_yts'].slice(-5);
           } else if (type === 'is_google_news') {
-            site.pageData.newsList = site.defaultPostList['is_google_news'].slice(-10);
+            site.pageData.newsList = site.defaultPostList['is_google_news'].slice(-5).filter((g) => !!g.text);
           } else if (type === 'is_children') {
-            site.pageData.childrenList = site.defaultPostList['is_children'].slice(-10);
+            site.pageData.childrenList = site.defaultPostList['is_children'].slice(-5);
           }
         }
       },

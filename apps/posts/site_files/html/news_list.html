@@ -1,11 +1,11 @@
 <div class="news-list">
-  <div class="post google-news mini center" id="post_##item.id##" x-list="newsList">
+  <div itemscope itemtype="https://schema.org/Article" class="post google-news mini center" id="post_##item.id##" x-list="newsList">
     <div class="body">
       <div class="row">
         <div class="details">
           <a rel="nofollow" href="/post/##item.guid##" target="_blank">
-            <img class="image mini" src="##item.image_url##" alt="##item.text##" onerror="this.onerror=null;this.src='/images/no.png'" />
-            <h2 class="text">##item.text##</h2>
+            <img class="image mini" src="##item.image_url##" alt="##item.details.title##" onerror="this.onerror=null;this.src='/images/no.png'" />
+            <h2 itemprop="articleBody" class="text">##item.text##</h2>
           </a>
         </div>
       </div>

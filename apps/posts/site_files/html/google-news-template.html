@@ -1,8 +1,8 @@
-<div class="post mini google-news center" id="post_{{id}}">
+<div itemscope itemtype="https://schema.org/Article" class="post mini google-news center" id="post_{{id}}">
   <div class="header">
     <img src="{{author.logo_url}}" alt="{{author.name}}" onerror="this.onerror=null;this.src='/images/no.png'" />
     <h2>
-      <a href="{{author_url}}" target="_blank">{{author.name}}</a>
+      <a itemprop="author" href="{{author_url}}" target="_blank">{{author.name}}</a>
     </h2>
     <span date="{{date}}"> {{timeago}} </span>
   </div>
@@ -17,7 +17,7 @@
       </div>
       <div class="col9">
         <h2 class="text">{{{text}}}</h2>
-        <h3 class="description">{{{details.description}}}</h3>
+        <h3 class="description" itemprop="articleBody">{{{details.description}}}</h3>
         <div class="left">
           <a class="btn bg-white black post-url" target="_blank" href="{{post_url}}"> ##word.posts_url##</a>
           <a x-permission="admin" rel="nofollow" class="btn bg-white black" target="_blank" href="{{details.url}}"> ##word.posts_source##</a>
