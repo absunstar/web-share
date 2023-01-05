@@ -106,23 +106,23 @@ nav.sitebar {
   padding: 3px;
 }
 
-nav h2.brand {
+nav .brand {
   margin: 0px;
   padding: 5px;
 }
 
-nav h2.brand a {
+nav .brand a {
   font-weight: bold;
   color: #ffeb3b;
   text-decoration: none;
 }
 
-nav h2.brand a span {
+nav .brand a span {
   font-size: 12px;
   color: #ffffff;
 }
 
-nav h2.brand a i {
+nav .brand a i {
   color: #000;
 }
 
