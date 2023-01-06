@@ -18,7 +18,7 @@ module.exports = function init(site) {
       is_porn: false,
       is_hidden: false,
     };
-    let sort = { time: -1 };
+    let sort = { date: -1 };
     if (type == 'is_yts') {
       where['is_yts'] = true;
     } else if (type == 'is_google_news') {
