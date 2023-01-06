@@ -18,7 +18,7 @@ module.exports = function init(site) {
       is_porn: false,
       is_hidden: false,
     };
-    let sort = { date: -1 };
+
     if (type == 'is_yts') {
       where['is_yts'] = true;
     } else if (type == 'is_google_news') {
@@ -55,23 +55,23 @@ module.exports = function init(site) {
         },
         limit: 1000,
         where: where,
-        sort: sort,
+        sort: { date: -1 },
       },
       (err, docs) => {
         if (!err && docs) {
-          docs.sort((a, b) => b.time - a.time);
           docs.forEach((doc) => {
             if (!site.activePostList.some((p) => p.id == doc.id)) {
               site.activePostList.push(handlePost(doc));
             }
           });
+          site.activePostList = site.activePostList.sort((a, b) => b.time - a.time);
           if (type === 'is_yts') {
             site.pageData.ytsList = site.activePostList.filter((p) => p.is_yts).slice(-5);
           } else if (type === 'is_google_news') {
             site.pageData.newsList = site.activePostList
               .filter((p) => p.is_google_news)
-              .slice(-5)
-              .filter((g) => !!g.text);
+              .filter((g) => !!g.text)
+              .slice(-5);
           } else if (type === 'is_children') {
             site.pageData.childrenList = site.activePostList.filter((p) => p.is_children).slice(-5);
           }
@@ -90,9 +90,6 @@ module.exports = function init(site) {
     // preparePots('is_rss');
     // preparePots('is_children');
 
-    setTimeout(() => {
-      site.activePostList = site.activePostList.sort((a, b) => b.time - a.time);
-    }, 1000 * 10);
     setTimeout(() => {
       prepareAllPosts();
     }, 1000 * 60 * 15);
