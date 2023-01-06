@@ -629,8 +629,8 @@ module.exports = function init(site) {
     };
     let where = {};
     where['id'] = req.data.id;
-    post.$posts_content.delete(where, (err, doc) => {
-      if (!err && doc) {
+    post.$posts_content.delete(where, (err, result) => {
+      if (!err && result) {
         response.done = true;
         if ((index = site.activePostList.findIndex((p) => p.id == req.data.id))) {
           if (index > -1) {
