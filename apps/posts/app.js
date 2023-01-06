@@ -59,7 +59,7 @@ module.exports = function init(site) {
       },
       (err, docs) => {
         if (!err && docs) {
-          docs.sort((a, b) => a.time - b.time);
+          docs.sort((a, b) => b.time - a.time);
           docs.forEach((doc) => {
             if (!site.activePostList.some((p) => p.id == doc.id)) {
               site.activePostList.push(handlePost(doc));
@@ -91,7 +91,7 @@ module.exports = function init(site) {
     preparePots('is_children');
 
     setTimeout(() => {
-      site.activePostList = site.activePostList.sort((a, b) => a.time - b.time);
+      site.activePostList = site.activePostList.sort((a, b) => b.time - a.time);
     }, 1000 * 10);
     setTimeout(() => {
       prepareAllPosts();
@@ -108,13 +108,14 @@ module.exports = function init(site) {
       return doc;
     }
     doc.$handled = true;
+    doc.time = doc.time || new Date(doc.date).getTime();
     doc.details.title = escapeHtml(doc.details.title);
     doc.page_title2 = doc.details.title.substring(0, 70);
     doc.image_url = doc.image_url || doc.details.image_url || '/images/no.png';
     doc.page_description = escapeHtml(doc.text);
     doc.post_url = '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
     doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
-    doc.timeago = post.xtime(new Date().getTime() - new Date(doc.date).getTime());
+    doc.timeago = post.xtime(new Date().getTime() - doc.time);
     doc.page_keywords = doc.details.title.split(' ').join(',');
     doc.details.description = doc.details.description || '';
     if (doc.is_video) {
