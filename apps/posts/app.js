@@ -63,6 +63,8 @@ module.exports = function init(site) {
             site.activePostList.push(handlePost(doc));
           });
 
+          site.activePostList = site.activePostList.sort((a, b) => a.time > b.time);
+
           if (type === 'is_yts') {
             site.pageData.ytsList = site.activePostList.filter((p) => p.is_yts).slice(-5);
           } else if (type === 'is_google_news') {
