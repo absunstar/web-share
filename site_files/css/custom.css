@@ -16,6 +16,7 @@ body {
 
 .brand-title {
   margin-top: 5px !important;
+  text-align: center;
 }
 .brand-title a {
   border-radius: 10px;
