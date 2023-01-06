@@ -59,12 +59,12 @@ module.exports = function init(site) {
       },
       (err, docs) => {
         if (!err && docs) {
+          docs.sort((a, b) => a.time > b.time);
           docs.forEach((doc) => {
-            site.activePostList.push(handlePost(doc));
+            if (!site.activePostList.some((p) => p.id == doc.id)) {
+              site.activePostList.push(handlePost(doc));
+            }
           });
-
-          site.activePostList = site.activePostList.sort((a, b) => a.time > b.time);
-
           if (type === 'is_yts') {
             site.pageData.ytsList = site.activePostList.filter((p) => p.is_yts).slice(-5);
           } else if (type === 'is_google_news') {
@@ -77,7 +77,7 @@ module.exports = function init(site) {
           }
         }
       },
-      false
+      true
     );
   }
 
@@ -90,6 +90,9 @@ module.exports = function init(site) {
     preparePots('is_rss');
     preparePots('is_children');
 
+    setTimeout(() => {
+      site.activePostList = site.activePostList.sort((a, b) => a.time > b.time);
+    }, 1000 * 10);
     setTimeout(() => {
       prepareAllPosts();
     }, 1000 * 60 * 15);
