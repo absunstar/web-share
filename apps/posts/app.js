@@ -82,13 +82,13 @@ module.exports = function init(site) {
   }
 
   function prepareAllPosts() {
-    preparePots('all');
+    //preparePots('all');
     preparePots('is_google_news');
     preparePots('is_yts');
-    preparePots('is_movies');
-    preparePots('is_series');
-    preparePots('is_rss');
-    preparePots('is_children');
+    // preparePots('is_movies');
+    // preparePots('is_series');
+    // preparePots('is_rss');
+    // preparePots('is_children');
 
     setTimeout(() => {
       site.activePostList = site.activePostList.sort((a, b) => b.time - a.time);
