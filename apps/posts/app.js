@@ -6,15 +6,7 @@ module.exports = function init(site) {
   require(__dirname + '/google_news.js')(site, post);
 
   site.activePostList = [];
-  site.defaultPostList = {
-    is_movies: [],
-    is_series: [],
-    is_rss: [],
-    is_google_news: [],
-    is_yts: [],
-    is_children: [],
-    all: [],
-  };
+
   site.pageData = {
     siteNews: require(__dirname + '/site_files/json/site-news.json'),
     PostTypes: require(__dirname + '/site_files/json/post-types.json'),
@@ -67,17 +59,19 @@ module.exports = function init(site) {
       },
       (err, docs) => {
         if (!err && docs) {
-          site.defaultPostList[type] = [];
           docs.forEach((doc) => {
-            site.defaultPostList[type].push(handlePost(doc));
+            site.activePostList.push(handlePost(doc));
           });
 
           if (type === 'is_yts') {
-            site.pageData.ytsList = site.defaultPostList['is_yts'].slice(-5);
+            site.pageData.ytsList = site.activePostList.filter((p) => p.is_yts).slice(-5);
           } else if (type === 'is_google_news') {
-            site.pageData.newsList = site.defaultPostList['is_google_news'].slice(-5).filter((g) => !!g.text);
+            site.pageData.newsList = site.activePostList
+              .filter((p) => p.is_google_news)
+              .slice(-5)
+              .filter((g) => !!g.text);
           } else if (type === 'is_children') {
-            site.pageData.childrenList = site.defaultPostList['is_children'].slice(-5);
+            site.pageData.childrenList = site.activePostList.filter((p) => p.is_children).slice(-5);
           }
         }
       },
@@ -152,6 +146,7 @@ module.exports = function init(site) {
       data: site.pageData,
     });
   });
+
   site.onGET({
     name: '/css/posts.css',
     public: true,
@@ -281,10 +276,53 @@ module.exports = function init(site) {
       site.callRoute('/posts', req, res);
     }
   });
+
+  site.onGET({ name: '/posts', public: true }, (req, res) => {
+    req.data.page_title = site.word('page_title').ar;
+    req.data.page_title2 = site.word('page_title2').ar;
+    req.data.page_description = site.word('page_description').ar;
+    req.data.page_keywords = site.word('page_keywords').ar;
+    req.data.image_url = '/images/logo.png';
+    req.data.h1 = req.data.page_description;
+    res.render(
+      'posts/index.html',
+      {
+        ...req.data,
+        siteNews: site.pageData.siteNews,
+        PostTypes: site.pageData.PostTypes,
+        ytsList: site.pageData.ytsList,
+        newsList: site.pageData.newsList,
+        childrenList: site.pageData.childrenList,
+      },
+      {
+        parser: 'html css js',
+      }
+    );
+  });
+
+  site.onGET({ name: '/torrents', public: true }, (req, res) => {
+    req.addFeature('torrents');
+    if (req.hasFeature('host.torrents')) {
+      req.addFeature('hide-right-menu');
+      req.addFeature('hide-left-menu');
+      req.data.content_class = 'col10';
+    } else if (req.hasFeature('host.news')) {
+    } else if (req.hasFeature('host.media')) {
+      req.addFeature('hide-right-menu');
+      req.addFeature('hide-left-menu');
+      req.data.content_class = 'col12';
+    } else {
+      req.addFeature('google-ads');
+    }
+
+    req.data.page_title2 = 'torrents movies - أفلام تورينت';
+    site.callRoute('/posts', req, res);
+  });
+
   site.onGET({ name: ['/post/:guid', '/post2/:guid'], public: true }, (req, res) => {
     if (req.params.guid == 'random') {
-      if (site.defaultPostList['all'] && site.defaultPostList['all'].length > 0) {
-        let doc = site.defaultPostList['all'][Math.floor(Math.random() * site.defaultPostList['all'].length)];
+      if (site.activePostList && site.activePostList.length > 0) {
+        let doc = site.activePostList[Math.floor(Math.random() * site.activePostList.length)];
         res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
       } else {
         res.redirect('/');
@@ -331,27 +369,22 @@ module.exports = function init(site) {
     }
   });
 
-  site.onGET({ name: '/posts', public: true }, (req, res) => {
-    req.data.page_title = site.word('page_title').ar;
-    req.data.page_title2 = site.word('page_title2').ar;
-    req.data.page_description = site.word('page_description').ar;
-    req.data.page_keywords = site.word('page_keywords').ar;
-    req.data.image_url = '/images/logo.png';
-    req.data.h1 = req.data.page_description;
-    res.render(
-      'posts/index.html',
-      {
-        ...req.data,
-        siteNews: site.pageData.siteNews,
-        PostTypes: site.pageData.PostTypes,
-        ytsList: site.pageData.ytsList,
-        newsList: site.pageData.newsList,
-        childrenList: site.pageData.childrenList,
-      },
-      {
-        parser: 'html css js',
-      }
-    );
+  site.onGET({ name: ['/torrent/random'], public: true }, (req, res) => {
+    if ((list = site.activePostList.filter((p) => p.is_yts))) {
+      let doc = list[Math.floor(Math.random() * list.length)];
+      res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+    } else {
+      res.redirect('/');
+    }
+  });
+
+  site.onGET({ name: ['/news/random'], public: true }, (req, res) => {
+    if ((list = site.activePostList.filter((p) => p.is_google_news))) {
+      let doc = list[Math.floor(Math.random() * list.length)];
+      res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+    } else {
+      res.redirect('/');
+    }
   });
 
   site.onGET({ name: '/youtube-view', public: true }, (req, res) => {
@@ -558,44 +591,34 @@ module.exports = function init(site) {
     );
   });
 
-  site.onGET({ name: ['/torrent/random'], public: true }, (req, res) => {
-    if (site.defaultPostList['is_yts'] && site.defaultPostList['is_yts'].length > 0) {
-      let doc = site.defaultPostList['is_yts'][Math.floor(Math.random() * site.defaultPostList['is_yts'].length)];
-      res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
-    } else {
-      res.redirect('/');
-    }
-  });
-
-  site.onGET({ name: ['/news/random'], public: true }, (req, res) => {
-    if (site.defaultPostList['is_google_news'] && site.defaultPostList['is_google_news'].length > 0) {
-      let doc = site.defaultPostList['is_google_news'][Math.floor(Math.random() * site.defaultPostList['is_google_news'].length)];
-      res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
-    } else {
-      res.redirect('/');
-    }
-  });
-
   site.onPOST({ name: 'api/posts/get', public: true }, (req, res) => {
     let response = {
       done: false,
     };
-    let where = {};
-    where['id'] = req.data.id;
-    post.$posts_content.find(
-      where,
-      (err, doc) => {
-        if (!err && doc) {
-          response.done = true;
-          response.doc = doc;
-          res.json(response);
-        } else {
-          response.error = err;
-          res.json(response);
-        }
-      },
-      true
-    );
+    if ((doc = site.activePostList.filter((p) => p.id == req.data.id))) {
+      response.done = true;
+      response.doc = doc;
+      res.json(response);
+    } else {
+      let where = {};
+      where['id'] = req.data.id;
+      post.$posts_content.find(
+        where,
+        (err, doc) => {
+          if (!err && doc) {
+            doc = site.handlePost(doc);
+            site.activePostList.push(doc);
+            response.done = true;
+            response.doc = doc;
+            res.json(response);
+          } else {
+            response.error = err;
+            res.json(response);
+          }
+        },
+        true
+      );
+    }
   });
   site.onPOST({ name: 'api/posts/delete', public: true }, (req, res) => {
     let response = {
@@ -606,6 +629,11 @@ module.exports = function init(site) {
     post.$posts_content.delete(where, (err, doc) => {
       if (!err && doc) {
         response.done = true;
+        if ((index = site.activePostList.findIndex((p) => p.id == req.data.id))) {
+          if (index > -1) {
+            site.activePostList.splice(index, 1);
+          }
+        }
         res.json(response);
       } else {
         response.error = err;
@@ -623,6 +651,11 @@ module.exports = function init(site) {
     post.$posts_content.update(req.data, (err, result) => {
       if (!err) {
         response.done = true;
+        if ((index = site.activePostList.findIndex((p) => p.id == req.data.id))) {
+          if (result.doc && index > -1) {
+            site.activePostList[index] = result.doc;
+          }
+        }
         response.result = result;
         res.json(response);
       } else {
@@ -641,16 +674,8 @@ module.exports = function init(site) {
       return;
     }
 
-    let _post = Object.assign(Object.assign({}, post.post_template), req.data);
-
-    if (req && res) {
-      _post.$req = req;
-      _post.$res = res;
-      _post._created = site.security.getUserFinger({
-        $req: req,
-        $res: res,
-      });
-    }
+    let _post = { ...post.post_template, ...req.data };
+    _post._created = req.getUserFinger();
 
     post.get_post_author(
       {
@@ -662,8 +687,9 @@ module.exports = function init(site) {
           post.add_post_content(_post, (err, new_post) => {
             if (!err) {
               response.done = true;
-              response.doc = new_post;
               response.id = new_post.id;
+              response.doc = site.handlePost(new_post);
+              site.activePostList.push(response.doc);
             } else {
               response.error = err.message;
             }
@@ -676,8 +702,9 @@ module.exports = function init(site) {
               post.add_post_content(_post, (err, new_post) => {
                 if (!err) {
                   response.done = true;
-                  response.doc = new_post;
                   response.id = new_post.id;
+                  response.doc = site.handlePost(new_post);
+                  site.activePostList.push(response.doc);
                 } else {
                   response.error = err.message;
                 }
@@ -748,7 +775,7 @@ module.exports = function init(site) {
     if (user_where.author_guid != undefined) {
       where['author.guid'] = user_where.author_guid;
     }
-    if (req.hasFeature('host.torrents2') || req.hasFeature('host.yts') || user_where.is_yts != undefined) {
+    if (req.hasFeature('host.torrents') || req.hasFeature('host.yts') || user_where.is_yts) {
       delete where.is_movies;
       delete where.is_series;
       delete where.is_rss;
@@ -757,7 +784,7 @@ module.exports = function init(site) {
       sort = {
         'yts.year': -1,
       };
-      where.is_yts = req.hasFeature('host.torrents2') || req.hasFeature('host.yts') || user_where.is_yts;
+      where.is_yts = true;
       skip = (req.data.page_number || 0) * (req.data.limit || 20);
       delete where.time;
       if (user_where.sort && user_where.sort != 'undefined') {
@@ -796,7 +823,8 @@ module.exports = function init(site) {
       type = 'is_series';
     }
     if (
-      site.defaultPostList[type].length > end &&
+      !where['author.guid'] &&
+      site.activePostList.length > end &&
       (user_where.sort == 'undefined' || user_where.sort == 'time') &&
       user_where.q == 'undefined' &&
       user_where.is_approved &&
@@ -806,7 +834,14 @@ module.exports = function init(site) {
       !user_where.is_porn
     ) {
       response.done = true;
-      response.list = site.defaultPostList[type].slice(start, end);
+      response.memory = true;
+      if (where.is_yts) {
+        response.list = site.activePostList.filter((p) => p.is_yts).slice(start, end);
+      } else if (where.is_google_news) {
+        response.list = site.activePostList.filter((p) => p.is_google_news).slice(start, end);
+      } else {
+        response.list = site.activePostList.slice(start, end);
+      }
       res.json(response);
     } else {
       post.$posts_content.findMany(
@@ -820,6 +855,7 @@ module.exports = function init(site) {
         (err, docs) => {
           if (!err) {
             response.done = true;
+            response.where = where;
             response.list = docs;
           } else {
             response.error = err.message;
@@ -917,25 +953,6 @@ module.exports = function init(site) {
       },
       true
     );
-  });
-
-  site.onGET({ name: '/torrents', public: true }, (req, res) => {
-    req.addFeature('torrents');
-    if (req.hasFeature('host.torrents')) {
-      req.addFeature('hide-right-menu');
-      req.addFeature('hide-left-menu');
-      req.data.content_class = 'col10';
-    } else if (req.hasFeature('host.news')) {
-    } else if (req.hasFeature('host.media')) {
-      req.addFeature('hide-right-menu');
-      req.addFeature('hide-left-menu');
-      req.data.content_class = 'col12';
-    } else {
-      req.addFeature('google-ads');
-    }
-
-    req.data.page_title2 = 'torrents movies - أفلام تورينت';
-    site.callRoute('/posts', req, res);
   });
 
   function responsePost(doc, res, req, callback) {

@@ -11,7 +11,7 @@ var my_post_content_where = {
   is_children: document.location.href.like('*children-videos*') ? true : null,
   is_yts: document.location.href.like('*torrents*') ? true : null,
   is_series: document.location.href.like('*series*') ? true : null,
-  is_movies: document.location.href.like('*movies*') ? true : null,
+  is_movies: null,
   is_google_news: document.location.href.like('*top-news*') ? true : null,
   is_approved: '##req.query.is_approved##' == 'false' ? false : true,
   is_porn: '##req.query.is_porn##' == 'true' ? true : false,
