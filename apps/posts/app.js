@@ -59,7 +59,7 @@ module.exports = function init(site) {
       },
       (err, docs) => {
         if (!err && docs) {
-          docs.sort((a, b) => a.time > b.time);
+          docs.sort((a, b) => a.time - b.time);
           docs.forEach((doc) => {
             if (!site.activePostList.some((p) => p.id == doc.id)) {
               site.activePostList.push(handlePost(doc));
@@ -91,7 +91,7 @@ module.exports = function init(site) {
     preparePots('is_children');
 
     setTimeout(() => {
-      site.activePostList = site.activePostList.sort((a, b) => a.time > b.time);
+      site.activePostList = site.activePostList.sort((a, b) => a.time - b.time);
     }, 1000 * 10);
     setTimeout(() => {
       prepareAllPosts();
