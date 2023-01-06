@@ -609,7 +609,7 @@ module.exports = function init(site) {
         where,
         (err, doc) => {
           if (!err && doc) {
-            doc = site.handlePost(doc);
+            doc = handlePost(doc);
             site.activePostList.push(doc);
             response.done = true;
             response.doc = doc;
@@ -691,8 +691,8 @@ module.exports = function init(site) {
             if (!err) {
               response.done = true;
               response.id = new_post.id;
-              response.doc = site.handlePost(new_post);
-              site.activePostList.push(response.doc);
+              response.doc = handlePost(new_post);
+              site.activePostList.unshift(response.doc);
             } else {
               response.error = err.message;
             }
@@ -706,8 +706,8 @@ module.exports = function init(site) {
                 if (!err) {
                   response.done = true;
                   response.id = new_post.id;
-                  response.doc = site.handlePost(new_post);
-                  site.activePostList.push(response.doc);
+                  response.doc = handlePost(new_post);
+                  site.activePostList.unshift(response.doc);
                 } else {
                   response.error = err.message;
                 }
