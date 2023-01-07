@@ -61,7 +61,7 @@ module.exports = function init(site, post) {
     } else if (req.params.guid) {
       list = site.activePostList.filter((p) => p.guid == req.params.guid).slice(0, limit);
     } else if (req.query.is_yts == 'true') {
-      list = site.activePostList.filter((p) => p.image_url && p.image_url !== '/images/no.png' && p.is_google_news).slice(0, limit);
+      list = site.activePostList.filter((p) => p.image_url && !p.image_url.contains('images/no.png') && p.is_google_news).slice(0, limit);
     } else if (req.query.is_google_news == 'true') {
       text += ' -Google-News ';
       list = site.activePostList.filter((p) => p.image_url && p.text && p.is_google_news).slice(0, limit);
