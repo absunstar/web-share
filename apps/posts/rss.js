@@ -55,9 +55,11 @@ module.exports = function init(site, post) {
     let text = '';
 
     if (req.params.guid == 'random') {
-      list = [site.activePostList.filter((p) => p.image_url && !p.image_url.contains('images/no.png') && p.is_google_news)[site.random(0, site.activePostList.length - 1)]];
+      list = site.activePostList.filter((p) => p.image_url && !p.image_url.contains('images/no.png') && p.is_google_news);
+      list = [list[site.random(0, list.length - 1)]];
     } else if (req.params.guid == 'random-yts') {
-      list = [site.activePostList.filter((p) => p.image_url && !p.image_url.contains('images/no.png') && p.is_yts)[site.random(0, site.activePostList.length - 1)]];
+      list = site.activePostList.filter((p) => p.image_url && !p.image_url.contains('images/no.png') && p.is_yts);
+      list = [list[site.random(0, list.length - 1)]];
     } else if (req.params.guid) {
       list = site.activePostList.filter((p) => p.guid == req.params.guid).slice(0, limit);
     } else if (req.query.is_yts == 'true') {
