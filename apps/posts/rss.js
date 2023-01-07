@@ -75,15 +75,16 @@ module.exports = function init(site, post) {
       //.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '');
       urls += `
         <item>
+          <guid>${doc.details.guid}</guid>
           <title>${doc.details.title}</title>
           <link>${doc.full_url}</link>
           <image>${doc.image_url}</image>
           <description>${doc.details.description}</description>
-          <date>${new Date(doc.date).toISOString()}</date>
+          <pubDate>${new Date(doc.date).toISOString()}</pubDate>
         </item>
         `;
     });
-    let xml = `<?xml version="1.0" ?>
+    let xml = `<?xml version="1.0" encoding="UTF-8" ?>
     <rss version="2.0">
       <channel>
             <title>Egytag ${text} Global RSS</title>
