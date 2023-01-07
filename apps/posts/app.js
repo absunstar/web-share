@@ -96,8 +96,8 @@ module.exports = function init(site) {
   }
 
   prepareAllPosts();
-  function escapeHtml(unsafe) {
-    return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  site.escapeHtml = function(unsafe) {
+    return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
   }
 
   function handlePost(doc) {
@@ -106,10 +106,10 @@ module.exports = function init(site) {
     }
     doc.$handled = true;
     doc.time = doc.time || new Date(doc.date).getTime();
-    doc.details.title = escapeHtml(doc.details.title);
+    doc.details.title = site.escapeHtml(doc.details.title);
     doc.page_title2 = doc.details.title.substring(0, 70);
     doc.image_url = doc.image_url || doc.details.image_url || '/images/no.png';
-    doc.page_description = escapeHtml(doc.text);
+    doc.page_description = site.escapeHtml(doc.text);
     doc.post_url = '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
     doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
     doc.timeago = post.xtime(new Date().getTime() - doc.time);
@@ -121,7 +121,7 @@ module.exports = function init(site) {
         doc.details.url = 'https://www.youtube.com/embed/' + doc.details.url.split('=')[1].split('&')[0];
       }
     } else if (doc.is_yts) {
-      doc.page_description = escapeHtml(doc.details.description);
+      doc.page_description = site.escapeHtml(doc.details.description);
       doc.banner = '/images/banner720p.png';
       doc.yts.torrents.forEach((torrent) => {
         if (torrent.quality == '1080p') {
@@ -129,14 +129,14 @@ module.exports = function init(site) {
         }
       });
     } else if (doc.is_google_news) {
-      doc.page_description = escapeHtml(doc.details.description);
+      doc.page_description = site.escapeHtml(doc.details.description);
     } else if (doc.is_series) {
       doc.page_title2 = ' مسلسل ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-      doc.page_description = escapeHtml(doc.details.description);
+      doc.page_description = site.escapeHtml(doc.details.description);
       doc.episode_count = doc.episode_list.length;
     } else if (doc.is_movies) {
       doc.page_title2 = ' فيلم ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-      doc.page_description = escapeHtml(doc.details.description);
+      doc.page_description = site.escapeHtml(doc.details.description);
     } else {
       doc.post_type = 'full-post';
     }

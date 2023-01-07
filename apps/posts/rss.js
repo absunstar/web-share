@@ -2,7 +2,7 @@ module.exports = function init(site, post) {
   let rss_busy = false;
   let rss_list = [];
 
-  site.onGET({name : ['/sitemap.xml']  , public : true}, (req, res) => {
+  site.onGET({ name: ['/sitemap.xml'], public: true }, (req, res) => {
     let where = {};
     if (req.params.guid) {
       where['guid'] = req.params.guid;
@@ -45,102 +45,60 @@ module.exports = function init(site, post) {
         } else {
           res.end(404);
         }
-      },
+      }
     );
   });
 
-  site.onGET({name :['/rss', '/rss/posts', '/rss/posts/:guid'], public : true}, (req, res) => {
-    let where = {};
-    if (req.query.is_rss == 'true') {
-      where['is_rss'] = true;
-    }
-    if (req.query.is_video == 'true') {
-      where['is_video'] = true;
-    }
-    if (req.query.is_youtube == 'true') {
-      where['is_youtube'] = true;
-    }
-    if (req.query.is_children == 'true') {
-      where['is_children'] = true;
-    }
-    if (req.query.is_yts == 'true') {
-      where['is_yts'] = true;
-    }
-    if (req.query.is_google_news == 'true') {
-      where['is_google_news'] = true;
-    }
-    
+  site.onGET({ name: ['/rss', '/rss/posts', '/rss/posts/:guid'], public: true }, (req, res) => {
+    let limit = req.query.limit || 10;
+    let list = [];
+    let text = '';
 
     if (req.params.guid == 'random') {
-      post.$posts_content.findAll(
-        {
-          where: where,
-          select: {
-            guid: 1,
-            details: 1,
-          },
-          limit: 100,
-          sort: {
-            date: -1,
-          },
-        },
-        (err, docs) => {
-          if (!err && docs && docs.length > 0) {
-            let doc = docs[Math.floor(Math.random() * docs.length)];
-            res.redirect('/rss/posts/' + doc.guid);
-          } else {
-            res.redirect('/rss/posts/random?limit=1');
-          }
-        },
-      );
+      let doc = site.activePostList[site.random(0, site.activePostList.length - 1)];
+      res.redirect('/rss/posts/' + doc.guid);
+      return;
+    } else if (req.params.guid) {
+      list = site.activePostList.filter((p) => p.guid == req.params.guid).slice(0, limit);
+    } else if (req.query.is_yts == 'true') {
+      list = site.activePostList.filter((p) => p.image_url && p.is_google_news).slice(0, limit);
+    } else if (req.query.is_google_news == 'true') {
+      text += ' -Google-News ';
+      list = site.activePostList.filter((p) => p.image_url && p.text && p.is_google_news).slice(0, limit);
     } else {
-      if (req.params.guid) {
-        where['guid'] = req.params.guid;
-      }
-      post.$posts_content.findAll(
-        {
-          where: where,
-          sort: {
-            id: -1,
-          },
-          limit: req.query.limit || 10,
-        },
-        (err, docs) => {
-          if (!err && docs) {
-            let urls = '';
-            docs.forEach((doc, i) => {
-              doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
-              if (typeof doc.text != 'string') {
-                doc.text = 'No Title';
-              }
-              doc.text = doc.text.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '');
-              urls += `
-                <item>
-                  <title>${doc.details.title}</title>
-                  <link>${doc.post_url}</link>
-                  <image>${doc.details.image_url}</image>
-                  <description>${doc.text}</description>
-                  <date>${new Date(doc.date).toISOString()}</date>
-                </item>
-                `;
-            });
-            let xml = `<?xml version="1.0" ?>
-                          <rss version="2.0">
-                            <channel>
-                                  <title>Egytag Global RSS</title>
-                                  <link>https://egytag.com</link>
-                                  <description>All Posts Rss Feeds</description>
-                                  ${urls}
-                              </channel>
-                           </rss>`;
-            res.set('Content-Type', 'application/xml');
-            res.end(xml);
-          } else {
-            res.end(402);
-          }
-        },
-      );
+      list = site.activePostList.slice(0, limit);
     }
+
+    let urls = '';
+    list.forEach((doc, i) => {
+      doc.full_url = 'https://egytag.com' + '/post/' + doc.guid;
+      doc.title = doc.title || doc.details.title;
+      doc.title = site.escapeHtml(doc.title);
+      doc.image_url = site.escapeHtml(doc.image_url);
+      //.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '');
+      doc.description = doc.details.description || '';
+      doc.description = site.escapeHtml(doc.description);
+      urls += `
+        <item>
+          <title>${doc.title}</title>
+          <link>${doc.full_url}</link>
+          <image>${doc.image_url}</image>
+          <description>${doc.description}</description>
+          <date>${new Date(doc.date).toISOString()}</date>
+        </item>
+        `;
+    });
+    let xml = `<?xml version="1.0" ?>
+    <rss version="2.0">
+      <channel>
+            <title>Egytag ${text} Global RSS</title>
+            <link>https://egytag.com</link>
+            <description>All Posts Rss Feeds</description>
+            ${urls}
+        </channel>
+     </rss>`;
+    res.set('Content-Type', 'application/xml');
+    res.end(xml);
   });
 
   post.prepare_rss_list = function () {
@@ -170,7 +128,7 @@ module.exports = function init(site, post) {
             post.$posts_author.update(doc);
           });
         }
-      },
+      }
     );
   };
 
@@ -226,7 +184,7 @@ module.exports = function init(site, post) {
                   is_approved: true,
                   is_rss: true,
                 },
-                (err, n) => {},
+                (err, n) => {}
               );
             }
           });
