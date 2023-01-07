@@ -106,22 +106,21 @@ module.exports = function init(site) {
     }
     doc.$handled = true;
     doc.time = doc.time || new Date(doc.date).getTime();
-    doc.details.title = site.escapeHtml(doc.details.title);
+    doc.details.title = site.escapeHtml(doc.details.title || '');
+    doc.details.description = site.escapeHtml(doc.details.description || '');
     doc.page_title2 = doc.details.title.substring(0, 70);
-    doc.image_url = doc.image_url || doc.details.image_url || '/images/no.png';
-    doc.page_description = site.escapeHtml(doc.text);
+    doc.image_url = site.escapeHtml(doc.image_url || doc.details.image_url || '/images/no.png');
+    doc.page_description = doc.details.description || doc.details.title;
     doc.post_url = '/post/' + doc.guid + '/' + encodeURI(doc.details.title.split(' ').join('-'));
     doc.author_url = '/author/' + doc.author.guid + '/' + encodeURI(doc.author.name.split(' ').join('-'));
     doc.timeago = post.xtime(new Date().getTime() - doc.time);
     doc.page_keywords = doc.details.title.split(' ').join(',');
-    doc.details.description = doc.details.description || '';
     if (doc.is_video) {
       doc.post_type = 'full-video';
       if (doc.details.url.like('https://www.youtube.com/watch*')) {
         doc.details.url = 'https://www.youtube.com/embed/' + doc.details.url.split('=')[1].split('&')[0];
       }
     } else if (doc.is_yts) {
-      doc.page_description = site.escapeHtml(doc.details.description);
       doc.banner = '/images/banner720p.png';
       doc.yts.torrents.forEach((torrent) => {
         if (torrent.quality == '1080p') {
@@ -129,14 +128,11 @@ module.exports = function init(site) {
         }
       });
     } else if (doc.is_google_news) {
-      doc.page_description = site.escapeHtml(doc.details.description);
     } else if (doc.is_series) {
       doc.page_title2 = ' مسلسل ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-      doc.page_description = site.escapeHtml(doc.details.description);
       doc.episode_count = doc.episode_list.length;
     } else if (doc.is_movies) {
       doc.page_title2 = ' فيلم ' + doc.details.title.replace(/<[^>]+>/g, '').substring(0, 70);
-      doc.page_description = site.escapeHtml(doc.details.description);
     } else {
       doc.post_type = 'full-post';
     }

@@ -72,18 +72,13 @@ module.exports = function init(site, post) {
     let urls = '';
     list.forEach((doc, i) => {
       doc.full_url = 'https://egytag.com' + '/post/' + doc.guid;
-      doc.title = doc.title || doc.details.title;
-      doc.title = site.escapeHtml(doc.title);
-      doc.image_url = site.escapeHtml(doc.image_url);
       //.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '');
-      doc.description = doc.details.description || '';
-      doc.description = site.escapeHtml(doc.description);
       urls += `
         <item>
-          <title>${doc.title}</title>
+          <title>${doc.details.title}</title>
           <link>${doc.full_url}</link>
           <image>${doc.image_url}</image>
-          <description>${doc.description}</description>
+          <description>${doc.details.description}</description>
           <date>${new Date(doc.date).toISOString()}</date>
         </item>
         `;
