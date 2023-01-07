@@ -96,9 +96,9 @@ module.exports = function init(site) {
   }
 
   prepareAllPosts();
-  site.escapeHtml = function(unsafe) {
+  site.escapeHtml = function (unsafe) {
     return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-  }
+  };
 
   function handlePost(doc) {
     if (doc.$handled) {
@@ -375,7 +375,11 @@ module.exports = function init(site) {
   site.onGET({ name: ['/torrent/random'], public: true }, (req, res) => {
     if ((list = site.activePostList.filter((p) => p.is_yts))) {
       let doc = list[Math.floor(Math.random() * list.length)];
-      res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+      if (doc) {
+        res.redirect('/post2/' + doc.guid + '/' + encodeURI(doc.details.title));
+      } else {
+        res.redirect('/torrent/random');
+      }
     } else {
       res.redirect('/');
     }
