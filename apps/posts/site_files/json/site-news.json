@@ -6,6 +6,18 @@
         "image_url": "//social-browser.com/images/logo.png"
     },
     {
+        "url": "//souq.egytag.com/",
+        "title": "موقع سوق مصر",
+        "description": "اعلانات - سلة - تاجر - بيع اون لاين",
+        "image_url": "/images/souq.png"
+    },
+    {
+        "url": "//pharmacy.egytag.com/",
+        "title": "برنامج أدارة الصيدليات",
+        "description": "ادوية - خدمات - فواتير - تقارير",
+        "image_url": "/images/pharmacy.png"
+    },
+    {
         "url": "//school.egytag.com/",
         "title": "برنامج أدارة مدرسة",
         "description": "طلاب - مدرسين - جداول الحصص - أمتحانات",
