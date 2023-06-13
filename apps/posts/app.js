@@ -968,7 +968,7 @@ module.exports = function init(site) {
     req.data.h1 = req.data.page_title;
 
     if (doc.post_url.startsWith('/post')) {
-      doc.post_url = req.headers.host + doc.post_url;
+      doc.post_url = '//' + req.headers.host + doc.post_url;
     }
     if (res.is_blogger) {
       res.render(
