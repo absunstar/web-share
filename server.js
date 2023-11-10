@@ -40,6 +40,12 @@ site.onGET({
   public: true,
 });
 
+site.onGET({
+  name: '/sw.js',
+  path: site.dir + '/js/sw.js',
+  public: true,
+});
+
 site.loadLocalApp('client-side');
 site.loadLocalApp('security');
 site.loadLocalApp('ui-print');
