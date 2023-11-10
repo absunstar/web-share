@@ -263,7 +263,7 @@ module.exports = function init(site) {
       req.addFeature('torrents');
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col10';
+      req.data.content_class = 'col12';
       site.callRoute('/posts', req, res);
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
@@ -304,7 +304,7 @@ module.exports = function init(site) {
     if (req.hasFeature('host.torrents')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
-      req.data.content_class = 'col10';
+      req.data.content_class = 'col12';
     } else if (req.hasFeature('host.news')) {
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
@@ -334,7 +334,7 @@ module.exports = function init(site) {
       } else if (req.hasFeature('host.torrents')) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
-        req.data.content_class = 'col10';
+        req.data.content_class = 'col12';
       } else if (req.hasFeature('host.media')) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
