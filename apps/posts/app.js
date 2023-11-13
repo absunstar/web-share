@@ -973,7 +973,7 @@ module.exports = function init(site) {
   function responsePost(doc, res, req, callback) {
     if (req.hasFeature('host.torrents')) {
       req.data.page_title = 'Movie Torrent';
-      req.data.page_title2 = 'Free Download ';
+      req.data.page_title2 = doc.page_title2 || site.word('page_title2').en;
       req.data.page_description = doc.page_description || site.word('page_description').en;
       req.data.page_keywords = doc.page_keywords || site.word('page_keywords').en;
       req.session.lang = 'en';
