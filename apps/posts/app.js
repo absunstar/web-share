@@ -280,10 +280,19 @@ module.exports = function init(site) {
   });
 
   site.onGET({ name: '/posts', public: true }, (req, res) => {
-    req.data.page_title = site.word('page_title').ar;
-    req.data.page_title2 = site.word('page_title2').ar;
-    req.data.page_description = site.word('page_description').ar;
-    req.data.page_keywords = site.word('page_keywords').ar;
+    if (req.hasFeature('host.torrents')) {
+      req.data.page_title = 'Movie Torrent';
+      req.data.page_title2 = 'Free Download ';
+      req.data.page_description = 'Download Now Free Movies With Heigh Quality 4k or 1080p or 720p in Torrent Format';
+      req.data.page_keywords = 'Movie , Torrent , Download , Free , Film';
+      req.session.lang = 'en';
+    } else {
+      req.data.page_title = site.word('page_title').ar;
+      req.data.page_title2 = site.word('page_title2').ar;
+      req.data.page_description = site.word('page_description').ar;
+      req.data.page_keywords = site.word('page_keywords').ar;
+    }
+
     req.data.image_url = '/images/logo.png';
     req.data.h1 = req.data.page_description;
     res.render(
@@ -962,10 +971,19 @@ module.exports = function init(site) {
   });
 
   function responsePost(doc, res, req, callback) {
-    req.data.page_title = doc.page_title || site.word('page_title').ar;
-    req.data.page_title2 = doc.page_title2 || site.word('page_title2').ar;
-    req.data.page_description = doc.page_description || site.word('page_description').ar;
-    req.data.page_keywords = doc.page_keywords || site.word('page_keywords').ar;
+    if (req.hasFeature('host.torrents')) {
+      req.data.page_title = 'Movie Torrent';
+      req.data.page_title2 = 'Free Download ';
+      req.data.page_description = doc.page_description || site.word('page_description').en;
+      req.data.page_keywords = doc.page_keywords || site.word('page_keywords').en;
+      req.session.lang = 'en';
+    } else {
+      req.data.page_title = doc.page_title || site.word('page_title').ar;
+      req.data.page_title2 = doc.page_title2 || site.word('page_title2').ar;
+      req.data.page_description = doc.page_description || site.word('page_description').ar;
+      req.data.page_keywords = doc.page_keywords || site.word('page_keywords').ar;
+    }
+
     req.data.image_url = doc.image_url || '/images/logo.png';
 
     req.data.h1 = req.data.page_title;
