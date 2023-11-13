@@ -1,3 +1,5 @@
+const data = require('../../../isite/lib/data');
+
 module.exports = function init(site) {
   const post = {};
 
@@ -16,7 +18,7 @@ module.exports = function init(site) {
 
   post.xtime = function (_time) {
     if (typeof _time == 'undefined' || !_time) {
-      return ' منذ قليل ';
+      return 'Now';
     }
 
     var _type = null;
@@ -25,22 +27,21 @@ module.exports = function init(site) {
     var _type_2 = null;
 
     var times = [1, 1000, 60, 60, 24, 30, 12];
-    var times_type = ['x', 'ثانية', 'دقيقة', 'ساعة', 'يوم', 'شهر', 'سنة'];
+    new Date().getSeconds;
+    var times_type = ['', 'Seconds', 'Minutes', 'Hours', 'Days', 'Monthes', 'Years'];
 
-    /*_time = (_time * 1000) - (2 * 60 * 60 * 1000 * 0);*/
     let offset = new Date().getTimezoneOffset();
     if (false && offset < 0) {
       let diff = Math.abs(offset) * 60 * 1000;
       _time = _time + diff;
     }
     if (_time <= 10000) {
-      return ' منذ قليل ';
+      return 'Now';
     }
     for (var i = 0; i < times.length; i++) {
       if (_time < times[i]) {
         break;
       } else {
-        /*check this */
         _type = times_type[i];
         if (i > 0) {
           _time_2 = _time % times[i];
@@ -54,9 +55,9 @@ module.exports = function init(site) {
     _time_2 = Math.floor(_time_2);
 
     if (_time_2 == 0 || _type_2 == null || _type_2 == 'x') {
-      return [' منذ ', _time, _type].join(' ');
+      return [' since ', _time, _type].join(' ');
     } else {
-      return [' منذ ', _time, _type, _time_2, _type_2].join(' ');
+      return [' since ', _time, _type, _time_2, _type_2].join(' ');
     }
   };
 
