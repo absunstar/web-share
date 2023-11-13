@@ -46,7 +46,9 @@ nav.sitebar .brand a {
   vertical-align: top;
   display: inline-block;
 }
-
+.en nav.sitebar .brand a {
+  float: left;
+}
 nav.sitebar .brand a span {
   color: #3f51b5;
 }
