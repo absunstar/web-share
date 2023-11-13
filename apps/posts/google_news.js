@@ -42,7 +42,17 @@ module.exports = function init(site, post) {
   });
 
   google_news.handlePostContent = function (_post, callback) {
+
     callback = callback || google_news.callback;
+    callback(
+      { message: '\n Post Content Stoped \n' },
+      {
+        url: _post.details.url,
+        guid: _post.guid,
+        hasContent: _post.hasContent || false,
+        tracking: _post.tracking,
+      })
+
     _post.tracking = '';
     if (_post.hasContent) {
       _post.tracking += ' -hasContent ';
