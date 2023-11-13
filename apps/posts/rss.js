@@ -73,7 +73,7 @@ module.exports = function init(site, post) {
 
     let urls = '';
     list.forEach((doc, i) => {
-      doc.full_url = 'https://egytag.com' + '/post/' + doc.guid;
+      doc.full_url = req.host + '/post/' + doc.guid;
       //.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '');
       urls += `
         <item>
