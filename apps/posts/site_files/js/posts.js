@@ -137,14 +137,14 @@ function loadPosts(more) {
       }
       setTimeout(() => {
         busy = false;
-      }, 1000 * 5);
+      }, 1000 * 3);
     },
     (err) => {
       console.log(err);
       setTimeout(() => {
         busy = false;
         loadPosts(more);
-      }, 1000 * 5);
+      }, 1000 * 3);
     }
   );
 }
