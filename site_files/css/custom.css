@@ -1,11 +1,10 @@
 :root {
-
-  --body-background: #FFEB3B;
+  --body-background: #2196f3;
   --body-margin-top: 70px;
   --body-margin-bottom: 200px;
 
   --scrollbar-background-color: #272727;
-  --scrollbar-color: #ffeb3b;
+  --scrollbar-color: var(--theme-color);
   --scrollbar-box-shadow-color: #4caf50;
 }
 
