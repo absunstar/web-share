@@ -97,6 +97,9 @@ module.exports = function init(site) {
 
   prepareAllPosts();
   site.escapeHtml = function (unsafe) {
+    if (typeof unsafe !== 'string') {
+      return '';
+    }
     return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
   };
 
