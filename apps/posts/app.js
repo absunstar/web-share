@@ -66,12 +66,12 @@ module.exports = function init(site) {
           });
           site.activePostList = site.activePostList.sort((a, b) => b.time - a.time);
           if (type === 'is_yts') {
-            site.pageData.ytsList = site.activePostList.filter((p) => p.is_yts).slice(-5);
+            site.pageData.ytsList = site.activePostList.filter((p) => p.is_yts).slice(-10);
           } else if (type === 'is_google_news') {
             site.pageData.newsList = site.activePostList
               .filter((p) => p.is_google_news)
               .filter((g) => !!g.text)
-              .slice(-5);
+              .slice(-10);
           } else if (type === 'is_children') {
             site.pageData.childrenList = site.activePostList.filter((p) => p.is_children).slice(-5);
           }
