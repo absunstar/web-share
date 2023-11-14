@@ -7,6 +7,9 @@ module.exports = function init(site, post) {
     if (req.params.guid) {
       where['guid'] = req.params.guid;
     }
+    if (req.host.like('*torrents*')) {
+      where['is_yts'] = true;
+    }
     post.$posts_content.findAll(
       {
         where: where,
@@ -19,10 +22,10 @@ module.exports = function init(site, post) {
         if (!err && docs) {
           let urls = '';
           docs.forEach((doc, i) => {
-            doc.post_url = 'https://egytag.com' + '/post/' + doc.guid;
+            doc.$post_url = req.host + '/post/' + doc.guid;
             urls += `
               <url>
-                  <loc>${doc.post_url}</loc>
+                  <loc>${doc.$post_url}</loc>
                   <lastmod>${new Date(doc.date).toISOString()}</lastmod>
                   <changefreq>monthly</changefreq>
                   <priority>.8</priority>
@@ -32,7 +35,7 @@ module.exports = function init(site, post) {
           let xml = `<?xml version="1.0" encoding="UTF-8"?>
                       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
                       <url>
-                      <loc>https://egytag.com/</loc>
+                      <loc>${req.host}</loc>
                       <lastmod>${new Date().toISOString()}</lastmod>
                       <changefreq>always</changefreq>
                       <priority>1</priority>
@@ -73,13 +76,13 @@ module.exports = function init(site, post) {
 
     let urls = '';
     list.forEach((doc, i) => {
-      doc.full_url = req.host + '/post/' + doc.guid;
+      doc.$full_url = req.host + '/post/' + doc.guid;
       //.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '');
       urls += `
         <item>
           <guid>${doc.guid}</guid>
           <title>${doc.details.title}</title>
-          <link>${doc.full_url}</link>
+          <link>${doc.$full_url}</link>
           <image>${doc.image_url}</image>
           <description>${doc.details.description}</description>
           <pubDate>${new Date(doc.date).toISOString()}</pubDate>
