@@ -21,8 +21,9 @@ module.exports = function init(site, post) {
       (err, docs) => {
         if (!err && docs) {
           let urls = '';
+          let host = 'https://' + req.host;
           docs.forEach((doc, i) => {
-            doc.$post_url = req.host + '/post/' + doc.guid;
+            doc.$post_url = host + '/post/' + doc.guid;
             urls += `
               <url>
                   <loc>${doc.$post_url}</loc>
@@ -35,7 +36,7 @@ module.exports = function init(site, post) {
           let xml = `<?xml version="1.0" encoding="UTF-8"?>
                       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
                       <url>
-                      <loc>${req.host}</loc>
+                      <loc>${host}</loc>
                       <lastmod>${new Date().toISOString()}</lastmod>
                       <changefreq>always</changefreq>
                       <priority>1</priority>
@@ -75,8 +76,9 @@ module.exports = function init(site, post) {
     }
 
     let urls = '';
+    let host = 'https://' + req.host;
     list.forEach((doc, i) => {
-      doc.$full_url = req.host + '/post/' + doc.guid;
+      doc.$full_url = host + '/post/' + doc.guid;
       //.replace(/<[^>]+>/g, '').replace(/&nbsp;|&laquo;|&raquo|&quot;|&rlm;|&llm;|&lrm;|&rrm;/g, '');
       urls += `
         <item>
