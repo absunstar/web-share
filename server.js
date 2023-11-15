@@ -54,13 +54,17 @@ site.onGET('glx_ecfdd4d6a3041a9e7eeea5a9947936bd.txt', (req, res) => {
   res.end('Galaksion check: 86531e4391aecbe5e70d086020f703f2');
 });
 
-site.monetag_zone = '21511';
-setInterval(() => {
+site.handleMonetag = function () {
   if (new Date().getHours() % 2 == 0) {
     site.monetag_zone = '21511';
   } else {
     site.monetag_zone = '20926';
   }
+};
+
+site.handleMonetag();
+setInterval(() => {
+  site.handleMonetag();
 }, 1000 * 60 * 60);
 
 setTimeout(() => {
