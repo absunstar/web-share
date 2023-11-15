@@ -56,9 +56,9 @@ site.onGET('glx_ecfdd4d6a3041a9e7eeea5a9947936bd.txt', (req, res) => {
 
 site.handleMonetag = function () {
   if (new Date().getHours() % 2 == 0) {
-    site.monetag_zone = '21511';
-  } else {
     site.monetag_zone = '20926';
+  } else {
+    site.monetag_zone = '21511';
   }
 };
 
