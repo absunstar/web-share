@@ -8,76 +8,90 @@
 <div x-permission="login" x-import="security/logout_modal.html"></div>
 
 <script>
-    function add_script(info) {
-        console.log('Adding Script : ' + info.src);
-        var script = document.createElement('script');
-        script.id = info['id'];
-        script.src = info['src'];
+  function add_script(info) {
+    console.log('Adding Script : ' + info.src);
+    var script = document.createElement('script');
+    script.id = info['id'];
+    script.src = info['src'];
 
-        if (typeof info['data-ad-client'] != 'undefined') {
-            script.setAttribute('data-ad-client', info['data-ad-client']);
-        }
-        if (typeof info['async'] != 'undefined') {
-            script.setAttribute('async', info['async']);
-        }
-        if (typeof info['data-cfasync'] != 'undefined') {
-            script.setAttribute('data-cfasync', info['data-cfasync']);
-        }
-        if (typeof info['data-adel'] != 'undefined') {
-            script.setAttribute('data-adel', info['data-adel']);
-        }
-        if (typeof info['czid'] != 'undefined') {
-            script.setAttribute('czid', info['czid']);
-        }
-        document.querySelector('head').appendChild(script);
+    if (typeof info['data-ad-client'] != 'undefined') {
+      script.setAttribute('data-ad-client', info['data-ad-client']);
     }
+    if (typeof info['async'] != 'undefined') {
+      script.setAttribute('async', info['async']);
+    }
+    if (typeof info['data-cfasync'] != 'undefined') {
+      script.setAttribute('data-cfasync', info['data-cfasync']);
+    }
+    if (typeof info['data-adel'] != 'undefined') {
+      script.setAttribute('data-adel', info['data-adel']);
+    }
+    if (typeof info['czid'] != 'undefined') {
+      script.setAttribute('czid', info['czid']);
+    }
+    document.querySelector('head').appendChild(script);
+  }
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script x-feature="google-analytic">
+  add_script({
+    src: 'https://www.googletagmanager.com/gtag/js?id=G-SJEBBEFC7P',
+    id: 'googletagmanager',
+    async: true,
+  });
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-SJEBBEFC7P');
 </script>
 
 <script x-feature="google-ads" class="google-ads-manager">
-    window.allowGoogleAds = true;
-    add_script({
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-        id: 'googlesyndication',
-        'data-ad-client': 'ca-pub-3372007384613151',
-        async: true,
-    });
+  window.allowGoogleAds = true;
+  add_script({
+    src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+    id: 'googlesyndication',
+    'data-ad-client': 'ca-pub-3372007384613151',
+    async: true,
+  });
 
-    add_script({
-        src: 'https://www.googletagmanager.com/gtag/js?id=UA-59220588-1',
-        id: 'googletagmanager',
-        async: true,
-    });
+  add_script({
+    src: 'https://www.googletagmanager.com/gtag/js?id=UA-59220588-1',
+    id: 'googletagmanager',
+    async: true,
+  });
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-59220588-1');
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-59220588-1');
 </script>
 
 <div x-feature="new-post" class="editor-manager">
-    <link href="/css/editor.css" rel="stylesheet" />
-    <script src="/js/editor.js"></script>
-    <script>
-        site.new_post_editor = WebShareEditor.create('new_post', {
-            toolbarItem: [
-                ['undo', 'redo'],
-                ['font', 'fontSize', 'formatBlock'],
-                ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-                ['removeFormat'],
-                ['fontColor', 'hiliteColor'],
-                ['outdent', 'indent'],
-                ['align', 'horizontalRule', 'list', 'table'],
-                ['link', 'image', 'video'],
-                /* ['fullScreen', 'showBlocks', 'codeView'],
+  <link href="/css/editor.css" rel="stylesheet" />
+  <script src="/js/editor.js"></script>
+  <script>
+    site.new_post_editor = WebShareEditor.create('new_post', {
+      toolbarItem: [
+        ['undo', 'redo'],
+        ['font', 'fontSize', 'formatBlock'],
+        ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+        ['removeFormat'],
+        ['fontColor', 'hiliteColor'],
+        ['outdent', 'indent'],
+        ['align', 'horizontalRule', 'list', 'table'],
+        ['link', 'image', 'video'],
+        /* ['fullScreen', 'showBlocks', 'codeView'],
                  ['preview', 'print'],
                  ['save', 'template'], */
-            ],
-            width: '100%',
-            minHeight: '300px',
-        });
-    </script>
+      ],
+      width: '100%',
+      minHeight: '300px',
+    });
+  </script>
 </div>
-
-

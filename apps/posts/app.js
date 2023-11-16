@@ -267,6 +267,7 @@ module.exports = function init(site) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
       req.data.content_class = 'col12';
+      req.addFeature('google-analytic');
       site.callRoute('/posts', req, res);
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
@@ -275,6 +276,7 @@ module.exports = function init(site) {
       site.callRoute('/posts', req, res);
     } else {
       req.addFeature('google-ads');
+      req.addFeature('google-analytic');
       site.callRoute('/posts', req, res);
     }
   });
@@ -317,12 +319,14 @@ module.exports = function init(site) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
       req.data.content_class = 'col12';
+      req.addFeature('google-analytic');
     } else if (req.hasFeature('host.news')) {
     } else if (req.hasFeature('host.media')) {
       req.addFeature('hide-right-menu');
       req.addFeature('hide-left-menu');
       req.data.content_class = 'col12';
     } else {
+      req.addFeature('google-analytic');
       req.addFeature('google-ads');
     }
 
@@ -347,11 +351,13 @@ module.exports = function init(site) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
         req.data.content_class = 'col12';
+        req.addFeature('google-analytic');
       } else if (req.hasFeature('host.media')) {
         req.addFeature('hide-left-menu');
         req.addFeature('hide-right-menu');
         req.data.content_class = 'col12';
       } else {
+        req.addFeature('google-analytic');
         req.addFeature('google-ads');
         req.addFeature('host.all');
       }
@@ -537,6 +543,7 @@ module.exports = function init(site) {
   site.onGET({ name: '/top-news', public: true }, (req, res) => {
     req.addFeature('host.default');
     req.addFeature('google-ads');
+    req.addFeature('google-analytic');
     res.render(
       'posts/index.html',
       {
